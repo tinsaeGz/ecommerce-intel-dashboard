@@ -1,32 +1,131 @@
 {
+  "meta": {
+    "landing": {
+      "title": "Suq Insights — Daily clarity from the records you keep",
+      "description": "Turn the records you already keep into a clear daily view of sales, stock, and returning customers."
+    },
+    "demo": {
+      "title": "Sample dashboard — Suq Insights",
+      "description": "Explore a transparent Suq Insights dashboard preview built from fictional sample data."
+    },
+    "signup": {
+      "title": "Account preview — Suq Insights",
+      "description": "Account creation is being connected. Explore the fictional sample dashboard in the meantime."
+    },
+    "login": {
+      "title": "Login preview — Suq Insights",
+      "description": "Account access is being connected. Explore the fictional sample dashboard in the meantime."
+    },
+    "app": {
+      "title": "Workspace preview — Suq Insights",
+      "description": "The authenticated Suq Insights workspace is being connected to the product backend."
+    }
+  },
+  "common": {
+    "loading": "Loading this page…",
+    "skipToContent": "Skip to main content"
+  },
   "brand": {
     "homeLabel": "Suq Insights home"
   },
   "language": {
     "label": "Choose language"
   },
-  "hero": {
-    "eyebrow": "Product foundation",
-    "title": "Clarity for every market day.",
-    "body": "Suq Insights is being built to turn the records merchants already keep into a clear daily view of sales, stock, and returning customers.",
-    "status": "Development environments are ready. Product implementation is underway."
+  "navigation": {
+    "primary": "Primary navigation",
+    "mobile": "Mobile navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
-  "questions": {
-    "label": "The three questions Suq Insights will answer",
-    "selling": {
-      "title": "What is selling?",
-      "body": "See revenue, transactions, units, patterns, and the items driving change."
-    },
-    "stock": {
-      "title": "What will run out next?",
-      "body": "Understand stock status, days remaining, and what may need attention today."
-    },
-    "customers": {
-      "title": "Which customers come back?",
-      "body": "See repeat business clearly when confirmed customer information supports it."
+  "actions": {
+    "startFree": "Start free",
+    "previewSignup": "Preview account access",
+    "exploreDemo": "Explore the demo",
+    "logIn": "Log in",
+    "backHome": "Back to home"
+  },
+  "announcement": {
+    "label": "Product announcement",
+    "message": "Built for the records you already keep—spreadsheets, exports, PDFs, photos, and more.",
+    "dismiss": "Dismiss announcement"
+  },
+  "hero": {
+    "eyebrow": "Commerce clarity from the data you already have",
+    "titleBefore": "Know what’s selling.",
+    "titleEmphasis": "See what runs out next.",
+    "titleAfter": "Bring customers back.",
+    "body": "Upload the records you already keep or record the day as it happens. Suq confirms what your data means, then turns it into a clear daily view of sales, stock, and returning customers.",
+    "languages": "English · Español · Français",
+    "sourcesLabel": "Example supported sources",
+    "sources": {
+      "csv": "CSV",
+      "excel": "Excel",
+      "pdf": "PDF",
+      "photo": "Photo"
     }
   },
+  "dashboard": {
+    "accessibleSummary": "Fictional Mercado Norte dashboard. Revenue is {{revenue}}, {{comparison}} over the comparison period. {{stockRisks}} items may run out within seven days. Updated from {{sources}} sources.",
+    "workspace": "Workspace",
+    "sampleDay": "Sample day · {{date}}",
+    "freshness": "Updated {{minutes}} minutes ago · {{sources}} sources",
+    "insightLabel": "Today’s insight",
+    "insight": "Revenue is {{comparison}} above the comparison period, led by Canvas Tote and Ground Coffee.",
+    "comparison": "{{comparison}} vs comparison",
+    "metrics": {
+      "revenue": "Revenue",
+      "transactions": "Transactions",
+      "units": "Units",
+      "customers": "Customers"
+    },
+    "chart": {
+      "eyebrow": "Sales velocity",
+      "title": "Revenue over time",
+      "period": "Opening to now",
+      "current": "Sample day",
+      "previous": "Comparison"
+    },
+    "stock": {
+      "eyebrow": "Needs attention",
+      "title_one": "1 item may run out",
+      "title_other": "{{count}} items may run out",
+      "body": "Within the next seven days at the current sales pace.",
+      "action": "View stock risk"
+    },
+    "confirmed": {
+      "title": "Data confirmed",
+      "body": "The field meanings were reviewed before totals changed.",
+      "date": "Transaction time",
+      "amount": "Line amount"
+    }
+  },
+  "demo": {
+    "eyebrow": "Transparent product preview",
+    "title": "See the daily view before sharing your data.",
+    "body": "This preview uses a fixed fictional merchant and internally consistent sample values. It contains no customer or merchant information.",
+    "sampleLabel": "Fictional sample data",
+    "sampleTitle": "A calm view of what changed and what needs attention",
+    "sampleBody": "The production dashboard will connect every answer to confirmed source records and freshness evidence."
+  },
+  "access": {
+    "signup": {
+      "eyebrow": "Account access preview",
+      "title": "Free account creation is being connected.",
+      "body": "The authentication workflow is not live in this foundation checkpoint. You can safely explore the fictional product demo without entering business data."
+    },
+    "login": {
+      "eyebrow": "Login preview",
+      "title": "Secure account access is being connected.",
+      "body": "The authentication workflow is not live in this foundation checkpoint. No login form is shown until it can connect to the real protected service."
+    }
+  },
+  "appPreview": {
+    "eyebrow": "Authenticated product boundary",
+    "title": "The workspace opens only through real account access.",
+    "body": "This route is separated from the marketing bundle, but it does not imitate an authenticated session. Explore the fictional dashboard while the protected product flow is connected."
+  },
   "footer": {
-    "note": "English · Español · Français"
+    "previewNote": "Phase 1 landing foundation · No private data required",
+    "languages": "English · Español · Français"
   }
 }

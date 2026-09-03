@@ -10,11 +10,14 @@ export const designTokens = {
     "lime": "#c9f54a",
     "mint": "#9be5c1",
     "aqua": "#9edfed",
-    "lavender": "#cfc6ff"
+    "lavender": "#cfc6ff",
+    "amber": "#f2be4a",
+    "coral": "#e9685a",
+    "forest": "#286448",
+    "blue": "#245e78"
   },
   "fontFamily": {
     "sans": [
-      "Inter",
       "ui-sans-serif",
       "system-ui",
       "-apple-system",
@@ -23,7 +26,7 @@ export const designTokens = {
       "sans-serif"
     ],
     "serif": [
-      "Source Serif 4",
+      "ui-serif",
       "Georgia",
       "serif"
     ]
@@ -38,7 +41,9 @@ export const designTokens = {
     "8": 32,
     "10": 40,
     "14": 56,
-    "18": 72
+    "18": 72,
+    "24": 96,
+    "32": 128
   },
   "radius": {
     "control": 8,
@@ -46,7 +51,34 @@ export const designTokens = {
     "panel": 24
   },
   "shadow": {
-    "panel": "0 1.5rem 4rem rgb(16 17 14 / 10%)"
+    "panel": "0 1.5rem 4rem rgb(16 17 14 / 10%)",
+    "overlay": "0 1rem 3rem rgb(16 17 14 / 16%)"
+  },
+  "fontSize": {
+    "caption": 12,
+    "ui": 14,
+    "body": 16,
+    "body-large": 20,
+    "heading": 22,
+    "section": 40,
+    "display": 72
+  },
+  "fontWeight": {
+    "regular": 400,
+    "medium": 500,
+    "semibold": 650,
+    "bold": 750
+  },
+  "lineHeight": {
+    "display": 0.98,
+    "heading": 1.12,
+    "ui": 1.4,
+    "body": 1.55
+  },
+  "motion": {
+    "fast": 120,
+    "panel": 200,
+    "reveal": 520
   }
 } as const;
 
