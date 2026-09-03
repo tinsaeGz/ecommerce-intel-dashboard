@@ -1,0 +1,27 @@
+:root {
+  color: var(--color-ink);
+  background: var(--color-paper);
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizelegibility;
+}
+
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 44%, rgb(155 229 193 / 32%), transparent 27rem),
+    radial-gradient(circle at 88% 72%, rgb(207 198 255 / 30%), transparent 28rem),
+    var(--color-paper);
+}
+
+button,
+a {
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 0.2rem solid var(--color-ink);
+  outline-offset: 0.2rem;
+}

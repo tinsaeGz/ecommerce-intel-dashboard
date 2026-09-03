@@ -1,0 +1,32 @@
+{
+  "brand": {
+    "homeLabel": "Suq Insights home"
+  },
+  "language": {
+    "label": "Choose language"
+  },
+  "hero": {
+    "eyebrow": "Product foundation",
+    "title": "Clarity for every market day.",
+    "body": "Suq Insights is being built to turn the records merchants already keep into a clear daily view of sales, stock, and returning customers.",
+    "status": "Development environments are ready. Product implementation is underway."
+  },
+  "questions": {
+    "label": "The three questions Suq Insights will answer",
+    "selling": {
+      "title": "What is selling?",
+      "body": "See revenue, transactions, units, patterns, and the items driving change."
+    },
+    "stock": {
+      "title": "What will run out next?",
+      "body": "Understand stock status, days remaining, and what may need attention today."
+    },
+    "customers": {
+      "title": "Which customers come back?",
+      "body": "See repeat business clearly when confirmed customer information supports it."
+    }
+  },
+  "footer": {
+    "note": "English · Español · Français"
+  }
+}

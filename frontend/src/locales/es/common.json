@@ -1,0 +1,32 @@
+{
+  "brand": {
+    "homeLabel": "Inicio de Suq Insights"
+  },
+  "language": {
+    "label": "Elegir idioma"
+  },
+  "hero": {
+    "eyebrow": "Base del producto",
+    "title": "Claridad para cada día de mercado.",
+    "body": "Suq Insights se está creando para convertir los registros que los comercios ya guardan en una visión diaria y clara de ventas, existencias y clientes que regresan.",
+    "status": "Los entornos de desarrollo están listos. La implementación del producto está en curso."
+  },
+  "questions": {
+    "label": "Las tres preguntas que responderá Suq Insights",
+    "selling": {
+      "title": "¿Qué se está vendiendo?",
+      "body": "Consulta ingresos, transacciones, unidades, patrones y los artículos que impulsan el cambio."
+    },
+    "stock": {
+      "title": "¿Qué se agotará próximamente?",
+      "body": "Comprende el estado de las existencias, los días restantes y lo que requiere atención hoy."
+    },
+    "customers": {
+      "title": "¿Qué clientes regresan?",
+      "body": "Visualiza claramente las compras recurrentes cuando la información confirmada del cliente lo permite."
+    }
+  },
+  "footer": {
+    "note": "English · Español · Français"
+  }
+}

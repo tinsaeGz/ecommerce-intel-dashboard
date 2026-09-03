@@ -1,0 +1,7 @@
+.git
+.github
+backend
+deploy
+docs
+*.md
+*.pdf

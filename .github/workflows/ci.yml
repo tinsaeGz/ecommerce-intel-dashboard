@@ -1,0 +1,108 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+  pull_request:
+    branches:
+      - dev
+      - main
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  branch-policy:
+    name: branch-policy
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require dev as the source of production pull requests
+        if: github.base_ref == 'main' && github.head_ref != 'dev'
+        run: |
+          echo "Pull requests into main must come from dev."
+          exit 1
+
+  quality:
+    name: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run repository checks
+        run: npm run check
+
+      - name: Upload frontend build
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist-${{ github.sha }}
+          path: frontend/dist
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    name: deploy-${{ github.ref_name }}
+    if: github.event_name == 'push'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || 'preview' }}
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build and deploy to Vercel
+        id: deploy
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF_NAME" == "main" ]]; then
+            target_environment="production"
+            production_flag="--prod"
+          else
+            target_environment="preview"
+            production_flag=""
+          fi
+
+          npx --yes vercel@59.11.2 pull \
+            --yes \
+            --environment="$target_environment" \
+            --token="$VERCEL_TOKEN"
+          npx --yes vercel@59.11.2 build \
+            $production_flag \
+            --token="$VERCEL_TOKEN"
+          deployment_url=$(npx --yes vercel@59.11.2 deploy \
+            --prebuilt \
+            $production_flag \
+            --token="$VERCEL_TOKEN" \
+            --no-color)
+          echo "url=$deployment_url" >> "$GITHUB_OUTPUT"

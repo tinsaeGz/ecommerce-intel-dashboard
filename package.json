@@ -1,0 +1,23 @@
+{
+  "name": "suq-insights",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build": "npm run build --workspace @suq-insights/frontend",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run build",
+    "dev": "npm run dev --workspace @suq-insights/frontend",
+    "lint": "npm run lint:docs && npm run lint --workspace @suq-insights/frontend",
+    "lint:docs": "markdownlint-cli2",
+    "test": "npm run test --workspace @suq-insights/frontend",
+    "typecheck": "npm run typecheck --workspace @suq-insights/frontend"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.23.2"
+  }
+}
