@@ -101,9 +101,23 @@ jobs:
           npx --yes vercel@59.11.2 build \
             $production_flag \
             --token="$VERCEL_TOKEN"
-          deployment_url=$(npx --yes vercel@59.11.2 deploy \
+
+          deployment_dir="$RUNNER_TEMP/vercel-deployment"
+          mkdir -p "$deployment_dir/.vercel"
+          cp -R .vercel/output "$deployment_dir/.vercel/output"
+          cp .vercel/project.json "$deployment_dir/.vercel/project.json"
+
+          deployment_url=$(npx --yes vercel@59.11.2 deploy "$deployment_dir" \
             --prebuilt \
             $production_flag \
             --token="$VERCEL_TOKEN" \
             --no-color)
+
+          if [[ "$GITHUB_REF_NAME" == "dev" ]]; then
+            npx --yes vercel@59.11.2 alias set \
+              "$deployment_url" \
+              ecommerce-intel-dashboard-dev.vercel.app \
+              --token="$VERCEL_TOKEN"
+          fi
+
           echo "url=$deployment_url" >> "$GITHUB_OUTPUT"

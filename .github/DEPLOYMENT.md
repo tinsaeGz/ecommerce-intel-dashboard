@@ -8,6 +8,16 @@ GitHub Actions is the deployment authority for the Vercel frontend project
 - pull requests run quality and branch-policy checks without deploying; and
 - other branches are excluded from both automatic deployment paths.
 
+The stable environment addresses are:
+
+- Preview (`dev`): `https://ecommerce-intel-dashboard-dev.vercel.app`;
+- Production (`main`): `https://ecommerce-intel-dashboard.vercel.app`.
+
+The workflow deploys the prebuilt output from a detached runner directory. This
+keeps Vercel's commit-author/fork protection enabled while allowing the trusted
+branch workflow to deploy commits from contributors who are not Vercel team
+members.
+
 The CI workflow uses these encrypted repository secrets:
 
 - `VERCEL_TOKEN` authenticates Vercel CLI;
