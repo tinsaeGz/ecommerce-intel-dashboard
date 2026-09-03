@@ -1,6 +1,6 @@
 # 04 — API Design
 
-One versioned REST API serves web, future mobile, and the premium Sync API. FastAPI routers under `/v1`; OpenAPI schema auto-published at `/v1/openapi.json` (public docs rendered for Sync API endpoints only; internal endpoints tagged `x-internal` and stripped from public docs).
+One versioned REST API serves web, mobile, and the premium Sync API. FastAPI routers under `/v1`; OpenAPI schema auto-published at `/v1/openapi.json` (public docs rendered for Sync API endpoints only; internal endpoints tagged `x-internal` and stripped from public docs).
 
 ## 1. Conventions
 

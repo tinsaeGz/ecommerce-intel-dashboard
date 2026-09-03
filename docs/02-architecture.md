@@ -12,7 +12,8 @@
 | Task queue | **Celery 5** (Redis broker, Redis result backend) | Ingestion, alert evaluation, SMS dispatch, report generation. Mature retry/routing/beat ecosystem; chosen over arq/Dramatiq for its scheduling (beat), routing, and operational tooling maturity — a commercial product needs boring queues |
 | Heavy tabular parsing | **Polars** + **DuckDB**, with Unix shell pre-pass (`awk`/`sed`/`iconv`) | See [06-ingestion.md](06-ingestion.md); shell tools do streaming byte-level cleanup at near-zero memory, Polars does typed normalization, `COPY` loads Postgres |
 | Object storage | **MinIO** (S3 API) self-hosted; swappable for S3/R2 | Raw uploads, rejected-row reports, generated exports. S3 API from day one so cloud migration is config-only |
-| Frontend | **React 18 + TypeScript + Vite + vanilla CSS** | Plain `.css` files with custom properties and cascade layers provide semantic tokens and responsive layouts without a utility framework or CSS runtime; TanStack Query handles server state; react-i18next handles localization |
+| Web | **React 19 + TypeScript + Vite + vanilla CSS** | One React major is shared with the Expo workspace to prevent duplicate native modules; plain `.css` files with custom properties and cascade layers provide semantic tokens and responsive layouts without a utility framework or CSS runtime; TanStack Query handles server state; react-i18next handles localization |
+| Mobile | **Expo + React Native** | Phase-2 native boundary reuses the generated API client and platform-neutral tokens while keeping native interaction and styling inside the app |
 | Charts | **ECharts** (via echarts-for-react) | Handles dense time series on low-end Android browsers better than SVG-based libs; built-in canvas rendering, zoom/brush |
 | Edge / TLS | **Caddy** (or nginx) reverse proxy | Automatic TLS, HTTP/2, gzip/brotli, static asset serving, coarse IP rate limiting, request size caps |
 | Observability | **Sentry** (errors) + **Prometheus/Grafana** (metrics) + **Loki** (logs) + OpenTelemetry traces | See [12-operations.md](12-operations.md) |
@@ -138,23 +139,28 @@ Dashboard reads never scan raw order rows. Read path: **Redis cache → daily ro
 
 Monorepo:
 
-```
-/backend
-  /app
-    /api/v1/            # routers: auth, uploads, dashboard, products, orders,
-                        # alerts, ads, advertiser, billing, admin, sync
-    /core/              # config (pydantic-settings), security, rate_limit,
-                        # entitlements, idempotency, errors, i18n
-    /db/                # session, models/, RLS helpers, alembic/
-    /domain/            # pure business logic (metrics, forecasting, ad auction)
-    /services/          # orchestration between db/domain/external
-    /workers/           # celery app, tasks/ (ingest, alerts, notify, ads, reports)
-    /integrations/      # payments (stripe + regional, provider-abstracted), sms, smtp, s3
-  /scripts/shell/       # awk/sed pre-pass scripts, versioned + unit-tested
-  /tests/
-/frontend
-  /src/{app,features,components,lib,locales}
-/deploy                 # compose files, Caddyfile, prometheus, grafana, backup scripts
+```text
+/apps
+  /web
+    /src/{app,features,components,lib,locales,styles}
+  /mobile               # Expo/React Native; demand-triggered phase 2 client
+    /src/{features,components,lib,locales}
+  /api
+    /src/suq_api
+      /api/v1           # routers: auth, uploads, widgets, billing, admin, sync
+      /core             # config, security, limits, entitlements, errors, i18n
+      /db               # sessions, models, RLS helpers, Alembic
+      /domain           # pure metrics, forecasting, fingerprints, billing, auction
+      /services         # orchestration between persistence, domain, and providers
+      /workers          # Celery tasks: ingest, alerts, notify, ads, reports
+      /integrations     # payments, messaging, email, object storage
+    /scripts/shell      # versioned and tested streaming pre-pass scripts
+    /tests
+/packages
+  /api-client           # generated TypeScript contract shared by web and mobile
+  /design-tokens        # neutral source generating web CSS and native values
+  /shared-types         # client-safe primitives only
+/deploy                 # compose, Caddy, monitoring, backups, runbooks
 /docs
 ```
 

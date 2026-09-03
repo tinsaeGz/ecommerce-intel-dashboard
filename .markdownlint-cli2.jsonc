@@ -19,8 +19,13 @@
   },
   "globs": [
     "*.md",
+    "apps/**/*.md",
+    "deploy/**/*.md",
     "docs/**/*.md",
     ".github/**/*.md",
+    "packages/**/*.md",
+    "!**/.venv/**",
+    "!**/dist/**",
     "!**/node_modules/**"
   ]
 }

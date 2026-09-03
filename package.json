@@ -3,19 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "frontend"
+    "apps/web",
+    "apps/mobile",
+    "packages/*"
   ],
   "engines": {
     "node": "22.x"
   },
   "scripts": {
-    "build": "npm run build --workspace @suq-insights/frontend",
-    "check": "npm run lint && npm run typecheck && npm run test && npm run build",
-    "dev": "npm run dev --workspace @suq-insights/frontend",
-    "lint": "npm run lint:docs && npm run lint --workspace @suq-insights/frontend",
+    "build": "npm run build:packages && npm run build:web && npm run build:mobile",
+    "build:mobile": "npm run build --workspace @suq-insights/mobile",
+    "build:packages": "npm run build --workspace @suq-insights/design-tokens && npm run build --workspace @suq-insights/shared-types && npm run build --workspace @suq-insights/api-client",
+    "build:web": "npm run build --workspace @suq-insights/web",
+    "check": "npm run generate:check && npm run lint && npm run typecheck && npm run test && npm run build",
+    "check:api": "cd apps/api && uv run ruff format --check . && uv run ruff check . && uv run mypy && uv run pytest && uv run pip-audit",
+    "dev": "npm run dev:web",
+    "dev:mobile": "npm run start --workspace @suq-insights/mobile",
+    "dev:web": "npm run dev --workspace @suq-insights/web",
+    "generate": "npm run generate:tokens && npm run generate:openapi && npm run generate:api-client",
+    "generate:api-client": "npm run generate --workspace @suq-insights/api-client",
+    "generate:check": "npm run check:generated --workspace @suq-insights/design-tokens && npm run check:generated --workspace @suq-insights/api-client",
+    "generate:openapi": "cd apps/api && uv run python -m suq_api.openapi",
+    "generate:tokens": "npm run generate --workspace @suq-insights/design-tokens",
+    "lint": "npm run lint:docs && npm run lint --workspaces --if-present",
     "lint:docs": "markdownlint-cli2",
-    "test": "npm run test --workspace @suq-insights/frontend",
-    "typecheck": "npm run typecheck --workspace @suq-insights/frontend"
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "devDependencies": {
     "markdownlint-cli2": "0.23.2"

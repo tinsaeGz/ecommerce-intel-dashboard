@@ -24,7 +24,7 @@ The CI workflow uses these encrypted repository secrets:
 - `VERCEL_ORG_ID` identifies the Vercel team; and
 - `VERCEL_PROJECT_ID` identifies the frontend project.
 
-Vercel hosts only the React/Vite frontend. The FastAPI and Celery services,
+Vercel hosts only `apps/web`. The FastAPI and Celery services in `apps/api`,
 PostgreSQL, Redis, and MinIO retain the same-origin container deployment
 architecture defined by `SDLC.md`; they are not silently moved to Vercel.
 

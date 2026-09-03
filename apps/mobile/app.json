@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "Suq Insights",
+    "slug": "suq-insights",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "com.suqinsights.mobile",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.suqinsights.mobile",
+      "predictiveBackGestureEnabled": true
+    },
+    "plugins": ["expo-localization"]
+  }
+}

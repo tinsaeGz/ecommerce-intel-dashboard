@@ -3,7 +3,7 @@
 The intended `main` policy is stored in `branch-protection.json`:
 
 - changes arrive through a pull request from `dev`;
-- CI branch-policy and quality checks pass on the latest commit;
+- CI branch-policy, API quality, and client/package quality checks pass on the latest commit;
 - the branch is current before merge;
 - one approval is required and stale approvals are dismissed;
 - the final push is approved by someone other than its author;

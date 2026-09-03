@@ -51,19 +51,48 @@ jobs:
       - name: Run repository checks
         run: npm run check
 
-      - name: Upload frontend build
+      - name: Upload web build
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: frontend-dist-${{ github.sha }}
-          path: frontend/dist
+          name: web-dist-${{ github.sha }}
+          path: apps/web/dist
           if-no-files-found: error
           retention-days: 7
+
+  api-quality:
+    name: api-quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v10
+        with:
+          enable-cache: true
+          cache-dependency-glob: apps/api/uv.lock
+          python-version: "3.12"
+
+      - name: Install API dependencies
+        working-directory: apps/api
+        run: uv sync --locked --all-groups
+
+      - name: Run API checks
+        run: npm run check:api
+
+      - name: Verify the checked-in OpenAPI contract
+        run: |
+          npm run generate:openapi
+          git diff --exit-code -- packages/api-client/openapi.json
 
   deploy:
     name: deploy-${{ github.ref_name }}
     if: github.event_name == 'push'
-    needs: quality
+    needs:
+      - api-quality
+      - quality
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:

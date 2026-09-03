@@ -1,7 +1,7 @@
 # E-Commerce Intelligence Dashboard — "Suq Insights"
 
-**Status:** Design complete, approved for development (rev. 2 — international market)
-**Backend:** FastAPI (Python 3.12) · **Frontend:** React + TypeScript + vanilla CSS · **DB:** PostgreSQL 16 · **Cache/Queue:** Redis 7 + Celery
+**Status:** Design complete, foundations in development (rev. 3 — multi-application monorepo)
+**API:** FastAPI (Python 3.12) · **Web:** React + TypeScript + vanilla CSS · **Mobile:** Expo/React Native (demand-triggered phase 2) · **DB:** PostgreSQL 16 · **Cache/Queue:** Redis 7 + Celery
 **Target deployment:** Ubuntu Linux server, EU region (Docker Compose), designed to scale out later
 **Languages:** English · Español · Français
 

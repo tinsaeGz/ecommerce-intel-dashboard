@@ -9,19 +9,21 @@
 
 ## Architecture
 
-- Maintain one monorepo with `backend/`, `frontend/`, `deploy/`, and `docs/` areas as described in SDLC section 7.1.
-- Build the frontend with React, React Router, TypeScript, Vite, standards-based vanilla CSS, TanStack Query, react-i18next, and ECharts. Serve marketing pages and the application from the same origin, with the authenticated product under `/app` and the versioned API under `/v1`.
-- Build the backend with Python 3.12, FastAPI, Pydantic v2, SQLAlchemy 2 async, Alembic, PostgreSQL 16, Redis 7, Celery 5, MinIO, Polars, DuckDB, and the SDLC document-extraction stack.
+- Maintain one monorepo with deployable applications in `apps/web`, `apps/mobile`, and `apps/api`; reusable TypeScript boundaries in `packages/api-client`, `packages/design-tokens`, and `packages/shared-types`; and operational material in `deploy/` and `docs/`.
+- Build `apps/web` with React, React Router, TypeScript, Vite, standards-based vanilla CSS, TanStack Query, react-i18next, and ECharts. Serve marketing pages and the application from the same origin, with the authenticated product under `/app` and the versioned API under `/v1`.
+- Build `apps/mobile` with Expo and React Native. Native delivery remains demand-triggered as specified by the SDLC, but mobile architecture must stay compatible with token authentication, offline entry, camera ingestion, push notifications, and the shared versioned API.
+- Build `apps/api` with Python 3.12, FastAPI, Pydantic v2, SQLAlchemy 2 async, Alembic, PostgreSQL 16, Redis 7, Celery 5, MinIO, Polars, DuckDB, and the SDLC document-extraction stack.
 - Keep the domain package pure: metrics, forecasting, fingerprints, billing math, entitlement rules, and auction scoring must not depend on HTTP, persistence, workers, or provider adapters.
-- Generate the frontend API client and types from the backend OpenAPI contract. Commit a contract change and its regenerated client in the same checkpoint.
+- Generate `packages/api-client` from the FastAPI OpenAPI contract. Both client applications consume that package; commit a contract change and its regenerated client in the same checkpoint.
+- Keep cross-client sharing deliberate: `packages/design-tokens` owns platform-neutral values, while web CSS and React Native styles remain platform-specific. `packages/shared-types` may contain client-safe primitives only; backend domain models and secrets never move into TypeScript merely for reuse.
 - Keep API and worker processes stateless. Heavy work belongs in isolated Celery queues, never in the request path.
 - Read all configuration from the environment, validate it at startup, and refuse to start when required configuration is invalid.
 
 ## UI/UX and vanilla CSS
 
 - Treat `UI-UX-CONCEPT.md` as the implementation reference for the landing-page narrative, product information architecture, visual tokens, responsive behavior, component states, accessibility, localization, and interaction details. `SDLC.md` remains authoritative when the documents conflict. `SUQ-INSIGHTS-UI-UX-CONCEPT.pdf` is a reading artifact; update it whenever its Markdown source materially changes.
-- Author styling as plain `.css` files imported explicitly by the owning entry point or component. Do not add Tailwind, Sass/Less, CSS-in-JS, CSS Modules, a runtime styling library, or a second design system without an approved architecture decision.
-- Keep global CSS deliberate: define shared tokens in `styles/tokens.css`, normalization in `styles/reset.css`, element defaults in `styles/base.css`, and ordered cascade layers `reset`, `base`, `components`, `utilities`, and `overrides`. Co-locate feature and component CSS with the code it styles once those directories exist.
+- Author web styling as plain `.css` files imported explicitly by the owning entry point or component. Do not add Tailwind, Sass/Less, CSS-in-JS, CSS Modules, a runtime styling library, or a second design system without an approved architecture decision. React Native uses its native `StyleSheet` API rather than CSS.
+- Keep global web CSS deliberate: generate shared token custom properties from `packages/design-tokens/tokens.json`, define normalization in `apps/web/src/styles/reset.css`, element defaults in `apps/web/src/styles/base.css`, and ordered cascade layers `reset`, `base`, `components`, `utilities`, and `overrides`. Co-locate feature and component CSS with the code it styles once those directories exist.
 - Use CSS custom properties for color, typography, spacing, radius, elevation, motion, breakpoints where usable, and component-level theming. Reuse a semantic token when one exists; do not scatter raw brand values through feature styles.
 - Keep selectors low-specificity and locally namespaced with a consistent component/feature convention. Prefer classes and `data-*` state attributes; avoid IDs, deep descendant chains, `!important`, and markup-dependent selectors.
 - Reserve inline styles for genuinely runtime-calculated geometry or values that cannot be expressed through a class or custom property. State, variants, responsive behavior, focus, reduced motion, and print styling belong in CSS.
@@ -82,7 +84,7 @@ Checkpoint: <completed and usable behavior>
 
 - Run the narrowest relevant checks during development, then all affected subsystem gates before committing. Use the commands defined by the repository's manifests and CI configuration once those files exist.
 - Backend work requires formatting/lint, strict type checks where configured, unit tests, and relevant integration tests against real PostgreSQL, Redis, and MinIO. Domain logic must remain property-testable.
-- Frontend work requires formatting/lint, TypeScript checks, component tests in all three locales, accessibility checks for changed flows, and a production build within its performance budget.
+- Web and mobile work requires formatting/lint, TypeScript checks, component tests in all three locales, and accessibility checks for changed flows. Web changes additionally require a production build within its performance budget; native release work requires the relevant Expo platform build and device-level offline, camera, notification, and accessibility checks.
 - Schema work requires hand-reviewed Alembic migrations, upgrade validation against a realistic snapshot, tenant/RLS tests, and zero-downtime expand-migrate-contract discipline.
 - Contract, security, billing, ingestion, or critical-journey changes require the corresponding contract, negative, fixture-corpus, idempotency, and end-to-end coverage from SDLC chapter 8.
 - Maintain at least 95% coverage for the pure domain package and 85% overall. Do not hide coverage regressions by excluding meaningful code.

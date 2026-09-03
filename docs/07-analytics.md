@@ -1,6 +1,6 @@
 # 07 — Analytics Engine
 
-All metrics have one definition, implemented once in `backend/app/domain/metrics/` (pure functions over rollup rows — unit-testable without a DB) and documented here. The dashboard, exports, and alerts all call the same functions.
+All metrics have one definition, implemented once in `apps/api/src/suq_api/domain/metrics/` (pure functions over rollup rows — unit-testable without a DB) and documented here. The dashboard, exports, and alerts all call the same functions.
 
 ## 1. Metric definitions
 

@@ -3,7 +3,7 @@
 ## 1. Localization (en / es / fr)
 
 ### Architecture
-- **Frontend:** react-i18next, namespace-per-feature JSON files in `frontend/src/locales/{en,es,fr}/*.json`. Language switcher persists to user profile (server) + localStorage (pre-login). Default locale from signup choice; browser `Accept-Language` as first-visit hint (and it actually works for es/fr, unlike minority locales).
+- **Web:** react-i18next, namespace-per-feature JSON files in `apps/web/src/locales/{en,es,fr}/*.json`. **Mobile:** react-i18next catalogs under `apps/mobile/src/locales/`. Language choice persists to the user profile plus platform-local storage before login. Default locale comes from signup choice, then the browser or device locale on first visit.
 - **Backend:** its own catalogs (same JSON format, shared keys repo-wide) for API error messages, alert/SMS/email templates, generated exports' headers. Locale resolution: explicit `?locale` > user profile > `Accept-Language` > merchant default.
 - **Key discipline:** English is the source-of-truth catalog; CI fails if es/fr files miss keys (fallback to English is allowed at runtime but tracked as a metric — missing-translation renders must trend to zero; target < 0.5% of es/fr session renders).
 - Message formatting via ICU MessageFormat (plurals, interpolation, gender where fr needs it). French typographic conventions respected in templates (non-breaking space before `:` `!` `?`, `« »` quotes) — small details that make the product feel native rather than translated.

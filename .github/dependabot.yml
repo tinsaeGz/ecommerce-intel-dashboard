@@ -1,5 +1,15 @@
 version: 2
 updates:
+  - package-ecosystem: pip
+    directory: /apps/api
+    schedule:
+      interval: weekly
+      day: monday
+      time: "05:30"
+      timezone: Etc/UTC
+    target-branch: dev
+    open-pull-requests-limit: 5
+
   - package-ecosystem: npm
     directory: /
     schedule:

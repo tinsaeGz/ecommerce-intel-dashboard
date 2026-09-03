@@ -1,0 +1,34 @@
+{
+  "name": "@suq-insights/mobile",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "android": "expo start --android",
+    "build": "expo export --platform android --output-dir dist",
+    "ios": "expo start --ios",
+    "lint": "eslint .",
+    "start": "expo start",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit --pretty false",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@suq-insights/design-tokens": "0.1.0",
+    "@suq-insights/shared-types": "0.1.0",
+    "expo": "~57.0.19",
+    "expo-localization": "~57.0.1",
+    "expo-status-bar": "~57.0.1",
+    "i18next": "26.4.1",
+    "react": "19.2.3",
+    "react-i18next": "17.0.13",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "eslint": "9.39.5",
+    "eslint-config-expo": "57.0.2",
+    "typescript": "~6.0.3",
+    "vitest": "3.2.7"
+  }
+}

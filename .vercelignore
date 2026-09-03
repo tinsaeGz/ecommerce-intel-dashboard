@@ -1,6 +1,6 @@
 .git
 .github
-backend
+apps/api
 deploy
 docs
 *.md

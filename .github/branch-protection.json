@@ -3,6 +3,7 @@
     "strict": true,
     "contexts": [
       "CI / branch-policy",
+      "CI / api-quality",
       "CI / quality"
     ]
   },

@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "installCommand": "npm ci",
-  "buildCommand": "npm run build",
-  "outputDirectory": "frontend/dist",
+  "installCommand": "npm ci --workspace @suq-insights/web --workspace @suq-insights/shared-types --workspace @suq-insights/design-tokens --workspace @suq-insights/api-client --include-workspace-root",
+  "buildCommand": "npm run build:web",
+  "outputDirectory": "apps/web/dist",
   "git": {
     "deploymentEnabled": {
       "*": false,

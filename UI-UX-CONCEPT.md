@@ -1504,7 +1504,7 @@ Track Core Web Vitals on marketing pages, route load, dashboard batch resolve, t
 ## 18.1 Frontend route groups
 
 ```text
-frontend/src/
+apps/web/src/
   marketing/        landing, pricing, use cases, resources
   app-shell/        authenticated layout, navigation, command menu
   dashboard/        canvas, picker, layout, widget frames
@@ -1527,19 +1527,19 @@ This is an organizational concept; final folder boundaries should follow the imp
 Styling is authored in standards-based vanilla CSS. The frontend does not use Tailwind, Sass/Less, CSS-in-JS, CSS Modules, or a runtime styling library.
 
 ```text
-frontend/src/styles/
+apps/web/src/styles/
   tokens.css        semantic custom properties
   reset.css         normalization and predictable defaults
   base.css          document typography and element defaults
   utilities.css     small, reviewed accessibility/layout helpers
 
-frontend/src/design-system/
+apps/web/src/design-system/
   button/button.tsx
   button/button.css
   dialog/dialog.tsx
   dialog/dialog.css
 
-frontend/src/dashboard/
+apps/web/src/dashboard/
   dashboard-canvas.tsx
   dashboard-canvas.css
 ```
