@@ -1517,11 +1517,40 @@ frontend/src/
   settings/         account, workspace, plan, security
   design-system/    tokens, primitives, patterns, charts
   i18n/             locale resources and formatters
+  styles/           vanilla CSS tokens, reset, base, shared utilities
 ```
 
 This is an organizational concept; final folder boundaries should follow the implemented repository conventions. Marketing pages and `/app` share tokens and primitives but load separate route bundles. Heavy dashboard/chart code must not inflate the landing-page entry bundle.
 
-## 18.2 Design-system layers
+## 18.2 Vanilla CSS structure
+
+Styling is authored in standards-based vanilla CSS. The frontend does not use Tailwind, Sass/Less, CSS-in-JS, CSS Modules, or a runtime styling library.
+
+```text
+frontend/src/styles/
+  tokens.css        semantic custom properties
+  reset.css         normalization and predictable defaults
+  base.css          document typography and element defaults
+  utilities.css     small, reviewed accessibility/layout helpers
+
+frontend/src/design-system/
+  button/button.tsx
+  button/button.css
+  dialog/dialog.tsx
+  dialog/dialog.css
+
+frontend/src/dashboard/
+  dashboard-canvas.tsx
+  dashboard-canvas.css
+```
+
+Declare the global order once with `@layer reset, base, components, utilities, overrides`. Component and feature files contribute to the appropriate layer. Use semantic custom properties from `tokens.css`, low-specificity locally namespaced classes, and `data-*` attributes for state and variants. Avoid IDs, deep descendant selectors, `!important`, and selectors that depend on incidental markup nesting.
+
+Responsive behavior is mobile-first and content-driven. Media queries stay beside the component whose layout changes. Shared breakpoints may be represented as documented custom-media build constants only if the chosen browser/tooling baseline supports the approach without introducing a CSS preprocessor; otherwise repeat the reviewed media-query values explicitly.
+
+Inline styles are limited to genuinely runtime-calculated geometry, such as a canvas position or measured chart dimension. Prefer setting a narrowly named CSS custom property from React and consuming it in the stylesheet. Focus, hover, disabled, validation, loading, reduced-motion, print, and locale-expansion behavior always belongs in CSS.
+
+## 18.3 Design-system layers
 
 1. **Tokens:** color, typography, space, radius, elevation, motion, breakpoints, z-index.
 2. **Primitives:** Button, Link, Input, Select, Dialog, Drawer, Tooltip, Menu, Tabs, Table foundation.
@@ -1531,7 +1560,7 @@ This is an organizational concept; final folder boundaries should follow the imp
 
 Avoid page-specific copies of primitives. New variants require a documented semantic need, not a visual preference.
 
-## 18.3 Widget contract reflected in UI
+## 18.4 Widget contract reflected in UI
 
 Each widget manifest should provide or enable:
 
@@ -1548,7 +1577,7 @@ Each widget manifest should provide or enable:
 
 The frontend registry maps render keys to lazy-loaded renderers. Unknown widget or render versions fail inside the frame with a safe recovery path.
 
-## 18.4 State ownership
+## 18.5 State ownership
 
 - URL: restorable filters, dashboard ID, date range, selected tab.
 - Server state: dashboards, widget data, uploads, records, alerts, entitlements; managed through TanStack Query and generated API types.
@@ -1556,7 +1585,7 @@ The frontend registry maps render keys to lazy-loaded renderers. Unknown widget 
 - Ephemeral state: open menus, hover/focus, in-progress drag.
 - Optimistic state: entries and canvas arrangements only where rollback is explicit and visible.
 
-## 18.5 Performance budgets
+## 18.6 Performance budgets
 
 - Keep marketing initial JavaScript below 200 KB gzipped as required by the SDLC.
 - Split authenticated route groups and widget renderers.
@@ -1566,7 +1595,7 @@ The frontend registry maps render keys to lazy-loaded renderers. Unknown widget 
 - Use server/edge caching for public pages and ETags for eligible product reads.
 - Audit the densest realistic canvas, not only a four-card demo.
 
-## 18.6 Security and privacy in UI implementation
+## 18.7 Security and privacy in UI implementation
 
 - Treat server authorization and entitlement responses as authoritative.
 - Never serialize access/refresh tokens into JavaScript-readable storage for the web client.

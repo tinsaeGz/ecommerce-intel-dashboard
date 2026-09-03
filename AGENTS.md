@@ -10,12 +10,22 @@
 ## Architecture
 
 - Maintain one monorepo with `backend/`, `frontend/`, `deploy/`, and `docs/` areas as described in SDLC section 7.1.
-- Build the frontend with React, React Router, TypeScript, Vite, Tailwind CSS, TanStack Query, react-i18next, and ECharts. Serve marketing pages and the application from the same origin, with the authenticated product under `/app` and the versioned API under `/v1`.
+- Build the frontend with React, React Router, TypeScript, Vite, standards-based vanilla CSS, TanStack Query, react-i18next, and ECharts. Serve marketing pages and the application from the same origin, with the authenticated product under `/app` and the versioned API under `/v1`.
 - Build the backend with Python 3.12, FastAPI, Pydantic v2, SQLAlchemy 2 async, Alembic, PostgreSQL 16, Redis 7, Celery 5, MinIO, Polars, DuckDB, and the SDLC document-extraction stack.
 - Keep the domain package pure: metrics, forecasting, fingerprints, billing math, entitlement rules, and auction scoring must not depend on HTTP, persistence, workers, or provider adapters.
 - Generate the frontend API client and types from the backend OpenAPI contract. Commit a contract change and its regenerated client in the same checkpoint.
 - Keep API and worker processes stateless. Heavy work belongs in isolated Celery queues, never in the request path.
 - Read all configuration from the environment, validate it at startup, and refuse to start when required configuration is invalid.
+
+## UI/UX and vanilla CSS
+
+- Treat `UI-UX-CONCEPT.md` as the implementation reference for the landing-page narrative, product information architecture, visual tokens, responsive behavior, component states, accessibility, localization, and interaction details. `SDLC.md` remains authoritative when the documents conflict. `SUQ-INSIGHTS-UI-UX-CONCEPT.pdf` is a reading artifact; update it whenever its Markdown source materially changes.
+- Author styling as plain `.css` files imported explicitly by the owning entry point or component. Do not add Tailwind, Sass/Less, CSS-in-JS, CSS Modules, a runtime styling library, or a second design system without an approved architecture decision.
+- Keep global CSS deliberate: define shared tokens in `styles/tokens.css`, normalization in `styles/reset.css`, element defaults in `styles/base.css`, and ordered cascade layers `reset`, `base`, `components`, `utilities`, and `overrides`. Co-locate feature and component CSS with the code it styles once those directories exist.
+- Use CSS custom properties for color, typography, spacing, radius, elevation, motion, breakpoints where usable, and component-level theming. Reuse a semantic token when one exists; do not scatter raw brand values through feature styles.
+- Keep selectors low-specificity and locally namespaced with a consistent component/feature convention. Prefer classes and `data-*` state attributes; avoid IDs, deep descendant chains, `!important`, and markup-dependent selectors.
+- Reserve inline styles for genuinely runtime-calculated geometry or values that cannot be expressed through a class or custom property. State, variants, responsive behavior, focus, reduced motion, and print styling belong in CSS.
+- Implement mobile-first, content-driven layouts from the breakpoints and behavior in `UI-UX-CONCEPT.md`. Every changed component must cover loading, empty, error, disabled/permission, localization expansion, keyboard focus, reduced motion, and touch targets as applicable.
 
 ## Product invariants
 

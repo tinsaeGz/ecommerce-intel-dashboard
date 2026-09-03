@@ -73,7 +73,7 @@ Tier limits are **data**, not code — stored in the `plans` table and enforced 
 
 ## 8. Mobile strategy
 
-The web app is mobile-first from day one (Tailwind responsive layouts, PWA manifest, offline shell for read-only cached dashboards). A native app is justified **when and only when** these feature demands materialize:
+The web app is mobile-first from day one (responsive vanilla CSS, PWA manifest, offline shell for read-only cached dashboards). A native app is justified **when and only when** these feature demands materialize:
 
 | Trigger feature | Why web can't do it well |
 |---|---|

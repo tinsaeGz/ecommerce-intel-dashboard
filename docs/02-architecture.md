@@ -12,7 +12,7 @@
 | Task queue | **Celery 5** (Redis broker, Redis result backend) | Ingestion, alert evaluation, SMS dispatch, report generation. Mature retry/routing/beat ecosystem; chosen over arq/Dramatiq for its scheduling (beat), routing, and operational tooling maturity — a commercial product needs boring queues |
 | Heavy tabular parsing | **Polars** + **DuckDB**, with Unix shell pre-pass (`awk`/`sed`/`iconv`) | See [06-ingestion.md](06-ingestion.md); shell tools do streaming byte-level cleanup at near-zero memory, Polars does typed normalization, `COPY` loads Postgres |
 | Object storage | **MinIO** (S3 API) self-hosted; swappable for S3/R2 | Raw uploads, rejected-row reports, generated exports. S3 API from day one so cloud migration is config-only |
-| Frontend | **React 18 + TypeScript + Vite + Tailwind CSS** | Per original spec; semantic color tokens for light/dark; TanStack Query for server state; react-i18next |
+| Frontend | **React 18 + TypeScript + Vite + vanilla CSS** | Plain `.css` files with custom properties and cascade layers provide semantic tokens and responsive layouts without a utility framework or CSS runtime; TanStack Query handles server state; react-i18next handles localization |
 | Charts | **ECharts** (via echarts-for-react) | Handles dense time series on low-end Android browsers better than SVG-based libs; built-in canvas rendering, zoom/brush |
 | Edge / TLS | **Caddy** (or nginx) reverse proxy | Automatic TLS, HTTP/2, gzip/brotli, static asset serving, coarse IP rate limiting, request size caps |
 | Observability | **Sentry** (errors) + **Prometheus/Grafana** (metrics) + **Loki** (logs) + OpenTelemetry traces | See [12-operations.md](12-operations.md) |

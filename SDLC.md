@@ -450,7 +450,7 @@ Every feature passes six gates. Small changes may compress gates into a single p
 | Schema and type inference | Custom profiler over Polars, with `python-dateutil` and locale-aware numeric parsers | Type, unit, and role inference must expose evidence and confidence rather than return a bare guess, which rules out opaque black-box inference; the profiler is pure and property-tested |
 | Document extraction (images, scanned PDFs) | OpenCV for page geometry and table segmentation, Tesseract (with language packs for English, Spanish, French) for recognition, `pdfplumber` for digital PDF text layers | Self-hosted keeps merchant documents inside our own EU infrastructure, which a cloud vision API would not; the pluggable extractor interface allows a hosted engine per workspace later if accuracy demands it |
 | Object storage | MinIO, S3-compatible | Raw uploads, error reports, exports; presigned downloads; cloud migration is a configuration change |
-| Frontend | React 18, TypeScript, Vite, Tailwind CSS, TanStack Query, react-i18next, ECharts | Semantic design tokens for light and dark themes; canvas charting performs well on low-end Android |
+| Frontend | React 18, TypeScript, Vite, standards-based vanilla CSS, TanStack Query, react-i18next, ECharts | Plain `.css` files use custom properties and cascade layers for semantic design tokens and responsive layouts without a utility framework or CSS runtime; canvas charting performs well on low-end Android |
 | Edge | Caddy reverse proxy behind Cloudflare | Automatic TLS, compression, request size caps, coarse IP throttling; CDN shortens the last mile for static assets worldwide |
 | Observability | Sentry, Prometheus with Grafana, Loki logs, OpenTelemetry traces | Errors, metrics, logs, and traces joined by request ID |
 | Deployment | Docker Compose on Ubuntu 24.04, Hetzner EU | Single well-run host at launch; EU region is a data-residency commitment; every service stateless except PostgreSQL, Redis, MinIO |
@@ -728,7 +728,7 @@ The context diagram fixes the system boundary. Two properties matter for everyth
 ```mermaid
 flowchart TB
     subgraph CLIENT["Client tier"]
-        SPA["React SPA / PWA<br/>TypeScript, Tailwind, ECharts"]
+        SPA["React SPA / PWA<br/>TypeScript, vanilla CSS, ECharts"]
         SW["Service worker<br/>app shell, offline reads"]
     end
 

@@ -1,7 +1,7 @@
 # E-Commerce Intelligence Dashboard — "Suq Insights"
 
 **Status:** Design complete, approved for development (rev. 2 — international market)
-**Backend:** FastAPI (Python 3.12) · **Frontend:** React + TypeScript + Tailwind · **DB:** PostgreSQL 16 · **Cache/Queue:** Redis 7 + Celery
+**Backend:** FastAPI (Python 3.12) · **Frontend:** React + TypeScript + vanilla CSS · **DB:** PostgreSQL 16 · **Cache/Queue:** Redis 7 + Celery
 **Target deployment:** Ubuntu Linux server, EU region (Docker Compose), designed to scale out later
 **Languages:** English · Español · Français
 
@@ -15,6 +15,7 @@ A commercial SaaS analytics platform for small and mid-size merchants internatio
 
 | Doc | Contents |
 |---|---|
+| [UI/UX Concept](UI-UX-CONCEPT.md) | Landing-page narrative, dashboard architecture, visual system, vanilla CSS conventions, component states, responsive behavior, accessibility, localization, and marketing initiatives |
 | [01 — Product Definition](docs/01-product.md) | Vision, personas, feature tiers, monetization, mobile strategy |
 | [02 — System Architecture](docs/02-architecture.md) | Components, diagrams, tech-stack decisions and rationale |
 | [03 — Data Model](docs/03-data-model.md) | Full PostgreSQL schema, multi-tenancy, partitioning, retention |
