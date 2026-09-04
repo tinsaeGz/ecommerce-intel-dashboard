@@ -8,7 +8,7 @@ import {
   SkipLink,
 } from "../components/public-ui";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
-import { DashboardPreview } from "./dashboard-preview";
+import { DailyBriefing, LedgerMotif, MerchantOutcomes, ClosingInvitation } from "./merchant-story";
 import {
   HowItWorks,
   ProblemFraming,
@@ -29,9 +29,10 @@ export function LandingPage() {
       <Announcement />
       <SiteHeader />
 
-      <main id="main-content">
+      <main id="main-content" className="marketing-canvas">
         <section className="landing-hero" aria-labelledby="landing-hero-title">
           <div className="landing-hero__copy">
+            <LedgerMotif />
             <p className="landing-hero__eyebrow">{t("hero.eyebrow")}</p>
             <h1 id="landing-hero-title">
               <span>{t("hero.titleBefore")}</span>{" "}
@@ -59,13 +60,15 @@ export function LandingPage() {
           </div>
 
           <div className="landing-hero__visual" id="product-preview">
-            <DashboardPreview showSourceCard />
+            <DailyBriefing />
           </div>
         </section>
 
         <SourceExplorer />
         <ProblemFraming />
         <HowItWorks />
+        <MerchantOutcomes />
+        <ClosingInvitation />
       </main>
 
       <SiteFooter />

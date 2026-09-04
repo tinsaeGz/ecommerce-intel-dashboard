@@ -64,6 +64,63 @@
       "photo": "Foto"
     }
   },
+  "presentation": {
+    "briefing": {
+      "label": "Una mañana con Mercado Norte",
+      "question": "¿Qué necesita mi atención hoy?",
+      "answer": "Los ingresos subieron un {{comparison}}. {{risks}} productos podrían agotarse pronto. Un campo aún necesita tu confirmación.",
+      "stockAction": "Revisar riesgos de existencias",
+      "stockNote": "Estimaciones ilustrativas al ritmo de ventas del ejemplo, no fechas de agotamiento garantizadas.",
+      "evidenceAction": "¿De dónde salen estas cifras?",
+      "evidenceBody": "La vista de ingresos usa los campos confirmados de fecha de transacción e importe de línea. «Cod.» es una interpretación pendiente independiente; no ha cambiado los totales. Todos los valores son ficticios.",
+      "reviewAction": "Revisar «Cod.»",
+      "caption": "Una respuesta, su evidencia y tu próxima decisión. Juntas en una vista diaria."
+    },
+    "problems": {
+      "label": "Preguntas ilustrativas de comerciantes · no son testimonios",
+      "questions": {
+        "different": "«¿Por qué cada exportación necesita una hoja diferente?»",
+        "cleanup": "«¿Puedo ver las cifras antes de que sea tarde para actuar?»",
+        "certainty": "«¿Esta columna era cantidad o ingresos?»"
+      }
+    },
+    "outcomes": {
+      "eyebrow": "Las reglas detrás de cada respuesta",
+      "title": "Claridad que puedes comprobar.",
+      "items": {
+        "trace": {
+          "title": "La evidencia está cerca",
+          "body": "Consulta la fuente y los campos confirmados detrás del ejemplo de ingresos."
+        },
+        "confirm": {
+          "title": "Tú confirmas el significado",
+          "body": "Prueba otro uso para «Cod.» y observa cómo cambia la vista previa de la interpretación."
+        },
+        "preserve": {
+          "title": "Los valores originales importan",
+          "body": "Compara un valor de origen con su significado propuesto. Un campo sin usar no es un campo descartado."
+        },
+        "missing": {
+          "title": "Lo que falta nunca es cero",
+          "body": "La vista previa explica por qué el margen no está disponible sin un campo de coste confirmado."
+        },
+        "context": {
+          "title": "El periodo sigue visible",
+          "body": "Un ejemplo fechado y su comparación dan a cada tendencia el contexto necesario."
+        },
+        "language": {
+          "title": "Léelo a tu manera",
+          "body": "Explora el mismo ejemplo en inglés, español o francés, con formatos locales de números y moneda."
+        }
+      }
+    },
+    "closing": {
+      "eyebrow": "Tu próxima decisión clara",
+      "title": "Descubre cómo sería una mañana más tranquila.",
+      "body": "Recorre los registros ficticios de Mercado Norte. Sigue las cifras, comprueba la evidencia y prueba la revisión antes de traer tus propios datos.",
+      "action": "Explorar Mercado Norte"
+    }
+  },
   "understanding": {
     "sources": {
       "eyebrow": "Trae los registros que tienes",

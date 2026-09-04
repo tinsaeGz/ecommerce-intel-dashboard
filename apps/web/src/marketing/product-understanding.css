@@ -17,10 +17,10 @@
   }
 
   .section-heading h2 {
-    font-size: clamp(2.35rem, 5vw, 4.75rem);
+    font-size: clamp(2.2rem, 4.2vw, 3.5rem);
     font-weight: var(--font-weight-semibold);
     letter-spacing: -0.052em;
-    line-height: 0.98;
+    line-height: 1.08;
     text-wrap: balance;
   }
 
@@ -36,12 +36,14 @@
   .source-explorer,
   .problem-framing,
   .how-it-works {
-    width: min(100% - 2rem, 80rem);
+    width: 100%;
     margin-inline: auto;
     padding-block: var(--space-24);
+    padding-inline: var(--canvas-inset);
   }
 
   .source-explorer {
+    background: var(--color-white);
     border-top: 0.0625rem solid var(--color-line);
   }
 
@@ -95,7 +97,7 @@
     color: var(--color-ink);
     background: var(--color-white);
     border-color: var(--color-ink);
-    box-shadow: 0 0.2rem 0 var(--color-ink);
+    box-shadow: inset 0.2rem 0 0 var(--color-ink);
   }
 
   .source-explorer__tab[aria-selected="true"] .source-explorer__tab-mark {
@@ -261,67 +263,95 @@
   }
 
   .problem-framing {
+    color: var(--color-paper);
+    background: var(--color-ink);
     border-top: 0.0625rem solid var(--color-line);
+  }
+
+  .problem-framing .section-heading__eyebrow {
+    color: var(--color-lime);
+  }
+
+  .problem-framing__label {
+    margin-top: var(--space-5);
+    font-size: var(--font-size-ui);
   }
 
   .problem-framing__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-4);
+    gap: 0;
     margin-top: var(--space-10);
   }
 
   .problem-card {
     display: flex;
-    min-height: 22rem;
+    min-height: 0;
     flex-direction: column;
     padding: var(--space-6);
-    background: var(--color-mist);
-    border: 0.0625rem solid var(--color-line);
-    border-radius: var(--radius-panel);
+    background: transparent;
+    border: 0;
+    border-top: 0.0625rem solid var(--color-slate);
+    border-inline-start: 0.0625rem solid var(--color-slate);
   }
 
   .problem-card[data-emphasis="true"] {
-    color: var(--color-white);
-    background: var(--color-ink);
-    border-color: var(--color-ink);
+    color: var(--color-paper);
+    background: transparent;
+  }
+
+  .problem-card:first-child {
+    border-inline-start: 0;
   }
 
   .problem-card__number {
     width: fit-content;
     padding: 0.35rem var(--space-2);
-    color: var(--color-slate);
+    color: var(--color-lime);
     font-family: ui-monospace, SFMono-Regular, "Cascadia Code", monospace;
     font-size: var(--font-size-caption);
-    border: 0.0625rem solid var(--color-line);
-    border-radius: 999px;
+    border: 0.0625rem solid var(--color-slate);
   }
 
   .problem-card[data-emphasis="true"] .problem-card__number {
     color: var(--color-lime);
-    border-color: var(--color-lime);
+    border-color: var(--color-slate);
+  }
+
+  .problem-card__question {
+    margin-block: var(--space-6);
+    color: var(--color-paper);
+    font-family: var(--font-serif);
+    font-size: clamp(1.45rem, 2.5vw, 2rem);
+    font-style: italic;
+    line-height: var(--line-height-heading);
   }
 
   .problem-card h3 {
     margin-top: auto;
-    font-size: clamp(1.65rem, 2.7vw, 2.5rem);
+    font-size: var(--font-size-body-large);
     letter-spacing: -0.035em;
-    line-height: 1.02;
+    line-height: var(--line-height-heading);
     text-wrap: balance;
   }
 
   .problem-card__body {
     margin-top: var(--space-4);
-    color: var(--color-slate);
+    color: var(--color-mist);
     line-height: var(--line-height-body);
   }
 
   .problem-card[data-emphasis="true"] .problem-card__body {
-    color: color-mix(in srgb, var(--color-white) 72%, transparent);
+    color: var(--color-mist);
   }
 
   .how-it-works {
     border-top: 0.0625rem solid var(--color-line);
+  }
+
+  .how-it-works:focus-visible {
+    outline: 0.2rem solid var(--color-forest);
+    outline-offset: -0.25rem;
   }
 
   .how-it-works__interactive {
@@ -855,7 +885,9 @@
     }
 
     .problem-card {
-      min-height: 18rem;
+      min-height: 0;
+      padding-inline: 0;
+      border-inline-start: 0;
     }
 
     .how-it-works__interactive {

@@ -64,6 +64,63 @@
       "photo": "Photo"
     }
   },
+  "presentation": {
+    "briefing": {
+      "label": "A morning with Mercado Norte",
+      "question": "What needs my attention today?",
+      "answer": "Revenue is up {{comparison}}. {{risks}} products may run out soon. One field still needs your confirmation.",
+      "stockAction": "Review stock risks",
+      "stockNote": "Illustrative estimates at the sample sales pace, not guaranteed stockout dates.",
+      "evidenceAction": "Where do these numbers come from?",
+      "evidenceBody": "The revenue view uses the confirmed transaction-time and line-amount fields. “Cod.” is a separate pending interpretation; it has not changed the totals. All values here are fictional.",
+      "reviewAction": "Review “Cod.”",
+      "caption": "An answer, its evidence, and your next decision. Together in one daily view."
+    },
+    "problems": {
+      "label": "Illustrative merchant questions · not customer testimonials",
+      "questions": {
+        "different": "“Why does every export need a different spreadsheet?”",
+        "cleanup": "“Can I get the numbers before it is too late to act?”",
+        "certainty": "“Did this column mean quantity or revenue?”"
+      }
+    },
+    "outcomes": {
+      "eyebrow": "The rules behind every answer",
+      "title": "Clarity you can check.",
+      "items": {
+        "trace": {
+          "title": "Evidence stays close",
+          "body": "Inspect the source and confirmed fields behind the sample revenue answer."
+        },
+        "confirm": {
+          "title": "You confirm the meaning",
+          "body": "Try another role for “Cod.” and see the interpretation preview update."
+        },
+        "preserve": {
+          "title": "Original values matter",
+          "body": "Compare a source value with its proposed meaning. An unused field is not a discarded field."
+        },
+        "missing": {
+          "title": "Missing is never zero",
+          "body": "The preview explains why margin is unavailable when no cost field is confirmed."
+        },
+        "context": {
+          "title": "The period stays visible",
+          "body": "A dated sample and its comparison give every trend the context it needs."
+        },
+        "language": {
+          "title": "Read it your way",
+          "body": "Explore the same example in English, Spanish, or French, with local number and currency formats."
+        }
+      }
+    },
+    "closing": {
+      "eyebrow": "Your next clear decision",
+      "title": "See what a calmer morning could look like.",
+      "body": "Walk through Mercado Norte’s fictional records. Follow the numbers, check the evidence, and try the review before bringing your own data.",
+      "action": "Explore Mercado Norte"
+    }
+  },
   "understanding": {
     "sources": {
       "eyebrow": "Bring the records you have",

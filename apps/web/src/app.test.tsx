@@ -147,6 +147,31 @@ describe("public landing routes", () => {
     );
   });
 
+  it.each(["en", "es", "fr"])("opens briefing evidence and focuses the review destination in %s", async (locale) => {
+    const user = userEvent.setup();
+    await i18n.changeLanguage(locale);
+    await renderAt("/");
+
+    const stockSummary = screen.getByText(i18n.t("presentation.briefing.stockAction"));
+    await user.click(stockSummary);
+    const stockDetail = stockSummary.closest("details");
+    expect(stockDetail).toHaveAttribute("open");
+    expect(within(stockDetail!).getAllByRole("listitem")).toHaveLength(3);
+    expect(stockDetail).toHaveTextContent(i18n.t("presentation.briefing.stockNote"));
+
+    const evidenceSummary = screen.getByText(i18n.t("presentation.briefing.evidenceAction"));
+    await user.click(evidenceSummary);
+    expect(evidenceSummary.closest("details")).toHaveAttribute("open");
+    expect(evidenceSummary.closest("details")).toHaveTextContent(i18n.t("presentation.briefing.evidenceBody"));
+
+    const reviewLink = screen.getByRole("link", { name: i18n.t("presentation.briefing.reviewAction") });
+    expect(reviewLink).toHaveAttribute("href", "#how-it-works");
+    reviewLink.focus();
+    await user.keyboard("{Enter}");
+    expect(screen.getByRole("region", { name: i18n.t("understanding.how.title") })).toHaveFocus();
+    expect(screen.getByRole("link", { name: i18n.t("presentation.closing.action") })).toHaveAttribute("href", "/demo");
+  });
+
   it("explains unsupported analysis instead of presenting a false zero", async () => {
     const user = userEvent.setup();
     await renderAt("/");

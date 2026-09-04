@@ -186,6 +186,7 @@ export function ProblemFraming() {
       <div className="section-heading section-heading--wide">
         <p className="section-heading__eyebrow">{t("understanding.problems.eyebrow")}</p>
         <h2 id="problem-title">{t("understanding.problems.title")}</h2>
+        <p className="problem-framing__label">{t("presentation.problems.label")}</p>
       </div>
       <div className="problem-framing__grid">
         {problems.map((problem, index) => (
@@ -197,6 +198,7 @@ export function ProblemFraming() {
             <span className="problem-card__number" aria-hidden="true">
               0{index + 1}
             </span>
+            <p className="problem-card__question">{t(`presentation.problems.questions.${problem}`)}</p>
             <h3>{t(`understanding.problems.items.${problem}.title`)}</h3>
             <p className="problem-card__body">
               {t(`understanding.problems.items.${problem}.body`)}
@@ -419,7 +421,7 @@ export function HowItWorks() {
   };
 
   return (
-    <section className="how-it-works" id="how-it-works" aria-labelledby="how-title">
+    <section className="how-it-works" id="how-it-works" aria-labelledby="how-title" tabIndex={-1}>
       <div className="section-heading section-heading--wide">
         <p className="section-heading__eyebrow">{t("understanding.how.eyebrow")}</p>
         <h2 id="how-title">{t("understanding.how.title")}</h2>

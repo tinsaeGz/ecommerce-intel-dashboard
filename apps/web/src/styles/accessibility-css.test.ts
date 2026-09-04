@@ -8,6 +8,7 @@ const styles = [
   "../marketing/dashboard-preview.css",
   "../marketing/landing-page.css",
   "../marketing/product-understanding.css",
+  "../marketing/merchant-story.css",
 ]
   .map((path) => readFileSync(new URL(path, import.meta.url), "utf8"))
   .join("\n");
@@ -21,7 +22,7 @@ describe("adaptive accessibility styles", () => {
   });
 
   it("keeps controls and charts visible in forced-colors mode", () => {
-    expect(styles.match(/@media \(forced-colors: active\)/g)).toHaveLength(4);
+    expect(styles.match(/@media \(forced-colors: active\)/g)).toHaveLength(5);
     expect(styles).toContain("border: 0.125rem solid currentcolor");
     expect(styles).toContain("stroke: currentcolor");
   });

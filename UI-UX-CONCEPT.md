@@ -49,7 +49,7 @@ hr { margin: 2em 0; border: 0; border-top: 1px solid #d8dbd1; }
 
 <div class="cover">
   <div>
-    <span class="cover-kicker">Product experience concept · v1.1</span>
+    <span class="cover-kicker">Product experience concept · v1.2</span>
     <h1>Suq Insights<br><em>Clarity for every market day.</em></h1>
     <p class="cover-deck">A comprehensive landing-page, dashboard, visual-system, content, conversion, and implementation blueprint for the production SaaS.</p>
   </div>
@@ -58,7 +58,7 @@ hr { margin: 2em 0; border: 0; border-top: 1px solid #d8dbd1; }
     <div class="cover-card"><span class="label">Product</span><br><strong>Messy records → useful answers</strong></div>
     <div class="cover-card"><span class="label">Experience</span><br><strong>Calm, credible, merchant-first</strong></div>
   </div>
-  <p class="small">Updated 4 September 2026 · Canonical product source: SDLC.md v3.0 · English master copy with Spanish and French localization requirements</p>
+  <p class="small">Updated 5 September 2026 · Canonical product source: SDLC.md v3.0 · English master copy with Spanish and French localization requirements</p>
 </div>
 
 # Document purpose and status
@@ -193,7 +193,7 @@ Layouts tolerate long French labels, Spanish accents, variable currency formats,
 
 # 2. Inspiration translated into Suq
 
-The goal is not to clone either reference. It is to identify the useful visual grammar and rebuild it around Suq’s product behavior.
+The references inform different parts of Suq: Milestone supplies the theme, the ecommerce dashboard supplies product organization, and Lightdash supplies the presentation rhythm. Each is rebuilt around Suq’s product behavior.
 
 ## 2.1 Milestone landing-page influence
 
@@ -201,10 +201,10 @@ Reference: [Milestone Webflow template](https://milestone-webflow-html-website-t
 
 Patterns worth carrying forward:
 
-- Oversized, centered, high-contrast hero typography.
+- Oversized, high-contrast hero typography; the updated presentation uses left-aligned copy within a shared page frame.
 - A bold sans-serif paired with a selective italic serif for warmth and emphasis.
 - Mostly white surfaces with acid-lime actions and soft mint, aqua, and lavender ambient gradients.
-- An oversized, angled product mockup that makes the software tangible immediately.
+- An oversized product mockup that makes the software tangible immediately. Suq uses the straight-on composition specified in §3.7.
 - Alternation between airy white sections and black editorial panels.
 - Rounded cards, simple line illustrations, sparse hand-drawn marks, and concise feature copy.
 - Product-led calls to action repeated at natural decision points.
@@ -245,6 +245,7 @@ Suq adaptation:
 | [Polar Analytics](https://www.polaranalytics.com/) | Goal-based navigation and a no-signup demo reduce evaluation risk. | Organize use cases around selling, stock, and returning customers; provide a sample-data playground. |
 | Milestone | Editorial contrast makes finance software feel approachable. | Use a confident black/white/lime identity with soft supporting color. |
 | Yow dashboard shot | Spatial calm and familiar ecommerce patterns lower learning cost. | Retain the calm shell while making every analytical frame a true Suq widget instance. |
+| [Lightdash on Saaspo](https://saaspo.com/pages/lightdash-landing-page) | A bounded page, large product demonstrations, and varied section density connect benefits to evidence. | Keep the Suq theme; present merchant questions, answers, supporting records, and a useful next action. |
 
 ## 2.4 What not to copy
 
@@ -255,6 +256,21 @@ Suq adaptation:
 - A permanent right rail that reduces the twelve-column canvas or breaks small laptops.
 - A fixed dashboard that visually resembles widgets but cannot actually be rearranged.
 - Generic “AI-powered growth” language. Suq’s trust comes from showing interpretation, evidence, and confirmed roles.
+
+## 2.5 Lightdash presentation influence
+
+Reference: [Lightdash landing-page capture on Saaspo](https://saaspo.com/pages/lightdash-landing-page). This is a presentation reference, not a source of Suq product capabilities. Some media panels in the capture are blank; no behavior is inferred from those panels.
+
+- **Continuous frame:** subtle vertical rails and shared section edges keep the page connected. Use the existing 1,280 px content maximum with responsive inner gutters. Sparse ledger dots belong behind product stages; they must not reduce text contrast.
+- **Large product demonstration:** begin with a merchant question, a concise answer, and useful actions before the detailed briefing. Keep one straight-on surface. Stock and evidence disclosures work by keyboard and touch; the review link moves focus to the corresponding section.
+- **Feature chapters:** give records, interpretation review, and daily decisions room for one dominant mockup each. A source selector or workflow tabs change only their own stage. Mobile and reduced-motion views show readable static workflow cards.
+- **Merchant situations:** use illustrative questions about incompatible exports, late numbers, and ambiguous columns in the problem section. Label them as illustrations; never give them fabricated customer identities, logos, or testimonial attribution.
+- **Outcome grid:** show six inspectable principles: evidence, confirmation, source preservation, honest missing data, period context, and localization. Prefer statements demonstrated by the preview. Future behavior remains part of the delivery plan until implemented.
+- **Transformation:** the existing Add → Confirm → See sequence is the first transformation timeline. Later iterations can extend it to repeated daily use; do not invent a five-day onboarding or productivity promise.
+- **Closing invitation:** a dark Ink panel with lime action invites the visitor into Mercado Norte's fictional demo. The account-access alternative remains explicitly a preview until authentication is connected.
+- **Brand detail:** original SVG ledger cells and receipt edges carry Suq's lime/mint palette at the hero and close. Hide decoration on narrow screens and in forced colors. Do not copy Lightdash's purple pixel artwork, copy, logos, security badges, or developer positioning.
+
+The presentation revision covers the existing foundations and understanding sequence, its outcome summary, and closing invitation. Dedicated daily-question panels, the full trust demonstration, channels, offline entry, and composable dashboards remain subsequent delivery work. This revision does not mark Phase 3 or the SaaS complete.
 
 ---
 
@@ -472,6 +488,10 @@ The global navigation remains short: **Product · How it works · Use cases · P
 
 **Reassurance line:** “English · Español · Français” and supported-source icons. Do not claim a trial length or no-card signup until billing policy confirms it.
 
+**Composition:** left-aligned headline and copy inside the continuous page rails, with a restrained ledger motif at the upper corner. The product stage occupies the full inner width below the copy on a quiet dotted surface. Paper, Ink, Lime, Mint, and the existing serif emphasis retain the Suq theme.
+
+**Question → answer → action:** “What needs my attention today?” leads into “Revenue is up 18%. Three products may run out soon. One field still needs your confirmation.” The product stage is visibly labelled fictional sample data. Native disclosures show the stock estimates and source evidence; “Review ‘Cod.’” links to the interpretation chapter and moves keyboard focus there. The pending field is separate from the confirmed revenue fields and must never imply that an unconfirmed import changed the totals.
+
 **Visual:** a straight-on merchant morning briefing uses real Suq components without browser chrome, device tilt, or decorative haze. Its asymmetrical hierarchy makes the input-to-insight relationship concrete instead of resembling a generic admin template. The visual should show:
 
 - One dominant revenue answer with localized currency and a restrained supporting trend.
@@ -493,17 +513,17 @@ The global navigation remains short: **Product · How it works · Use cases · P
 
 **Microcopy:** “No fixed column names. No required order. You confirm the meaning before totals change.”
 
-**Interaction:** selecting a source changes a small adjacent preview from raw input to recognized table. Keyboard users receive the same change through tabs.
+**Interaction:** selecting a source changes a large adjacent stage from raw input to recognized table. Keyboard users receive the same change through tabs. The section shares the page rails and uses thin separators rather than a collection of disconnected floating cards.
 
 ### 3. Problem framing: “Your data should not need a new job before it can help you”
 
-Use three concise problem cards:
+Use a dark Ink chapter with three bordered columns that stack on mobile. Precede each explanation with an illustrative merchant question, explicitly labelled as an example rather than a testimonial:
 
 1. **Every export looks different.** “Columns move, headings change, and dates mean different things.”
 2. **Manual cleanup steals the decision window.** “By the time the sheet is ready, the stock decision is already late.”
 3. **A confident wrong answer is worse than no answer.** “Suq shows uncertainty and asks before it commits.”
 
-The third card is dark Ink with lime type accents; it introduces the trust position.
+Example questions: “Why does every export need a different spreadsheet?”, “Can I get the numbers before it is too late to act?”, and “Did this column mean quantity or revenue?” Use Paper text, lime sequence markers, and serif emphasis for the questions. The whole chapter introduces the trust position; nothing auto-scrolls or requires motion to be read.
 
 ### 4. How it works: “From messy records to a useful morning view”
 
@@ -516,6 +536,8 @@ Use a three-act scrollytelling or tabbed sequence. Scrollytelling collapses to s
 **Act 3 — See what matters.** The confirmed fields animate into the starting dashboard. Copy: “Only supported analyses appear. Missing concepts are explained, never treated as zero.”
 
 Primary CTA after the sequence: **Try sample data**.
+
+In the current preview, follow the sequence with **Clarity you can check**, a six-cell grid of evidence, confirmation, preservation, missing-data, context, and localization principles. Its copy points to behavior visible in the sample. Finish with a dark invitation to explore Mercado Norte and an honest account-access preview link. As later phases arrive, these two closing sections move after the new product chapters.
 
 ### 5. Three daily questions
 
@@ -673,18 +695,22 @@ Footer groups: Product, Use cases, Resources, Company, Legal, Language. Include 
 │ Suq   Product  How it works  Use cases  Pricing  Resources   EN  Log in [CTA]│
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│                 COMMERCE CLARITY FROM YOUR DATA                              │
-│           Know what’s selling. See what runs out next.                       │
-│                        Bring customers back.                                 │
-│                 [Start free]  [Explore the demo]                             │
+│ COMMERCE CLARITY FROM YOUR DATA                          ledger cells       │
+│ Know what’s selling. See what runs out next.                                 │
+│ Bring customers back.                                                        │
+│ [Start free]  [Explore the demo]                                             │
 │                                                                              │
-│      soft color haze        ┌───────────────────────────────┐                 │
-│        + source card  ───▶  │   angled real dashboard      │                 │
-│                             └───────────────────────────────┘                 │
+│ What needs my attention today?                 FICTIONAL SAMPLE DATA       │
+│ Answer → [Stock risks] [Evidence] [Review Cod.]                              │
+│ ┌────────────────────────────────────────────────────────────────────────┐ │
+│ │ Straight-on briefing: answer, evidence, action queue, daily glance      │ │
+│ └────────────────────────────────────────────────────────────────────────┘ │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │ CSV · Excel · Paste · JSON · POS · Marketplace · Image · PDF · Entry · API  │
 ├──────────────────────────────────────────────────────────────────────────────┤
-│ Three pains                     │ Add → Confirm → See                        │
+│ DARK PROBLEM CHAPTER: illustrative merchant questions                       │
+├──────────────────────────────────────────────────────────────────────────────┤
+│ Add → Confirm → See: one large stage; static workflow on mobile             │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │ WHAT IS SELLING?                │ product mockup                             │
 │ product mockup                  │ WHAT WILL RUN OUT?                         │
@@ -694,7 +720,8 @@ Footer groups: Product, Use cases, Resources, Company, Legal, Language. Include 
 ├──────────────────────────────────────────────────────────────────────────────┤
 │ Channels + live entry             Composable dashboard                      │
 ├──────────────────────────────────────────────────────────────────────────────┤
-│ Global readiness · Proof · Comparison · Pricing · FAQ · Final CTA · Footer  │
+│ Global readiness · Proof · Comparison · Pricing · FAQ                       │
+│ Inspectable outcome grid · Dark sample-demo invitation · Footer             │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -709,6 +736,7 @@ The page should not rely on one repeated screenshot. Build a small mockup set fr
 Desktop sample content:
 
 - Workspace: “Mercado Norte” (fictional).
+- Above the briefing: one daily question, a visible sample-data label, an answer, stock/evidence disclosures, and a working link to interpretation review. Essential meaning must remain accessible outside any decorative `aria-hidden` mockup crop.
 - Date: “Today · 3 Sep” using the selected locale and timezone.
 - Editorial answer: “Revenue is 18% above the comparison period, led by Canvas Tote and Ground Coffee.”
 - Evidence line: “POS export · 312 confirmed transactions.”

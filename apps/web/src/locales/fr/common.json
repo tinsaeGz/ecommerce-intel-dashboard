@@ -64,6 +64,63 @@
       "photo": "Photo"
     }
   },
+  "presentation": {
+    "briefing": {
+      "label": "Une matinée avec Mercado Norte",
+      "question": "Qu’est-ce qui demande mon attention aujourd’hui ?",
+      "answer": "Le chiffre d’affaires a augmenté de {{comparison}}. {{risks}} produits risquent de manquer bientôt. Un champ attend encore votre confirmation.",
+      "stockAction": "Examiner les risques de rupture",
+      "stockNote": "Estimations illustratives au rythme de vente de l’exemple, sans garantie de date de rupture.",
+      "evidenceAction": "D’où viennent ces chiffres ?",
+      "evidenceBody": "La vue du chiffre d’affaires utilise les champs confirmés de date de transaction et de montant de ligne. « Cod. » est une interprétation distincte en attente ; elle n’a pas modifié les totaux. Toutes les valeurs sont fictives.",
+      "reviewAction": "Vérifier « Cod. »",
+      "caption": "Une réponse, ses preuves et votre prochaine décision. Réunies dans une vue quotidienne."
+    },
+    "problems": {
+      "label": "Questions illustratives de commerçants · pas des témoignages",
+      "questions": {
+        "different": "« Pourquoi chaque export demande-t-il un tableur différent ? »",
+        "cleanup": "« Puis-je obtenir les chiffres à temps pour agir ? »",
+        "certainty": "« Cette colonne indiquait-elle la quantité ou le chiffre d’affaires ? »"
+      }
+    },
+    "outcomes": {
+      "eyebrow": "Les règles derrière chaque réponse",
+      "title": "Une clarté que vous pouvez vérifier.",
+      "items": {
+        "trace": {
+          "title": "Les preuves restent proches",
+          "body": "Consultez la source et les champs confirmés derrière l’exemple de chiffre d’affaires."
+        },
+        "confirm": {
+          "title": "Vous confirmez le sens",
+          "body": "Essayez un autre rôle pour « Cod. » et observez la mise à jour de l’aperçu."
+        },
+        "preserve": {
+          "title": "Les valeurs d’origine comptent",
+          "body": "Comparez une valeur source à son sens proposé. Un champ inutilisé n’est pas un champ supprimé."
+        },
+        "missing": {
+          "title": "Une absence n’est jamais zéro",
+          "body": "L’aperçu explique pourquoi la marge est indisponible sans champ de coût confirmé."
+        },
+        "context": {
+          "title": "La période reste visible",
+          "body": "Un exemple daté et sa comparaison donnent à chaque tendance le contexte nécessaire."
+        },
+        "language": {
+          "title": "Lisez dans votre langue",
+          "body": "Explorez le même exemple en anglais, espagnol ou français, avec les formats locaux de nombres et de devises."
+        }
+      }
+    },
+    "closing": {
+      "eyebrow": "Votre prochaine décision éclairée",
+      "title": "Imaginez une matinée plus sereine.",
+      "body": "Parcourez les données fictives de Mercado Norte. Suivez les chiffres, vérifiez les preuves et essayez la révision avant d’apporter vos propres données.",
+      "action": "Explorer Mercado Norte"
+    }
+  },
   "understanding": {
     "sources": {
       "eyebrow": "Apportez les données que vous avez",
