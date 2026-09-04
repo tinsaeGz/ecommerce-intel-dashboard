@@ -11,8 +11,21 @@ html {
 body,
 h1,
 h2,
-p {
+h3,
+p,
+figure {
   margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
 }
 
 button,
@@ -23,6 +36,12 @@ textarea {
 }
 
 button,
-a {
+a,
+select {
   -webkit-tap-highlight-color: transparent;
+}
+
+button,
+select {
+  color: inherit;
 }

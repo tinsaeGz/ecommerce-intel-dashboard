@@ -1,32 +1,131 @@
 {
+  "meta": {
+    "landing": {
+      "title": "Suq Insights — Claridad diaria a partir de tus registros",
+      "description": "Convierte los registros que ya guardas en una vista diaria clara de ventas, existencias y clientes recurrentes."
+    },
+    "demo": {
+      "title": "Panel de muestra — Suq Insights",
+      "description": "Explora una vista transparente de Suq Insights creada con datos de muestra ficticios."
+    },
+    "signup": {
+      "title": "Vista previa de la cuenta — Suq Insights",
+      "description": "La creación de cuentas se está conectando. Mientras tanto, explora el panel de muestra ficticio."
+    },
+    "login": {
+      "title": "Vista previa del acceso — Suq Insights",
+      "description": "El acceso a las cuentas se está conectando. Mientras tanto, explora el panel de muestra ficticio."
+    },
+    "app": {
+      "title": "Vista previa del espacio de trabajo — Suq Insights",
+      "description": "El espacio de trabajo autenticado de Suq Insights se está conectando al backend del producto."
+    }
+  },
+  "common": {
+    "loading": "Cargando esta página…",
+    "skipToContent": "Saltar al contenido principal"
+  },
   "brand": {
     "homeLabel": "Inicio de Suq Insights"
   },
   "language": {
     "label": "Elegir idioma"
   },
-  "hero": {
-    "eyebrow": "Base del producto",
-    "title": "Claridad para cada día de mercado.",
-    "body": "Suq Insights se está creando para convertir los registros que los comercios ya guardan en una visión diaria y clara de ventas, existencias y clientes que regresan.",
-    "status": "Los entornos de desarrollo están listos. La implementación del producto está en curso."
+  "navigation": {
+    "primary": "Navegación principal",
+    "mobile": "Navegación móvil",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
-  "questions": {
-    "label": "Las tres preguntas que responderá Suq Insights",
-    "selling": {
-      "title": "¿Qué se está vendiendo?",
-      "body": "Consulta ingresos, transacciones, unidades, patrones y los artículos que impulsan el cambio."
-    },
-    "stock": {
-      "title": "¿Qué se agotará próximamente?",
-      "body": "Comprende el estado de las existencias, los días restantes y lo que requiere atención hoy."
-    },
-    "customers": {
-      "title": "¿Qué clientes regresan?",
-      "body": "Visualiza claramente las compras recurrentes cuando la información confirmada del cliente lo permite."
+  "actions": {
+    "startFree": "Comenzar gratis",
+    "previewSignup": "Ver acceso a la cuenta",
+    "exploreDemo": "Explorar la demo",
+    "logIn": "Iniciar sesión",
+    "backHome": "Volver al inicio"
+  },
+  "announcement": {
+    "label": "Anuncio del producto",
+    "message": "Creado para los registros que ya usas: hojas de cálculo, exportaciones, PDF, fotos y más.",
+    "dismiss": "Cerrar anuncio"
+  },
+  "hero": {
+    "eyebrow": "Claridad comercial a partir de los datos que ya tienes",
+    "titleBefore": "Descubre qué se vende.",
+    "titleEmphasis": "Anticipa qué se agotará.",
+    "titleAfter": "Haz que tus clientes vuelvan.",
+    "body": "Sube los registros que ya guardas o registra el día a medida que sucede. Suq confirma qué significan tus datos y los convierte en una vista diaria clara de ventas, existencias y clientes recurrentes.",
+    "languages": "English · Español · Français",
+    "sourcesLabel": "Ejemplos de fuentes compatibles",
+    "sources": {
+      "csv": "CSV",
+      "excel": "Excel",
+      "pdf": "PDF",
+      "photo": "Foto"
     }
   },
+  "dashboard": {
+    "accessibleSummary": "Panel ficticio de Mercado Norte. Los ingresos son {{revenue}}, un {{comparison}} respecto al periodo de comparación. {{stockRisks}} artículos pueden agotarse en siete días. Actualizado desde {{sources}} fuentes.",
+    "workspace": "Espacio de trabajo",
+    "sampleDay": "Día de muestra · {{date}}",
+    "freshness": "Actualizado hace {{minutes}} minutos · {{sources}} fuentes",
+    "insightLabel": "Dato clave de hoy",
+    "insight": "Los ingresos están un {{comparison}} por encima del periodo comparado, impulsados por Bolso de lona y Café molido.",
+    "comparison": "{{comparison}} frente al periodo comparado",
+    "metrics": {
+      "revenue": "Ingresos",
+      "transactions": "Transacciones",
+      "units": "Unidades",
+      "customers": "Clientes"
+    },
+    "chart": {
+      "eyebrow": "Ritmo de ventas",
+      "title": "Ingresos a lo largo del día",
+      "period": "Desde la apertura",
+      "current": "Día de muestra",
+      "previous": "Comparación"
+    },
+    "stock": {
+      "eyebrow": "Requiere atención",
+      "title_one": "1 artículo puede agotarse",
+      "title_other": "{{count}} artículos pueden agotarse",
+      "body": "Durante los próximos siete días al ritmo de ventas actual.",
+      "action": "Ver riesgo de existencias"
+    },
+    "confirmed": {
+      "title": "Datos confirmados",
+      "body": "Los significados de los campos se revisaron antes de cambiar los totales.",
+      "date": "Hora de transacción",
+      "amount": "Importe de línea"
+    }
+  },
+  "demo": {
+    "eyebrow": "Vista transparente del producto",
+    "title": "Conoce la vista diaria antes de compartir tus datos.",
+    "body": "Esta vista usa un comercio ficticio y valores de muestra fijos y coherentes. No contiene información de clientes ni de comercios.",
+    "sampleLabel": "Datos de muestra ficticios",
+    "sampleTitle": "Una vista clara de lo que cambió y lo que requiere atención",
+    "sampleBody": "El panel de producción conectará cada respuesta con registros de origen confirmados y evidencia de actualización."
+  },
+  "access": {
+    "signup": {
+      "eyebrow": "Vista previa del acceso",
+      "title": "La creación de cuentas gratuitas se está conectando.",
+      "body": "El flujo de autenticación aún no está activo en esta fase inicial. Puedes explorar la demo ficticia sin introducir datos de tu negocio."
+    },
+    "login": {
+      "eyebrow": "Vista previa del inicio de sesión",
+      "title": "El acceso seguro a las cuentas se está conectando.",
+      "body": "El flujo de autenticación aún no está activo en esta fase inicial. No mostramos un formulario hasta que pueda conectarse al servicio protegido real."
+    }
+  },
+  "appPreview": {
+    "eyebrow": "Límite del producto autenticado",
+    "title": "El espacio de trabajo solo se abre con un acceso real.",
+    "body": "Esta ruta está separada del paquete de marketing, pero no simula una sesión autenticada. Explora el panel ficticio mientras se conecta el flujo protegido."
+  },
   "footer": {
-    "note": "English · Español · Français"
+    "previewNote": "Base de la landing de la fase 1 · No requiere datos privados",
+    "languages": "English · Español · Français"
   }
 }

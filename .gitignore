@@ -10,6 +10,7 @@ Thumbs.db
 
 # Build artifacts
 *.zip
+*.pdf
 
 # Root workspace and local deployment state
 node_modules/

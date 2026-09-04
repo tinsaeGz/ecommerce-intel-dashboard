@@ -1,32 +1,131 @@
 {
+  "meta": {
+    "landing": {
+      "title": "Suq Insights — Une vision quotidienne à partir de vos données",
+      "description": "Transformez les données que vous conservez déjà en une vue claire des ventes, des stocks et des clients fidèles."
+    },
+    "demo": {
+      "title": "Tableau de bord de démonstration — Suq Insights",
+      "description": "Découvrez un aperçu transparent de Suq Insights créé avec des données fictives."
+    },
+    "signup": {
+      "title": "Aperçu du compte — Suq Insights",
+      "description": "La création de comptes est en cours de connexion. Découvrez le tableau fictif en attendant."
+    },
+    "login": {
+      "title": "Aperçu de la connexion — Suq Insights",
+      "description": "L’accès aux comptes est en cours de connexion. Découvrez le tableau fictif en attendant."
+    },
+    "app": {
+      "title": "Aperçu de l’espace de travail — Suq Insights",
+      "description": "L’espace de travail authentifié de Suq Insights est en cours de connexion au backend du produit."
+    }
+  },
+  "common": {
+    "loading": "Chargement de cette page…",
+    "skipToContent": "Aller au contenu principal"
+  },
   "brand": {
     "homeLabel": "Accueil de Suq Insights"
   },
   "language": {
     "label": "Choisir la langue"
   },
-  "hero": {
-    "eyebrow": "Fondation du produit",
-    "title": "De la clarté pour chaque journée de marché.",
-    "body": "Suq Insights est conçu pour transformer les données que les commerçants possèdent déjà en une vue quotidienne claire des ventes, des stocks et des clients fidèles.",
-    "status": "Les environnements de développement sont prêts. La mise en œuvre du produit est en cours."
+  "navigation": {
+    "primary": "Navigation principale",
+    "mobile": "Navigation mobile",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
-  "questions": {
-    "label": "Les trois questions auxquelles Suq Insights répondra",
-    "selling": {
-      "title": "Qu’est-ce qui se vend ?",
-      "body": "Suivez le chiffre d’affaires, les transactions, les unités, les tendances et les articles qui évoluent."
-    },
-    "stock": {
-      "title": "Quel article sera bientôt épuisé ?",
-      "body": "Comprenez l’état des stocks, les jours restants et ce qui demande votre attention aujourd’hui."
-    },
-    "customers": {
-      "title": "Quels clients reviennent ?",
-      "body": "Visualisez les achats répétés lorsque les données client confirmées le permettent."
+  "actions": {
+    "startFree": "Commencer gratuitement",
+    "previewSignup": "Voir l’accès au compte",
+    "exploreDemo": "Explorer la démo",
+    "logIn": "Se connecter",
+    "backHome": "Retour à l’accueil"
+  },
+  "announcement": {
+    "label": "Annonce du produit",
+    "message": "Conçu pour les données que vous utilisez déjà : feuilles de calcul, exports, PDF, photos et plus encore.",
+    "dismiss": "Fermer l’annonce"
+  },
+  "hero": {
+    "eyebrow": "Une vision commerciale claire à partir de vos données",
+    "titleBefore": "Sachez ce qui se vend.",
+    "titleEmphasis": "Anticipez les ruptures.",
+    "titleAfter": "Faites revenir vos clients.",
+    "body": "Importez les données que vous conservez déjà ou enregistrez la journée à mesure qu’elle avance. Suq confirme leur signification, puis les transforme en une vue claire des ventes, des stocks et des clients fidèles.",
+    "languages": "English · Español · Français",
+    "sourcesLabel": "Exemples de sources prises en charge",
+    "sources": {
+      "csv": "CSV",
+      "excel": "Excel",
+      "pdf": "PDF",
+      "photo": "Photo"
     }
   },
+  "dashboard": {
+    "accessibleSummary": "Tableau fictif de Mercado Norte. Le chiffre d’affaires atteint {{revenue}}, soit {{comparison}} par rapport à la période de comparaison. {{stockRisks}} articles risquent une rupture sous sept jours. Mis à jour depuis {{sources}} sources.",
+    "workspace": "Espace de travail",
+    "sampleDay": "Journée exemple · {{date}}",
+    "freshness": "Mis à jour il y a {{minutes}} minutes · {{sources}} sources",
+    "insightLabel": "Information du jour",
+    "insight": "Le chiffre d’affaires dépasse la période comparée de {{comparison}}, porté par le Cabas en toile et le Café moulu.",
+    "comparison": "{{comparison}} par rapport à la période comparée",
+    "metrics": {
+      "revenue": "Chiffre d’affaires",
+      "transactions": "Transactions",
+      "units": "Unités",
+      "customers": "Clients"
+    },
+    "chart": {
+      "eyebrow": "Rythme des ventes",
+      "title": "Chiffre d’affaires au fil de la journée",
+      "period": "Depuis l’ouverture",
+      "current": "Journée exemple",
+      "previous": "Comparaison"
+    },
+    "stock": {
+      "eyebrow": "À surveiller",
+      "title_one": "1 article risque une rupture",
+      "title_other": "{{count}} articles risquent une rupture",
+      "body": "Dans les sept prochains jours au rythme de vente actuel.",
+      "action": "Voir les risques de stock"
+    },
+    "confirmed": {
+      "title": "Données confirmées",
+      "body": "La signification des champs a été vérifiée avant de modifier les totaux.",
+      "date": "Heure de transaction",
+      "amount": "Montant de ligne"
+    }
+  },
+  "demo": {
+    "eyebrow": "Aperçu transparent du produit",
+    "title": "Découvrez la vue quotidienne avant de partager vos données.",
+    "body": "Cet aperçu utilise un commerce fictif et des valeurs d’exemple fixes et cohérentes. Il ne contient aucune information de client ou de commerçant.",
+    "sampleLabel": "Données d’exemple fictives",
+    "sampleTitle": "Une vue sereine de ce qui a changé et de ce qui demande votre attention",
+    "sampleBody": "Le tableau de bord de production reliera chaque réponse aux données source confirmées et à leur fraîcheur."
+  },
+  "access": {
+    "signup": {
+      "eyebrow": "Aperçu de l’accès au compte",
+      "title": "La création de comptes gratuits est en cours de connexion.",
+      "body": "Le parcours d’authentification n’est pas encore actif dans cette première étape. Vous pouvez explorer la démo fictive sans saisir de données commerciales."
+    },
+    "login": {
+      "eyebrow": "Aperçu de la connexion",
+      "title": "L’accès sécurisé aux comptes est en cours de connexion.",
+      "body": "Le parcours d’authentification n’est pas encore actif dans cette première étape. Aucun formulaire n’est affiché avant sa connexion au véritable service protégé."
+    }
+  },
+  "appPreview": {
+    "eyebrow": "Limite du produit authentifié",
+    "title": "L’espace de travail ne s’ouvre qu’avec un véritable accès.",
+    "body": "Cette route est séparée du paquet marketing, mais elle n’imite pas une session authentifiée. Explorez le tableau fictif pendant la connexion du parcours protégé."
+  },
   "footer": {
-    "note": "English · Español · Français"
+    "previewNote": "Fondation de la landing page, phase 1 · Aucune donnée privée requise",
+    "languages": "English · Español · Français"
   }
 }

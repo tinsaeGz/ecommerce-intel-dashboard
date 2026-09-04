@@ -35,6 +35,18 @@ const cssLines = [
   ...Object.entries(tokens.space).map(([name, value]) => `  --space-${name}: ${rem(value)};`),
   ...Object.entries(tokens.radius).map(([name, value]) => `  --radius-${name}: ${rem(value)};`),
   ...Object.entries(tokens.shadow).map(([name, value]) => `  --shadow-${name}: ${value};`),
+  ...Object.entries(tokens.fontSize).map(
+    ([name, value]) => `  --font-size-${name}: ${rem(value)};`,
+  ),
+  ...Object.entries(tokens.fontWeight).map(
+    ([name, value]) => `  --font-weight-${name}: ${value};`,
+  ),
+  ...Object.entries(tokens.lineHeight).map(
+    ([name, value]) => `  --line-height-${name}: ${value};`,
+  ),
+  ...Object.entries(tokens.motion).map(
+    ([name, value]) => `  --motion-${name}: ${value}ms;`,
+  ),
   "}",
   "",
 ];

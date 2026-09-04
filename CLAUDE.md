@@ -5,6 +5,7 @@
 ## Claude Code
 
 - The exclusive-session rule applies before any repository work.
+- Use `ghost` as the Claude branch identity: `agent/ghost/<requirement-or-area>-<slug>`. Never put `claude`, its provider, or a model name in a branch name.
 - Do not create subagents or run tasks concurrently.
 - Treat `AGENTS.md` and `SDLC.md` as authoritative.
 - Use `UI-UX-CONCEPT.md` as the detailed landing-page and product UI/UX implementation reference; defer to `SDLC.md` if they conflict.
