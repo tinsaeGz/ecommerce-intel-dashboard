@@ -7,8 +7,14 @@ export const landingDemo = {
   transactions: 312,
   units: 468,
   customers: 241,
+  returningCustomers: 38,
   comparisonPercent: 18,
   stockRisks: 3,
+  stockRiskItems: [
+    { name: "Ground Coffee", daysRemaining: 2 },
+    { name: "Canvas Tote", daysRemaining: 4 },
+    { name: "Ceramic Cup", daysRemaining: 6 },
+  ],
   sources: 4,
   freshnessMinutes: 2,
   chart: {

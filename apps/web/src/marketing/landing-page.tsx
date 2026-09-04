@@ -9,6 +9,11 @@ import {
 } from "../components/public-ui";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
 import { DashboardPreview } from "./dashboard-preview";
+import {
+  HowItWorks,
+  ProblemFraming,
+  SourceExplorer,
+} from "./product-understanding";
 import "./landing-page.css";
 
 const heroSources = ["csv", "excel", "pdf", "photo"] as const;
@@ -54,13 +59,13 @@ export function LandingPage() {
           </div>
 
           <div className="landing-hero__visual" id="product-preview">
-            <div className="landing-hero__haze" aria-hidden="true" />
-            <span className="landing-hero__annotation" aria-hidden="true">
-              ↘
-            </span>
             <DashboardPreview showSourceCard />
           </div>
         </section>
+
+        <SourceExplorer />
+        <ProblemFraming />
+        <HowItWorks />
       </main>
 
       <SiteFooter />

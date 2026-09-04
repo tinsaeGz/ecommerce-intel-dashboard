@@ -97,6 +97,97 @@ describe("public landing routes", () => {
     expect(screen.getAllByText(/12\.480\s*€/).length).toBeGreaterThan(0);
   });
 
+  it("lets keyboard users compare supported sources", async () => {
+    const user = userEvent.setup();
+    await renderAt("/");
+    const sourceTabs = screen.getByRole("tablist", {
+      name: "Supported source examples",
+    });
+    expect(within(sourceTabs).getAllByRole("tab")).toHaveLength(10);
+    const csvTab = within(sourceTabs).getByRole("tab", { name: /CSV/i });
+
+    expect(csvTab).toHaveAttribute("aria-selected", "true");
+    csvTab.focus();
+    await user.keyboard("{ArrowRight}");
+
+    const excelTab = within(sourceTabs).getByRole("tab", { name: /Excel/i });
+    expect(excelTab).toHaveFocus();
+    expect(excelTab).toHaveAttribute("aria-selected", "true");
+    expect(
+      screen.getByRole("tabpanel", { name: /Excel/i }),
+    ).toHaveTextContent(/workbook whose first useful row/i);
+  });
+
+  it("shows evidence and updates an interpretation before commitment", async () => {
+    const user = userEvent.setup();
+    await renderAt("/");
+    const workflowTabs = screen.getByRole("tablist", {
+      name: "How Suq turns records into answers",
+    });
+    const confirmTab = within(workflowTabs).getByRole("tab", {
+      name: /Confirm what it means/i,
+    });
+
+    expect(confirmTab).toHaveAttribute("aria-selected", "true");
+    const reviewPanel = screen.getByRole("tabpanel", {
+      name: /Confirm what it means/i,
+    });
+    expect(
+      within(reviewPanel).getByRole("group", {
+        name: "Interpretation evidence",
+      }),
+    ).toHaveTextContent(/abbreviated header is ambiguous/i);
+
+    await user.selectOptions(
+      within(reviewPanel).getByRole("combobox", { name: "Use this field as" }),
+      "customerIdentity",
+    );
+    expect(within(reviewPanel).getByRole("status")).toHaveTextContent(
+      /Customer identity.*Nothing is committed yet/i,
+    );
+  });
+
+  it("explains unsupported analysis instead of presenting a false zero", async () => {
+    const user = userEvent.setup();
+    await renderAt("/");
+    const workflowTabs = screen.getByRole("tablist", {
+      name: "How Suq turns records into answers",
+    });
+    const confirmTab = within(workflowTabs).getByRole("tab", {
+      name: /Confirm what it means/i,
+    });
+
+    confirmTab.focus();
+    await user.keyboard("{ArrowRight}");
+
+    const seeTab = within(workflowTabs).getByRole("tab", {
+      name: /See what matters/i,
+    });
+    expect(seeTab).toHaveFocus();
+    expect(seeTab).toHaveAttribute("aria-selected", "true");
+    const answersPanel = screen.getByRole("tabpanel", {
+      name: /See what matters/i,
+    });
+    expect(answersPanel).toHaveTextContent(/Margin is unavailable/i);
+    expect(answersPanel).toHaveTextContent(/No confirmed cost field was found/i);
+    expect(answersPanel).not.toHaveTextContent(/Margin[^.]*0/);
+  });
+
+  it.each([
+    ["en", "Start where your records are.", "From messy records to a useful morning view."],
+    ["es", "Empieza donde están tus registros.", "De registros desordenados a una vista útil cada mañana."],
+    ["fr", "Commencez là où se trouvent vos données.", "Des données imparfaites à une vue matinale utile."],
+  ])("renders the product-understanding sequence in %s", async (locale, sourcesTitle, howTitle) => {
+    await i18n.changeLanguage(locale);
+    await renderAt("/");
+
+    expect(screen.getByRole("heading", { name: sourcesTitle })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: howTitle })).toBeInTheDocument();
+    expect(
+      within(screen.getByRole("tablist", { name: /source|fuentes/i })).getAllByRole("tab"),
+    ).toHaveLength(10);
+  });
+
   it.each([
     ["/demo", /See the daily view before sharing your data/i],
     ["/signup", /Free account creation is being connected/i],

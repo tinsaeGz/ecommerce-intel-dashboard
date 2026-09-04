@@ -49,7 +49,7 @@ hr { margin: 2em 0; border: 0; border-top: 1px solid #d8dbd1; }
 
 <div class="cover">
   <div>
-    <span class="cover-kicker">Product experience concept · v1.0</span>
+    <span class="cover-kicker">Product experience concept · v1.1</span>
     <h1>Suq Insights<br><em>Clarity for every market day.</em></h1>
     <p class="cover-deck">A comprehensive landing-page, dashboard, visual-system, content, conversion, and implementation blueprint for the production SaaS.</p>
   </div>
@@ -58,7 +58,7 @@ hr { margin: 2em 0; border: 0; border-top: 1px solid #d8dbd1; }
     <div class="cover-card"><span class="label">Product</span><br><strong>Messy records → useful answers</strong></div>
     <div class="cover-card"><span class="label">Experience</span><br><strong>Calm, credible, merchant-first</strong></div>
   </div>
-  <p class="small">Prepared 3 September 2026 · Canonical product source: SDLC.md v3.0 · English master copy with Spanish and French localization requirements</p>
+  <p class="small">Updated 4 September 2026 · Canonical product source: SDLC.md v3.0 · English master copy with Spanish and French localization requirements</p>
 </div>
 
 # Document purpose and status
@@ -343,7 +343,8 @@ Use tabular numerals for metrics. Never tighten tracking on translated uppercase
 Mockups are the connective tissue between landing page and product:
 
 - Use real Suq components and plausible, localized sample data.
-- Display the dashboard in a slightly angled browser/tablet frame only in the hero; later sections use straight-on crops for legibility.
+- Display the hero as a straight-on Suq product surface with a decision-led hierarchy. Avoid decorative browser chrome, device tilt, floating cards, and equal-weight KPI grids that make the product resemble a generic analytics template.
+- Build the hero around one editorial answer, adjacent actions, supporting evidence, freshness, and a visible interpretation-review item. Later mockups crop to the specific decision or review state being explained.
 - Highlight one interaction per mockup: upload review, live dashboard update, stock warning, or mobile quick entry.
 - Keep sample merchant names fictional and clearly generic. Do not use real customer data.
 - A mockup caption states the user benefit, not the component name: “Confirm what every column means before it affects your totals.”
@@ -471,17 +472,18 @@ The global navigation remains short: **Product · How it works · Use cases · P
 
 **Reassurance line:** “English · Español · Français” and supported-source icons. Do not claim a trial length or no-card signup until billing policy confirms it.
 
-**Visual:** an angled dashboard mockup rises from a soft mint/aqua/lavender haze. A floating “Data confirmed” card connects a source thumbnail to the dashboard, making the input-to-insight relationship obvious. The visual should show:
+**Visual:** a straight-on merchant morning briefing uses real Suq components without browser chrome, device tilt, or decorative haze. Its asymmetrical hierarchy makes the input-to-insight relationship concrete instead of resembling a generic admin template. The visual should show:
 
-- Revenue today with localized currency.
-- One plain-language insight.
-- Revenue over time.
-- One stock warning.
-- “Updated moments ago” freshness.
+- One dominant revenue answer with localized currency and a restrained supporting trend.
+- A plain-language explanation with a nearby evidence line and confirmed transaction count.
+- A prioritized stock action queue rather than another equal-weight metric card.
+- A compact daily glance for transactions, units, and returning customers.
+- One ambiguous source field that visibly requires confirmation before commitment.
+- “Updated moments ago” freshness and source count.
 
-**Interaction:** on capable devices, the floating card shifts no more than 8 px with pointer movement; reduced-motion users see a static composition. The hero content renders before the mockup and remains within the initial weight budget.
+**Interaction:** use one short entrance after the copy; do not add parallax or decorative pointer movement. Reduced-motion users see the final static composition immediately. The hero content renders before the mockup and remains within the initial weight budget.
 
-**Mobile:** stack copy, CTAs, reassurance, then a straight-on dashboard crop. No angled device may cause horizontal overflow.
+**Mobile:** stack copy, CTAs, reassurance, then crop the briefing to its answer, daily glance, and review item. The wider stock queue may be omitted from the crop when retaining it would make the decision text illegible. No product surface may cause horizontal overflow.
 
 ### 2. Source ribbon: “Start where your records are”
 
@@ -708,13 +710,15 @@ Desktop sample content:
 
 - Workspace: “Mercado Norte” (fictional).
 - Date: “Today · 3 Sep” using the selected locale and timezone.
-- Insight: “Revenue is 18% above last Thursday, led by Canvas Tote and Ground Coffee.”
-- KPI cards: Revenue, transactions, units, customers.
-- Main chart: revenue-over-time, line render, current vs previous period.
-- Risk card: “3 items may run out within 7 days.”
+- Editorial answer: “Revenue is 18% above the comparison period, led by Canvas Tote and Ground Coffee.”
+- Evidence line: “POS export · 312 confirmed transactions.”
+- Prioritized action queue: Ground Coffee, Canvas Tote, and Ceramic Cup with readable days-remaining labels.
+- Daily glance: 312 transactions, 468 units, and 38 returning customers.
+- Review item: “`Cod.` may be the item identifier,” with an explicit Review action and abbreviated-header evidence.
+- A restrained revenue sparkline that supports the answer instead of dominating it.
 - Freshness: “Updated 2 minutes ago · 4 sources.”
 
-Use varied product names that translate cleanly and avoid sensitive customer detail. Sample numbers must be internally consistent across charts, tooltips, and tables.
+Use varied product names that translate cleanly and avoid sensitive customer detail. Sample numbers must be internally consistent across charts, tooltips, and tables. The composition must retain clear primary, secondary, and evidence layers; do not turn each value into an interchangeable dashboard card.
 
 ## 6.2 Interpretation-review mockup
 

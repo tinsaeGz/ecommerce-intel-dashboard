@@ -112,33 +112,9 @@
 
   .landing-hero__visual {
     position: relative;
-    max-width: 68rem;
+    max-width: 72rem;
     margin: clamp(4rem, 8vw, var(--space-24)) auto 0;
-    padding-inline: clamp(0rem, 3vw, 2.5rem);
     animation: landing-mockup-reveal var(--motion-reveal) ease-out both;
-  }
-
-  .landing-hero__haze {
-    position: absolute;
-    z-index: -1;
-    inset: -18% -12% -22%;
-    background:
-      radial-gradient(circle at 18% 35%, var(--color-mint), transparent 34%),
-      radial-gradient(circle at 78% 25%, var(--color-aqua), transparent 31%),
-      radial-gradient(circle at 70% 78%, var(--color-lavender), transparent 34%);
-    filter: blur(3rem);
-    opacity: 0.62;
-  }
-
-  .landing-hero__annotation {
-    position: absolute;
-    inset-block-start: -4rem;
-    inset-inline-start: 1%;
-    color: var(--color-ink);
-    font-family: var(--font-serif);
-    font-size: 3.5rem;
-    font-style: italic;
-    transform: rotate(8deg);
   }
 
   @keyframes landing-mockup-reveal {
@@ -188,10 +164,6 @@
       padding-inline: 0;
     }
 
-    .landing-hero__annotation,
-    .landing-hero__haze {
-      display: none;
-    }
   }
 
   @media (width <= 22.5rem) {

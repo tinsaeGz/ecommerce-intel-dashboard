@@ -64,6 +64,154 @@
       "photo": "Photo"
     }
   },
+  "understanding": {
+    "sources": {
+      "eyebrow": "Bring the records you have",
+      "title": "Start where your records are.",
+      "body": "Choose a source to see the same promise in action: Suq reads what arrived, proposes a structure, and leaves uncertain meaning for you to confirm.",
+      "tabLabel": "Supported source examples",
+      "rawLabel": "What arrives",
+      "recognizedLabel": "What Suq recognizes",
+      "recognizedTitle": "A reviewable structure",
+      "promise": "No fixed column names. No required order. You confirm the meaning before totals change.",
+      "items": {
+        "csv": "CSV",
+        "excel": "Excel",
+        "paste": "Pasted table",
+        "json": "JSON",
+        "pos": "POS export",
+        "marketplace": "Marketplace export",
+        "image": "Image",
+        "pdf": "PDF",
+        "manual": "Manual entry",
+        "api": "Sync API"
+      },
+      "previews": {
+        "csv": "A comma-separated sales file with Spanish headers and European currency values.",
+        "excel": "A workbook whose first useful row begins below a merchant-written title.",
+        "paste": "Rows copied directly from a working sheet without renaming any columns.",
+        "json": "Nested order records whose item lines need to be separated from order details.",
+        "pos": "A register export with product codes, quantities, totals, and local timestamps.",
+        "marketplace": "An order export with marketplace-specific names and additional attributes.",
+        "image": "A photographed paper table with recognized cells linked to their source regions.",
+        "pdf": "A digital or photographed report whose table structure is reconstructed for review.",
+        "manual": "A simple daily entry channel for recording sales while work is happening.",
+        "api": "Versioned records sent by an approved system through the programmatic sync boundary."
+      }
+    },
+    "problems": {
+      "eyebrow": "The work before the work",
+      "title": "Your data should not need a new job before it can help you.",
+      "items": {
+        "different": {
+          "title": "Every export looks different.",
+          "body": "Columns move, headings change, and dates mean different things. A rigid template makes normal records feel broken."
+        },
+        "cleanup": {
+          "title": "Manual cleanup steals the decision window.",
+          "body": "By the time the sheet is ready, the stock decision is already late and the reason for a sales change is harder to see."
+        },
+        "certainty": {
+          "title": "A confident wrong answer is worse than no answer.",
+          "body": "Suq keeps uncertainty visible, shows the evidence, and asks before an interpretation changes your totals."
+        }
+      }
+    },
+    "how": {
+      "eyebrow": "Add → Confirm → See",
+      "title": "From messy records to a useful morning view.",
+      "body": "Suq separates understanding the source from committing it. That small review boundary is what keeps flexible ingestion trustworthy.",
+      "tabLabel": "How Suq turns records into answers",
+      "steps": {
+        "add": {
+          "title": "Add what you have",
+          "body": "Use a file, photo, pasted table, or entry channel."
+        },
+        "confirm": {
+          "title": "Confirm what it means",
+          "body": "Inspect types, uses, confidence, samples, and evidence."
+        },
+        "see": {
+          "title": "See what matters",
+          "body": "Only supported answers appear; missing concepts are explained."
+        }
+      },
+      "stages": {
+        "add": {
+          "dropTitle": "Add the record you already use",
+          "dropBody": "Nothing needs to be renamed first. Suq profiles the actual headers and values before proposing what they mean."
+        },
+        "see": {
+          "answerLabel": "Supported answer",
+          "answer": "Revenue is up 18%, led by Canvas Tote and Ground Coffee.",
+          "evidence": "Based on 312 confirmed transactions from the selected period.",
+          "availableLabel": "Ready to use",
+          "unavailableLabel": "Not guessed",
+          "unavailable": "Margin is unavailable",
+          "unavailableReason": "No confirmed cost field was found. Add or map cost to enable this answer."
+        }
+      },
+      "action": "Try sample data"
+    },
+    "review": {
+      "fileLabel": "Review before import",
+      "progress": "1 field needs review",
+      "columns": {
+        "field": "Source field",
+        "type": "Detected type",
+        "use": "Used as",
+        "confidence": "Confidence"
+      },
+      "types": {
+        "date": "Date · day first",
+        "currency": "Decimal · EUR",
+        "identifier": "Identifier",
+        "text": "Text"
+      },
+      "roles": {
+        "transactionTime": "Transaction time",
+        "lineAmount": "Line amount",
+        "itemIdentity": "Item identity",
+        "customerIdentity": "Customer identity",
+        "notAnalyzed": "Not used in analysis"
+      },
+      "confidence": {
+        "high": "High",
+        "medium": "Medium",
+        "needsReview": "Needs review"
+      },
+      "samples": {
+        "date": "03/09/26 · 03/09/26",
+        "amount": "48,00 € · 27,50 €",
+        "code": "CT-204 · GC-118",
+        "customer": "C-0091 · C-0148",
+        "notes": "counter · delivery"
+      },
+      "evidence": {
+        "label": "Interpretation evidence",
+        "eyebrow": "Why Suq suggests this",
+        "title": "Review “{{field}}”",
+        "sourceCrop": "Source region",
+        "locale": "The source uses Spanish labels and European number formatting.",
+        "facts": {
+          "date": "Values repeat across line items and parse consistently as day-first dates.",
+          "amount": "Values match quantity multiplied by unit price across sampled rows.",
+          "code": "Values are short and repeat across orders, but the abbreviated header is ambiguous.",
+          "customer": "Values recur across separate dates and resemble stable customer identifiers.",
+          "notes": "Free-text values vary and do not match a required analytical concept."
+        },
+        "effects": {
+          "date": "Enables period grouping and day-aware comparisons.",
+          "amount": "Enables revenue totals and sales comparisons.",
+          "code": "Confirming item identity enables product momentum and stock matching.",
+          "customer": "Enables returning-customer analysis when identity is confirmed.",
+          "notes": "The original values remain preserved and available for filtering."
+        }
+      },
+      "editLabel": "Use this field as",
+      "update": "Preview updated: {{role}}. Nothing is committed yet."
+    }
+  },
   "dashboard": {
     "accessibleSummary": "Fictional Mercado Norte dashboard. Revenue is {{revenue}}, {{comparison}} over the comparison period. {{stockRisks}} items may run out within seven days. Updated from {{sources}} sources.",
     "workspace": "Workspace",
@@ -72,6 +220,22 @@
     "insightLabel": "Today’s insight",
     "insight": "Revenue is {{comparison}} above the comparison period, led by Canvas Tote and Ground Coffee.",
     "comparison": "{{comparison}} vs comparison",
+    "briefing": {
+      "greeting": "Good morning, {{workspace}}.",
+      "answerLabel": "What changed",
+      "storyTitle": "Sales are moving faster than the comparison day.",
+      "evidenceLabel": "Evidence",
+      "evidence": "POS export · {{transactions}} confirmed transactions",
+      "actNext": "Act next",
+      "daysRemaining_one": "About {{count}} day left",
+      "daysRemaining_other": "About {{count}} days left",
+      "glance": "Today at a glance",
+      "returning": "Returning",
+      "reviewLabel": "Needs confirmation",
+      "reviewTitle": "“Cod.” may be the item identifier",
+      "reviewEvidence": "Three sample values match product-code patterns. The header remains ambiguous.",
+      "reviewAction": "Review"
+    },
     "metrics": {
       "revenue": "Revenue",
       "transactions": "Transactions",
@@ -125,7 +289,7 @@
     "body": "This route is separated from the marketing bundle, but it does not imitate an authenticated session. Explore the fictional dashboard while the protected product flow is connected."
   },
   "footer": {
-    "previewNote": "Phase 1 landing foundation · No private data required",
+    "previewNote": "Product preview · No private data required",
     "languages": "English · Español · Français"
   }
 }

@@ -64,6 +64,154 @@
       "photo": "Foto"
     }
   },
+  "understanding": {
+    "sources": {
+      "eyebrow": "Trae los registros que tienes",
+      "title": "Empieza donde están tus registros.",
+      "body": "Elige una fuente para ver la misma promesa en acción: Suq lee lo que llega, propone una estructura y deja los significados inciertos para que los confirmes.",
+      "tabLabel": "Ejemplos de fuentes compatibles",
+      "rawLabel": "Lo que llega",
+      "recognizedLabel": "Lo que Suq reconoce",
+      "recognizedTitle": "Una estructura revisable",
+      "promise": "Sin nombres de columna fijos. Sin orden obligatorio. Confirmas el significado antes de que cambien los totales.",
+      "items": {
+        "csv": "CSV",
+        "excel": "Excel",
+        "paste": "Tabla pegada",
+        "json": "JSON",
+        "pos": "Exportación de TPV",
+        "marketplace": "Exportación de marketplace",
+        "image": "Imagen",
+        "pdf": "PDF",
+        "manual": "Entrada manual",
+        "api": "API de sincronización"
+      },
+      "previews": {
+        "csv": "Un archivo de ventas separado por comas, con encabezados en español e importes en euros.",
+        "excel": "Un libro cuya primera fila útil comienza debajo de un título escrito por el comercio.",
+        "paste": "Filas copiadas directamente de una hoja de trabajo sin cambiar el nombre de las columnas.",
+        "json": "Pedidos anidados cuyas líneas de producto deben separarse de los datos del pedido.",
+        "pos": "Una exportación de caja con códigos, cantidades, totales y horas locales.",
+        "marketplace": "Una exportación de pedidos con nombres propios del marketplace y atributos adicionales.",
+        "image": "Una tabla en papel fotografiada, con cada celda reconocida vinculada a su región de origen.",
+        "pdf": "Un informe digital o fotografiado cuya estructura tabular se reconstruye para revisarla.",
+        "manual": "Un canal sencillo para registrar ventas diarias mientras sucede el trabajo.",
+        "api": "Registros versionados enviados por un sistema aprobado mediante el límite de sincronización programática."
+      }
+    },
+    "problems": {
+      "eyebrow": "El trabajo antes del trabajo",
+      "title": "Tus datos no deberían necesitar otro trabajo antes de ayudarte.",
+      "items": {
+        "different": {
+          "title": "Cada exportación es diferente.",
+          "body": "Las columnas se mueven, los encabezados cambian y las fechas significan cosas distintas. Una plantilla rígida hace que registros normales parezcan rotos."
+        },
+        "cleanup": {
+          "title": "La limpieza manual roba tiempo para decidir.",
+          "body": "Cuando la hoja está lista, la decisión sobre existencias ya llega tarde y cuesta más ver por qué cambiaron las ventas."
+        },
+        "certainty": {
+          "title": "Una respuesta errónea y segura es peor que ninguna.",
+          "body": "Suq mantiene visible la incertidumbre, muestra la evidencia y pregunta antes de que una interpretación cambie tus totales."
+        }
+      }
+    },
+    "how": {
+      "eyebrow": "Añadir → Confirmar → Ver",
+      "title": "De registros desordenados a una vista útil cada mañana.",
+      "body": "Suq separa la comprensión de la fuente de su confirmación. Ese pequeño límite de revisión hace fiable una importación flexible.",
+      "tabLabel": "Cómo Suq convierte registros en respuestas",
+      "steps": {
+        "add": {
+          "title": "Añade lo que tienes",
+          "body": "Usa un archivo, una foto, una tabla pegada o un canal de entrada."
+        },
+        "confirm": {
+          "title": "Confirma qué significa",
+          "body": "Revisa tipos, usos, confianza, muestras y evidencia."
+        },
+        "see": {
+          "title": "Mira lo que importa",
+          "body": "Solo aparecen respuestas compatibles; los conceptos ausentes se explican."
+        }
+      },
+      "stages": {
+        "add": {
+          "dropTitle": "Añade el registro que ya utilizas",
+          "dropBody": "No tienes que renombrar nada. Suq analiza los encabezados y valores reales antes de proponer qué significan."
+        },
+        "see": {
+          "answerLabel": "Respuesta disponible",
+          "answer": "Los ingresos aumentaron un 18 %, impulsados por Bolso de lona y Café molido.",
+          "evidence": "Basado en 312 transacciones confirmadas del periodo seleccionado.",
+          "availableLabel": "Listo para usar",
+          "unavailableLabel": "No se adivina",
+          "unavailable": "El margen no está disponible",
+          "unavailableReason": "No se encontró un campo de coste confirmado. Añade o asigna el coste para activar esta respuesta."
+        }
+      },
+      "action": "Probar datos de muestra"
+    },
+    "review": {
+      "fileLabel": "Revisar antes de importar",
+      "progress": "1 campo requiere revisión",
+      "columns": {
+        "field": "Campo de origen",
+        "type": "Tipo detectado",
+        "use": "Se usa como",
+        "confidence": "Confianza"
+      },
+      "types": {
+        "date": "Fecha · día primero",
+        "currency": "Decimal · EUR",
+        "identifier": "Identificador",
+        "text": "Texto"
+      },
+      "roles": {
+        "transactionTime": "Hora de transacción",
+        "lineAmount": "Importe de línea",
+        "itemIdentity": "Identidad del artículo",
+        "customerIdentity": "Identidad del cliente",
+        "notAnalyzed": "No se usa en el análisis"
+      },
+      "confidence": {
+        "high": "Alta",
+        "medium": "Media",
+        "needsReview": "Requiere revisión"
+      },
+      "samples": {
+        "date": "03/09/26 · 03/09/26",
+        "amount": "48,00 € · 27,50 €",
+        "code": "CT-204 · GC-118",
+        "customer": "C-0091 · C-0148",
+        "notes": "mostrador · entrega"
+      },
+      "evidence": {
+        "label": "Evidencia de la interpretación",
+        "eyebrow": "Por qué Suq lo propone",
+        "title": "Revisar «{{field}}»",
+        "sourceCrop": "Región de origen",
+        "locale": "La fuente usa etiquetas en español y formato numérico europeo.",
+        "facts": {
+          "date": "Los valores se repiten entre líneas y se interpretan de forma coherente con el día primero.",
+          "amount": "Los valores coinciden con cantidad por precio unitario en las filas de muestra.",
+          "code": "Los valores son cortos y se repiten entre pedidos, pero el encabezado abreviado es ambiguo.",
+          "customer": "Los valores reaparecen en fechas distintas y parecen identificadores estables de clientes.",
+          "notes": "Los textos varían y no coinciden con un concepto analítico obligatorio."
+        },
+        "effects": {
+          "date": "Permite agrupar por periodos y comparar días.",
+          "amount": "Permite calcular ingresos y comparar ventas.",
+          "code": "Confirmar la identidad del artículo activa el impulso de producto y la relación con existencias.",
+          "customer": "Activa el análisis de clientes recurrentes cuando se confirma la identidad.",
+          "notes": "Los valores originales se conservan y siguen disponibles para filtrar."
+        }
+      },
+      "editLabel": "Usar este campo como",
+      "update": "Vista actualizada: {{role}}. Aún no se ha confirmado nada."
+    }
+  },
   "dashboard": {
     "accessibleSummary": "Panel ficticio de Mercado Norte. Los ingresos son {{revenue}}, un {{comparison}} respecto al periodo de comparación. {{stockRisks}} artículos pueden agotarse en siete días. Actualizado desde {{sources}} fuentes.",
     "workspace": "Espacio de trabajo",
@@ -72,6 +220,22 @@
     "insightLabel": "Dato clave de hoy",
     "insight": "Los ingresos están un {{comparison}} por encima del periodo comparado, impulsados por Bolso de lona y Café molido.",
     "comparison": "{{comparison}} frente al periodo comparado",
+    "briefing": {
+      "greeting": "Buenos días, {{workspace}}.",
+      "answerLabel": "Qué cambió",
+      "storyTitle": "Las ventas avanzan más rápido que en el día comparado.",
+      "evidenceLabel": "Evidencia",
+      "evidence": "Exportación de TPV · {{transactions}} transacciones confirmadas",
+      "actNext": "Actúa ahora",
+      "daysRemaining_one": "Queda aproximadamente {{count}} día",
+      "daysRemaining_other": "Quedan aproximadamente {{count}} días",
+      "glance": "El día de un vistazo",
+      "returning": "Recurrentes",
+      "reviewLabel": "Requiere confirmación",
+      "reviewTitle": "«Cod.» puede ser el identificador del artículo",
+      "reviewEvidence": "Tres valores de muestra coinciden con patrones de códigos de producto. El encabezado sigue siendo ambiguo.",
+      "reviewAction": "Revisar"
+    },
     "metrics": {
       "revenue": "Ingresos",
       "transactions": "Transacciones",
@@ -125,7 +289,7 @@
     "body": "Esta ruta está separada del paquete de marketing, pero no simula una sesión autenticada. Explora el panel ficticio mientras se conecta el flujo protegido."
   },
   "footer": {
-    "previewNote": "Base de la landing de la fase 1 · No requiere datos privados",
+    "previewNote": "Vista previa del producto · No requiere datos privados",
     "languages": "English · Español · Français"
   }
 }

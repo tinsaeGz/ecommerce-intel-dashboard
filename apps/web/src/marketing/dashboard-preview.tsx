@@ -17,9 +17,9 @@ interface DashboardPreviewProps {
 }
 
 function toPoints(values: readonly number[]) {
-  const width = 520;
-  const height = 150;
-  const maximum = Math.max(...landingDemo.chart.current);
+  const width = 360;
+  const height = 82;
+  const maximum = Math.max(...values);
 
   return values
     .map((value, index) => {
@@ -49,13 +49,6 @@ export function DashboardPreview({
     landingDemo.timeZone,
   );
 
-  const metrics = [
-    ["revenue", formattedRevenue],
-    ["transactions", formatNumber(landingDemo.transactions, locale)],
-    ["units", formatNumber(landingDemo.units, locale)],
-    ["customers", formatNumber(landingDemo.customers, locale)],
-  ] as const;
-
   return (
     <figure
       className="dashboard-preview"
@@ -72,132 +65,137 @@ export function DashboardPreview({
       </figcaption>
 
       <div className="dashboard-preview__frame" aria-hidden="true">
-        <div className="dashboard-preview__browser-bar">
-          <span className="dashboard-preview__browser-dot" />
-          <span className="dashboard-preview__browser-dot" />
-          <span className="dashboard-preview__browser-dot" />
-          <span className="dashboard-preview__address">app.suqinsights.com</span>
-        </div>
+        <aside className="dashboard-preview__rail">
+          <span className="dashboard-preview__mini-mark">S</span>
+          <span className="dashboard-preview__rail-item" data-active="true">↗</span>
+          <span className="dashboard-preview__rail-item">≡</span>
+          <span className="dashboard-preview__rail-item">＋</span>
+        </aside>
 
-        <div className="dashboard-preview__application">
-          <div className="dashboard-preview__rail">
-            <span className="dashboard-preview__mini-mark">S</span>
-            <span data-active="true" />
-            <span />
-            <span />
-            <span />
-          </div>
+        <div className="dashboard-preview__briefing">
+          <header className="dashboard-preview__header">
+            <div>
+              <p className="dashboard-preview__overline">{t("dashboard.workspace")}</p>
+              <h2>{t("dashboard.briefing.greeting", { workspace: landingDemo.workspace })}</h2>
+            </div>
+            <div className="dashboard-preview__context">
+              <p>{t("dashboard.sampleDay", { date: formattedDate })}</p>
+              <p className="dashboard-preview__freshness">
+                <span className="dashboard-preview__freshness-dot" />
+                {t("dashboard.freshness", {
+                  minutes: landingDemo.freshnessMinutes,
+                  sources: landingDemo.sources,
+                })}
+              </p>
+            </div>
+          </header>
 
-          <div className="dashboard-preview__canvas">
-            <header className="dashboard-preview__header">
-              <div>
-                <p className="dashboard-preview__overline">{t("dashboard.workspace")}</p>
-                <h2>{landingDemo.workspace}</h2>
+          <div className="dashboard-preview__briefing-grid">
+            <section className="dashboard-preview__story">
+              <div className="dashboard-preview__story-heading">
+                <div>
+                  <p className="dashboard-preview__overline">
+                    {t("dashboard.briefing.answerLabel")}
+                  </p>
+                  <strong>{formattedRevenue}</strong>
+                  <span className="dashboard-preview__comparison">
+                    {t("dashboard.comparison", { comparison: formattedComparison })}
+                  </span>
+                </div>
+                <span className="dashboard-preview__movement">↗ {formattedComparison}</span>
               </div>
-              <div className="dashboard-preview__context">
-                <p>{t("dashboard.sampleDay", { date: formattedDate })}</p>
-                <p className="dashboard-preview__freshness">
-                  <span className="dashboard-preview__freshness-dot" />
-                  {t("dashboard.freshness", {
-                    minutes: landingDemo.freshnessMinutes,
-                    sources: landingDemo.sources,
+
+              <h3>{t("dashboard.briefing.storyTitle")}</h3>
+              <p className="dashboard-preview__story-copy">
+                {t("dashboard.insight", { comparison: formattedComparison })}
+              </p>
+
+              <svg viewBox="0 0 360 100" role="presentation">
+                <line x1="0" y1="82" x2="360" y2="82" />
+                <polyline points={toPoints(landingDemo.chart.current)} />
+                <circle cx="360" cy="0" r="4" />
+              </svg>
+
+              <div className="dashboard-preview__evidence">
+                <span className="dashboard-preview__evidence-label">
+                  {t("dashboard.briefing.evidenceLabel")}
+                </span>
+                <strong>
+                  {t("dashboard.briefing.evidence", {
+                    transactions: formatNumber(landingDemo.transactions, locale),
                   })}
-                </p>
-              </div>
-            </header>
-
-            <section className="dashboard-preview__insight">
-              <span className="dashboard-preview__spark">↗</span>
-              <div>
-                <p className="dashboard-preview__overline">{t("dashboard.insightLabel")}</p>
-                <p>{t("dashboard.insight", { comparison: formattedComparison })}</p>
+                </strong>
               </div>
             </section>
 
-            <div className="dashboard-preview__metrics">
-              {metrics.map(([metric, value]) => (
-                <section className="dashboard-preview__metric" key={metric}>
-                  <p>{t(`dashboard.metrics.${metric}`)}</p>
-                  <strong>{value}</strong>
-                  {metric === "revenue" ? (
-                    <span className="dashboard-preview__metric-comparison">
-                      {t("dashboard.comparison", { comparison: formattedComparison })}
-                    </span>
-                  ) : null}
-                </section>
-              ))}
-            </div>
-
-            <div className="dashboard-preview__lower-grid">
-              <section className="dashboard-preview__chart-card">
-                <div className="dashboard-preview__card-heading">
-                  <div>
-                    <p className="dashboard-preview__overline">{t("dashboard.chart.eyebrow")}</p>
-                    <h3>{t("dashboard.chart.title")}</h3>
-                  </div>
-                  <span className="dashboard-preview__period">
-                    {t("dashboard.chart.period")}
-                  </span>
+            <section className="dashboard-preview__actions">
+              <div className="dashboard-preview__actions-heading">
+                <div>
+                  <p className="dashboard-preview__overline">
+                    {t("dashboard.briefing.actNext")}
+                  </p>
+                  <h3>{t("dashboard.stock.title", { count: landingDemo.stockRisks })}</h3>
                 </div>
-                <svg viewBox="0 0 520 170" role="presentation">
-                  <line x1="0" y1="30" x2="520" y2="30" />
-                  <line x1="0" y1="90" x2="520" y2="90" />
-                  <line x1="0" y1="150" x2="520" y2="150" />
-                  <polyline
-                    className="dashboard-preview__previous-line"
-                    points={toPoints(landingDemo.chart.previous)}
-                  />
-                  <polyline
-                    className="dashboard-preview__current-line"
-                    points={toPoints(landingDemo.chart.current)}
-                  />
-                  <circle cx="520" cy="0" r="5" />
-                </svg>
-                <div className="dashboard-preview__legend">
-                  <span data-series="current">{t("dashboard.chart.current")}</span>
-                  <span data-series="previous">{t("dashboard.chart.previous")}</span>
-                </div>
-              </section>
+                <span className="dashboard-preview__risk-count">{landingDemo.stockRisks}</span>
+              </div>
+              <ol>
+                {landingDemo.stockRiskItems.map((item, index) => (
+                  <li key={item.name}>
+                    <span className="dashboard-preview__risk-index">0{index + 1}</span>
+                    <strong>{item.name}</strong>
+                    <small className="dashboard-preview__risk-days">
+                      {t("dashboard.briefing.daysRemaining", {
+                        count: item.daysRemaining,
+                      })}
+                    </small>
+                  </li>
+                ))}
+              </ol>
+              <span className="dashboard-preview__text-action">
+                {t("dashboard.stock.action")} →
+              </span>
+            </section>
 
-              <section className="dashboard-preview__risk-card">
-                <span className="dashboard-preview__risk-icon">!</span>
-                <p className="dashboard-preview__overline">{t("dashboard.stock.eyebrow")}</p>
-                <strong>
-                  {t("dashboard.stock.title", { count: landingDemo.stockRisks })}
-                </strong>
-                <p>{t("dashboard.stock.body")}</p>
-                <span className="dashboard-preview__risk-link">
-                  {t("dashboard.stock.action")} →
+            <section className="dashboard-preview__glance">
+              <p className="dashboard-preview__overline">
+                {t("dashboard.briefing.glance")}
+              </p>
+              <dl>
+                <div>
+                  <dt>{t("dashboard.metrics.transactions")}</dt>
+                  <dd>{formatNumber(landingDemo.transactions, locale)}</dd>
+                </div>
+                <div>
+                  <dt>{t("dashboard.metrics.units")}</dt>
+                  <dd>{formatNumber(landingDemo.units, locale)}</dd>
+                </div>
+                <div>
+                  <dt>{t("dashboard.briefing.returning")}</dt>
+                  <dd>{formatNumber(landingDemo.returningCustomers, locale)}</dd>
+                </div>
+              </dl>
+            </section>
+
+            {showSourceCard ? (
+              <section className="dashboard-preview__review">
+                <span className="dashboard-preview__review-icon">?</span>
+                <div>
+                  <p className="dashboard-preview__overline">
+                    {t("dashboard.briefing.reviewLabel")}
+                  </p>
+                  <strong>{t("dashboard.briefing.reviewTitle")}</strong>
+                  <small className="dashboard-preview__review-evidence">
+                    {t("dashboard.briefing.reviewEvidence")}
+                  </small>
+                </div>
+                <span className="dashboard-preview__review-action">
+                  {t("dashboard.briefing.reviewAction")} →
                 </span>
               </section>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>
-
-      {showSourceCard ? (
-        <div className="source-confirmation" aria-hidden="true">
-          <div className="source-confirmation__heading">
-            <span className="source-confirmation__icon">✓</span>
-            <div>
-              <strong>{t("dashboard.confirmed.title")}</strong>
-              <p className="source-confirmation__body">
-                {t("dashboard.confirmed.body")}
-              </p>
-            </div>
-          </div>
-          <dl>
-            <div>
-              <dt>Fecha</dt>
-              <dd>{t("dashboard.confirmed.date")}</dd>
-            </div>
-            <div>
-              <dt>Imp.</dt>
-              <dd>{t("dashboard.confirmed.amount")}</dd>
-            </div>
-          </dl>
-        </div>
-      ) : null}
     </figure>
   );
 }

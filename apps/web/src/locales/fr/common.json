@@ -64,6 +64,154 @@
       "photo": "Photo"
     }
   },
+  "understanding": {
+    "sources": {
+      "eyebrow": "Apportez les données que vous avez",
+      "title": "Commencez là où se trouvent vos données.",
+      "body": "Choisissez une source pour voir la même promesse en action : Suq lit ce qui arrive, propose une structure et vous laisse confirmer les significations incertaines.",
+      "tabLabel": "Exemples de sources prises en charge",
+      "rawLabel": "Ce qui arrive",
+      "recognizedLabel": "Ce que Suq reconnaît",
+      "recognizedTitle": "Une structure que vous pouvez vérifier",
+      "promise": "Aucun nom de colonne imposé. Aucun ordre requis. Vous confirmez la signification avant toute modification des totaux.",
+      "items": {
+        "csv": "CSV",
+        "excel": "Excel",
+        "paste": "Tableau collé",
+        "json": "JSON",
+        "pos": "Export de caisse",
+        "marketplace": "Export de marketplace",
+        "image": "Image",
+        "pdf": "PDF",
+        "manual": "Saisie manuelle",
+        "api": "API de synchronisation"
+      },
+      "previews": {
+        "csv": "Un fichier de ventes séparé par des virgules, avec des en-têtes espagnols et des montants en euros.",
+        "excel": "Un classeur dont la première ligne utile commence sous un titre ajouté par le commerçant.",
+        "paste": "Des lignes copiées directement depuis une feuille de travail sans renommer les colonnes.",
+        "json": "Des commandes imbriquées dont les lignes d’articles doivent être séparées des détails de commande.",
+        "pos": "Un export de caisse avec les codes produit, quantités, totaux et heures locales.",
+        "marketplace": "Un export de commandes avec les noms propres à la marketplace et des attributs supplémentaires.",
+        "image": "Un tableau papier photographié, dont chaque cellule reconnue reste liée à sa zone source.",
+        "pdf": "Un rapport numérique ou photographié dont la structure tabulaire est reconstruite pour vérification.",
+        "manual": "Un canal simple pour enregistrer les ventes quotidiennes pendant le travail.",
+        "api": "Des enregistrements versionnés envoyés par un système approuvé via la limite de synchronisation programmée."
+      }
+    },
+    "problems": {
+      "eyebrow": "Le travail avant le travail",
+      "title": "Vos données ne devraient pas exiger un nouveau travail avant de pouvoir vous aider.",
+      "items": {
+        "different": {
+          "title": "Chaque export est différent.",
+          "body": "Les colonnes bougent, les en-têtes changent et les dates prennent des sens différents. Un modèle rigide fait paraître anormales des données ordinaires."
+        },
+        "cleanup": {
+          "title": "Le nettoyage manuel réduit le temps de décision.",
+          "body": "Lorsque la feuille est prête, la décision de stock arrive déjà trop tard et la cause d’une évolution des ventes devient moins claire."
+        },
+        "certainty": {
+          "title": "Une mauvaise réponse affirmée vaut moins qu’aucune réponse.",
+          "body": "Suq garde l’incertitude visible, montre les preuves et demande votre accord avant qu’une interprétation modifie vos totaux."
+        }
+      }
+    },
+    "how": {
+      "eyebrow": "Ajouter → Confirmer → Voir",
+      "title": "Des données imparfaites à une vue matinale utile.",
+      "body": "Suq sépare la compréhension de la source de sa validation. Cette étape de vérification rend l’importation flexible digne de confiance.",
+      "tabLabel": "Comment Suq transforme les données en réponses",
+      "steps": {
+        "add": {
+          "title": "Ajoutez ce que vous avez",
+          "body": "Utilisez un fichier, une photo, un tableau collé ou un canal de saisie."
+        },
+        "confirm": {
+          "title": "Confirmez la signification",
+          "body": "Vérifiez les types, usages, niveaux de confiance, exemples et preuves."
+        },
+        "see": {
+          "title": "Voyez ce qui compte",
+          "body": "Seules les réponses possibles apparaissent ; les concepts absents sont expliqués."
+        }
+      },
+      "stages": {
+        "add": {
+          "dropTitle": "Ajoutez les données que vous utilisez déjà",
+          "dropBody": "Rien ne doit être renommé. Suq étudie les véritables en-têtes et valeurs avant de proposer leur signification."
+        },
+        "see": {
+          "answerLabel": "Réponse disponible",
+          "answer": "Le chiffre d’affaires progresse de 18 %, porté par le Cabas en toile et le Café moulu.",
+          "evidence": "Calculé à partir de 312 transactions confirmées sur la période choisie.",
+          "availableLabel": "Prêt à utiliser",
+          "unavailableLabel": "Aucune supposition",
+          "unavailable": "La marge n’est pas disponible",
+          "unavailableReason": "Aucun champ de coût confirmé n’a été trouvé. Ajoutez ou associez le coût pour activer cette réponse."
+        }
+      },
+      "action": "Essayer les données d’exemple"
+    },
+    "review": {
+      "fileLabel": "Vérifier avant l’importation",
+      "progress": "1 champ à vérifier",
+      "columns": {
+        "field": "Champ source",
+        "type": "Type détecté",
+        "use": "Utilisé comme",
+        "confidence": "Confiance"
+      },
+      "types": {
+        "date": "Date · jour en premier",
+        "currency": "Décimal · EUR",
+        "identifier": "Identifiant",
+        "text": "Texte"
+      },
+      "roles": {
+        "transactionTime": "Heure de transaction",
+        "lineAmount": "Montant de ligne",
+        "itemIdentity": "Identité de l’article",
+        "customerIdentity": "Identité du client",
+        "notAnalyzed": "Non utilisé dans l’analyse"
+      },
+      "confidence": {
+        "high": "Élevée",
+        "medium": "Moyenne",
+        "needsReview": "À vérifier"
+      },
+      "samples": {
+        "date": "03/09/26 · 03/09/26",
+        "amount": "48,00 € · 27,50 €",
+        "code": "CT-204 · GC-118",
+        "customer": "C-0091 · C-0148",
+        "notes": "comptoir · livraison"
+      },
+      "evidence": {
+        "label": "Preuves de l’interprétation",
+        "eyebrow": "Pourquoi Suq le propose",
+        "title": "Vérifier « {{field}} »",
+        "sourceCrop": "Zone source",
+        "locale": "La source utilise des libellés espagnols et le format numérique européen.",
+        "facts": {
+          "date": "Les valeurs se répètent entre les lignes et correspondent toujours à des dates avec le jour en premier.",
+          "amount": "Les valeurs correspondent à la quantité multipliée par le prix unitaire dans les lignes étudiées.",
+          "code": "Les valeurs sont courtes et se répètent entre les commandes, mais l’en-tête abrégé reste ambigu.",
+          "customer": "Les valeurs reviennent à différentes dates et ressemblent à des identifiants client stables.",
+          "notes": "Le texte varie et ne correspond à aucun concept analytique nécessaire."
+        },
+        "effects": {
+          "date": "Permet le regroupement par période et les comparaisons quotidiennes.",
+          "amount": "Permet le calcul du chiffre d’affaires et la comparaison des ventes.",
+          "code": "Confirmer l’identité de l’article active le suivi produit et le rapprochement des stocks.",
+          "customer": "Active l’analyse des clients fidèles lorsque leur identité est confirmée.",
+          "notes": "Les valeurs originales restent conservées et utilisables comme filtres."
+        }
+      },
+      "editLabel": "Utiliser ce champ comme",
+      "update": "Aperçu actualisé : {{role}}. Rien n’est encore validé."
+    }
+  },
   "dashboard": {
     "accessibleSummary": "Tableau fictif de Mercado Norte. Le chiffre d’affaires atteint {{revenue}}, soit {{comparison}} par rapport à la période de comparaison. {{stockRisks}} articles risquent une rupture sous sept jours. Mis à jour depuis {{sources}} sources.",
     "workspace": "Espace de travail",
@@ -72,6 +220,22 @@
     "insightLabel": "Information du jour",
     "insight": "Le chiffre d’affaires dépasse la période comparée de {{comparison}}, porté par le Cabas en toile et le Café moulu.",
     "comparison": "{{comparison}} par rapport à la période comparée",
+    "briefing": {
+      "greeting": "Bonjour, {{workspace}}.",
+      "answerLabel": "Ce qui a changé",
+      "storyTitle": "Les ventes progressent plus vite que lors de la journée comparée.",
+      "evidenceLabel": "Preuves",
+      "evidence": "Export de caisse · {{transactions}} transactions confirmées",
+      "actNext": "À faire maintenant",
+      "daysRemaining_one": "Environ {{count}} jour restant",
+      "daysRemaining_other": "Environ {{count}} jours restants",
+      "glance": "La journée en un coup d’œil",
+      "returning": "Fidèles",
+      "reviewLabel": "Confirmation requise",
+      "reviewTitle": "« Cod. » pourrait identifier l’article",
+      "reviewEvidence": "Trois exemples suivent les motifs d’un code produit. L’en-tête reste ambigu.",
+      "reviewAction": "Vérifier"
+    },
     "metrics": {
       "revenue": "Chiffre d’affaires",
       "transactions": "Transactions",
@@ -125,7 +289,7 @@
     "body": "Cette route est séparée du paquet marketing, mais elle n’imite pas une session authentifiée. Explorez le tableau fictif pendant la connexion du parcours protégé."
   },
   "footer": {
-    "previewNote": "Fondation de la landing page, phase 1 · Aucune donnée privée requise",
+    "previewNote": "Aperçu du produit · Aucune donnée privée requise",
     "languages": "English · Español · Français"
   }
 }
