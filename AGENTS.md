@@ -58,7 +58,8 @@ Only one LLM may perform repository work at a time. This includes implementation
 
 - After acquiring the lock, inspect `git status`, the current branch, recent commits, and the relevant SDLC sections before editing.
 - State the active requirement IDs, acceptance criteria, branch, and intended paths. Ask for clarification only when a material product decision cannot be derived from the repository.
-- Use short-lived implementation branches named `agent/<identity>/<requirement-or-area>-<slug>`, normally lasting no more than three days. Use `tensu` as the branch identity for Codex and `ghost` as the branch identity for Claude. Branch names must use these stable identities rather than an LLM, provider, product, or model name. A successor may continue an existing branch only when the user explicitly hands it over.
+- Use short-lived implementation branches named `<type>/<identity>/<requirement-or-area>-<slug>`, normally lasting no more than three days. Use the smallest accurate Conventional Commit type, such as `feat`, `fix`, `docs`, `refactor`, `test`, `perf`, `build`, `ci`, or `chore`; do not use `agent` as a branch prefix or type.
+- Use `tensu` as the branch identity for Codex and `ghost` as the branch identity for Claude. For example, use `feat/tensu/landing-daily-value` or `fix/ghost/auth-cookie-rotation`. Branch names must use these stable identities rather than an LLM, provider, product, or model name. A successor may continue an existing branch only when the user explicitly hands it over.
 - Keep changes within the active requirement. Preserve all unrelated user changes and avoid unrelated formatting, dependency, generated-file, or lockfile churn.
 - Do not create parallel worktrees for LLM collaboration. Human-created worktrees are allowed, but the repository-wide LLM lock still applies across them.
 
