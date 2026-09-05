@@ -1,0 +1,148 @@
+name: suq-dev
+
+x-application: &application
+  image: suq-api:local
+  build:
+    context: ..
+    dockerfile: apps/api/Dockerfile
+  init: true
+  read_only: true
+  tmpfs:
+    - /tmp:size=128m,mode=1777
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  environment:
+    SUQ_ENVIRONMENT: development
+    SUQ_REDIS_URL: redis://redis:6379/0
+  networks: [application, data]
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+    object-storage:
+      condition: service_healthy
+
+x-worker-health: &worker-health
+  test: [CMD-SHELL, 'celery --app suq_api.worker:celery_app inspect ping --destination "worker@$$HOSTNAME" --timeout 5']
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 30s
+
+services:
+  edge:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs:
+      - /var/cache/nginx:uid=10001,gid=10001
+      - /var/run:uid=10001,gid=10001
+    mem_limit: 128m
+    ports:
+      - "127.0.0.1:${SUQ_HTTP_PORT:-8080}:8080"
+    networks: [application]
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, wget, -q, --spider, http://127.0.0.1:8080/health/live]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    <<: *application
+    mem_limit: 512m
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/live', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  worker-ingest:
+    <<: *application
+    mem_limit: 1g
+    command: [celery, --app, suq_api.worker:celery_app, worker, --hostname, "worker@%h", --queues, ingest, --concurrency, "1", --loglevel, INFO]
+    healthcheck: *worker-health
+    stop_grace_period: 60s
+
+  worker-fast:
+    <<: *application
+    mem_limit: 512m
+    command: [celery, --app, suq_api.worker:celery_app, worker, --hostname, "worker@%h", --queues, "alerts,notify,ads", --concurrency, "2", --loglevel, INFO]
+    healthcheck: *worker-health
+    stop_grace_period: 60s
+
+  worker-reports:
+    <<: *application
+    mem_limit: 1g
+    command: [celery, --app, suq_api.worker:celery_app, worker, --hostname, "worker@%h", --queues, reports, --concurrency, "1", --loglevel, INFO]
+    healthcheck: *worker-health
+    stop_grace_period: 60s
+
+  postgres:
+    build:
+      context: .
+      dockerfile: postgres/Dockerfile
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?Copy deploy/.env.example to deploy/.env}
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks: [data]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    command: [redis-server, --appendonly, "yes", --maxmemory-policy, noeviction]
+    volumes:
+      - redis-data:/data
+    networks: [data]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  object-storage:
+    build:
+      context: .
+      dockerfile: s3-stub/Dockerfile
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    networks: [data]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9000/health/ready', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "127.0.0.1:${SUQ_MAIL_PORT:-8025}:8025"
+    networks: [application, data]
+    healthcheck:
+      test: [CMD, /mailpit, readyz]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  application:
+  data:
+    internal: true
+
+volumes:
+  postgres-data:
+  redis-data:

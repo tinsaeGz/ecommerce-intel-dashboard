@@ -10,9 +10,11 @@ Thumbs.db
 
 # Build artifacts
 *.zip
+*.pdf
 
 # Root workspace and local deployment state
 node_modules/
+__pycache__/
 /.vercel/
 .env*
 !.env.example

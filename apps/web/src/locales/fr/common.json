@@ -1,32 +1,388 @@
 {
+  "meta": {
+    "landing": {
+      "title": "Suq Insights — Une vision quotidienne à partir de vos données",
+      "description": "Transformez les données que vous conservez déjà en une vue claire des ventes, des stocks et des clients fidèles."
+    },
+    "demo": {
+      "title": "Tableau de bord de démonstration — Suq Insights",
+      "description": "Découvrez un aperçu transparent de Suq Insights créé avec des données fictives."
+    },
+    "signup": {
+      "title": "Aperçu du compte — Suq Insights",
+      "description": "La création de comptes est en cours de connexion. Découvrez le tableau fictif en attendant."
+    },
+    "login": {
+      "title": "Aperçu de la connexion — Suq Insights",
+      "description": "L’accès aux comptes est en cours de connexion. Découvrez le tableau fictif en attendant."
+    },
+    "app": {
+      "title": "Aperçu de l’espace de travail — Suq Insights",
+      "description": "L’espace de travail authentifié de Suq Insights est en cours de connexion au backend du produit."
+    }
+  },
+  "common": {
+    "loading": "Chargement de cette page…",
+    "skipToContent": "Aller au contenu principal"
+  },
   "brand": {
     "homeLabel": "Accueil de Suq Insights"
   },
   "language": {
     "label": "Choisir la langue"
   },
-  "hero": {
-    "eyebrow": "Fondation du produit",
-    "title": "De la clarté pour chaque journée de marché.",
-    "body": "Suq Insights est conçu pour transformer les données que les commerçants possèdent déjà en une vue quotidienne claire des ventes, des stocks et des clients fidèles.",
-    "status": "Les environnements de développement sont prêts. La mise en œuvre du produit est en cours."
+  "navigation": {
+    "primary": "Navigation principale",
+    "mobile": "Navigation mobile",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
-  "questions": {
-    "label": "Les trois questions auxquelles Suq Insights répondra",
-    "selling": {
-      "title": "Qu’est-ce qui se vend ?",
-      "body": "Suivez le chiffre d’affaires, les transactions, les unités, les tendances et les articles qui évoluent."
-    },
-    "stock": {
-      "title": "Quel article sera bientôt épuisé ?",
-      "body": "Comprenez l’état des stocks, les jours restants et ce qui demande votre attention aujourd’hui."
-    },
-    "customers": {
-      "title": "Quels clients reviennent ?",
-      "body": "Visualisez les achats répétés lorsque les données client confirmées le permettent."
+  "actions": {
+    "startFree": "Commencer gratuitement",
+    "previewSignup": "Voir l’accès au compte",
+    "exploreDemo": "Explorer la démo",
+    "logIn": "Se connecter",
+    "backHome": "Retour à l’accueil"
+  },
+  "announcement": {
+    "label": "Annonce du produit",
+    "message": "Conçu pour les données que vous utilisez déjà : feuilles de calcul, exports, PDF, photos et plus encore.",
+    "dismiss": "Fermer l’annonce"
+  },
+  "hero": {
+    "eyebrow": "Une vision commerciale claire à partir de vos données",
+    "titleBefore": "Sachez ce qui se vend.",
+    "titleEmphasis": "Anticipez les ruptures.",
+    "titleAfter": "Faites revenir vos clients.",
+    "body": "Importez les données que vous conservez déjà ou enregistrez la journée à mesure qu’elle avance. Suq confirme leur signification, puis les transforme en une vue claire des ventes, des stocks et des clients fidèles.",
+    "languages": "English · Español · Français",
+    "sourcesLabel": "Exemples de sources prises en charge",
+    "sources": {
+      "csv": "CSV",
+      "excel": "Excel",
+      "pdf": "PDF",
+      "photo": "Photo"
     }
   },
+  "polish": {
+    "review": {
+      "sample": "Exemple fictif · prêt à vérifier",
+      "eyebrow": "Vos données. Votre interprétation.",
+      "title": "Que signifie « Cod. » ici ?",
+      "body": "Suq a repéré un possible code produit. Vous avez le dernier mot.",
+      "sourceCaption": "Lignes originales de l’exemple en espagnol",
+      "sourceNote": "Les valeurs d’origine, telles qu’elles sont arrivées.",
+      "roleLabel": "Utiliser « Cod. » comme",
+      "pending": "Une suggestion, pas une décision",
+      "evidence": "Ces valeurs se répètent dans plusieurs commandes. L’en-tête abrégé a encore besoin de votre contexte.",
+      "confirmed": "Sens confirmé dans cet aperçu",
+      "result": "« Cod. » est maintenant présenté comme : {{role}}.",
+      "confirm": "Confirmer ce sens",
+      "reset": "Réessayer la vérification",
+      "localOnly": "Exemple interactif uniquement. Aucun fichier n’est envoyé ni enregistré."
+    },
+    "dashboard": {
+      "workspaceNote": "Vue quotidienne · exemple fictif",
+      "metricLabel": "Choisir un indicateur du tableau de bord",
+      "selected": "Tendance affichée",
+      "viewTrend": "Voir la tendance ↗",
+      "dayView": "Au fil de la journée d’exemple",
+      "cumulative": "Total cumulé",
+      "atTime": "à {{time}}",
+      "inspectTime": "Explorer la journée",
+      "viewData": "Afficher le graphique en tableau",
+      "dataCaption": "{{metric}} au fil de la journée d’exemple",
+      "time": "Heure",
+      "stockHint": "Sélectionnez un produit pour examiner le risque.",
+      "stockLabel": "Produits à risque de rupture",
+      "stockDetail_one": "Il reste environ {{count}} jour de stock au rythme de vente de l’exemple. Vérifiez le relevé avant de réapprovisionner.",
+      "stockDetail_other": "Il reste environ {{count}} jours de stock au rythme de vente de l’exemple. Vérifiez le relevé avant de réapprovisionner.",
+      "reviewLink": "Examiner les preuves de la source"
+    }
+  },
+  "presentation": {
+    "briefing": {
+      "label": "Une matinée avec Mercado Norte",
+      "question": "Qu’est-ce qui demande mon attention aujourd’hui ?",
+      "answer": "Le chiffre d’affaires a augmenté de {{comparison}}. {{risks}} produits risquent de manquer bientôt. Un champ attend encore votre confirmation.",
+      "stockAction": "Examiner les risques de rupture",
+      "stockNote": "Estimations illustratives au rythme de vente de l’exemple, sans garantie de date de rupture.",
+      "evidenceAction": "D’où viennent ces chiffres ?",
+      "evidenceBody": "La vue du chiffre d’affaires utilise les champs confirmés de date de transaction et de montant de ligne. « Cod. » est une interprétation distincte en attente ; elle n’a pas modifié les totaux. Toutes les valeurs sont fictives.",
+      "reviewAction": "Vérifier « Cod. »",
+      "caption": "Une réponse, ses preuves et votre prochaine décision. Réunies dans une vue quotidienne."
+    },
+    "problems": {
+      "label": "Questions illustratives de commerçants · pas des témoignages",
+      "questions": {
+        "different": "« Pourquoi chaque export demande-t-il un tableur différent ? »",
+        "cleanup": "« Puis-je obtenir les chiffres à temps pour agir ? »",
+        "certainty": "« Cette colonne indiquait-elle la quantité ou le chiffre d’affaires ? »"
+      }
+    },
+    "outcomes": {
+      "eyebrow": "Les règles derrière chaque réponse",
+      "title": "Une clarté que vous pouvez vérifier.",
+      "items": {
+        "trace": {
+          "title": "Les preuves restent proches",
+          "body": "Consultez la source et les champs confirmés derrière l’exemple de chiffre d’affaires."
+        },
+        "confirm": {
+          "title": "Vous confirmez le sens",
+          "body": "Essayez un autre rôle pour « Cod. » et observez la mise à jour de l’aperçu."
+        },
+        "preserve": {
+          "title": "Les valeurs d’origine comptent",
+          "body": "Comparez une valeur source à son sens proposé. Un champ inutilisé n’est pas un champ supprimé."
+        },
+        "missing": {
+          "title": "Une absence n’est jamais zéro",
+          "body": "L’aperçu explique pourquoi la marge est indisponible sans champ de coût confirmé."
+        },
+        "context": {
+          "title": "La période reste visible",
+          "body": "Un exemple daté et sa comparaison donnent à chaque tendance le contexte nécessaire."
+        },
+        "language": {
+          "title": "Lisez dans votre langue",
+          "body": "Explorez le même exemple en anglais, espagnol ou français, avec les formats locaux de nombres et de devises."
+        }
+      }
+    },
+    "closing": {
+      "eyebrow": "Votre prochaine décision éclairée",
+      "title": "Imaginez une matinée plus sereine.",
+      "body": "Parcourez les données fictives de Mercado Norte. Suivez les chiffres, vérifiez les preuves et essayez la révision avant d’apporter vos propres données.",
+      "action": "Explorer Mercado Norte"
+    }
+  },
+  "understanding": {
+    "sources": {
+      "eyebrow": "Apportez les données que vous avez",
+      "title": "Commencez là où se trouvent vos données.",
+      "body": "Choisissez une source pour voir la même promesse en action : Suq lit ce qui arrive, propose une structure et vous laisse confirmer les significations incertaines.",
+      "tabLabel": "Exemples de sources prises en charge",
+      "rawLabel": "Ce qui arrive",
+      "recognizedLabel": "Ce que Suq reconnaît",
+      "recognizedTitle": "Une structure que vous pouvez vérifier",
+      "promise": "Aucun nom de colonne imposé. Aucun ordre requis. Vous confirmez la signification avant toute modification des totaux.",
+      "items": {
+        "csv": "CSV",
+        "excel": "Excel",
+        "paste": "Tableau collé",
+        "json": "JSON",
+        "pos": "Export de caisse",
+        "marketplace": "Export de marketplace",
+        "image": "Image",
+        "pdf": "PDF",
+        "manual": "Saisie manuelle",
+        "api": "API de synchronisation"
+      },
+      "previews": {
+        "csv": "Un fichier de ventes séparé par des virgules, avec des en-têtes espagnols et des montants en euros.",
+        "excel": "Un classeur dont la première ligne utile commence sous un titre ajouté par le commerçant.",
+        "paste": "Des lignes copiées directement depuis une feuille de travail sans renommer les colonnes.",
+        "json": "Des commandes imbriquées dont les lignes d’articles doivent être séparées des détails de commande.",
+        "pos": "Un export de caisse avec les codes produit, quantités, totaux et heures locales.",
+        "marketplace": "Un export de commandes avec les noms propres à la marketplace et des attributs supplémentaires.",
+        "image": "Un tableau papier photographié, dont chaque cellule reconnue reste liée à sa zone source.",
+        "pdf": "Un rapport numérique ou photographié dont la structure tabulaire est reconstruite pour vérification.",
+        "manual": "Un canal simple pour enregistrer les ventes quotidiennes pendant le travail.",
+        "api": "Des enregistrements versionnés envoyés par un système approuvé via la limite de synchronisation programmée."
+      }
+    },
+    "problems": {
+      "eyebrow": "Le travail avant le travail",
+      "title": "Vos données ne devraient pas exiger un nouveau travail avant de pouvoir vous aider.",
+      "items": {
+        "different": {
+          "title": "Chaque export est différent.",
+          "body": "Les colonnes bougent, les en-têtes changent et les dates prennent des sens différents. Un modèle rigide fait paraître anormales des données ordinaires."
+        },
+        "cleanup": {
+          "title": "Le nettoyage manuel réduit le temps de décision.",
+          "body": "Lorsque la feuille est prête, la décision de stock arrive déjà trop tard et la cause d’une évolution des ventes devient moins claire."
+        },
+        "certainty": {
+          "title": "Une mauvaise réponse affirmée vaut moins qu’aucune réponse.",
+          "body": "Suq garde l’incertitude visible, montre les preuves et demande votre accord avant qu’une interprétation modifie vos totaux."
+        }
+      }
+    },
+    "how": {
+      "eyebrow": "Ajouter → Confirmer → Voir",
+      "title": "Des données imparfaites à une vue matinale utile.",
+      "body": "Suq sépare la compréhension de la source de sa validation. Cette étape de vérification rend l’importation flexible digne de confiance.",
+      "tabLabel": "Comment Suq transforme les données en réponses",
+      "steps": {
+        "add": {
+          "title": "Ajoutez ce que vous avez",
+          "body": "Utilisez un fichier, une photo, un tableau collé ou un canal de saisie."
+        },
+        "confirm": {
+          "title": "Confirmez la signification",
+          "body": "Vérifiez les types, usages, niveaux de confiance, exemples et preuves."
+        },
+        "see": {
+          "title": "Voyez ce qui compte",
+          "body": "Seules les réponses possibles apparaissent ; les concepts absents sont expliqués."
+        }
+      },
+      "stages": {
+        "add": {
+          "dropTitle": "Ajoutez les données que vous utilisez déjà",
+          "dropBody": "Rien ne doit être renommé. Suq étudie les véritables en-têtes et valeurs avant de proposer leur signification."
+        },
+        "see": {
+          "answerLabel": "Réponse disponible",
+          "answer": "Le chiffre d’affaires progresse de 18 %, porté par le Cabas en toile et le Café moulu.",
+          "evidence": "Calculé à partir de 312 transactions confirmées sur la période choisie.",
+          "availableLabel": "Prêt à utiliser",
+          "unavailableLabel": "Aucune supposition",
+          "unavailable": "La marge n’est pas disponible",
+          "unavailableReason": "Aucun champ de coût confirmé n’a été trouvé. Ajoutez ou associez le coût pour activer cette réponse."
+        }
+      },
+      "action": "Essayer les données d’exemple"
+    },
+    "review": {
+      "fileLabel": "Vérifier avant l’importation",
+      "progress": "1 champ à vérifier",
+      "columns": {
+        "field": "Champ source",
+        "type": "Type détecté",
+        "use": "Utilisé comme",
+        "confidence": "Confiance"
+      },
+      "types": {
+        "date": "Date · jour en premier",
+        "currency": "Décimal · EUR",
+        "identifier": "Identifiant",
+        "text": "Texte"
+      },
+      "roles": {
+        "transactionTime": "Heure de transaction",
+        "lineAmount": "Montant de ligne",
+        "itemIdentity": "Identité de l’article",
+        "customerIdentity": "Identité du client",
+        "notAnalyzed": "Non utilisé dans l’analyse"
+      },
+      "confidence": {
+        "high": "Élevée",
+        "medium": "Moyenne",
+        "needsReview": "À vérifier"
+      },
+      "samples": {
+        "date": "03/09/26 · 03/09/26",
+        "amount": "48,00 € · 27,50 €",
+        "code": "CT-204 · GC-118",
+        "customer": "C-0091 · C-0148",
+        "notes": "comptoir · livraison"
+      },
+      "evidence": {
+        "label": "Preuves de l’interprétation",
+        "eyebrow": "Pourquoi Suq le propose",
+        "title": "Vérifier « {{field}} »",
+        "sourceCrop": "Zone source",
+        "locale": "La source utilise des libellés espagnols et le format numérique européen.",
+        "facts": {
+          "date": "Les valeurs se répètent entre les lignes et correspondent toujours à des dates avec le jour en premier.",
+          "amount": "Les valeurs correspondent à la quantité multipliée par le prix unitaire dans les lignes étudiées.",
+          "code": "Les valeurs sont courtes et se répètent entre les commandes, mais l’en-tête abrégé reste ambigu.",
+          "customer": "Les valeurs reviennent à différentes dates et ressemblent à des identifiants client stables.",
+          "notes": "Le texte varie et ne correspond à aucun concept analytique nécessaire."
+        },
+        "effects": {
+          "date": "Permet le regroupement par période et les comparaisons quotidiennes.",
+          "amount": "Permet le calcul du chiffre d’affaires et la comparaison des ventes.",
+          "code": "Confirmer l’identité de l’article active le suivi produit et le rapprochement des stocks.",
+          "customer": "Active l’analyse des clients fidèles lorsque leur identité est confirmée.",
+          "notes": "Les valeurs originales restent conservées et utilisables comme filtres."
+        }
+      },
+      "editLabel": "Utiliser ce champ comme",
+      "update": "Aperçu actualisé : {{role}}. Rien n’est encore validé."
+    }
+  },
+  "dashboard": {
+    "accessibleSummary": "Tableau fictif de Mercado Norte. Le chiffre d’affaires atteint {{revenue}}, soit {{comparison}} par rapport à la période de comparaison. {{stockRisks}} articles risquent une rupture sous sept jours. Mis à jour depuis {{sources}} sources.",
+    "workspace": "Espace de travail",
+    "sampleDay": "Journée exemple · {{date}}",
+    "freshness": "Mis à jour il y a {{minutes}} minutes · {{sources}} sources",
+    "insightLabel": "Information du jour",
+    "insight": "Le chiffre d’affaires dépasse la période comparée de {{comparison}}, porté par le Cabas en toile et le Café moulu.",
+    "comparison": "{{comparison}} par rapport à la période comparée",
+    "briefing": {
+      "greeting": "Bonjour, {{workspace}}.",
+      "answerLabel": "Ce qui a changé",
+      "storyTitle": "Les ventes progressent plus vite que lors de la journée comparée.",
+      "evidenceLabel": "Preuves",
+      "evidence": "Export de caisse · {{transactions}} transactions confirmées",
+      "actNext": "À faire maintenant",
+      "daysRemaining_one": "Environ {{count}} jour restant",
+      "daysRemaining_other": "Environ {{count}} jours restants",
+      "glance": "La journée en un coup d’œil",
+      "returning": "Fidèles",
+      "reviewLabel": "Confirmation requise",
+      "reviewTitle": "« Cod. » pourrait identifier l’article",
+      "reviewEvidence": "Trois exemples suivent les motifs d’un code produit. L’en-tête reste ambigu.",
+      "reviewAction": "Vérifier"
+    },
+    "metrics": {
+      "revenue": "Chiffre d’affaires",
+      "transactions": "Transactions",
+      "units": "Unités",
+      "customers": "Clients"
+    },
+    "chart": {
+      "eyebrow": "Rythme des ventes",
+      "title": "Chiffre d’affaires au fil de la journée",
+      "period": "Depuis l’ouverture",
+      "current": "Journée exemple",
+      "previous": "Comparaison"
+    },
+    "stock": {
+      "eyebrow": "À surveiller",
+      "title_one": "1 article risque une rupture",
+      "title_other": "{{count}} articles risquent une rupture",
+      "body": "Dans les sept prochains jours au rythme de vente actuel.",
+      "action": "Voir les risques de stock"
+    },
+    "confirmed": {
+      "title": "Données confirmées",
+      "body": "La signification des champs a été vérifiée avant de modifier les totaux.",
+      "date": "Heure de transaction",
+      "amount": "Montant de ligne"
+    }
+  },
+  "demo": {
+    "eyebrow": "Aperçu transparent du produit",
+    "title": "Découvrez la vue quotidienne avant de partager vos données.",
+    "body": "Cet aperçu utilise un commerce fictif et des valeurs d’exemple fixes et cohérentes. Il ne contient aucune information de client ou de commerçant.",
+    "sampleLabel": "Données d’exemple fictives",
+    "sampleTitle": "Une vue sereine de ce qui a changé et de ce qui demande votre attention",
+    "sampleBody": "Le tableau de bord de production reliera chaque réponse aux données source confirmées et à leur fraîcheur."
+  },
+  "access": {
+    "signup": {
+      "eyebrow": "Aperçu de l’accès au compte",
+      "title": "La création de comptes gratuits est en cours de connexion.",
+      "body": "Le parcours d’authentification n’est pas encore actif dans cette première étape. Vous pouvez explorer la démo fictive sans saisir de données commerciales."
+    },
+    "login": {
+      "eyebrow": "Aperçu de la connexion",
+      "title": "L’accès sécurisé aux comptes est en cours de connexion.",
+      "body": "Le parcours d’authentification n’est pas encore actif dans cette première étape. Aucun formulaire n’est affiché avant sa connexion au véritable service protégé."
+    }
+  },
+  "appPreview": {
+    "eyebrow": "Limite du produit authentifié",
+    "title": "L’espace de travail ne s’ouvre qu’avec un véritable accès.",
+    "body": "Cette route est séparée du paquet marketing, mais elle n’imite pas une session authentifiée. Explorez le tableau fictif pendant la connexion du parcours protégé."
+  },
   "footer": {
-    "note": "English · Español · Français"
+    "previewNote": "Aperçu du produit · Aucune donnée privée requise",
+    "languages": "English · Español · Français"
   }
 }

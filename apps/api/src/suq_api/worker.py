@@ -1,4 +1,5 @@
 from celery import Celery
+from kombu import Queue
 
 from suq_api.core.settings import Settings, get_settings
 
@@ -16,6 +17,10 @@ def create_celery(settings: Settings | None = None) -> Celery:
         enable_utc=True,
         result_serializer="json",
         task_serializer="json",
+        task_default_queue="ingest",
+        task_queues=tuple(Queue(name) for name in ("ingest", "alerts", "notify", "ads", "reports")),
+        task_create_missing_queues=False,
+        worker_prefetch_multiplier=1,
         timezone="UTC",
     )
     return application

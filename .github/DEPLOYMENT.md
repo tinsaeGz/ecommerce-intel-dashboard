@@ -3,9 +3,9 @@
 GitHub Actions is the deployment authority for the Vercel frontend project
 `yohanis-axki-s-projects/ecommerce-intel-dashboard`:
 
-- a successful push to `dev` creates a Vercel Preview deployment;
-- a successful push to `main` creates a Vercel Production deployment;
-- pull requests run quality and branch-policy checks without deploying; and
+- a successful web-affecting push to `dev` creates a Vercel Preview deployment;
+- a successful web-affecting push to `main` creates a Vercel Production deployment;
+- pull requests run affected subsystem checks and the aggregate `ci-gate` without deploying; and
 - other branches are excluded from both automatic deployment paths.
 
 The stable environment addresses are:
@@ -30,3 +30,7 @@ architecture defined by `SDLC.md`; they are not silently moved to Vercel.
 
 The Vercel GitHub App may replace the deployment job later. If it does, remove
 the Action-based deployment in the same checkpoint to avoid duplicate builds.
+
+The deployed HTML routes receive smoke checks. Protected previews require
+`VERCEL_AUTOMATION_BYPASS_SECRET`. See [CI coverage](CI.md) for selection,
+security/migration gates, startup diagnostics, and unimplemented release gates.

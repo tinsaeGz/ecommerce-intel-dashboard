@@ -35,3 +35,20 @@ def test_worker_uses_validated_redis_configuration() -> None:
     assert worker.conf.broker_url == "redis://redis:6379/3"
     assert worker.conf.result_backend == "redis://redis:6379/3"
     assert worker.conf.task_serializer == "json"
+
+
+def test_worker_declares_only_isolated_workload_queues() -> None:
+    worker = create_celery(Settings(environment="test"))
+
+    assert {queue.name for queue in worker.conf.task_queues} == {
+        "ingest",
+        "alerts",
+        "notify",
+        "ads",
+        "reports",
+    }
+    assert worker.conf.task_default_queue == "ingest"
+    assert worker.conf.task_create_missing_queues is False
+    assert worker.conf.worker_prefetch_multiplier == 1
+    with pytest.raises(KeyError):
+        worker.amqp.queues.select(["unconfigured"])
