@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
@@ -10,16 +10,18 @@ import {
 } from "../components/public-ui";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
 import { DailyBriefing, ClosingInvitation } from "./merchant-story";
-import { MerchantDecisions, RecordToDecision, TrustStory } from "./merchant-decisions";
+import { CinematicStory } from "./cinematic-story";
 import { BuyingQuestions } from "./buying-questions";
 import "./landing-page.css";
 
 export function LandingPage() {
   const { t } = useTranslation();
+  const headingRef = useRef<HTMLHeadingElement>(null);
   const { hash, key } = useLocation();
 
   useEffect(() => {
-    if (!["#daily-decisions", "#how-it-works", "#plans", "#faq"].includes(hash)) return;
+    if (!hash) { headingRef.current?.focus({ preventScroll: true }); return; }
+    if (!["#daily-decisions", "#how-it-works", "#next-sale", "#plans", "#faq"].includes(hash)) return;
     const target = document.getElementById(hash.slice(1));
     target?.focus({ preventScroll: true });
     target?.scrollIntoView?.();
@@ -36,7 +38,7 @@ export function LandingPage() {
         <section className="landing-hero" aria-labelledby="landing-hero-title">
           <div className="landing-hero__copy">
             <p className="landing-hero__eyebrow">{t("hero.eyebrow")}</p>
-            <h1 id="landing-hero-title">
+            <h1 ref={headingRef} tabIndex={-1} id="landing-hero-title">
               <span>{t("hero.titleBefore")}</span>{" "}
               <em>{t("hero.titleEmphasis")}</em>{" "}
               <span>{t("hero.titleAfter")}</span>
@@ -53,9 +55,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        <MerchantDecisions />
-        <RecordToDecision />
-        <TrustStory />
+        <CinematicStory />
         <BuyingQuestions />
         <ClosingInvitation />
       </main>

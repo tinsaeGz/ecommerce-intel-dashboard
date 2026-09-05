@@ -468,7 +468,7 @@
       "missing": "Aucun champ de coût confirmé ? La marge reste indisponible au lieu d’être affichée à zéro."
     },
     "demo": {
-      "workflow": "Explorer toutes les étapes de la révision"
+      "workflow": "Essayer la vente suivante"
     }
   },
   "buying": {
@@ -553,5 +553,46 @@
         "answer": "Les exemples utilisent des données fictives ; vous ne pouvez pas importer vos registres ici. Votre langue est enregistrée dans ce navigateur. Les événements d’interaction restent dans la mémoire temporaire de l’onglet et ne sont pas transmis à un service d’analytique. L’hébergeur reçoit les requêtes ordinaires de pages. Les conditions de confidentialité du produit en production et un canal public d’assistance ne sont pas encore publiés ici."
       }
     }
+  },
+  "cinematic": {
+    "reset": "Réinitialiser l’exemple",
+    "resetDone": "Exemple réinitialisé. Vos choix et la prochaine vente retrouvent leurs valeurs de départ.",
+    "memory": "Vos choix sont conservés entre ces pages. Rechargez pour recommencer.",
+    "reviewScope": "Cette révision modifie uniquement cet exemple de données. Elle ne recalcule pas le tableau de bord historique.",
+    "eyebrow": "Une boutique. Une journée exemple.",
+    "intro": "Suivez la question, vérifiez les données, puis essayez une petite décision.",
+    "controls": "Chapitres de l’histoire",
+    "chapter": "Chapitre {{number}}",
+    "questions": "Explorer une question commerciale",
+    "topics": {
+      "sales": "Ventes",
+      "stock": "Stock",
+      "customers": "Clients"
+    },
+    "day": {
+      "label": "Comprendre la journée",
+      "title": "Commencez par ce qui a changé.",
+      "body": "Les ventes augmentent. Le café se fait rare. Certains clients reviennent. Explorez chaque question dans la même journée exemple.",
+      "bridge": "Chaque réponse repose sur des données. Voyez ensuite comment leur sens est confirmé."
+    },
+    "evidence": {
+      "label": "Examiner les données",
+      "title": "L’original reste visible.",
+      "body": "Un nom de champ abrégé peut avoir plusieurs sens. Examinez les valeurs originales, choisissez leur rôle et confirmez explicitement l’interprétation.",
+      "bridge": "Cet exemple ne change que sa propre interprétation. Deviner ne donne pas de réponse fiable lorsque les données clients ou les coûts manquent."
+    },
+    "sale": {
+      "label": "Essayer la vente suivante",
+      "title": "Une vente. Un effet visible.",
+      "body": "La journée historique se termine avec 12 cafés en stock. Prévisualisez une vente supplémentaire, confirmez-la, puis annulez-la pour voir le stock revenir.",
+      "bridge": "Vos choix vous accompagnent dans la démo. Continuez à y explorer le même exemple."
+    },
+    "continue": "Continuer avec cet exemple",
+    "historicalScope": "Après la clôture historique : cet exemple change uniquement le stock de café affiché de 12 à 11. Le chiffre d’affaires, les observations du graphique et les estimations historiques de risque de stock restent inchangés.",
+    "stockAfter_one": "Après la clôture · {{count}} café restant",
+    "stockAfter_other": "Après la clôture · {{count}} cafés restants",
+    "saleApplied": "Une vente exemple confirmée. Les chiffres historiques ci-dessus restent inchangés.",
+    "salePending": "La vente suivante est en prévisualisation. Le stock n’a pas changé.",
+    "saleNotApplied": "Aucune vente suivante appliquée. Le stock de départ est celui de la clôture historique."
   }
 }
