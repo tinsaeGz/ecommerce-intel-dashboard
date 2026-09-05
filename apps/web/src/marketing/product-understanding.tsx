@@ -11,18 +11,7 @@ import { DropdownSelect } from "../components/dropdown-select";
 import { DemoLink } from "../components/public-ui";
 import "./product-understanding.css";
 
-const sourceKeys = [
-  "csv",
-  "excel",
-  "paste",
-  "json",
-  "pos",
-  "marketplace",
-  "image",
-  "pdf",
-  "manual",
-  "api",
-] as const;
+import { sourceKeys, useSampleScenario, type SampleSource } from "../lib/sample-scenario";
 
 const sourceMarks: Record<(typeof sourceKeys)[number], string> = {
   csv: "CSV",
@@ -61,7 +50,8 @@ function getKeyboardTarget(
 
 export function SourceExplorer() {
   const { t } = useTranslation();
-  const [activeSource, setActiveSource] = useState<(typeof sourceKeys)[number]>("csv");
+  const { state: { source: activeSource }, dispatch } = useSampleScenario();
+  const setActiveSource = (value: SampleSource) => dispatch({ type: "source", value });
   const tabsId = useId();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 

@@ -553,5 +553,11 @@
         "answer": "The examples use fictional data; you cannot upload business records here. Your language choice is saved in this browser. Demo interaction events stay in temporary tab memory and are not sent to an analytics collector. The site host receives ordinary page requests. Production privacy terms and a public support channel are not yet published here."
       }
     }
+  },
+  "cinematic": {
+    "reset": "Reset sample",
+    "resetDone": "Sample reset. Your choices and the next sale have returned to their starting values.",
+    "memory": "Your sample choices stay with you between these pages. Refresh to start fresh.",
+    "reviewScope": "This review changes only this illustrative record example. It does not reprocess the historical dashboard."
   }
 }

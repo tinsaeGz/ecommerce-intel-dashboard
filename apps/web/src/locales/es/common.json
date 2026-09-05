@@ -553,5 +553,11 @@
         "answer": "Los ejemplos usan datos ficticios; aquí no puedes subir registros de tu negocio. Tu idioma se guarda en este navegador. Los eventos de interacción permanecen en la memoria temporal de la pestaña y no se envían a un servicio de analítica. El alojamiento recibe las solicitudes habituales de páginas. Las condiciones de privacidad de producción y un canal público de soporte aún no están publicados aquí."
       }
     }
+  },
+  "cinematic": {
+    "reset": "Restablecer ejemplo",
+    "resetDone": "Ejemplo restablecido. Tus opciones y la próxima venta vuelven a sus valores iniciales.",
+    "memory": "Tus opciones se conservan entre estas páginas. Recarga para empezar de nuevo.",
+    "reviewScope": "Esta revisión solo cambia este ejemplo de registros. No vuelve a procesar el panel histórico."
   }
 }

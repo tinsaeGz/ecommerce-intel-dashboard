@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ButtonLink } from "../components/public-ui";
@@ -7,12 +7,13 @@ import { emitJourneyEvent } from "../lib/journey-events";
 import { landingDemo } from "../lib/demo-data";
 import { formatDemoDate, formatNumber, formatPercent } from "../lib/format";
 import { coffeeStock, customerHistory, returningCount, salesComparison, sampleStock } from "../lib/merchant-story-data";
+import { useSampleScenario, type ScenarioAction } from "../lib/sample-scenario";
 import "./merchant-decisions.css";
 
 export function MerchantDecisions() {
   const { t, i18n } = useTranslation();
   const locale = getSupportedLanguage(i18n.resolvedLanguage);
-  const [hasIdentity, setHasIdentity] = useState(true);
+  const { state: { hasIdentity }, dispatch } = useSampleScenario();
   const money = (cents: number) => new Intl.NumberFormat(locale, { style: "currency", currency: landingDemo.currency }).format(cents / 100);
   const increase = salesComparison.reduce((sum, row) => sum + row.currentCents - row.previousCents, 0);
 
@@ -78,7 +79,7 @@ export function MerchantDecisions() {
           <p>{t("stories.customers.body")}</p>
         </div>
         <div className="decision-proof">
-          <label className="story-toggle"><input type="checkbox" checked={hasIdentity} onChange={event => setHasIdentity(event.target.checked)} />{t("stories.customers.toggle")}</label>
+          <label className="story-toggle"><input type="checkbox" checked={hasIdentity} onChange={event => dispatch({ type: "identity", value: event.target.checked })} />{t("stories.customers.toggle")}</label>
           <div role="status">
             {hasIdentity ? <>
               <strong className="decision-proof__value">{formatNumber(returningCount, locale)}</strong>
@@ -90,7 +91,7 @@ export function MerchantDecisions() {
           </div>
           <details>
             <summary>{t("stories.customers.evidence")}</summary>
-            <p>{t("stories.customers.source", { total: customerHistory.today.length, returning: returningCount })}</p>
+            <p>{hasIdentity ? t("stories.customers.source", { total: customerHistory.today.length, returning: returningCount }) : t("stories.customers.missing")}</p>
           </details>
         </div>
       </article>
@@ -100,14 +101,6 @@ export function MerchantDecisions() {
 
 export function RecordToDecision() {
   const { t } = useTranslation();
-  const [entry, setEntry] = useState<"idle" | "review" | "recorded">("idle");
-  const stock = entry === "recorded" ? sampleStock - 1 : sampleStock;
-  const actionRef = useRef<HTMLButtonElement>(null);
-  const previousEntry = useRef(entry);
-  useEffect(() => {
-    if (previousEntry.current !== entry) actionRef.current?.focus({ preventScroll: true });
-    previousEntry.current = entry;
-  }, [entry]);
   return (
     <section className="record-journey" id="how-it-works" tabIndex={-1} aria-labelledby="record-journey-title">
       <header className="story-heading">
@@ -118,24 +111,7 @@ export function RecordToDecision() {
       <ol className="record-journey__steps">
         {(["add", "confirm", "see"] as const).map(step => <li key={step}><h3>{t(`understanding.how.steps.${step}.title`)}</h3><p>{t(`stories.entry.steps.${step}`)}</p></li>)}
       </ol>
-      <div className="entry-preview" role="group" aria-labelledby="entry-preview-title">
-        <div>
-          <p className="story-eyebrow">{t("stories.entry.sample")}</p>
-          <h3 id="entry-preview-title">{t("stories.entry.try")}</h3>
-          <p>{t("stories.entry.context")}</p>
-        </div>
-        <div className="entry-preview__controls">
-          <p className="entry-preview__stock" role="status">{t("stories.entry.stock", { count: stock })}</p>
-          {entry === "review" ? <>
-            <p>{t("stories.entry.review", { before: sampleStock, after: sampleStock - 1 })}</p>
-            <button ref={actionRef} className="button-link" data-variant="primary" type="button" onClick={() => { setEntry("recorded"); }}>{t("stories.entry.confirm")}</button>
-            <button className="button-link" data-variant="quiet" type="button" onClick={() => setEntry("idle")}>{t("stories.entry.cancel")}</button>
-          </> : entry === "recorded" ? <>
-            <p>{t("stories.entry.result")}</p>
-            <button ref={actionRef} className="button-link" data-variant="secondary" type="button" onClick={() => { setEntry("idle"); }}>{t("stories.entry.undo")}</button>
-          </> : <button ref={actionRef} className="button-link" data-variant="primary" type="button" onClick={() => setEntry("review")}>{t("stories.entry.select")}</button>}
-        </div>
-      </div>
+      <SampleSale />
       <p className="record-journey__formats">{t("stories.entry.formats")}</p>
       <ButtonLink to="/demo#demo-sources" variant="quiet" onClick={() => emitJourneyEvent("landing_cta_selected", { location: "sources" })}>{t("stories.entry.explore")}</ButtonLink>
     </section>
@@ -159,5 +135,38 @@ export function TrustStory() {
         <p>{t("stories.trust.missing")}</p>
       </div>
     </section>
+  );
+}
+
+export function SampleSale() {
+  const { t } = useTranslation();
+  const { state: { sale: entry }, dispatch } = useSampleScenario();
+  const stock = entry === "recorded" ? sampleStock - 1 : sampleStock;
+  const actionRef = useRef<HTMLButtonElement>(null);
+  const focusRequested = useRef(false);
+  const act = (action: ScenarioAction) => { focusRequested.current = true; dispatch(action); };
+  useEffect(() => {
+    if (focusRequested.current) actionRef.current?.focus({ preventScroll: true });
+    focusRequested.current = false;
+  }, [entry]);
+  return (
+      <div className="entry-preview" role="group" aria-labelledby="entry-preview-title">
+        <div>
+          <p className="story-eyebrow">{t("stories.entry.sample")}</p>
+          <h3 id="entry-preview-title">{t("stories.entry.try")}</h3>
+          <p>{t("stories.entry.context")}</p>
+        </div>
+        <div className="entry-preview__controls">
+          <p className="entry-preview__stock" role="status">{t("stories.entry.stock", { count: stock })}</p>
+          {entry === "review" ? <>
+            <p>{t("stories.entry.review", { before: sampleStock, after: sampleStock - 1 })}</p>
+            <button ref={actionRef} className="button-link" data-variant="primary" type="button" onClick={() => { act({ type: "confirm-sale" }); }}>{t("stories.entry.confirm")}</button>
+            <button className="button-link" data-variant="quiet" type="button" onClick={() => act({ type: "cancel-sale" })}>{t("stories.entry.cancel")}</button>
+          </> : entry === "recorded" ? <>
+            <p>{t("stories.entry.result")}</p>
+            <button ref={actionRef} className="button-link" data-variant="secondary" type="button" onClick={() => { act({ type: "undo-sale" }); }}>{t("stories.entry.undo")}</button>
+          </> : <button ref={actionRef} className="button-link" data-variant="primary" type="button" onClick={() => act({ type: "preview-sale" })}>{t("stories.entry.select")}</button>}
+        </div>
+      </div>
   );
 }
