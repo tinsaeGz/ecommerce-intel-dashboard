@@ -66,7 +66,9 @@ export function CinematicStory() {
 
   const choose = (chapter: Chapter) => {
     setActive(chapter);
-    document.getElementById(chapterIds[chapter])?.scrollIntoView?.({ block: "start" });
+    const target = document.getElementById(chapterIds[chapter]);
+    if (!enhanced) target?.focus({ preventScroll: true });
+    target?.scrollIntoView?.({ block: "start" });
   };
 
   return <section className="cinematic-story" ref={storyRef} data-enhanced={enhanced} data-chapter={active} aria-labelledby="cinematic-title">
@@ -92,7 +94,7 @@ export function CinematicStory() {
             <p className="cinematic-copy__bridge">{t(`cinematic.${chapter}.bridge`)}</p>
             {chapter === "sale" && <ButtonLink to="/demo" variant="primary" onClick={() => emitJourneyEvent("landing_cta_selected", { location: "how-it-works" })}>{t("cinematic.continue")}</ButtonLink>}
           </article>
-          <div className="cinematic-pane" id={`scene-${chapter}`} data-active={!inactive} aria-hidden={inactive || undefined} inert={inactive}>
+          <div className="cinematic-pane" id={`scene-${chapter}`} data-active={!inactive} onFocusCapture={() => setActive(chapter)} aria-hidden={inactive || undefined} inert={inactive}>
             <p className="cinematic-pane__caption"><span>{landingDemo.workspace}</span><span>{t("demo.sampleLabel")} · 0{index + 1} / 03</span></p>
             {chapter === "day" ? <DayScene /> : chapter === "evidence" ? <>
               <HeroRecordReview />

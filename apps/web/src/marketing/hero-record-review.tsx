@@ -63,7 +63,10 @@ export function HeroRecordReview() {
         <button
           type="button"
           className="hero-record__apply"
-          onClick={() => dispatch({ type: confirmed ? "reset-review" : "confirm-review" })}
+          onKeyDown={event => { if (event.repeat && (event.key === "Enter" || event.key === " ")) event.preventDefault(); }}
+          onClick={event => {
+            if (event.detail <= 1) dispatch({ type: confirmed ? "reset-review" : "confirm-review" });
+          }}
         >
           {t(confirmed ? "polish.review.reset" : "polish.review.confirm")}
           <span aria-hidden="true">{confirmed ? "↺" : "→"}</span>

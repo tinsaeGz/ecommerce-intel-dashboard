@@ -94,7 +94,11 @@ export function SampleSale() {
   const stock = entry === "recorded" ? sampleStock - 1 : sampleStock;
   const actionRef = useRef<HTMLButtonElement>(null);
   const focusRequested = useRef(false);
-  const act = (action: ScenarioAction) => { focusRequested.current = true; dispatch(action); };
+  const act = (event: { detail: number }, action: ScenarioAction) => {
+    if (event.detail > 1) return;
+    focusRequested.current = true;
+    dispatch(action);
+  };
   useEffect(() => {
     if (focusRequested.current) actionRef.current?.focus({ preventScroll: true });
     focusRequested.current = false;
@@ -106,16 +110,16 @@ export function SampleSale() {
           <h3 id="entry-preview-title">{t("stories.entry.try")}</h3>
           <p>{t("stories.entry.context")}</p>
         </div>
-        <div className="entry-preview__controls">
+        <div className="entry-preview__controls" onKeyDown={event => { if (event.repeat && (event.key === "Enter" || event.key === " ")) event.preventDefault(); }}>
           <p className="entry-preview__stock" role="status">{t("stories.entry.stock", { count: stock })}</p>
           {entry === "review" ? <>
             <p>{t("stories.entry.review", { before: sampleStock, after: sampleStock - 1 })}</p>
-            <button ref={actionRef} className="button-link" data-variant="primary" type="button" onClick={() => { act({ type: "confirm-sale" }); }}>{t("stories.entry.confirm")}</button>
-            <button className="button-link" data-variant="quiet" type="button" onClick={() => act({ type: "cancel-sale" })}>{t("stories.entry.cancel")}</button>
+            <button ref={actionRef} className="button-link" data-variant="primary" type="button" onClick={event => { act(event, { type: "confirm-sale" }); }}>{t("stories.entry.confirm")}</button>
+            <button className="button-link" data-variant="quiet" type="button" onClick={event => act(event, { type: "cancel-sale" })}>{t("stories.entry.cancel")}</button>
           </> : entry === "recorded" ? <>
             <p>{t("stories.entry.result")}</p>
-            <button ref={actionRef} className="button-link" data-variant="secondary" type="button" onClick={() => { act({ type: "undo-sale" }); }}>{t("stories.entry.undo")}</button>
-          </> : <button ref={actionRef} className="button-link" data-variant="primary" type="button" onClick={() => act({ type: "preview-sale" })}>{t("stories.entry.select")}</button>}
+            <button ref={actionRef} className="button-link" data-variant="secondary" type="button" onClick={event => { act(event, { type: "undo-sale" }); }}>{t("stories.entry.undo")}</button>
+          </> : <button ref={actionRef} className="button-link" data-variant="primary" type="button" onClick={event => act(event, { type: "preview-sale" })}>{t("stories.entry.select")}</button>}
         </div>
       </div>
   );

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -20,18 +20,20 @@ import "./demo-page.css";
 
 export function DemoPage() {
   const { t } = useTranslation();
+  const headingRef = useRef<HTMLHeadingElement>(null);
   useDemoVisit();
   const { state: { hasIdentity }, dispatch } = useSampleScenario();
-  const { hash } = useLocation();
+  const { hash, key } = useLocation();
   useEffect(() => {
-    if (hash !== "#demo-review" && hash !== "#demo-sources") return;
+    if (!hash) { headingRef.current?.focus({ preventScroll: true }); return; }
+    if (hash !== "#demo-review" && hash !== "#demo-sources" && hash !== "#demo-workflow") return;
     const target = document.querySelector<HTMLDetailsElement>(hash);
     if (target) {
       target.open = true;
       target.querySelector("summary")?.focus({ preventScroll: true });
       target.scrollIntoView?.();
     }
-  }, [hash]);
+  }, [hash, key]);
 
   useDocumentMetadata(t("meta.demo.title"), t("meta.demo.description"));
 
@@ -42,7 +44,7 @@ export function DemoPage() {
       <main className="public-route__main" id="main-content">
         <div className="public-route__intro">
           <p className="public-route__eyebrow">{t("demo.eyebrow")}</p>
-          <h1>{t("demo.title")}</h1>
+          <h1 ref={headingRef} tabIndex={-1}>{t("demo.title")}</h1>
           <p className="public-route__body">{t("demo.body")}</p>
           <div className="public-route__actions">
             <a className="button-link" data-variant="primary" href="#demo-review" onClick={() => {

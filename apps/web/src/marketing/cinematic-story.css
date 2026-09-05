@@ -1,20 +1,25 @@
 @layer components {
   .cinematic-story {
-    --scene-wash: var(--color-paper);
+    --scene-opacity: 0;
 
     position: relative;
+    isolation: isolate;
     padding-block: var(--space-14);
-    background: linear-gradient(180deg, var(--color-paper), var(--scene-wash) 60%, var(--color-paper));
-    transition: background-color var(--motion-panel) ease;
   }
 
-  .cinematic-story[data-chapter="evidence"] {
-    --scene-wash: color-mix(in srgb, var(--color-mint) 8%, var(--color-paper));
+  .cinematic-story::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, var(--color-paper), color-mix(in srgb, var(--color-mint) 16%, var(--color-paper)) 60%, var(--color-paper));
+    opacity: var(--scene-opacity);
+    transition: opacity var(--motion-panel) ease;
+    pointer-events: none;
   }
 
-  .cinematic-story[data-chapter="sale"] {
-    --scene-wash: color-mix(in srgb, var(--color-mint) 16%, var(--color-paper));
-  }
+  .cinematic-story[data-chapter="evidence"] { --scene-opacity: 0.5; }
+  .cinematic-story[data-chapter="sale"] { --scene-opacity: 1; }
 
   .cinematic-story__heading { margin-bottom: var(--space-8); }
 
@@ -198,8 +203,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .cinematic-story,
-    .cinematic-story[data-enhanced="true"] .cinematic-pane,
+    .cinematic-story::before,
+    .cinematic-story[data-enhanced="true"] .cinematic-pane[data-active],
     .cinematic-controls button,
     .day-scene__questions button {
       transition: none;

@@ -588,6 +588,11 @@
       "bridge": "Your choices travel with you into the demo. Continue exploring the same sample there."
     },
     "continue": "Continue with this sample",
-    "historicalScope": "After the historical cutoff: this example changes only the displayed coffee stock from 12 to 11. Historical revenue, chart observations and stock-risk estimates stay unchanged."
+    "historicalScope": "After the historical cutoff: this example changes only the displayed coffee stock from 12 to 11. Historical revenue, chart observations and stock-risk estimates stay unchanged.",
+    "stockAfter_one": "After the cutoff · {{count}} coffee left",
+    "stockAfter_other": "After the cutoff · {{count}} coffees left",
+    "saleApplied": "One sample sale confirmed. Historical figures above are unchanged.",
+    "salePending": "The next sale is being previewed. Stock has not changed.",
+    "saleNotApplied": "No next sale applied. Start with the stock at the historical cutoff."
   }
 }

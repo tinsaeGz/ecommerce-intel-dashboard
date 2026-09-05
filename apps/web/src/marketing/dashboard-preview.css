@@ -1,4 +1,17 @@
 @layer components {
+  .dashboard-preview__after-cutoff {
+    margin-top: var(--space-5);
+    padding: var(--space-4);
+    background: var(--color-mint);
+    border-radius: var(--radius-control);
+    line-height: var(--line-height-body);
+  }
+
+  .dashboard-preview__after-cutoff p {
+    margin-top: var(--space-2);
+    font-size: var(--font-size-ui);
+  }
+
   .dashboard-preview {
     width: 100%;
     min-width: 0;
@@ -382,6 +395,18 @@
   }
 
   @media (forced-colors: active) {
+    .dashboard-preview__metric[aria-pressed="true"] {
+      --metric-copy: HighlightText;
+
+      color: HighlightText;
+      background: Highlight;
+      forced-color-adjust: none;
+    }
+
+    .dashboard-preview__metric[aria-pressed="true"] .dashboard-preview__metric-hint {
+      color: HighlightText;
+    }
+
     .dashboard-preview__frame,
     .dashboard-preview__metric,
     .dashboard-preview__stock-item {

@@ -588,6 +588,11 @@
       "bridge": "Tus opciones te acompañan a la demo. Sigue explorando allí el mismo ejemplo."
     },
     "continue": "Continuar con este ejemplo",
-    "historicalScope": "Después del corte histórico: este ejemplo solo cambia las existencias de café mostradas de 12 a 11. Los ingresos, las observaciones del gráfico y las estimaciones históricas de riesgo de existencias no cambian."
+    "historicalScope": "Después del corte histórico: este ejemplo solo cambia las existencias de café mostradas de 12 a 11. Los ingresos, las observaciones del gráfico y las estimaciones históricas de riesgo de existencias no cambian.",
+    "stockAfter_one": "Después del corte · queda {{count}} café",
+    "stockAfter_other": "Después del corte · quedan {{count}} cafés",
+    "saleApplied": "Una venta de ejemplo confirmada. Las cifras históricas anteriores no cambian.",
+    "salePending": "La próxima venta está en previsualización. Las existencias no han cambiado.",
+    "saleNotApplied": "No se ha aplicado otra venta. Se parte de las existencias al corte histórico."
   }
 }

@@ -2,7 +2,7 @@
 
 Date: 2026-09-05
 
-Status: PRs 1 and 2 merged; PR 3 implemented for review with public support/legal destinations pending owner input; PR 4 remains planned. See [PR 1 validation](reviews/landing-conversion.md), [PR 2 validation](reviews/landing-merchant-stories.md), and [PR 3 validation](reviews/landing-buying-questions.md).
+Status: Earlier landing content through PR #8 is merged. The three Cinematic Suq deliveries are implemented for sequential review, unmerged. See [final validation and evidence](reviews/cinematic-experience.md). Public support/legal destinations and real analytics remain pending separately.
 
 Baseline: `45b7326` — flat landing section surfaces.
 
@@ -190,3 +190,9 @@ The landing narrative now uses three connected chapters. The first scene has com
 With sufficient width and height, chapter copy scrolls beside one visible sticky product scene. Inactive scenes are inert and excluded from the accessibility tree during crossfades. Scroll observes chapter intersections and changes presentation only; it cannot hide a scene containing keyboard focus. Explicit chapter buttons remain available. Without IntersectionObserver, on mobile/short screens, or with enlarged text, copy and scenes remain sequential in the same DOM order with no duplicated controls.
 
 Validation at this checkpoint: 74 web tests, including scroll/state isolation, focus protection and locale continuity; Chromium EN/ES/FR chapter controls, scroll selection, mobile/short fallback and axe including contrast. The final delivery adds the full viewport matrix, recording and performance evidence.
+
+### Final cinematic delivery
+
+Scenario continuity and presentation are delivered in PRs #9 and #10. The final polish branch adds route focus, direct sale links, a separate dashboard stock readout after the cutoff, double-click protection, and the forced-color/200% text corrections found during browser review. All 78 web tests and 27 browser cases passed; initial JavaScript is 122.9 KB gzip. See the final validation report for screenshots, the interaction recording, reproducible checks and remaining human review limits.
+
+The accepted cinematic amendment replaces the earlier separate demonstration layout, not the pending public support/legal and analytics tasks. Leave the three cinematic PRs unmerged for owner review.

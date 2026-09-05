@@ -17,7 +17,7 @@ export function DashboardPreview({ showSourceCard = false, variant = "hero" }: D
   const summaryId = useId();
   const chartId = useId();
   const sliderId = useId();
-  const { state: { metric, observation, stockIndex, hasIdentity }, dispatch } = useSampleScenario();
+  const { state: { metric, observation, stockIndex, hasIdentity, sale }, dispatch } = useSampleScenario();
   const unavailable = metric === "customers" && !hasIdentity;
   const locale = getSupportedLanguage(i18n.resolvedLanguage);
   const values = previewMetricSeries[metric];
@@ -106,6 +106,10 @@ export function DashboardPreview({ showSourceCard = false, variant = "hero" }: D
             </div>
             <div className="dashboard-preview__stock-detail" role="status">
               <strong>{selectedStock.name}</strong><p>{t("polish.dashboard.stockDetail", { count: selectedStock.daysRemaining })}</p>
+            </div>
+            <div className="dashboard-preview__after-cutoff" role="status">
+              <strong>{t("cinematic.stockAfter", { count: sale === "recorded" ? 11 : 12 })}</strong>
+              <p>{t(sale === "recorded" ? "cinematic.saleApplied" : sale === "review" ? "cinematic.salePending" : "cinematic.saleNotApplied")}</p>
             </div>
             <p className="dashboard-preview__stock-disclaimer">{t("presentation.briefing.stockNote")}</p>
           </section>

@@ -38,3 +38,8 @@ select:focus-visible {
     scroll-behavior: auto;
   }
 }
+
+/* Route headings receive programmatic focus for assistive technology. */
+:where(h1[tabindex="-1"]):focus {
+  outline: none;
+}

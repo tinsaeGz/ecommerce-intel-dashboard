@@ -588,6 +588,11 @@
       "bridge": "Vos choix vous accompagnent dans la démo. Continuez à y explorer le même exemple."
     },
     "continue": "Continuer avec cet exemple",
-    "historicalScope": "Après la clôture historique : cet exemple change uniquement le stock de café affiché de 12 à 11. Le chiffre d’affaires, les observations du graphique et les estimations historiques de risque de stock restent inchangés."
+    "historicalScope": "Après la clôture historique : cet exemple change uniquement le stock de café affiché de 12 à 11. Le chiffre d’affaires, les observations du graphique et les estimations historiques de risque de stock restent inchangés.",
+    "stockAfter_one": "Après la clôture · {{count}} café restant",
+    "stockAfter_other": "Après la clôture · {{count}} cafés restants",
+    "saleApplied": "Une vente exemple confirmée. Les chiffres historiques ci-dessus restent inchangés.",
+    "salePending": "La vente suivante est en prévisualisation. Le stock n’a pas changé.",
+    "saleNotApplied": "Aucune vente suivante appliquée. Le stock de départ est celui de la clôture historique."
   }
 }

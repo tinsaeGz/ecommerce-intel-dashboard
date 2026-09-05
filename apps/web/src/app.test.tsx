@@ -157,7 +157,7 @@ describe("public landing routes", () => {
     const select = within(review).getByRole("combobox");
     await user.click(select);
     await user.click(screen.getByRole("option", { name: i18n.t("understanding.review.roles.customerIdentity") }));
-    await user.click(within(review).getByRole("button", { name: i18n.t("polish.review.confirm") }));
+    await user.dblClick(within(review).getByRole("button", { name: i18n.t("polish.review.confirm") }));
     expect(within(review).getByRole("status")).toHaveTextContent(i18n.t("polish.review.result", { role: i18n.t("understanding.review.roles.customerIdentity") }));
     await user.click(select);
     await user.keyboard("{Enter}");
@@ -195,7 +195,7 @@ describe("public landing routes", () => {
     expect(within(table).getAllByRole("row").at(-1)).toHaveTextContent("468");
     const stock = screen.getByRole("region", { name: i18n.t("dashboard.stock.eyebrow") });
     await user.click(within(stock).getByRole("button", { name: /Canvas Tote/ }));
-    expect(within(stock).getByRole("status")).toHaveTextContent(i18n.t("polish.dashboard.stockDetail", { count: 4 }));
+    expect(within(stock).getAllByRole("status")[0]).toHaveTextContent(i18n.t("polish.dashboard.stockDetail", { count: 4 }));
   });
 
   it.each(["en", "es", "fr"])("takes a merchant from the hero to the demo and source review in %s", async (locale) => {
@@ -284,6 +284,18 @@ describe("public landing routes", () => {
     expect(within(entry).getByRole("button", { name: i18n.t("stories.entry.select") })).toHaveFocus();
   });
 
+  it("applies one sale after a double click and does not turn the second click into undo", async () => {
+    const user = userEvent.setup();
+    await renderAt("/");
+    await user.click(screen.getByRole("button", { name: i18n.t("stories.entry.select") }));
+    await user.dblClick(screen.getByRole("button", { name: i18n.t("stories.entry.confirm") }));
+    const entry = screen.getByRole("group", { name: i18n.t("stories.entry.try") });
+    expect(within(entry).getByRole("status")).toHaveTextContent(i18n.t("stories.entry.stock", { count: 11 }));
+    await user.dblClick(within(entry).getByRole("button", { name: i18n.t("stories.entry.undo") }));
+    expect(within(entry).getByRole("status")).toHaveTextContent(i18n.t("stories.entry.stock", { count: 12 }));
+    expect(within(entry).getByRole("button", { name: i18n.t("stories.entry.select") })).toBeVisible();
+  });
+
   it.each(["en", "es", "fr"])("explains the source math and missing customer identity in %s", async (locale) => {
     const user = userEvent.setup();
     await i18n.changeLanguage(locale);
@@ -317,6 +329,13 @@ describe("public landing routes", () => {
     expect(summary).toHaveFocus();
     await user.click(screen.getByRole("link", { name: i18n.t("actions.backHome") }));
     await screen.findByRole("heading", { name: i18n.t("stories.title") });
+  });
+
+  it.each(["#demo-review", "#demo-sources", "#demo-workflow"])("focuses a direct demo chapter at %s", async (hash) => {
+    await renderAt(`/demo${hash}`);
+    const target = document.querySelector(hash) as HTMLDetailsElement;
+    await waitFor(() => expect(target).toHaveAttribute("open"));
+    expect(target.querySelector("summary")).toHaveFocus();
   });
 
   it.each([
