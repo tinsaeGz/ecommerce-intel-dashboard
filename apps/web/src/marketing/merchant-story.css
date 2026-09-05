@@ -148,6 +148,12 @@
   }
 
   @media (forced-colors: active) {
+    .closing-invitation__surface,
+    .closing-invitation__eyebrow {
+      color: CanvasText;
+      background: Canvas;
+    }
+
     .daily-briefing,
     .closing-invitation__surface {
       border: 0.125rem solid currentcolor;

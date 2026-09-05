@@ -1,21 +1,21 @@
-import { useId, useState } from "react";
+import { useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { DropdownSelect } from "../components/dropdown-select";
+import { useSampleScenario } from "../lib/sample-scenario";
 import "./hero-record-review.css";
 
 const roles = ["itemIdentity", "customerIdentity", "notAnalyzed"] as const;
-type ReviewRole = (typeof roles)[number];
 
-export function HeroRecordReview() {
+
+export function HeroRecordReview({ compact = false }: { compact?: boolean }) {
   const { t } = useTranslation();
   const fieldId = useId();
   const titleId = useId();
-  const [role, setRole] = useState<ReviewRole>("itemIdentity");
-  const [confirmed, setConfirmed] = useState(false);
+  const { state: { role, confirmed }, dispatch } = useSampleScenario();
 
   return (
-    <section className="hero-record" aria-labelledby={titleId} data-confirmed={confirmed}>
+    <section className="hero-record" aria-labelledby={titleId} data-compact={compact} data-confirmed={confirmed}>
       <header className="hero-record__header">
         <span className="hero-record__file-icon" aria-hidden="true">CSV</span>
         <div>
@@ -30,6 +30,7 @@ export function HeroRecordReview() {
         <h2 id={titleId}>{t("polish.review.title")}</h2>
         <p className="hero-record__deck">{t("polish.review.body")}</p>
 
+        <div className="hero-record__review-layout">
         <div className="hero-record__source">
           <table>
             <caption className="visually-hidden">{t("polish.review.sourceCaption")}</caption>
@@ -42,11 +43,12 @@ export function HeroRecordReview() {
           <p>{t("polish.review.sourceNote")}</p>
         </div>
 
+        <div className="hero-record__selection">
         <label className="hero-record__label" htmlFor={fieldId}>{t("polish.review.roleLabel")}</label>
         <DropdownSelect
           id={fieldId} label={t("polish.review.roleLabel")} value={role}
           hint={t("polish.review.localOnly")}
-          onChange={(value) => { setRole(value); setConfirmed(false); }}
+          onChange={(value) => dispatch({ type: "role", value })}
           options={roles.map((value) => ({ value, label: t(`understanding.review.roles.${value}`) }))}
         />
 
@@ -63,20 +65,18 @@ export function HeroRecordReview() {
         <button
           type="button"
           className="hero-record__apply"
-          onClick={() => {
-            if (confirmed) {
-              setRole("itemIdentity");
-              setConfirmed(false);
-            } else {
-              setConfirmed(true);
-            }
+          onKeyDown={event => { if (event.repeat && (event.key === "Enter" || event.key === " ")) event.preventDefault(); }}
+          onClick={event => {
+            if (event.detail <= 1) dispatch({ type: confirmed ? "reset-review" : "confirm-review" });
           }}
         >
           {t(confirmed ? "polish.review.reset" : "polish.review.confirm")}
           <span aria-hidden="true">{confirmed ? "↺" : "→"}</span>
         </button>
+        </div>
+        </div>
       </div>
-      <p className="hero-record__footnote">{t("polish.review.localOnly")}</p>
+      <p className="hero-record__footnote">{t("cinematic.reviewScope")}</p>
     </section>
   );
 }

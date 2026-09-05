@@ -2,7 +2,7 @@
 
 Date: 2026-09-05
 
-Status: PRs 1 and 2 merged; PR 3 implemented for review with public support/legal destinations pending owner input; PR 4 remains planned. See [PR 1 validation](reviews/landing-conversion.md), [PR 2 validation](reviews/landing-merchant-stories.md), and [PR 3 validation](reviews/landing-buying-questions.md).
+Status: Earlier landing content through PR #8 is merged. The three Cinematic Suq deliveries are implemented for sequential review, unmerged. See [final validation and evidence](reviews/cinematic-experience.md). Public support/legal destinations and real analytics remain pending separately.
 
 Baseline: `45b7326` — flat landing section surfaces.
 
@@ -168,3 +168,49 @@ Source: independent rendering review at 1440×900 and 390×844 (ghost, 2026-09-0
 | A8. Anonymous file trial has its own proposal | Outside PR 1–4 | See ADR 0005. It is scoped as an ephemeral inference preview that loads nothing, so it does not alter the FR-A-1 upload rule, and it is sequenced after the inference worker exists. | Section 8 names this as the open discovery item. The proposal records the boundary questions and a recommended answer for decision. |
 
 Verification additions for the affected PRs: a viewport screenshot at 390×844 attached to PR 1 evidence showing the A1 contents; a page-wide search confirming `Cod.` occurs once in rendered copy for PR 2; a unit test asserting the event sink rejects properties outside the approved set for PR 1.
+
+## Accepted amendment: Cinematic Suq (2026-09-05)
+
+The owner approved one continuous merchant story across the landing page and fictional demo. This amendment supersedes the separate Daily decisions / How it works / Trust presentation above, while preserving the finalized PR #8 hero, plans, FAQ, and closing action.
+
+Three chapters — Understand the day, Inspect the evidence, Try the next sale — share one typed, browser-memory scenario above the routes. Source selection, illustrative role review/confirmation, customer-evidence availability, dashboard selections, and the reversible sample sale survive navigation and language changes. Reset sample restores defaults; a refresh starts fresh. This is demonstration state, not merchant persistence or analytics.
+
+Role review applies only to the original illustrative source records. It does not reprocess the historical dashboard. The next sale changes only the separately identified stock after the historical cutoff (12 → 11); historical money, chart observations, and risk estimates remain unchanged. Missing customer evidence makes customer analyses unavailable, never zero. Source or role changes invalidate review confirmation; repeated confirmation cannot record extra sales.
+
+Desktop uses scrolling copy beside one sticky scene with explicit chapter controls. IntersectionObserver changes presentation only. Mobile, short viewports, enlarged content, and unsupported observers retain sequential scenes without duplicated controls. CSS provides restrained transitions with immediate reduced-motion states. Keyboard focus must never be hidden by automatic chapter changes.
+
+Delivery: three successive, unmerged PRs against dev, in order: scenario continuity, cinematic presentation, final accessibility/performance evidence. Each includes its predecessor until earlier PRs merge. Public support/legal destinations, real analytics, authenticated onboarding, and application workflows remain separate pending work.
+
+Acceptance: SDLC §1.2, FR-U-4/5/12, FR-G-6, FR-E-1, FR-D-12 and NFR-5/6/9/10, as illustrative marketing behavior only. Validate continuity, invalidation, cancel/undo/reset, repeated actions, Back/direct links, all locales, scroll isolation, historical integrity, keyboard/forced colors/reduced motion, mobile and short viewports, 200% text, browser accessibility, and initial JavaScript below 200 KB gzip. Capture screenshots and an interaction recording; no conversion claim without merchant evidence.
+
+### Cinematic presentation checkpoint
+
+The landing narrative now uses three connected chapters. The first scene has compact Sales / Stock / Customers question controls, the second reuses the original-record review, and the third reuses the preview/confirm/undo sale. Plans, FAQ, closing action and the immediate hero briefing remain below/above the story as approved. The legacy separate trust and workflow sections are removed.
+
+With sufficient width and height, chapter copy scrolls beside one visible sticky product scene. Inactive scenes are inert and excluded from the accessibility tree during crossfades. Scroll observes chapter intersections and changes presentation only; it cannot hide a scene containing keyboard focus. Explicit chapter buttons remain available. Without IntersectionObserver, on mobile/short screens, or with enlarged text, copy and scenes remain sequential in the same DOM order with no duplicated controls.
+
+Validation at this checkpoint: 74 web tests, including scroll/state isolation, focus protection and locale continuity; Chromium EN/ES/FR chapter controls, scroll selection, mobile/short fallback and axe including contrast. The final delivery adds the full viewport matrix, recording and performance evidence.
+
+### Final cinematic delivery
+
+Scenario continuity and presentation are delivered in PRs #9 and #10. The final polish branch adds route focus, direct sale links, a separate dashboard stock readout after the cutoff, double-click protection, and the forced-color/200% text corrections found during browser review. All 78 web tests and 27 browser cases passed; initial JavaScript is 122.9 KB gzip. See the final validation report for screenshots, the interaction recording, reproducible checks and remaining human review limits.
+
+The accepted cinematic amendment replaces the earlier separate demonstration layout, not the pending public support/legal and analytics tasks. Leave the three cinematic PRs unmerged for owner review.
+
+## Art-direction revision: the story leads (2026-09-06)
+
+Owner feedback: the first cinematic implementation felt shallow and its mockups did not look real. The owner selected a more theatrical brand story, with dramatic scene changes and visual storytelling supported by the product demonstration. Functional test results from the first delivery did not establish the quality of its art direction.
+
+The revised sequence uses three distinct compositions:
+
+1. **The shop is busy. What is moving it?** Large editorial typography and a 312-transaction motif establish the scale of the fictional trading day. A compact workspace shows the actual sample product comparisons, stock arithmetic, or customer-history visualization. The chart uses existing aggregates, not invented transaction rows.
+2. **A small detail. A different story.** The desktop environment cuts to ink and lime. Original CSV rows sit beside the role selector and confirmation, bringing the meaning of one column into focus. The source review remains illustrative; it does not reprocess history.
+3. **The next sale. Now you see it.** Mint marks the shift to action. An inventory balance and movement ledger sit beside quick entry. The twelfth unit is marked as a draft during preview, leaves only after confirmation, and returns on undo. The historical balance stays at 12.
+
+The scene surfaces use consistent workspace identity, date, readable data, and functioning controls. Large typography and changes in scene scale provide the theatrical material; fabricated browser chrome, unavailable application navigation, videos, and new animation dependencies are unnecessary. Background lighting cuts immediately to keep text contrast stable; CSS crossfades and restrained movement apply to presentation only. Reduced motion removes those transitions.
+
+The immediate hero briefing, plan comparison, FAQ and closing invitation retain their existing place. Mobile, short and enlarged-text layouts remain sequential. A scene that grows beyond the available desktop viewport also falls back to normal flow, so expanded evidence and translated controls remain reachable. Missing customer identifiers remove the customer visualization and show the existing explanation.
+
+Acceptance stays within the earlier fictional marketing scope and requirement IDs. Review the revised screenshots and recording for the strength of the art direction; automated accessibility and behavior checks cannot establish immersion or conversion. Existing cinematic PRs stay unmerged. This revision follows their shared-state and accessibility work.
+
+Revision validation: 79 web tests, 30 Chromium continuity/layout cases across EN/ES/FR with axe including contrast, and a 125.3 KB initial JavaScript gzip build. The exact next action is owner review of the revised art direction in the unmerged PR and browser, following PR #11.

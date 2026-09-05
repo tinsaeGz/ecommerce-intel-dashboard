@@ -13,20 +13,21 @@ const styles = [
   "../marketing/hero-record-review.css",
   "../marketing/merchant-decisions.css",
   "../marketing/buying-questions.css",
+  "../marketing/cinematic-story.css",
 ]
   .map((path) => readFileSync(new URL(path, import.meta.url), "utf8"))
   .join("\n");
 
 describe("adaptive accessibility styles", () => {
   it("provides static states when reduced motion is requested", () => {
-    expect(styles.match(/@media \(prefers-reduced-motion: reduce\)/g)).toHaveLength(5);
+    expect(styles.match(/@media \(prefers-reduced-motion: reduce\)/g)).toHaveLength(6);
     expect(styles).toContain("animation: none");
     expect(styles).toContain("transition: none");
     expect(styles).toContain("transform: none");
   });
 
   it("keeps controls and charts visible in forced-colors mode", () => {
-    expect(styles.match(/@media \(forced-colors: active\)/g)).toHaveLength(9);
+    expect(styles.match(/@media \(forced-colors: active\)/g)).toHaveLength(10);
     expect(styles).toContain("border: 0.125rem solid currentcolor");
     expect(styles).toContain("stroke: currentcolor");
   });

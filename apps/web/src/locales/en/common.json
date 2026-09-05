@@ -468,7 +468,7 @@
       "missing": "No confirmed cost field? Margin stays unavailable, rather than appearing as zero."
     },
     "demo": {
-      "workflow": "Explore every step of the review"
+      "workflow": "Try the next sale"
     }
   },
   "buying": {
@@ -553,5 +553,83 @@
         "answer": "The examples use fictional data; you cannot upload business records here. Your language choice is saved in this browser. Demo interaction events stay in temporary tab memory and are not sent to an analytics collector. The site host receives ordinary page requests. Production privacy terms and a public support channel are not yet published here."
       }
     }
+  },
+  "cinematic": {
+    "reset": "Reset sample",
+    "resetDone": "Sample reset. Your choices and the next sale have returned to their starting values.",
+    "memory": "Your sample choices stay with you between these pages. Refresh to start fresh.",
+    "reviewScope": "This review changes only this illustrative record example. It does not reprocess the historical dashboard.",
+    "eyebrow": "One shop. One sample day.",
+    "intro": "Follow the question, check the evidence, then try one small decision yourself.",
+    "controls": "Story chapters",
+    "chapter": "Chapter {{number}}",
+    "questions": "Explore a business question",
+    "topics": {
+      "sales": "Sales",
+      "stock": "Stock",
+      "customers": "Customers"
+    },
+    "day": {
+      "label": "Understand the day",
+      "title": "Start with what changed.",
+      "body": "Sales are up. Coffee is running low. Some customers are coming back. Explore each question in the same sample day.",
+      "bridge": "Every answer has records behind it. Next, look at how their meaning is confirmed."
+    },
+    "evidence": {
+      "label": "Inspect the evidence",
+      "title": "The original stays in view.",
+      "body": "A short field name can mean more than one thing. Inspect the original values, choose their role, and explicitly confirm the interpretation.",
+      "bridge": "This small example changes only its own interpretation. Missing customer or cost evidence cannot become a reliable answer by guessing."
+    },
+    "sale": {
+      "label": "Try the next sale",
+      "title": "One sale. A visible consequence.",
+      "body": "The historical day ends with 12 coffees in stock. Preview one more sale, confirm it, then undo it to see the stock return.",
+      "bridge": "Your choices travel with you into the demo. Continue exploring the same sample there."
+    },
+    "continue": "Continue with this sample",
+    "historicalScope": "After the historical cutoff: this example changes only the displayed coffee stock from 12 to 11. Historical revenue, chart observations and stock-risk estimates stay unchanged.",
+    "stockAfter_one": "After the cutoff · {{count}} coffee left",
+    "stockAfter_other": "After the cutoff · {{count}} coffees left",
+    "saleApplied": "One sample sale confirmed. Historical figures above are unchanged.",
+    "salePending": "The next sale is being previewed. Stock has not changed.",
+    "saleNotApplied": "No next sale applied. Start with the stock at the historical cutoff."
+  },
+  "theatre": {
+    "title": "Every day has a story.",
+    "emphasis": "Find yours in the numbers.",
+    "intro": "Step inside Mercado Norte. Follow a busy day from the first question to the next decision.",
+    "day": {
+      "title": "The shop is busy.",
+      "emphasis": "What is moving it?",
+      "body": "312 transactions. More revenue. But the total is only the beginning. See which products explain the change, what is running low, and who comes back.",
+      "bridge": "Start with a question. Follow the answer into the records.",
+      "motif": "transactions in one sample day",
+      "workspace": "Daily overview · historical sample"
+    },
+    "evidence": {
+      "title": "A small detail.",
+      "emphasis": "A different story.",
+      "body": "One column says “Cod.” Is that a product or a customer? The original rows stay in view while you decide what the code means.",
+      "bridge": "Suq proposes a meaning. You make the call.",
+      "motif": "one column, more than one meaning",
+      "workspace": "Source review · illustrative example"
+    },
+    "sale": {
+      "title": "The next sale.",
+      "emphasis": "Now you see it.",
+      "body": "One coffee leaves the shelf. Preview the movement, confirm it, and watch twelve become eleven. Change your mind? Undo brings it back.",
+      "bridge": "The next action is yours. Nothing changes just because you scroll.",
+      "motif": "one decision, a visible consequence",
+      "workspace": "Quick entry · after the historical cutoff"
+    },
+    "customerHistory": "241 customers in the sample day",
+    "customerLegend": "Each dot is one customer. The 38 green dots also appear in earlier sample records.",
+    "balance": "Stock after the historical cutoff",
+    "units": "units",
+    "cutoff": "At the historical cutoff",
+    "noMovement": "No next sale recorded",
+    "draftMovement": "Next sale · awaiting confirmation",
+    "confirmedMovement": "Next sale · confirmed"
   }
 }
