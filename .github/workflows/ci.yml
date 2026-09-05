@@ -82,10 +82,40 @@ jobs:
       - name: Run API checks
         run: npm run check:api
 
+      - name: Check container smoke script
+        run: |
+          uv run --project apps/api ruff format --check deploy/smoke.py
+          uv run --project apps/api ruff check --select E,F,I,UP deploy/smoke.py
+
       - name: Verify the checked-in OpenAPI contract
         run: |
           npm run generate:openapi
           git diff --exit-code -- packages/api-client/openapi.json
+
+  container-smoke:
+    name: container-smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate development topology
+        run: docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci config --quiet
+
+      - name: Build and start development stack
+        run: docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci up --build --detach --wait --wait-timeout 180
+
+      - name: Exercise services and worker isolation
+        run: python3 deploy/smoke.py --env-file deploy/.env.example --project-name suq-ci
+
+      - name: Collect container diagnostics on failure
+        if: failure()
+        run: docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci logs --no-color --tail 100
+
+      - name: Stop ephemeral CI stack
+        if: always()
+        run: docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci down --volumes
 
   deploy:
     name: deploy-${{ github.ref_name }}
@@ -93,6 +123,7 @@ jobs:
     needs:
       - api-quality
       - quality
+      - container-smoke
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:
