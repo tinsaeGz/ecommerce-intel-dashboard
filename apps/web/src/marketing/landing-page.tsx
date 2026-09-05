@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import {
   DemoLink,
@@ -9,10 +11,19 @@ import {
 import { useDocumentMetadata } from "../lib/use-document-metadata";
 import { DailyBriefing, ClosingInvitation } from "./merchant-story";
 import { MerchantDecisions, RecordToDecision, TrustStory } from "./merchant-decisions";
+import { BuyingQuestions } from "./buying-questions";
 import "./landing-page.css";
 
 export function LandingPage() {
   const { t } = useTranslation();
+  const { hash, key } = useLocation();
+
+  useEffect(() => {
+    if (!["#daily-decisions", "#how-it-works", "#plans", "#faq"].includes(hash)) return;
+    const target = document.getElementById(hash.slice(1));
+    target?.focus({ preventScroll: true });
+    target?.scrollIntoView?.();
+  }, [hash, key]);
 
   useDocumentMetadata(t("meta.landing.title"), t("meta.landing.description"));
 
@@ -45,6 +56,7 @@ export function LandingPage() {
         <MerchantDecisions />
         <RecordToDecision />
         <TrustStory />
+        <BuyingQuestions />
         <ClosingInvitation />
       </main>
 

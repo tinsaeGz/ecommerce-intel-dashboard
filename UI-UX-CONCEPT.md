@@ -471,7 +471,7 @@ Proof              “This works for businesses like mine.”
 Low-risk action    “I can try it safely.”
 ```
 
-The preview navigation contains language and **Explore the demo**; mobile uses the existing menu with focus restoration. Add **Product · How it works · Plans · FAQ** links as the corresponding sections ship. Production account links appear only after the account journey works; do not create placeholder navigation destinations.
+The preview navigation contains **Product · How it works · Plans · FAQ**, language, and **Explore the demo**. Each section link opens the landing page, scrolls to its destination, and moves keyboard focus there. Focus must not draw a rectangle around the entire section: suppress the section outline and underline its heading when `:focus-visible` applies. Interactive controls retain their own focus indicators. Below 68rem the scrollable mobile menu retains demo-first focus and Escape restoration; links close the menu before focusing their destination. Production account links appear only after the account journey works; do not create placeholder navigation destinations.
 
 ## 5.2 Section blueprint
 
@@ -527,7 +527,7 @@ Present one compact interpretation example after the business outcomes: “What 
 
 The review link navigates to `/demo#demo-review`, opens the disclosure, moves focus to its summary, and scrolls to it. The source-explorer link does the equivalent for `/demo#demo-sources`. The full legacy step-by-step review remains available in a separate demo disclosure, preserving its field and evidence interactions without repeating them on the landing page.
 
-**Remaining blueprint:** the following dashboard, proof, comparison, plans, FAQ, and footer sections describe the broader intended experience. They are not all implemented by this narrative checkpoint; delivery follows `docs/landing-page-revision-plan.md`.
+**Remaining blueprint:** dashboard composition and expanded customer proof below remain future work. The compact comparison, planned plans, FAQ and working footer destinations are implemented as described below; delivery follows `docs/landing-page-revision-plan.md`.
 
 ### 8. Composable dashboard: “Your morning check is not your weekly review”
 
@@ -568,45 +568,27 @@ After beta, replace or supplement with approved customer evidence:
 - Short testimonials with name, role, business, locale, and consent.
 - Customer logos only when contractual approval exists.
 
-### 11. Comparison: “Built for real merchant records”
+### 11. Comparison: keep your records
 
-| Capability | Spreadsheets alone | Fixed-schema dashboard | Suq Insights |
-|---|---|---|---|
-| Accepts varied structures | Manual cleanup | Usually no | Infers, then asks for confirmation |
-| Preserves unknown fields | Yes, but unmodeled | Often dropped | Retained as typed attributes |
-| Correctable interpretation | Manual formulas | Re-import/configuration | Remodels retained history |
-| Daily entry and uploads | Separate processes | Integration-dependent | Same channel and records path |
-| Derived stock provenance | Manual | Varies | Inspectable observation + events |
-| Dashboard composition | Manual charts | Often fixed | Question-based movable widgets |
+Show two short columns before the plans: working across separate records (compare exports, look up earlier entries, join sales and stock manually), and the planned Suq workflow (review field meanings, use a common daily view, retain evidence). This describes a concrete task rather than claiming all spreadsheets or competitors lack a capability. Keep the section flat and compact.
 
-Keep the comparison factual and review competitor claims before naming a competitor.
+### 12. Planned plans
 
-### 12. Pricing
+The preview displays two equal-weight, non-purchasable cards: **Free · planned** and **Premium · planned**. State prominently that accounts/subscriptions are unavailable and Premium pricing will be announced when finalized. No invented price, tax amount, discount, purchase control or trial claim.
 
-Use two primary cards: **Free** and **Premium**. A third enterprise card is not justified by the current SDLC.
+- Free: one dashboard, 90-day visible history, five uploads per day up to 10 MB each, dashboard alerts, owner only, contextual sponsorship. Sync API and full exports are Premium capabilities.
+- Premium: multiple named dashboards, history beyond 90 days subject to the stated retention rules, 50 uploads per day up to 50 MB each, dashboard/opt-in email/SMS alerts to a verified phone (up to ten SMS daily), owner plus up to four staff, Sync API, CSV/XLSX exports up to five jobs daily, and an ad-free workspace.
+- A visible note states the six-week forecasting prerequisite and moving-average fallback, and labels priority support as planned rather than an active preview service.
 
-**Free:** one dashboard, 90-day visible history, dashboard alerts, plan upload quotas, contextual sponsored widget.
-
-**Premium:** unlimited history subject to retention policy, multiple dashboards, predictive alerts over email/SMS, team seats, Sync API, full exports, priority support, ad-free workspace.
-
-The exact price, tax display, regional billing providers, and annual discount are product dependencies. Display tax clearly before checkout. Each capability links to a concise explanation; do not hide important limits in tooltips.
+Each card uses a heading and definition list. Stack at narrow widths; use two columns from 52rem. Keep the entire limits comparison visible rather than hiding limits in tooltips.
 
 ### 13. FAQ
 
-Recommended launch questions:
+Six native `details`/`summary` disclosures, initially closed, cover current availability; file sources and column names; uncertain fields, corrections and undo; missing stock/customer/cost evidence; history and downgrades; and current demo privacy. Multiple answers may be open. Preserve keyboard toggling, visible focus, enlarged text and all three locales.
 
-1. What files can I use?
-2. Do I need to rename or reorder columns?
-3. What happens when Suq is unsure about a field?
-4. Can I correct an upload after it is processed?
-5. How does Suq calculate current stock?
-6. What if my data does not include customer information?
-7. Is my business data separated from other merchants?
-8. What happens to my history if I downgrade?
-9. Which languages, currencies, and timezones are supported?
-10. What is shown in the free plan’s sponsored widget?
+Distinguish planned product behavior from the working fictional demo in each relevant answer. State the retention distinctions from SDLC §2.2 and the data model: Free raw records beyond 90 days are pruned nightly; Premium-era records hidden on downgrade are retained 13 months; original uploads expire after 30 days on Free or 180 days on Premium. Do not promise perpetual retention.
 
-Answers should be visible in an accessible accordion with correct heading and button semantics; one answer may remain open by default on desktop, all closed on mobile.
+The privacy answer describes only the inspected preview: no business-file input, browser-persisted language, temporary in-tab journey events with no analytics collector, and ordinary page requests to the host. Production privacy terms and a public support channel are not yet published here. This is an explanation of the preview, not a legal policy or a verified production-security claim.
 
 ### 14. Final CTA and footer
 
@@ -614,11 +596,11 @@ Answers should be visible in an accessible accordion with correct heading and bu
 
 **Preview action:** **Explore the demo**. Restore **Start free** with **Explore the demo** as secondary only after the production account journey is verified.
 
-Footer groups: Product, Use cases, Resources, Company, Legal, Language. Include status, accessibility, privacy, terms, security, and support links. Advertiser access sits in the footer, not the primary merchant navigation.
+The current footer links only to the working demo, Plans and FAQ, alongside the brand and language information. Approved public support and privacy/terms destinations remain a publishing dependency; do not invent an email, legal policy, company identity or empty link. Future production footer groups may include Company, Legal, status and advertiser access after those destinations are verified.
 
 ## 5.3 Landing-page wireframe
 
-This is the broader launch blueprint, including future sections. The current preview order is hero → three merchant decisions → short workflow and next-sale example → trust → closing action.
+This is the broader launch blueprint, including future sections. The current preview order is hero → three merchant decisions → short workflow and next-sale example → trust → workflow comparison and planned plans → FAQ → closing action.
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────┐

@@ -26,6 +26,47 @@ beforeEach(async () => {
 });
 
 describe("public landing routes", () => {
+  it.each(["en", "es", "fr"])("explains planned limits and opens every FAQ in %s", async (locale) => {
+    const user = userEvent.setup();
+    await i18n.changeLanguage(locale);
+    await renderAt("/");
+    const plans = screen.getByRole("region", { name: i18n.t("buying.title") });
+    const free = within(plans).getByRole("article", { name: i18n.t("buying.free.title") });
+    const premium = within(plans).getByRole("article", { name: i18n.t("buying.premium.title") });
+    expect(free).toHaveTextContent(/5.*10 M[Bo]/);
+    expect(premium).toHaveTextContent(/50.*50 M[Bo]/);
+    expect(premium).toHaveTextContent("4");
+    expect(free).toHaveTextContent("90");
+    expect(within(plans).getByText(i18n.t("buying.availability"))).toBeVisible();
+    expect(within(plans).queryByRole("button")).not.toBeInTheDocument();
+    for (const question of ["availability", "sources", "review", "missing", "history", "privacy"]) {
+      const summary = screen.getByText(i18n.t(`buying.faq.${question}.question`), { selector: "summary" });
+      expect(summary.parentElement).not.toHaveAttribute("open");
+      await user.click(summary);
+      expect(summary.parentElement).toHaveAttribute("open");
+      expect(screen.getByText(i18n.t(`buying.faq.${question}.answer`))).toBeVisible();
+    }
+    const results = await axe.run(screen.getByRole("region", { name: i18n.t("buying.faq.title") }), { rules: { "color-contrast": { enabled: false } } });
+    expect(results.violations).toEqual([]);
+  });
+
+  it.each(["en", "es", "fr"])("takes mobile and footer navigation to focused landing sections in %s", async (locale) => {
+    const user = userEvent.setup();
+    await i18n.changeLanguage(locale);
+    await renderAt("/demo");
+    await user.click(screen.getByRole("button", { name: i18n.t("navigation.openMenu") }));
+    const menu = screen.getByRole("navigation", { name: i18n.t("navigation.mobile") });
+    await user.click(within(menu).getByRole("link", { name: i18n.t("buying.nav.plans") }));
+    expect(screen.queryByRole("navigation", { name: i18n.t("navigation.mobile") })).not.toBeInTheDocument();
+    expect(screen.getByRole("region", { name: i18n.t("buying.title") })).toHaveFocus();
+    const footer = screen.getByRole("navigation", { name: i18n.t("buying.nav.footer") });
+    await user.click(within(footer).getByRole("link", { name: i18n.t("buying.nav.faq") }));
+    expect(screen.getByRole("region", { name: i18n.t("buying.faq.title") })).toHaveFocus();
+    for (const link of within(footer).getAllByRole("link")) {
+      expect(link.getAttribute("href")).toMatch(/^\/(demo|#plans|#faq)$/);
+    }
+  });
+
   it("states the audience, outcome, and primary action in the hero", async () => {
     await renderAt("/");
 

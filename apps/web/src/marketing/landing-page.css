@@ -11,6 +11,16 @@
     margin-inline: auto;
   }
 
+  .marketing-canvas > :where(section[tabindex="-1"]):focus {
+    outline: none;
+  }
+
+  .marketing-canvas > :where(section[tabindex="-1"]):focus-visible :where(h2) {
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+  }
+
   .landing-hero {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(22rem, 1fr);

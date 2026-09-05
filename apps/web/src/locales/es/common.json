@@ -470,5 +470,88 @@
     "demo": {
       "workflow": "Explorar cada paso de la revisión"
     }
+  },
+  "buying": {
+    "nav": {
+      "product": "Producto",
+      "how": "Cómo funciona",
+      "plans": "Planes",
+      "faq": "Preguntas",
+      "footer": "Explora Suq Insights"
+    },
+    "eyebrow": "Para tu rutina diaria",
+    "title": "Conserva tus registros. Dedica menos tiempo a relacionarlos.",
+    "intro": "Tus archivos siguen siendo el punto de partida. El espacio de trabajo previsto reúne los registros revisados en una vista diaria.",
+    "availability": "Planes Gratis y Premium previstos. Esta vista previa no permite crear cuentas ni contratar suscripciones. El precio de Premium se anunciará cuando esté definido.",
+    "workflow": {
+      "today": {
+        "title": "Trabajar con registros separados",
+        "body": "Comparar exportaciones, consultar entradas anteriores y relacionar a mano las ventas con los recuentos de existencias."
+      },
+      "planned": {
+        "title": "El flujo de Suq previsto",
+        "body": "Revisar qué significa cada campo y consultar una vista compartida de ventas, existencias y clientes. Conservar la evidencia de cada respuesta."
+      }
+    },
+    "rows": {
+      "dashboards": "Paneles",
+      "history": "Historial visible",
+      "uploads": "Carga de archivos",
+      "alerts": "Alertas",
+      "team": "Personas",
+      "connections": "Sincronización y exportación",
+      "sponsorship": "Patrocinio"
+    },
+    "free": {
+      "title": "Gratis · previsto",
+      "purpose": "Una vista diaria para el propietario.",
+      "dashboards": "1 panel",
+      "history": "90 días",
+      "uploads": "5 al día, hasta 10 MB por archivo",
+      "alerts": "Alertas en el panel",
+      "team": "Solo el propietario",
+      "connections": "La API de sincronización y las exportaciones completas son funciones Premium",
+      "sponsorship": "Patrocinio contextual en el espacio de trabajo"
+    },
+    "premium": {
+      "title": "Premium · previsto",
+      "purpose": "Más historial y formas de trabajar en equipo.",
+      "dashboards": "Varios paneles con nombre",
+      "history": "Más de 90 días, según las reglas de conservación indicadas abajo",
+      "uploads": "50 al día, hasta 50 MB por archivo",
+      "alerts": "Panel, correo con activación voluntaria y SMS a un teléfono verificado (hasta 10 SMS al día)",
+      "team": "Propietario y hasta 4 empleados",
+      "connections": "API de sincronización; exportaciones CSV/XLSX, hasta 5 trabajos al día",
+      "sponsorship": "Espacio de trabajo sin anuncios"
+    },
+    "forecast": "Las previsiones Premium previstas necesitan al menos 6 semanas de historial. Con menos historial, las alertas usan una media móvil. También se prevé soporte prioritario; no es un servicio activo en esta vista previa.",
+    "faq": {
+      "eyebrow": "Antes de traer tus registros",
+      "title": "Respuestas a preguntas prácticas.",
+      "availability": {
+        "question": "¿Puedo usarlo hoy con mi negocio?",
+        "answer": "Hoy puedes explorar la demo ficticia y probar sus ejemplos locales de revisión y venta. Esta vista previa no ofrece cuentas reales, carga de archivos, entradas guardadas, suscripciones ni notificaciones."
+      },
+      "sources": {
+        "question": "¿Tendré que renombrar columnas o cambiar mis archivos?",
+        "answer": "El producto previsto acepta hojas de cálculo, CSV, exportaciones de TPV, PDF y fotos de registros, además de la entrada directa. Revisas los significados propuestos para los campos sin tener que ajustarte a una plantilla fija de columnas. La demo muestra ejemplos; no acepta tus archivos."
+      },
+      "review": {
+        "question": "¿Y si un campo no está claro o una carga es incorrecta?",
+        "answer": "El flujo previsto pide confirmar el significado de los campos inciertos antes de incorporar un conjunto de datos. Las correcciones posteriores muestran su efecto sobre el historial antes de aplicarse, y se puede deshacer una carga completa. La demo permite probar la revisión de campos y deshacer una venta de ejemplo sin guardar nada."
+      },
+      "missing": {
+        "question": "¿Bastan las ventas para conocer existencias, clientes recurrentes o beneficios?",
+        "answer": "No. Las existencias necesitan una observación inicial y los movimientos correspondientes. El análisis de clientes recurrentes necesita un identificador confirmado, y el margen necesita datos de costes. Si falta evidencia, la respuesta se explica como no disponible; no se muestra un cero ni un resultado supuesto."
+      },
+      "history": {
+        "question": "¿Qué ocurre con los registros antiguos al cambiar de plan?",
+        "answer": "El historial Gratis previsto abarca 90 días; los registros originales más antiguos de ese plan se eliminan cada noche. Al bajar de Premium, los datos antiguos del período Premium se ocultan y se conservan durante 13 meses para poder recuperarlos al volver a Premium en ese plazo. Los archivos subidos caducan a los 30 días en Gratis o a los 180 en Premium. Estas reglas están previstas; no significan que esta demo almacene archivos."
+      },
+      "privacy": {
+        "question": "¿Qué guarda o envía esta demo?",
+        "answer": "Los ejemplos usan datos ficticios; aquí no puedes subir registros de tu negocio. Tu idioma se guarda en este navegador. Los eventos de interacción permanecen en la memoria temporal de la pestaña y no se envían a un servicio de analítica. El alojamiento recibe las solicitudes habituales de páginas. Las condiciones de privacidad de producción y un canal público de soporte aún no están publicados aquí."
+      }
+    }
   }
 }

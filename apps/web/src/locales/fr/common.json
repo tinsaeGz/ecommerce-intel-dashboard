@@ -470,5 +470,88 @@
     "demo": {
       "workflow": "Explorer toutes les étapes de la révision"
     }
+  },
+  "buying": {
+    "nav": {
+      "product": "Produit",
+      "how": "Fonctionnement",
+      "plans": "Offres",
+      "faq": "Questions",
+      "footer": "Explorer Suq Insights"
+    },
+    "eyebrow": "Pour votre routine quotidienne",
+    "title": "Gardez vos registres. Passez moins de temps à les rapprocher.",
+    "intro": "Vos fichiers restent le point de départ. L’espace de travail prévu réunit les données vérifiées dans une vue quotidienne.",
+    "availability": "Offres Gratuit et Premium prévues. Les comptes et abonnements ne sont pas disponibles dans cet aperçu. Le tarif Premium sera annoncé une fois défini.",
+    "workflow": {
+      "today": {
+        "title": "Travailler avec des registres séparés",
+        "body": "Comparer les exports, consulter les anciennes saisies et rapprocher manuellement les ventes des comptages de stock."
+      },
+      "planned": {
+        "title": "Le fonctionnement prévu de Suq",
+        "body": "Vérifier le sens de chaque champ, puis consulter une vue commune des ventes, du stock et des clients. Garder les éléments qui justifient chaque réponse."
+      }
+    },
+    "rows": {
+      "dashboards": "Tableaux de bord",
+      "history": "Historique visible",
+      "uploads": "Import de fichiers",
+      "alerts": "Alertes",
+      "team": "Équipe",
+      "connections": "Synchronisation et exports",
+      "sponsorship": "Publicité"
+    },
+    "free": {
+      "title": "Gratuit · prévu",
+      "purpose": "Une vue quotidienne pour le propriétaire.",
+      "dashboards": "1 tableau de bord",
+      "history": "90 jours",
+      "uploads": "5 par jour, jusqu’à 10 Mo chacun",
+      "alerts": "Alertes dans le tableau de bord",
+      "team": "Propriétaire uniquement",
+      "connections": "L’API de synchronisation et les exports complets sont des fonctions Premium",
+      "sponsorship": "Publicité contextuelle dans l’espace de travail"
+    },
+    "premium": {
+      "title": "Premium · prévu",
+      "purpose": "Plus d’historique et de possibilités de collaboration.",
+      "dashboards": "Plusieurs tableaux de bord nommés",
+      "history": "Au-delà de 90 jours, selon les règles de conservation ci-dessous",
+      "uploads": "50 par jour, jusqu’à 50 Mo chacun",
+      "alerts": "Tableau de bord, e-mail sur inscription et SMS vers un téléphone vérifié (jusqu’à 10 SMS par jour)",
+      "team": "Propriétaire et jusqu’à 4 collaborateurs",
+      "connections": "API de synchronisation ; exports CSV/XLSX, jusqu’à 5 tâches par jour",
+      "sponsorship": "Espace de travail sans publicité"
+    },
+    "forecast": "Les prévisions Premium prévues nécessitent au moins 6 semaines d’historique. Sinon, les alertes utilisent une moyenne mobile. Une assistance prioritaire est aussi prévue ; ce service n’est pas actif dans cet aperçu.",
+    "faq": {
+      "eyebrow": "Avant d’apporter vos registres",
+      "title": "Quelques réponses pratiques.",
+      "availability": {
+        "question": "Puis-je l’utiliser pour mon commerce dès aujourd’hui ?",
+        "answer": "Vous pouvez explorer la démo fictive et essayer ses exemples locaux de vérification et de vente. Les comptes réels, imports, saisies enregistrées, abonnements et notifications ne sont pas disponibles dans cet aperçu."
+      },
+      "sources": {
+        "question": "Devrai-je renommer mes colonnes ou modifier mes fichiers ?",
+        "answer": "Le produit prévu accepte les feuilles de calcul, CSV, exports de caisse, PDF et photos de registres, ainsi que la saisie directe. Vous vérifiez le sens proposé des champs sans devoir respecter un modèle fixe de colonnes. La démo présente des exemples ; elle n’accepte pas vos fichiers."
+      },
+      "review": {
+        "question": "Que faire si un champ est ambigu ou un import incorrect ?",
+        "answer": "Le fonctionnement prévu vous demande de confirmer les champs incertains avant de valider un jeu de données. Les corrections ultérieures présentent leur effet sur l’historique avant application, et un import entier peut être annulé. La démo permet d’essayer la vérification des champs et d’annuler une vente fictive sans rien enregistrer."
+      },
+      "missing": {
+        "question": "Les ventes suffisent-elles à connaître le stock, les clients fidèles ou le bénéfice ?",
+        "answer": "Non. Le stock nécessite une observation initiale et les mouvements correspondants. L’analyse des clients récurrents nécessite un identifiant confirmé, et la marge nécessite des coûts. Sans ces éléments, une réponse expliquée comme indisponible remplace tout zéro ou résultat supposé."
+      },
+      "history": {
+        "question": "Que deviennent les anciens registres si je change d’offre ?",
+        "answer": "L’historique Gratuit prévu couvre 90 jours ; les données brutes plus anciennes de cette offre sont supprimées chaque nuit. Après un passage de Premium à Gratuit, les anciennes données de la période Premium sont masquées et conservées 13 mois afin de les retrouver en revenant à Premium pendant ce délai. Les fichiers importés expirent après 30 jours en Gratuit ou 180 jours en Premium. Ces règles sont prévues ; elles ne signifient pas que cet aperçu stocke des imports."
+      },
+      "privacy": {
+        "question": "Que conserve ou transmet cette démo ?",
+        "answer": "Les exemples utilisent des données fictives ; vous ne pouvez pas importer vos registres ici. Votre langue est enregistrée dans ce navigateur. Les événements d’interaction restent dans la mémoire temporaire de l’onglet et ne sont pas transmis à un service d’analytique. L’hébergeur reçoit les requêtes ordinaires de pages. Les conditions de confidentialité du produit en production et un canal public d’assistance ne sont pas encore publiés ici."
+      }
+    }
   }
 }

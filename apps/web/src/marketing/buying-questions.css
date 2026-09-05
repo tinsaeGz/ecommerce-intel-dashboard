@@ -1,0 +1,103 @@
+@layer components {
+  .buying-section {
+    padding-block: var(--space-10);
+    border-top: 0.0625rem solid var(--color-line);
+    scroll-margin-top: var(--space-5);
+  }
+
+  .workflow-comparison,
+  .plan-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+
+  .workflow-comparison h3,
+  .plan-summary h3 {
+    font-size: var(--font-size-heading);
+    line-height: var(--line-height-heading);
+  }
+
+  .workflow-comparison p,
+  .plan-availability,
+  .plan-footnote {
+    margin-top: var(--space-3);
+    line-height: var(--line-height-body);
+    color: var(--color-slate);
+  }
+
+  .plan-availability {
+    margin-top: var(--space-6);
+    color: var(--color-ink);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .plan-summary {
+    min-width: 0;
+    padding: var(--space-5);
+    border: 0.0625rem solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+
+  .plan-summary__purpose {
+    margin-block: var(--space-3) var(--space-5);
+    color: var(--color-slate);
+    line-height: var(--line-height-body);
+  }
+
+  .plan-summary dl > div {
+    padding-block: var(--space-3);
+    border-top: 0.0625rem solid var(--color-line);
+    line-height: var(--line-height-body);
+  }
+
+  .plan-summary dt {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .plan-summary dd {
+    margin: 0;
+    color: var(--color-slate);
+  }
+
+  .buying-faq {
+    margin-top: var(--space-6);
+  }
+
+  .buying-faq details {
+    border-top: 0.0625rem solid var(--color-line);
+  }
+
+  .buying-faq summary {
+    padding-block: var(--space-4);
+    min-height: 2.75rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-body);
+    cursor: pointer;
+  }
+
+  .buying-faq p {
+    max-width: 65ch;
+    padding-bottom: var(--space-5);
+    color: var(--color-slate);
+    line-height: var(--line-height-body);
+  }
+
+  .buying-faq summary:focus-visible {
+    outline: 0.2rem solid var(--color-ink);
+    outline-offset: 0.2rem;
+  }
+
+  @media (width >= 52rem) {
+    .workflow-comparison,
+    .plan-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (forced-colors: active) {
+    .plan-summary {
+      border: 0.125rem solid currentcolor;
+    }
+  }
+}

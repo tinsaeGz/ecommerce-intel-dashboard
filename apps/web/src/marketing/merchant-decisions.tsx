@@ -17,7 +17,7 @@ export function MerchantDecisions() {
   const increase = salesComparison.reduce((sum, row) => sum + row.currentCents - row.previousCents, 0);
 
   return (
-    <section className="merchant-decisions" id="daily-decisions" aria-labelledby="decisions-title">
+    <section className="merchant-decisions" id="daily-decisions" tabIndex={-1} aria-labelledby="decisions-title">
       <header className="story-heading">
         <p className="story-eyebrow">{t("stories.eyebrow")}</p>
         <h2 id="decisions-title">{t("stories.title")}</h2>
@@ -109,7 +109,7 @@ export function RecordToDecision() {
     previousEntry.current = entry;
   }, [entry]);
   return (
-    <section className="record-journey" id="how-it-works" aria-labelledby="record-journey-title">
+    <section className="record-journey" id="how-it-works" tabIndex={-1} aria-labelledby="record-journey-title">
       <header className="story-heading">
         <p className="story-eyebrow">{t("understanding.how.eyebrow")}</p>
         <h2 id="record-journey-title">{t("stories.entry.title")}</h2>
