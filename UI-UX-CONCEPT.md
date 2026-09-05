@@ -471,7 +471,7 @@ Proof              “This works for businesses like mine.”
 Low-risk action    “I can try it safely.”
 ```
 
-The preview navigation contains **Product · How it works · Plans · FAQ**, language, and **Explore the demo**. Each section link opens the landing page, scrolls to its destination, and moves keyboard focus there. Below 68rem the scrollable mobile menu retains demo-first focus and Escape restoration; links close the menu before focusing their destination. Production account links appear only after the account journey works; do not create placeholder navigation destinations.
+The preview navigation contains **Product · How it works · Plans · FAQ**, language, and **Explore the demo**. Each section link opens the landing page, scrolls to its destination, and moves keyboard focus there. Focus must not draw a rectangle around the entire section: suppress the section outline and underline its heading when `:focus-visible` applies. Interactive controls retain their own focus indicators. Below 68rem the scrollable mobile menu retains demo-first focus and Escape restoration; links close the menu before focusing their destination. Production account links appear only after the account journey works; do not create placeholder navigation destinations.
 
 ## 5.2 Section blueprint
 

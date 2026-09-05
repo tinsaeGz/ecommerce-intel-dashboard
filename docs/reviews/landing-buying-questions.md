@@ -51,3 +51,9 @@ Unavailable: physical Android/device checks, NVDA/VoiceOver, native-language rev
 ## Remaining work
 
 Owner-provided public support and approved privacy/terms URLs are still needed before adding those footer links. Until then, the footer uses only working internal routes. PR 4 needs a reviewed analytics collector design and, if desired, a separate accepted design for early-access submission. The earlier Vercel deployment configuration issue is separate from this landing PR. Unrelated `docs/diagrams/` files remain untouched.
+
+## Section-focus correction
+
+The browser's default focus outline framed the entire section after navigation. The landing CSS now suppresses only that noninteractive section outline and underlines its heading when `:focus-visible` applies. Focus and scroll destinations are unchanged; button/link/disclosure focus indicators remain intact.
+
+Revalidated all four destinations in English, Spanish and French: mouse navigation has no section outline, keyboard navigation shows the heading underline, and the next Tab stop has a visible focus outline. A 390px forced-color check retained the heading indicator without page overflow. Web lint/types, all 66 tests, production build (118.9 KB initial gzip), documentation lint and whitespace checks passed again. [Focused Product section](landing-buying-questions/section-focus-1440.png) shows the corrected treatment. The concept PDF was regenerated with this focus contract.
