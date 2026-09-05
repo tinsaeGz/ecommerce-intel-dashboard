@@ -1,18 +1,18 @@
-import { useId, useState } from "react";
+import { useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { DropdownSelect } from "../components/dropdown-select";
+import { useSampleScenario } from "../lib/sample-scenario";
 import "./hero-record-review.css";
 
 const roles = ["itemIdentity", "customerIdentity", "notAnalyzed"] as const;
-type ReviewRole = (typeof roles)[number];
+
 
 export function HeroRecordReview() {
   const { t } = useTranslation();
   const fieldId = useId();
   const titleId = useId();
-  const [role, setRole] = useState<ReviewRole>("itemIdentity");
-  const [confirmed, setConfirmed] = useState(false);
+  const { state: { role, confirmed }, dispatch } = useSampleScenario();
 
   return (
     <section className="hero-record" aria-labelledby={titleId} data-confirmed={confirmed}>
@@ -46,7 +46,7 @@ export function HeroRecordReview() {
         <DropdownSelect
           id={fieldId} label={t("polish.review.roleLabel")} value={role}
           hint={t("polish.review.localOnly")}
-          onChange={(value) => { setRole(value); setConfirmed(false); }}
+          onChange={(value) => dispatch({ type: "role", value })}
           options={roles.map((value) => ({ value, label: t(`understanding.review.roles.${value}`) }))}
         />
 
@@ -63,20 +63,13 @@ export function HeroRecordReview() {
         <button
           type="button"
           className="hero-record__apply"
-          onClick={() => {
-            if (confirmed) {
-              setRole("itemIdentity");
-              setConfirmed(false);
-            } else {
-              setConfirmed(true);
-            }
-          }}
+          onClick={() => dispatch({ type: confirmed ? "reset-review" : "confirm-review" })}
         >
           {t(confirmed ? "polish.review.reset" : "polish.review.confirm")}
           <span aria-hidden="true">{confirmed ? "↺" : "→"}</span>
         </button>
       </div>
-      <p className="hero-record__footnote">{t("polish.review.localOnly")}</p>
+      <p className="hero-record__footnote">{t("cinematic.reviewScope")}</p>
     </section>
   );
 }

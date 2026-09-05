@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 
+import { SampleScenarioProvider } from "./components/sample-scenario-provider";
 import { LandingPage } from "./marketing/landing-page";
 
 const DemoPage = lazy(() =>
@@ -40,7 +41,7 @@ function RouteLoadingState() {
 
 export function App() {
   return (
-    <>
+    <SampleScenarioProvider>
       <LanguageDocumentSync />
       <Suspense fallback={<RouteLoadingState />}>
         <Routes>
@@ -52,6 +53,6 @@ export function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
-    </>
+    </SampleScenarioProvider>
   );
 }

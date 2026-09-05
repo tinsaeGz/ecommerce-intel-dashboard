@@ -553,5 +553,11 @@
         "answer": "Les exemples utilisent des données fictives ; vous ne pouvez pas importer vos registres ici. Votre langue est enregistrée dans ce navigateur. Les événements d’interaction restent dans la mémoire temporaire de l’onglet et ne sont pas transmis à un service d’analytique. L’hébergeur reçoit les requêtes ordinaires de pages. Les conditions de confidentialité du produit en production et un canal public d’assistance ne sont pas encore publiés ici."
       }
     }
+  },
+  "cinematic": {
+    "reset": "Réinitialiser l’exemple",
+    "resetDone": "Exemple réinitialisé. Vos choix et la prochaine vente retrouvent leurs valeurs de départ.",
+    "memory": "Vos choix sont conservés entre ces pages. Rechargez pour recommencer.",
+    "reviewScope": "Cette révision modifie uniquement cet exemple de données. Elle ne recalcule pas le tableau de bord historique."
   }
 }

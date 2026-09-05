@@ -8,6 +8,7 @@ import {
   SiteHeader,
   SkipLink,
 } from "../components/public-ui";
+import { ResetSample } from "../components/reset-sample";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
 import { DailyBriefing, ClosingInvitation } from "./merchant-story";
 import { MerchantDecisions, RecordToDecision, TrustStory } from "./merchant-decisions";
@@ -53,6 +54,7 @@ export function LandingPage() {
           </div>
         </section>
 
+        <ResetSample />
         <MerchantDecisions />
         <RecordToDecision />
         <TrustStory />

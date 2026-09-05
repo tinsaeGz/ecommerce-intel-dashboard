@@ -168,3 +168,17 @@ Source: independent rendering review at 1440×900 and 390×844 (ghost, 2026-09-0
 | A8. Anonymous file trial has its own proposal | Outside PR 1–4 | See ADR 0005. It is scoped as an ephemeral inference preview that loads nothing, so it does not alter the FR-A-1 upload rule, and it is sequenced after the inference worker exists. | Section 8 names this as the open discovery item. The proposal records the boundary questions and a recommended answer for decision. |
 
 Verification additions for the affected PRs: a viewport screenshot at 390×844 attached to PR 1 evidence showing the A1 contents; a page-wide search confirming `Cod.` occurs once in rendered copy for PR 2; a unit test asserting the event sink rejects properties outside the approved set for PR 1.
+
+## Accepted amendment: Cinematic Suq (2026-09-05)
+
+The owner approved one continuous merchant story across the landing page and fictional demo. This amendment supersedes the separate Daily decisions / How it works / Trust presentation above, while preserving the finalized PR #8 hero, plans, FAQ, and closing action.
+
+Three chapters — Understand the day, Inspect the evidence, Try the next sale — share one typed, browser-memory scenario above the routes. Source selection, illustrative role review/confirmation, customer-evidence availability, dashboard selections, and the reversible sample sale survive navigation and language changes. Reset sample restores defaults; a refresh starts fresh. This is demonstration state, not merchant persistence or analytics.
+
+Role review applies only to the original illustrative source records. It does not reprocess the historical dashboard. The next sale changes only the separately identified stock after the historical cutoff (12 → 11); historical money, chart observations, and risk estimates remain unchanged. Missing customer evidence makes customer analyses unavailable, never zero. Source or role changes invalidate review confirmation; repeated confirmation cannot record extra sales.
+
+Desktop uses scrolling copy beside one sticky scene with explicit chapter controls. IntersectionObserver changes presentation only. Mobile, short viewports, enlarged content, and unsupported observers retain sequential scenes without duplicated controls. CSS provides restrained transitions with immediate reduced-motion states. Keyboard focus must never be hidden by automatic chapter changes.
+
+Delivery: three successive, unmerged PRs against dev, in order: scenario continuity, cinematic presentation, final accessibility/performance evidence. Each includes its predecessor until earlier PRs merge. Public support/legal destinations, real analytics, authenticated onboarding, and application workflows remain separate pending work.
+
+Acceptance: SDLC §1.2, FR-U-4/5/12, FR-G-6, FR-E-1, FR-D-12 and NFR-5/6/9/10, as illustrative marketing behavior only. Validate continuity, invalidation, cancel/undo/reset, repeated actions, Back/direct links, all locales, scroll isolation, historical integrity, keyboard/forced colors/reduced motion, mobile and short viewports, 200% text, browser accessibility, and initial JavaScript below 200 KB gzip. Capture screenshots and an interaction recording; no conversion claim without merchant evidence.
