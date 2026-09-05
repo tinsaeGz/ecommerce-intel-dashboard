@@ -30,6 +30,7 @@ export function DropdownSelect<T extends string>({ id, label, value, options, on
   const triggerRef = useRef<HTMLButtonElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef({ text: "", time: 0 });
+  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(value);
   const [position, setPosition] = useState({ left: 0, top: 0, width: 0, maxHeight: 320 });
@@ -163,6 +164,7 @@ export function DropdownSelect<T extends string>({ id, label, value, options, on
         aria-activedescendant={expanded ? `${listId}-${active}` : undefined}
         disabled={disabled || enabled.length === 0}
         onClick={() => expanded ? setOpen(false) : show()} onKeyDown={handleKey}
+        onFocus={event => setPortalTarget(event.currentTarget.closest("dialog"))}
         onBlur={() => setOpen(false)}
       >
         {selected?.mark ? <span className="dropdown-select__mark" aria-hidden="true">{selected.mark}</span> : null}
@@ -186,7 +188,7 @@ export function DropdownSelect<T extends string>({ id, label, value, options, on
             ))}
           </ul>
           {hint ? <p className="dropdown-select__hint">{hint}</p> : null}
-        </div>, document.body,
+        </div>, portalTarget ?? document.body,
       ) : null}
     </>
   );

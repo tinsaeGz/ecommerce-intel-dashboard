@@ -8,6 +8,8 @@ import { i18n } from "../i18n";
 import { CinematicStory } from "./cinematic-story";
 
 let notify: IntersectionObserverCallback;
+const nativeShow = Object.getOwnPropertyDescriptor(HTMLDialogElement.prototype, "showModal");
+const nativeClose = Object.getOwnPropertyDescriptor(HTMLDialogElement.prototype, "close");
 const disconnect = vi.fn();
 function ScenarioProbe() {
   const { state } = useSampleScenario();
@@ -16,6 +18,8 @@ function ScenarioProbe() {
 
 beforeEach(async () => {
   await i18n.changeLanguage("en");
+  Object.defineProperty(HTMLDialogElement.prototype, "showModal", { configurable: true, value: function (this: HTMLDialogElement) { this.setAttribute("open", ""); } });
+  Object.defineProperty(HTMLDialogElement.prototype, "close", { configurable: true, value: function (this: HTMLDialogElement) { this.removeAttribute("open"); } });
   vi.stubGlobal("innerHeight", 1000);
   vi.stubGlobal("matchMedia", () => ({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
   vi.stubGlobal("IntersectionObserver", class {
@@ -24,7 +28,13 @@ beforeEach(async () => {
     disconnect = disconnect;
   });
 });
-afterEach(() => { vi.unstubAllGlobals(); vi.clearAllMocks(); });
+afterEach(() => {
+  vi.unstubAllGlobals(); vi.clearAllMocks();
+  if (nativeShow) Object.defineProperty(HTMLDialogElement.prototype, "showModal", nativeShow);
+  else Reflect.deleteProperty(HTMLDialogElement.prototype, "showModal");
+  if (nativeClose) Object.defineProperty(HTMLDialogElement.prototype, "close", nativeClose);
+  else Reflect.deleteProperty(HTMLDialogElement.prototype, "close");
+});
 
 function renderStory() {
   return render(<MemoryRouter><SampleScenarioProvider><CinematicStory /><ScenarioProbe /></SampleScenarioProvider></MemoryRouter>);
@@ -75,6 +85,37 @@ describe("chapter presentation", () => {
     expect(within(entry).getByRole("button", { name: i18n.t("stories.entry.confirm") })).toBeVisible();
     await user.click(screen.getByRole("button", { name: i18n.t("cinematic.evidence.label") }));
     expect(screen.getByRole("region", { name: i18n.t("polish.review.title") })).toHaveAttribute("data-confirmed", "true");
+  });
+
+  it.each(["en", "es", "fr"])("carries an operated scenario into and out of the focused story in %s", async locale => {
+    const user = userEvent.setup();
+    await i18n.changeLanguage(locale);
+    renderStory();
+    await user.click(screen.getByRole("button", { name: i18n.t("cinematic.evidence.label") }));
+    await user.click(screen.getByRole("button", { name: i18n.t("polish.review.confirm") }));
+    const before = screen.getByTestId("scenario").textContent;
+    await user.click(screen.getByRole("button", { name: i18n.t("theatre.enter") }));
+    const dialog = screen.getByRole("dialog", { name: i18n.t("theatre.focusTitle") });
+    expect(within(dialog).getByRole("button", { name: i18n.t("theatre.exit") })).toHaveFocus();
+    expect(screen.getByTestId("scenario").textContent).toBe(before);
+    expect(document.querySelectorAll(".hero-record")).toHaveLength(1);
+    expect(document.documentElement).toHaveClass("cinematic-focus-open");
+    await user.click(within(dialog).getByRole("button", { name: i18n.t("theatre.trySale") }));
+    expect(within(dialog).getByRole("button", { name: i18n.t("cinematic.sale.label") })).toHaveFocus();
+    await user.click(within(dialog).getByRole("button", { name: i18n.t("stories.entry.select") }));
+    const pending = screen.getByTestId("scenario").textContent;
+    fireEvent(dialog, new Event("cancel", { cancelable: true }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: i18n.t("theatre.enter") })).toHaveFocus();
+    expect(document.documentElement).not.toHaveClass("cinematic-focus-open");
+    expect(screen.getByTestId("scenario").textContent).toBe(pending);
+    await user.click(screen.getByRole("button", { name: i18n.t("theatre.enter") }));
+    await user.click(screen.getByRole("button", { name: i18n.t("stories.entry.confirm") }));
+    expect(JSON.parse(screen.getByTestId("scenario").textContent ?? "{}").sale).toBe("recorded");
+    await user.click(screen.getByRole("button", { name: i18n.t("stories.entry.undo") }));
+    expect(JSON.parse(screen.getByTestId("scenario").textContent ?? "{}").sale).toBe("idle");
+    await user.click(screen.getByRole("button", { name: i18n.t("theatre.exit") }));
+    expect(screen.getByRole("button", { name: i18n.t("theatre.enter") })).toHaveFocus();
   });
 
   it("falls back when a translated or expanded product scene cannot fit the viewport", () => {

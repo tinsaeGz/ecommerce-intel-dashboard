@@ -631,6 +631,11 @@
     "noMovement": "Sin nueva venta registrada",
     "draftMovement": "Siguiente venta · pendiente de confirmar",
     "confirmedMovement": "Siguiente venta · confirmada",
-    "windowTitle": "Espacio de ejemplo"
+    "windowTitle": "Espacio de ejemplo",
+    "focusTitle": "Historia interactiva del comercio",
+    "enter": "Entrar en la experiencia",
+    "exit": "Salir de la experiencia",
+    "followEvidence": "Seguir los registros",
+    "trySale": "Pasar a la siguiente venta"
   }
 }

@@ -23,7 +23,6 @@ export function DesktopMonitor({ children }: { children: ReactNode }) {
       </div>
       <div className="desktop-monitor__chin" aria-hidden="true"><span>suq</span><i /></div>
     </div>
-    <div className="desktop-monitor__stand" aria-hidden="true"><span /><i /></div>
   </div>;
 }
 

@@ -19,6 +19,17 @@ function Example({ disabled = false }: { disabled?: boolean }) {
 }
 
 describe("shared dropdown select", () => {
+  it("keeps the options inside a containing dialog and cancels the list without closing it", async () => {
+    const user = userEvent.setup();
+    render(<dialog open aria-label="Sample"><Example /></dialog>);
+    await user.click(screen.getByRole("combobox"));
+    expect(screen.getByRole("dialog")).toContainElement(screen.getByRole("listbox"));
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+    expect(screen.getByRole("dialog")).toHaveAttribute("open");
+    expect(screen.getByRole("combobox")).toHaveFocus();
+  });
+
   it("browses without committing, skips disabled options, and cancels with Escape", async () => {
     const user = userEvent.setup();
     render(<Example />);
