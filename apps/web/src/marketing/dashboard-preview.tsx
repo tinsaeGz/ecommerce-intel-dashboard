@@ -1,9 +1,10 @@
-import { useId, useState } from "react";
+import { useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getSupportedLanguage } from "../i18n";
-import { landingDemo, previewMetricKeys, previewMetricSeries, type PreviewMetric } from "../lib/demo-data";
+import { landingDemo, previewMetricKeys, previewMetricSeries } from "../lib/demo-data";
 import { formatCurrency, formatDemoDate, formatNumber, formatPercent } from "../lib/format";
+import { useSampleScenario } from "../lib/sample-scenario";
 import "./dashboard-preview.css";
 
 interface DashboardPreviewProps {
@@ -16,9 +17,8 @@ export function DashboardPreview({ showSourceCard = false, variant = "hero" }: D
   const summaryId = useId();
   const chartId = useId();
   const sliderId = useId();
-  const [metric, setMetric] = useState<PreviewMetric>("revenue");
-  const [observation, setObservation] = useState(7);
-  const [stockIndex, setStockIndex] = useState(0);
+  const { state: { metric, observation, stockIndex, hasIdentity }, dispatch } = useSampleScenario();
+  const unavailable = metric === "customers" && !hasIdentity;
   const locale = getSupportedLanguage(i18n.resolvedLanguage);
   const values = previewMetricSeries[metric];
   const selectedStock = landingDemo.stockRiskItems[stockIndex];
@@ -52,9 +52,9 @@ export function DashboardPreview({ showSourceCard = false, variant = "hero" }: D
         </header>
         <div className="dashboard-preview__metrics" role="group" aria-label={t("polish.dashboard.metricLabel")}>
           {previewMetricKeys.map((key) => (
-            <button className="dashboard-preview__metric" key={key} type="button" aria-pressed={metric === key} onClick={() => setMetric(key)}>
+            <button className="dashboard-preview__metric" key={key} type="button" aria-pressed={metric === key} onClick={() => dispatch({ type: "metric", value: key })}>
               <span>{t(`dashboard.metrics.${key}`)}</span>{" "}
-              <strong>{formatValue(landingDemo[key], key)}</strong>{" "}
+              <strong>{key === "customers" && !hasIdentity ? t("stories.customers.unavailable") : formatValue(landingDemo[key], key)}</strong>{" "}
               <span className="dashboard-preview__metric-hint">{t(metric === key ? "polish.dashboard.selected" : "polish.dashboard.viewTrend")}</span>
             </button>
           ))}
@@ -65,6 +65,7 @@ export function DashboardPreview({ showSourceCard = false, variant = "hero" }: D
               <div><p className="dashboard-preview__eyebrow">{t("polish.dashboard.dayView")}</p><h3 id={chartId}>{t(`dashboard.metrics.${metric}`)}</h3></div>
               <p className="dashboard-preview__comparison">{metric === "revenue" ? t("dashboard.comparison", { comparison }) : t("polish.dashboard.cumulative")}</p>
             </div>
+            {unavailable ? <p role="status">{t("stories.customers.missing")}</p> : <>
             <div className="dashboard-preview__reading" role="status">
               <strong>{formatValue(values[observation])}</strong>
               <span>{t("polish.dashboard.atTime", { time: timeAt(observation) })}</span>
@@ -79,7 +80,7 @@ export function DashboardPreview({ showSourceCard = false, variant = "hero" }: D
             <label className="dashboard-preview__slider-label" htmlFor={sliderId}>{t("polish.dashboard.inspectTime")}</label>
             <input id={sliderId} className="dashboard-preview__slider" type="range" min="0" max="7" step="1" value={observation}
               aria-valuetext={`${timeAt(observation)} · ${t(`dashboard.metrics.${metric}`)} · ${formatValue(values[observation])}`}
-              onChange={(event) => setObservation(Number(event.target.value))} />
+              onChange={(event) => dispatch({ type: "observation", value: Number(event.target.value) })} />
             <details className="dashboard-preview__data">
               <summary>{t("polish.dashboard.viewData")}</summary>
               <table>
@@ -88,6 +89,7 @@ export function DashboardPreview({ showSourceCard = false, variant = "hero" }: D
                 <tbody>{values.map((value, index) => <tr key={index}><th scope="row">{timeAt(index)}</th><td>{formatValue(value)}</td></tr>)}</tbody>
               </table>
             </details>
+            </>}
           </section>
           <section className="dashboard-preview__stock" aria-label={t("dashboard.stock.eyebrow")}>
             <p className="dashboard-preview__eyebrow">{t("dashboard.briefing.actNext")}</p>
@@ -95,7 +97,7 @@ export function DashboardPreview({ showSourceCard = false, variant = "hero" }: D
             <p className="dashboard-preview__stock-note">{t("polish.dashboard.stockHint")}</p>
             <div className="dashboard-preview__stock-list" role="group" aria-label={t("polish.dashboard.stockLabel")}>
               {landingDemo.stockRiskItems.map((item, index) => (
-                <button key={item.name} type="button" className="dashboard-preview__stock-item" aria-pressed={stockIndex === index} onClick={() => setStockIndex(index)}>
+                <button key={item.name} type="button" className="dashboard-preview__stock-item" aria-pressed={stockIndex === index} onClick={() => dispatch({ type: "stock", value: index })}>
                   <span className="dashboard-preview__stock-mark" aria-hidden="true">0{index + 1}</span>
                   <span><strong>{item.name}</strong><small>{t("dashboard.briefing.daysRemaining", { count: item.daysRemaining })}</small></span>
                   <span aria-hidden="true">↗</span>

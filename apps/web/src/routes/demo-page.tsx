@@ -8,9 +8,12 @@ import {
   SiteHeader,
   SkipLink,
 } from "../components/public-ui";
+import { ResetSample } from "../components/reset-sample";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
 import { emitJourneyEvent, useDemoVisit } from "../lib/journey-events";
-import { HowItWorks, SourceExplorer } from "../marketing/product-understanding";
+import { SourceExplorer } from "../marketing/product-understanding";
+import { SampleSale } from "../marketing/merchant-decisions";
+import { useSampleScenario } from "../lib/sample-scenario";
 import { HeroRecordReview } from "../marketing/hero-record-review";
 import { DashboardPreview } from "../marketing/dashboard-preview";
 import "./demo-page.css";
@@ -18,6 +21,7 @@ import "./demo-page.css";
 export function DemoPage() {
   const { t } = useTranslation();
   useDemoVisit();
+  const { state: { hasIdentity }, dispatch } = useSampleScenario();
   const { hash } = useLocation();
   useEffect(() => {
     if (hash !== "#demo-review" && hash !== "#demo-sources") return;
@@ -51,6 +55,8 @@ export function DemoPage() {
           </div>
         </div>
 
+        <ResetSample />
+        <label className="story-toggle"><input type="checkbox" checked={hasIdentity} onChange={event => dispatch({ type: "identity", value: event.target.checked })} />{t("stories.customers.toggle")}</label>
         <section className="demo-stage" aria-labelledby="demo-stage-title">
           <div className="demo-stage__note">
             <span>{t("demo.sampleLabel")}</span>
@@ -71,7 +77,8 @@ export function DemoPage() {
         </details>
         <details className="demo-review" id="demo-workflow">
           <summary>{t("stories.demo.workflow")}</summary>
-          <HowItWorks />
+          <SampleSale />
+          <p className="cinematic-pane__scope">{t("cinematic.historicalScope")}</p>
         </details>
       </main>
       <SiteFooter />

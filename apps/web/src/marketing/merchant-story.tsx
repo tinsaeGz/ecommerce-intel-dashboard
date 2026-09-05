@@ -4,12 +4,14 @@ import { DemoLink } from "../components/public-ui";
 import { getSupportedLanguage } from "../i18n";
 import { landingDemo } from "../lib/demo-data";
 import { formatCurrency, formatDemoDate, formatNumber, formatPercent } from "../lib/format";
+import { useSampleScenario } from "../lib/sample-scenario";
 import "./merchant-story.css";
 
 
 export function DailyBriefing() {
   const { i18n, t } = useTranslation();
   const locale = getSupportedLanguage(i18n.resolvedLanguage);
+  const { state: { hasIdentity } } = useSampleScenario();
 
   return (
     <section className="daily-briefing" aria-labelledby="briefing-title">
@@ -29,8 +31,8 @@ export function DailyBriefing() {
         </div>
         <div>
           <dt>{t("dashboard.briefing.returning")}</dt>
-          <dd>{formatNumber(landingDemo.returningCustomers, locale)}</dd>
-          <dd className="daily-briefing__context">{t("hero.customerContext", { customers: formatNumber(landingDemo.customers, locale) })}</dd>
+          <dd>{hasIdentity ? formatNumber(landingDemo.returningCustomers, locale) : t("stories.customers.unavailable")}</dd>
+          <dd className="daily-briefing__context">{hasIdentity ? t("hero.customerContext", { customers: formatNumber(landingDemo.customers, locale) }) : t("stories.customers.missing")}</dd>
         </div>
       </dl>
       <DemoLink location="briefing" />

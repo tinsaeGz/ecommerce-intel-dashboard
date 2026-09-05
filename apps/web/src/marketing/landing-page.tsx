@@ -10,7 +10,7 @@ import {
 } from "../components/public-ui";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
 import { DailyBriefing, ClosingInvitation } from "./merchant-story";
-import { MerchantDecisions, RecordToDecision, TrustStory } from "./merchant-decisions";
+import { CinematicStory } from "./cinematic-story";
 import { BuyingQuestions } from "./buying-questions";
 import "./landing-page.css";
 
@@ -19,7 +19,7 @@ export function LandingPage() {
   const { hash, key } = useLocation();
 
   useEffect(() => {
-    if (!["#daily-decisions", "#how-it-works", "#plans", "#faq"].includes(hash)) return;
+    if (!["#daily-decisions", "#how-it-works", "#next-sale", "#plans", "#faq"].includes(hash)) return;
     const target = document.getElementById(hash.slice(1));
     target?.focus({ preventScroll: true });
     target?.scrollIntoView?.();
@@ -53,9 +53,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        <MerchantDecisions />
-        <RecordToDecision />
-        <TrustStory />
+        <CinematicStory />
         <BuyingQuestions />
         <ClosingInvitation />
       </main>
