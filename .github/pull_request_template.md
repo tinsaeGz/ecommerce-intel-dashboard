@@ -11,7 +11,7 @@ Describe the completed behavior and why it is needed.
 
 - [ ] Narrow checks passed
 - [ ] Affected subsystem checks passed
-- [ ] English, Spanish, and French behavior considered
+- [ ] Spanish launch behavior reviewed when user-facing copy changes
 - [ ] Accessibility and security implications reviewed
 
 Commands and results:
