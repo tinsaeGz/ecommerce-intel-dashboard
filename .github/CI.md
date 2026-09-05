@@ -61,7 +61,7 @@ No backend staging host, migration snapshot, or deployment credentials exist in
 this repository. API/worker images are built and tested, **not deployed**.
 Full-stack staging/CD must be completed before Phase 0's staging exit gate.
 
-## Why the current PRs show no checks
+## Why earlier PR checks did not start
 
 GitHub is creating `startup_failure` runs before any jobs or logs exist. The
 manual CI dispatch [33953345103](https://github.com/backostech/ecommerce-intel-dashboard/actions/runs/33953345103)
@@ -87,12 +87,15 @@ success. Do not merge until the required result exists and succeeds.
 
 Resolve the billing condition through the account's authorized billing owner.
 No payment or budget change is authorized by the CI task; any additional spend
-requires an explicit account-owner decision. Do not change repository visibility,
-disable checks, or delete workflow history as a workaround. Once billing permits
-execution, dispatch CI on the PR head and verify that jobs actually start.
-The 44 image findings below are a separate, subsequent gate: the scanner never
-ran in the failed GitHub startup attempts. Require a green
-`ci-gate`, merge to `dev`, and verify the deployment job and its smoke result.
+requires an explicit account-owner decision. Do not change repository
+visibility, disable checks, or delete workflow history as a workaround.
+
+The current PR routes jobs to a repository self-hosted runner labelled
+`suq-ci`. Self-hosted runners do not consume GitHub-hosted Actions minutes, but
+the runner machine must stay online and maintain Docker, Node, Python, and
+network access. Require a green `ci-gate`, merge to `dev`, and verify the
+deployment job and its smoke result. The 44 image findings below are a separate,
+subsequent gate: the scanner never ran in the failed GitHub startup attempts.
 
 ## Local checkpoint evidence
 
