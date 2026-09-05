@@ -598,7 +598,7 @@
   "theatre": {
     "title": "Every day has a story.",
     "emphasis": "Find yours in the numbers.",
-    "intro": "Step inside Mercado Norte. Follow a busy day from the first question to the next decision.",
+    "intro": "Take a seat at Mercado Norte. See the day on screen, look closer at the evidence, then make the next move yourself.",
     "day": {
       "title": "The shop is busy.",
       "emphasis": "What is moving it?",
@@ -630,6 +630,7 @@
     "cutoff": "At the historical cutoff",
     "noMovement": "No next sale recorded",
     "draftMovement": "Next sale · awaiting confirmation",
-    "confirmedMovement": "Next sale · confirmed"
+    "confirmedMovement": "Next sale · confirmed",
+    "windowTitle": "Sample workspace"
   }
 }

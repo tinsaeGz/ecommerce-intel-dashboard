@@ -6,7 +6,7 @@ import { ButtonLink } from "../components/public-ui";
 import { ResetSample } from "../components/reset-sample";
 import { emitJourneyEvent } from "../lib/journey-events";
 import { landingDemo } from "../lib/demo-data";
-import { DayEvidence, StockMovement, WorkspaceHeading } from "./scene-material";
+import { DayEvidence, DesktopMonitor, StockMovement, WorkspaceHeading } from "./scene-material";
 import { DecisionExample, SampleSale, type DecisionKind } from "./merchant-decisions";
 import { HeroRecordReview } from "./hero-record-review";
 import "./cinematic-story.css";
@@ -118,7 +118,7 @@ export function CinematicStory() {
           </article>
           <div className="cinematic-pane" data-scene={chapter} id={`scene-${chapter}`} data-active={!inactive} onFocusCapture={() => setActive(chapter)} aria-hidden={inactive || undefined} inert={inactive}>
             <div className="scene-set">
-            <div className="scene-set__overture" aria-hidden="true"><span>0{index + 1} / 03</span><strong>{chapter === "day" ? "312" : chapter === "evidence" ? "Cod." : "−1"}</strong><span>{t(`theatre.${chapter}.motif`)}</span></div>
+            <DesktopMonitor>
             <div className="scene-workspace">
             <WorkspaceHeading chapter={chapter} />
             {chapter === "day" ? <DayScene /> : chapter === "evidence" ? <>
@@ -131,6 +131,7 @@ export function CinematicStory() {
               <ButtonLink to="/demo#demo-sources" variant="quiet" onClick={() => emitJourneyEvent("landing_cta_selected", { location: "sources" })}>{t("stories.entry.explore")}</ButtonLink>
             </>}
             </div>
+            </DesktopMonitor>
             <p className="cinematic-pane__caption"><span>{landingDemo.workspace}</span><span>{t("demo.sampleLabel")}</span></p>
             </div>
           </div>

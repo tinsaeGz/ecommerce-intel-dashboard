@@ -1753,3 +1753,15 @@ The immediate hero briefing, plan comparison, FAQ and closing invitation retain 
 Acceptance stays within the earlier fictional marketing scope and requirement IDs. Review the revised screenshots and recording for the strength of the art direction; automated accessibility and behavior checks cannot establish immersion or conversion. Existing cinematic PRs stay unmerged. This revision follows their shared-state and accessibility work.
 
 Revision validation: 79 web tests, 30 Chromium continuity/layout cases across EN/ES/FR with axe including contrast, and a 125.3 KB initial JavaScript gzip build. See `docs/reviews/cinematic-experience.md` for the revised scenes, interaction recording, reproduction instructions and remaining human review limits.
+
+## Desktop workstation amendment (2026-09-06)
+
+The owner requested stronger immersion and mockups that visibly sit inside a desktop display. The story now invites the visitor to take a seat at Mercado Norte: see the trading day on screen, inspect the evidence, and make the next move in the same sample workspace.
+
+The product demonstration is framed as a desktop monitor, with a slim dark bezel, camera detail, decorative window title bar, lower edge and metal stand. The wider stage and consistent minimum screen height keep the monitor visually grounded between chapters. The large floating numerical motifs are removed so the physical workstation becomes the focal point. Paper, ink and mint still mark the narrative changes; the old zoom movement is removed.
+
+The screen contains actual React components and shared scenario controls, not a screenshot. Decorative window marks and hardware are hidden from assistive technology and are not clickable. No fake address, connection status or operating-system action is introduced. This owner-requested frame supersedes the previous amendment’s choice to omit window chrome.
+
+On mobile, the monitor becomes a slim window frame; the camera, lower edge and stand are omitted. Text is never scaled down to fit the hardware. Enlarged or expanded content still falls back to normal page flow, and the shared dropdown renders above the frame. System colors simplify the hardware; reduced-motion users receive immediate scene changes. Shadows are limited to the physical display and stand, leaving section backgrounds flat.
+
+The demonstration’s confirmation, undo, historical-cutoff and missing-customer-evidence rules are unchanged. This is a visual revision of PR #12, not a new product capability or a claim of measured conversion improvement.

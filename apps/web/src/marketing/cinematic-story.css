@@ -218,33 +218,71 @@
     --set-background: var(--color-mint);
   }
 
-  .scene-set__overture {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: end;
-    gap: var(--space-2) var(--space-4);
-    padding-bottom: var(--space-5);
+  .desktop-monitor {
+    position: relative;
+    min-width: 0;
+  }
+
+  .desktop-monitor__case {
+    position: relative;
+    padding: 0.125rem;
+    background: var(--color-ink);
+    border: 0.0625rem solid var(--color-slate);
+    border-radius: var(--radius-card);
+  }
+
+  .desktop-monitor__screen {
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(var(--radius-card) - 0.125rem);
+    background: var(--color-white);
+    color: var(--color-ink);
+  }
+
+  .desktop-monitor__window {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: var(--space-8);
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-mist);
+    border-bottom: 0.0625rem solid var(--color-line);
     font-size: var(--font-size-caption);
-    font-weight: var(--font-weight-semibold);
+    color: var(--color-slate);
   }
 
-  .scene-set__overture strong {
-    grid-area: 1 / 2 / 3 / 3;
-    justify-self: end;
-    font-size: clamp(4rem, 9vw, 8rem);
-    line-height: 0.85;
-    letter-spacing: -0.07em;
-    font-weight: var(--font-weight-regular);
-    color: var(--set-accent);
+  .desktop-monitor__window-dots {
+    display: flex;
+    flex-shrink: 0;
+    gap: 0.3rem;
   }
 
-  .scene-set__overture :where(span:last-child) { max-width: 18ch; }
+  .desktop-monitor__window-dots i {
+    width: 0.4rem;
+    height: 0.4rem;
+    border: 0.0625rem solid var(--color-slate);
+    border-radius: 50%;
+  }
+
+  .desktop-monitor__window-mark {
+    flex-shrink: 0;
+    width: 0.625rem;
+    height: 0.5rem;
+    border: 0.0625rem solid var(--color-slate);
+    border-top-width: 0.15rem;
+  }
+
+  .desktop-monitor__window-context,
+  .desktop-monitor__camera,
+  .desktop-monitor__chin,
+  .desktop-monitor__stand { display: none; }
 
   .scene-workspace {
     min-width: 0;
     color: var(--color-ink);
     background: var(--color-white);
-    border-radius: var(--radius-control);
+    border-radius: 0;
   }
 
   .scene-workspace__header {
@@ -500,6 +538,76 @@
   .cinematic-pane .hero-record__footnote { padding: var(--space-3) var(--space-4); }
 
   @media (width >= 48rem) {
+    .scene-set { padding: var(--space-4); }
+    .desktop-monitor__window-context { display: inline; }
+
+    .desktop-monitor__case {
+      padding: var(--space-4) var(--space-2) 0;
+      border-radius: var(--radius-panel);
+      background: linear-gradient(150deg, var(--color-slate), var(--color-ink) 18% 85%, var(--color-slate));
+      box-shadow: 0 var(--space-3) var(--space-6) color-mix(in srgb, var(--color-ink) 18%, transparent);
+    }
+
+    .desktop-monitor__screen {
+      border: 0.0625rem solid var(--color-ink);
+      border-radius: var(--radius-card) var(--radius-card) 0 0;
+    }
+
+    .desktop-monitor__camera {
+      display: block;
+      position: absolute;
+      inset-block-start: 0.35rem;
+      inset-inline-start: calc(50% - 0.15rem);
+      width: 0.3rem;
+      height: 0.3rem;
+      border: 0.0625rem solid var(--color-slate);
+      border-radius: 50%;
+      background: var(--color-ink);
+    }
+
+    .desktop-monitor__chin {
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      height: var(--space-6);
+      color: var(--color-line);
+      font-family: var(--font-serif);
+      font-size: var(--font-size-caption);
+      letter-spacing: 0.1em;
+    }
+
+    .desktop-monitor__chin i {
+      position: absolute;
+      inset-inline-end: var(--space-3);
+      width: 0.2rem;
+      height: 0.2rem;
+      border-radius: 50%;
+      background: var(--color-mint);
+    }
+
+    .desktop-monitor__stand {
+      display: grid;
+      position: relative;
+      justify-items: center;
+      padding-bottom: var(--space-3);
+    }
+
+    .desktop-monitor__stand span {
+      width: 16%;
+      height: var(--space-8);
+      background: linear-gradient(90deg, var(--color-slate), var(--color-line) 16%, var(--color-mist) 55%, var(--color-slate));
+      clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
+    }
+
+    .desktop-monitor__stand i {
+      width: 35%;
+      height: var(--space-2);
+      border-radius: 50% 50% 0.2rem 0.2rem;
+      background: linear-gradient(var(--color-mist), var(--color-line) 35%, var(--color-slate));
+      box-shadow: 0 var(--space-2) var(--space-3) color-mix(in srgb, var(--color-ink) 22%, transparent);
+    }
+
     .cinematic-pane[data-scene="sale"] .scene-workspace {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -523,7 +631,6 @@
     }
     .cinematic-pane[data-scene="sale"] .scene-inventory__balance strong { font-size: 6rem; }
 
-    .scene-set { padding: var(--space-6); }
 
     .hero-record[data-compact="true"] .hero-record__review-layout {
       display: grid;
@@ -540,6 +647,12 @@
     }
   }
 
+  .cinematic-story[data-enhanced="true"] .scene-set {
+    padding: 0;
+    background: transparent;
+  }
+  .cinematic-story[data-enhanced="true"] .desktop-monitor__screen { min-height: 39rem; }
+
   .cinematic-story[data-enhanced="true"] .cinematic-toolbar {
     position: sticky;
     top: 0;
@@ -547,7 +660,7 @@
   }
 
   .cinematic-story[data-enhanced="true"] .cinematic-layout {
-    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr);
     gap: 0 var(--space-10);
     align-items: start;
   }
@@ -565,14 +678,12 @@
     top: 9rem;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1);
-    transition: opacity var(--motion-panel) ease, transform var(--motion-reveal) cubic-bezier(0.2, 0.7, 0.2, 1), visibility var(--motion-panel);
+    transition: opacity var(--motion-panel) ease, visibility var(--motion-panel);
   }
 
   .cinematic-story[data-enhanced="true"] .cinematic-pane[data-active="false"] {
     opacity: 0;
     visibility: hidden;
-    transform: translateY(var(--space-6)) scale(0.97);
     pointer-events: none;
   }
 
@@ -618,6 +729,20 @@
       --set-accent: CanvasText;
     }
     .scene-workspace { border: 0.0625rem solid CanvasText; }
+
+    .desktop-monitor__case {
+      background: Canvas;
+      border-color: CanvasText;
+      box-shadow: none;
+    }
+    .desktop-monitor__stand { visibility: hidden; }
+    .desktop-monitor__chin { color: CanvasText; }
+
+    .desktop-monitor__window {
+      color: CanvasText;
+      background: Canvas;
+    }
+
 
     .scene-bars__tracks span,
     .scene-inventory__units span,

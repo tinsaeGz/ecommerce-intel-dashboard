@@ -598,7 +598,7 @@
   "theatre": {
     "title": "Cada día tiene una historia.",
     "emphasis": "Encuentra la tuya en los números.",
-    "intro": "Entra en Mercado Norte. Sigue un día de actividad, desde la primera pregunta hasta la siguiente decisión.",
+    "intro": "Toma asiento en Mercado Norte. Mira el día en pantalla, examina los registros y da tú el siguiente paso.",
     "day": {
       "title": "La tienda está llena.",
       "emphasis": "¿Qué la mueve?",
@@ -630,6 +630,7 @@
     "cutoff": "En el corte histórico",
     "noMovement": "Sin nueva venta registrada",
     "draftMovement": "Siguiente venta · pendiente de confirmar",
-    "confirmedMovement": "Siguiente venta · confirmada"
+    "confirmedMovement": "Siguiente venta · confirmada",
+    "windowTitle": "Espacio de ejemplo"
   }
 }

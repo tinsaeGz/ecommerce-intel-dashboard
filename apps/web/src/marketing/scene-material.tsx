@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getSupportedLanguage } from "../i18n";
@@ -7,6 +7,25 @@ import { formatDemoDate } from "../lib/format";
 import { coffeeStock, returningCount, salesComparison, sampleStock } from "../lib/merchant-story-data";
 import { useSampleScenario } from "../lib/sample-scenario";
 import type { DecisionKind } from "./merchant-decisions";
+
+export function DesktopMonitor({ children }: { children: ReactNode }) {
+  const { t } = useTranslation();
+  return <div className="desktop-monitor">
+    <div className="desktop-monitor__case">
+      <div className="desktop-monitor__camera" aria-hidden="true" />
+      <div className="desktop-monitor__screen">
+        <div className="desktop-monitor__window" aria-hidden="true">
+          <span className="desktop-monitor__window-dots"><i /><i /><i /></span>
+          <span>Suq Insights <span className="desktop-monitor__window-context">— {t("theatre.windowTitle")}</span></span>
+          <span className="desktop-monitor__window-mark" />
+        </div>
+        {children}
+      </div>
+      <div className="desktop-monitor__chin" aria-hidden="true"><span>suq</span><i /></div>
+    </div>
+    <div className="desktop-monitor__stand" aria-hidden="true"><span /><i /></div>
+  </div>;
+}
 
 export function WorkspaceHeading({ chapter }: { chapter: "day" | "evidence" | "sale" }) {
   const { t, i18n } = useTranslation();

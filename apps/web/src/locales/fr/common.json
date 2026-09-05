@@ -598,7 +598,7 @@
   "theatre": {
     "title": "Chaque jour a son histoire.",
     "emphasis": "Trouvez la vôtre dans les chiffres.",
-    "intro": "Entrez chez Mercado Norte. Suivez une journée animée, de la première question à la prochaine décision.",
+    "intro": "Installez-vous chez Mercado Norte. Découvrez la journée à l’écran, examinez les données, puis passez vous-même à l’action.",
     "day": {
       "title": "La boutique s’anime.",
       "emphasis": "Qu’est-ce qui la fait avancer ?",
@@ -630,6 +630,7 @@
     "cutoff": "À l’arrêté historique",
     "noMovement": "Aucune nouvelle vente enregistrée",
     "draftMovement": "Prochaine vente · à confirmer",
-    "confirmedMovement": "Prochaine vente · confirmée"
+    "confirmedMovement": "Prochaine vente · confirmée",
+    "windowTitle": "Espace de démonstration"
   }
 }
