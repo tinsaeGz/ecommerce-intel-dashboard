@@ -25,6 +25,35 @@ class SelectionTests(unittest.TestCase):
         self.assertTrue(lanes["web"] and lanes["containers"] and lanes["deploy_web"])
         self.assertFalse(lanes["api"] or lanes["mobile"])
 
+    def test_documentation_images_keep_docs_and_security(self):
+        for extension in ("png", "jpg", "jpeg", "webp", "gif", "svg", "drawio", "PNG"):
+            with self.subTest(extension=extension):
+                lanes = select([f"docs/reviews/landing/preview.{extension}"])
+                self.assertEqual(
+                    {key for key, enabled in lanes.items() if enabled},
+                    {"docs", "security"},
+                )
+
+    def test_landing_screenshots_do_not_expand_web_checks_to_every_subsystem(self):
+        lanes = select(
+            [
+                "apps/web/src/marketing/landing-page.tsx",
+                "docs/reviews/landing.md",
+                "docs/reviews/landing/en-390.png",
+            ]
+        )
+        self.assertEqual(
+            {key for key, enabled in lanes.items() if enabled},
+            {"web", "docs", "security", "containers", "deploy_web"},
+        )
+
+    def test_runtime_images_and_unknown_docs_keep_required_suites(self):
+        self.assertTrue(select(["apps/web/public/hero.png"])["web"])
+        self.assertTrue(select(["apps/mobile/assets/icon.png"])["mobile"])
+        for path in ("docs/generate.py", "docs/fixture.json", "new-subsystem/hero.png"):
+            with self.subTest(path=path):
+                self.assertTrue(all(select([path]).values()))
+
     def test_backend_rechecks_contract_consumers_without_web_deployment(self):
         lanes = select(["apps/api/src/suq_api/api/v1/version.py"])
         self.assertTrue(
