@@ -12,6 +12,7 @@ permissions:
 
 env:
   DOCKER_CONTEXT: default
+  PATH: /home/tensu/.local/bin:/usr/local/bin:/usr/bin:/bin
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
@@ -134,11 +135,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: astral-sh/setup-uv@v10
-        with:
-          python-version: "3.12"
-          enable-cache: true
-          cache-dependency-glob: apps/api/uv.lock
+      - name: Verify self-hosted uv
+        run: uv --version
       - run: uv sync --project apps/api --locked --all-groups
       - name: Backend quality and coverage
         run: |
@@ -164,11 +162,8 @@ jobs:
           node --version
           npm --version
       - run: npm ci
-      - uses: astral-sh/setup-uv@v10
-        with:
-          python-version: "3.12"
-          enable-cache: true
-          cache-dependency-glob: apps/api/uv.lock
+      - name: Verify self-hosted uv
+        run: uv --version
       - run: uv sync --project apps/api --locked --all-groups
       - name: Verify API and generated client together
         run: |
@@ -221,10 +216,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Install Trivy
-        uses: aquasecurity/setup-trivy@81e514348e19b6112ce2a7e3ecbafe19c1e1f567
-        with:
-          version: v0.74.0
+      - name: Verify self-hosted Trivy
+        run: trivy --version
       - name: Scan dependencies and redact secret findings
         run: |
           python3 .github/scripts/security.py
@@ -239,10 +232,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Install Trivy
-        uses: aquasecurity/setup-trivy@81e514348e19b6112ce2a7e3ecbafe19c1e1f567
-        with:
-          version: v0.74.0
+      - name: Verify self-hosted Trivy
+        run: trivy --version
       - name: Validate and start real-service stack
         run: |
           docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci config --quiet
