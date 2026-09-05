@@ -8,20 +8,19 @@ Authority: SDLC v3.0 §11. Phase 0 remains in progress; Phase 1 has not started.
 | CI before features (§9.2) | Partial | Affected subsystem gates, security/image scans and container smoke are wired; GitHub startup, real migrations and authenticated journey gates remain open |
 | Development containers (§9.1) | Implemented | `deploy/compose.yml`, container builds, `deploy/smoke.py`, ADR 0001 |
 | Isolated worker queues (§5.2) | Infrastructure implemented | Ingest, fast, and reports pools; real task routing follows task implementation |
-| Core middleware (§5.3) | Not implemented | Request tracing, body guard, authentication, tenant/RLS binding, entitlements, limits, idempotency, conditional reads |
-| Authentication (FR-A-1, FR-A-2, FR-A-5) | Not implemented | Persistent accounts, secure sessions, verification, roles, three-locale web flows and negative tests |
+| Core middleware (§5.3) | Designed, not implemented | ADR 0004 fixes the auth/tenant persistence boundary; request tracing, body guard, authentication, tenant/RLS binding, entitlements, limits, idempotency, and conditional reads remain implementation work |
+| Authentication (FR-A-1, FR-A-2, FR-A-5) | Designed, not implemented | ADR 0004 defines merchants, users, email verification, refresh rotation, roles, RLS binding, required migrations, three-locale web flows, and negative tests |
 | Automatic staging deployment (§9.2) | Not implemented for full stack | Existing Vercel deployment serves the web preview only |
 | Phase 0 exit gate (§11) | Not met | Signup, login, tenant-scoped endpoint through full middleware on staging |
 
 ## Next implementation checkpoint
 
-Record the authentication and tenant-persistence design before adding tables.
-Implement the first authentication vertical slice across PostgreSQL migrations
-and RLS, centralized middleware/services, the generated API contract/client,
-and the English, Spanish, and French web flows. Include real-service tenancy
-and session negative tests. The local database administrator must never become
-the runtime application's database role. Extend readiness to check the actual
-dependencies once adapters exist.
+Implement ADR 0004 as the first authentication vertical slice across
+PostgreSQL migrations and RLS, centralized middleware/services, the generated
+API contract/client, and the English, Spanish, and French web flows. Include
+real-service tenancy and session negative tests. The local database
+administrator must never become the runtime application's database role. Extend
+readiness to check the actual dependencies once adapters exist.
 
 Staging provisioning and encrypted runtime credentials are external dependencies
 for the final Phase 0 exit gate. The development Compose environment is not a
