@@ -71,16 +71,21 @@ def main() -> None:
         == "1"
     )
     execute(
-        "minio",
-        "curl",
-        "--fail",
-        "--silent",
-        "http://localhost:9000/minio/health/ready",
+        "object-storage",
+        "python",
+        "-c",
+        (
+            "import urllib.request; "
+            "urllib.request.urlopen('http://localhost:9000/health/ready', timeout=3)"
+        ),
     )
     execute("mailpit", "/mailpit", "readyz")
     with urllib.request.urlopen(args.mail_url, timeout=10) as response:
         assert response.status == 200
-    print("PASS: PostgreSQL query, Redis command, MinIO and mail catcher readiness")
+    print(
+        "PASS: PostgreSQL query, Redis command, "
+        "S3-compatible object store and mail catcher readiness"
+    )
 
     for service, expected in (
         ("worker-ingest", {"ingest"}),

@@ -15,7 +15,7 @@ Deleted files and both sides of a rename participate in selection.
 | Mobile | Native lint, TypeScript, unit tests, Android export; security |
 | Shared packages | Package builds/tests, generated tokens, both client suites, security, containers; API-client changes also verify OpenAPI |
 | API | Ruff formatting/lint/security rules, strict mypy, pytest, 85% overall coverage, 95% domain threshold when domain exists, pip audit; OpenAPI/client regeneration, both client suites, packages, security, containers, migration gate |
-| Infrastructure | Compose validation, image builds, real PostgreSQL/Redis/MinIO/mail/worker smoke, CRITICAL image vulnerability scans, security, migration gate |
+| Infrastructure | Compose validation, image builds, real PostgreSQL/Redis/object-storage/mail/worker smoke, CRITICAL image vulnerability scans, security, migration gate |
 | Documentation only | Markdown lint and security scan (including secrets in docs) |
 | Workflow, root lockfile, unknown paths | Every gate |
 
@@ -105,22 +105,25 @@ pass, OpenAPI/client regeneration is clean, and real-container smoke passes.
 The source dependency/secret scan including development dependencies reports
 zero CRITICAL dependencies and zero secrets.
 
-The image gate correctly fails on the existing images. Trivy 0.74.0 reports
-the following CRITICAL findings; these are scanner findings requiring triage,
-not a claim that every finding is exploitable in this application. No findings
-are suppressed and deployment must remain blocked.
+The original image gate failed on CRITICAL findings in the pinned Caddy,
+MinIO, PostgreSQL Bookworm, Redis Bookworm, Mailpit, and Python slim runtime
+images. ADR 0003 records the remediation: the Phase 0 stack now uses nginx,
+Alpine application images, a hardened PostgreSQL Alpine derivative, Redis
+Alpine, current Mailpit, and an in-repository object-storage health stub until
+the ingestion phase needs full S3 behavior.
+
+Local validation scanned every compose image reference with Trivy 0.74.0 and
+reported zero CRITICAL findings for:
 
 | Image | CRITICAL findings |
-|---|---|
-| `axllent/mailpit:v1.27.4` | 4 |
-| `minio/minio:RELEASE.2025-04-22T22-12-26Z` | 8 |
-| `postgres:16-bookworm` | 16 |
-| `redis:7-bookworm` | 4 |
-| `suq-api:local` | 5 |
-| `suq-ci-validation-edge` | 7 |
+|---|---:|
+| `axllent/mailpit:latest` | 0 |
+| `redis:7-alpine` | 0 |
+| `suq-api:local` | 0 |
+| `suq-ci-edge:latest` | 0 |
+| `suq-ci-object-storage:latest` | 0 |
+| `suq-ci-postgres:latest` | 0 |
 
-Counts are from this local validation, not a permanent vulnerability inventory.
-Use the next CI scan to assess patched images and vendor advisories. GitHub
-runner execution, environment approvals, deployed-route probes, real migration
-validation, and full-stack staging remain unverified or unavailable as described
-above.
+No findings are suppressed. GitHub runner execution, environment approvals,
+deployed-route probes, real migration validation, and full-stack staging remain
+unverified or unavailable as described above.

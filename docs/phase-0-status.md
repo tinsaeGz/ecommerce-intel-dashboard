@@ -37,10 +37,12 @@ staging release candidate. Native product delivery remains demand-triggered.
   system Docker daemon. All nine services became healthy.
 - `python3 deploy/smoke.py --env-file deploy/.env.example --project-name suq-phase0-check`:
   passed with `DOCKER_CONTEXT=default`; same-origin routes, missing assets,
-  PostgreSQL, Redis, MinIO, mail preview, worker queue isolation, and non-root,
-  read-only, memory-bounded application containers verified.
+  PostgreSQL, Redis, object-storage readiness, mail preview, worker queue
+  isolation, and non-root, read-only, memory-bounded application containers
+  verified.
 - Smoke-script Ruff formatting/lint and documentation lint: passed.
-- Image vulnerability gate: Trivy scanning is now wired into CI without a Docker
-  Scout login. See `.github/CI.md`; a configured gate is not proof of a green run.
+- Image vulnerability gate: local Trivy validation scanned every compose image
+  reference with zero CRITICAL findings. See `.github/CI.md`; GitHub CI must
+  still pass on the personal repository before merge.
 - Authenticated staging, migration/RLS, and storage-adapter integration gates
   are not implemented and have not been run.

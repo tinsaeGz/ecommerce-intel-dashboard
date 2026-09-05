@@ -18,8 +18,9 @@ python3 deploy/smoke.py
 Open <http://localhost:8080> for the web application, `/v1/version` for the API,
 and <http://localhost:8025> for the mail preview. The application is currently
 a product preview; `/app` is not yet authenticated. No email is sent until the
-notification adapter is implemented. Internal SMTP is `mailpit:1025`, object
-storage is `minio:9000`, PostgreSQL is `postgres:5432`, and Redis is `redis:6379`.
+notification adapter is implemented. Internal SMTP is `mailpit:1025`,
+Phase 0 object-storage health stub is `object-storage:9000`, PostgreSQL is
+`postgres:5432`, and Redis is `redis:6379`.
 The database bootstrap account is a local administrator, **not** the future
 application database role. No database credentials are passed to the API until
 the tenant-safe persistence layer is implemented.

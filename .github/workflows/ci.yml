@@ -12,6 +12,7 @@ permissions:
 
 env:
   DOCKER_CONTEXT: default
+  DOCKER_HOST: unix:///var/run/docker.sock
   PATH: /home/tensu/.local/bin:/usr/local/bin:/usr/bin:/bin
 
 concurrency:
@@ -242,11 +243,13 @@ jobs:
         run: python3 deploy/smoke.py --env-file deploy/.env.example --project-name suq-ci
       - name: Scan built application and service images
         run: |
-          docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci images --quiet | sort -u > /tmp/suq-images
+          docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci images --format json \
+            | python3 -c 'import json, sys; print("\n".join(sorted({"{}:{}".format(image["Repository"], image["Tag"]) for image in json.load(sys.stdin)})))' \
+            > /tmp/suq-images
           test -s /tmp/suq-images
           scan_status=0
-          while IFS= read -r image_id; do
-            trivy image --scanners vuln --severity CRITICAL --exit-code 1 "$image_id" || scan_status=1
+          while IFS= read -r image_ref; do
+            trivy image --scanners vuln --severity CRITICAL --exit-code 1 "$image_ref" || scan_status=1
           done < /tmp/suq-images
           exit "$scan_status"
       - name: Failure diagnostics

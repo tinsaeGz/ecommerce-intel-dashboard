@@ -11,9 +11,9 @@ COPY apps/web apps/web
 COPY packages packages
 RUN npm run build:packages && npm run build:web
 
-FROM caddy:2.10.2-alpine
-RUN setcap -r /usr/bin/caddy
-COPY deploy/Caddyfile /etc/caddy/Caddyfile
+FROM nginx:alpine
+COPY deploy/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/apps/web/dist /srv
+RUN chown -R 10001:10001 /var/cache/nginx /var/run /srv
 USER 10001:10001
 EXPOSE 8080
