@@ -1,5 +1,7 @@
 @layer components {
   .demo-review {
+    --canvas-inset: clamp(0rem, 2vw, 1.5rem);
+
     margin-top: var(--space-10);
     scroll-margin-top: var(--space-5);
   }

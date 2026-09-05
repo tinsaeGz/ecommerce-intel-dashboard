@@ -390,5 +390,85 @@
   "footer": {
     "previewNote": "Aperçu du produit · Aucune donnée privée requise",
     "languages": "English · Español · Français"
+  },
+  "stories": {
+    "eyebrow": "Décidez avant que la journée ne vous échappe",
+    "title": "Trois questions. Des décisions claires.",
+    "sample": "Mercado Norte · {{date}} · journée fictive",
+    "product": "Produit",
+    "products": {
+      "tote": "Sac en toile",
+      "coffee": "Café moulu",
+      "other": "Autres produits"
+    },
+    "sales": {
+      "question": "Qu’est-ce qui se vend ?",
+      "title": "Comprenez ce qui explique l’évolution.",
+      "body": "Les sacs en toile et le café expliquent l’essentiel de la hausse. Vérifiez ce qui se vend avant de choisir quoi promouvoir ou réapprovisionner.",
+      "change": "De chiffre d’affaires en plus par rapport à la veille",
+      "evidence": "Quelles données expliquent la hausse ?",
+      "caption": "Chiffre d’affaires à 14 h chaque jour, en EUR",
+      "before": "2 sept.",
+      "now": "3 sept.",
+      "total": "Total",
+      "source": "L’export des ventes contient {{count}} transactions confirmées pour la journée fictive ; les totaux par produit correspondent au chiffre d’affaires affiché ci-dessus."
+    },
+    "stock": {
+      "question": "Qu’est-ce qui risque de manquer ?",
+      "title": "Vérifiez le stock avant la mauvaise surprise.",
+      "body": "Un comptage donne le point de départ. Les livraisons s’ajoutent et les ventes se soustraient, pour vérifier la quantité avant de commander.",
+      "remaining_one": "{{count}} unité restante",
+      "remaining_other": "{{count}} unités restantes",
+      "estimate": "Environ {{days}} jours à raison de {{pace}} unités vendues par jour. Une estimation, pas une date de rupture garantie.",
+      "evidence": "Comment cette quantité a-t-elle été calculée ?",
+      "observed": "Dernier comptage physique",
+      "delivered": "Livraisons depuis le comptage",
+      "sold": "Ventes depuis le comptage",
+      "prerequisite": "Cet exemple combine un comptage, une livraison et des ventes. Un fichier de ventes seul ne permet pas de connaître le stock en rayon."
+    },
+    "customers": {
+      "question": "Quels clients reviennent ?",
+      "title": "Retrouvez les clients fidèles dans vos données.",
+      "body": "Reconnaissez les clients qui reviennent grâce à un identifiant stable. Désactivez-le dans cet exemple pour voir ce qui se passe sans cette information.",
+      "toggle": "Inclure les identifiants clients",
+      "result": "Clients revenus parmi les {{total}} d’aujourd’hui ; {{first}} apparaissent pour la première fois dans l’historique fictif.",
+      "unavailable": "Analyse des clients fidèles indisponible",
+      "missing": "Ajoutez un identifiant client stable pour relier les visites. Les totaux des ventes ne révèlent pas qui est revenu.",
+      "evidence": "Qu’est-ce qu’un client qui revient ?",
+      "source": "Sur les {{total}} identifiants distincts présents aujourd’hui, {{returning}} figurent aussi dans l’historique antérieur de l’exemple. Cela ne précise pas depuis quand une personne est cliente."
+    },
+    "entry": {
+      "title": "Importez un fichier. Ou notez la prochaine vente.",
+      "body": "Partez de vos données actuelles et gardez une vue à jour pendant votre activité.",
+      "steps": {
+        "add": "Apportez un tableur, un export de caisse, une photo ou une saisie quotidienne.",
+        "confirm": "Vérifiez les détails incertains avant qu’ils ne modifient vos résultats.",
+        "see": "Suivez ventes, stocks et clients lorsque les données le permettent."
+      },
+      "sample": "Exemple local · rien n’est enregistré",
+      "try": "Essayez la prochaine vente de café.",
+      "context": "Partez des 12 unités restantes à la clôture de la journée fictive. Cette vente suivante ne change que le stock affiché ici.",
+      "stock_one": "Café moulu · {{count}} unité restante",
+      "stock_other": "Café moulu · {{count}} unités restantes",
+      "select": "Noter une vente de café",
+      "review": "Vendre une unité de café moulu : {{before}} → {{after}} unités restantes.",
+      "confirm": "Confirmer la vente fictive",
+      "cancel": "Annuler",
+      "undo": "Annuler la vente fictive",
+      "result": "La prochaine vente réduit le stock d’une unité.",
+      "formats": "CSV · Excel · Exports de caisse · Photos · Saisie quotidienne",
+      "explore": "Explorer les exemples de sources"
+    },
+    "trust": {
+      "eyebrow": "Des preuves à côté de chaque réponse",
+      "title": "Vous gardez le dernier mot.",
+      "body": "Le produit est conçu pour proposer un sens, expliquer pourquoi et vous laisser le corriger. Essayez la révision avant d’apporter vos propres données.",
+      "question": "Que signifie « Cod. » ?",
+      "evidence": "Ces valeurs originales de l’exemple espagnol ressemblent à des codes produit. Le titre abrégé nécessite encore votre contexte.",
+      "missing": "Aucun champ de coût confirmé ? La marge reste indisponible au lieu d’être affichée à zéro."
+    },
+    "demo": {
+      "workflow": "Explorer toutes les étapes de la révision"
+    }
   }
 }

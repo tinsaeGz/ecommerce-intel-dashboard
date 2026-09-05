@@ -38,29 +38,6 @@ export function DailyBriefing() {
   );
 }
 
-const outcomeKeys = ["trace", "confirm", "preserve", "missing", "context", "language"] as const;
-
-export function MerchantOutcomes() {
-  const { t } = useTranslation();
-  return (
-    <section className="merchant-outcomes" aria-labelledby="outcomes-title">
-      <div className="section-heading">
-        <p className="section-heading__eyebrow">{t("presentation.outcomes.eyebrow")}</p>
-        <h2 id="outcomes-title">{t("presentation.outcomes.title")}</h2>
-      </div>
-      <ul className="merchant-outcomes__grid">
-        {outcomeKeys.map((key, index) => (
-          <li className="merchant-outcomes__item" key={key}>
-            <span className="merchant-outcomes__number" aria-hidden="true">0{index + 1}</span>
-            <h3>{t(`presentation.outcomes.items.${key}.title`)}</h3>
-            <p>{t(`presentation.outcomes.items.${key}.body`)}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
 export function ClosingInvitation() {
   const { t } = useTranslation();
   return (

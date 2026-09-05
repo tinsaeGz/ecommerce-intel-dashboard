@@ -390,5 +390,85 @@
   "footer": {
     "previewNote": "Vista previa del producto · No requiere datos privados",
     "languages": "English · Español · Français"
+  },
+  "stories": {
+    "eyebrow": "Decide antes de que termine el día",
+    "title": "Tres preguntas. Próximos pasos claros.",
+    "sample": "Mercado Norte · {{date}} · día de ejemplo ficticio",
+    "product": "Producto",
+    "products": {
+      "tote": "Bolsa de lona",
+      "coffee": "Café molido",
+      "other": "Otros productos"
+    },
+    "sales": {
+      "question": "¿Qué se vende?",
+      "title": "Descubre qué impulsa el cambio.",
+      "body": "Las bolsas de lona y el café explican la mayor parte del aumento. Revisa qué se vende antes de decidir qué promocionar o reponer.",
+      "change": "Más ingresos que el día anterior",
+      "evidence": "¿Qué registros explican el aumento?",
+      "caption": "Ingresos a las 14:00 de cada día, en EUR",
+      "before": "2 sept",
+      "now": "3 sept",
+      "total": "Total",
+      "source": "El archivo de ventas contiene {{count}} transacciones confirmadas del día de ejemplo; los totales por producto coinciden con los ingresos mostrados arriba."
+    },
+    "stock": {
+      "question": "¿Qué está por agotarse?",
+      "title": "Revisa las existencias antes de llevarte una sorpresa.",
+      "body": "Un recuento indica el punto de partida. Las entregas suman y las ventas restan, para que puedas comprobar la cantidad antes de reponer.",
+      "remaining_one": "Queda {{count}} unidad",
+      "remaining_other": "Quedan {{count}} unidades",
+      "estimate": "Unos {{days}} días a un ritmo de {{pace}} unidades vendidas al día. Es una estimación, no una fecha de agotamiento garantizada.",
+      "evidence": "¿Cómo se calculó esta cantidad?",
+      "observed": "Último recuento físico",
+      "delivered": "Entregas desde el recuento",
+      "sold": "Ventas desde el recuento",
+      "prerequisite": "Este ejemplo combina un recuento de existencias, un registro de entrega y ventas. Un archivo de ventas por sí solo no indica qué queda en la estantería."
+    },
+    "customers": {
+      "question": "¿Qué clientes vuelven?",
+      "title": "Identifica las visitas recurrentes en tus registros.",
+      "body": "Reconoce a los clientes que vuelven cuando tus registros incluyen un identificador estable. Desactívalo en este ejemplo para ver qué ocurre sin esa información.",
+      "toggle": "Incluir identificadores de clientes",
+      "result": "Clientes recurrentes de {{total}} hoy; {{first}} aparecen por primera vez en el historial de ejemplo.",
+      "unavailable": "Análisis de clientes recurrentes no disponible",
+      "missing": "Añade un identificador estable de cliente para relacionar las visitas. Los totales de ventas no revelan quién volvió.",
+      "evidence": "¿Qué se considera un cliente recurrente?",
+      "source": "De {{total}} identificadores distintos en los registros de hoy, {{returning}} también aparecen en el historial anterior del ejemplo. Esto no indica desde cuándo alguien es cliente."
+    },
+    "entry": {
+      "title": "Trae un archivo. O registra la próxima venta.",
+      "body": "Empieza con los registros que tienes y mantén la información al día mientras trabajas.",
+      "steps": {
+        "add": "Trae una hoja de cálculo, un archivo del punto de venta, una foto o una entrada diaria.",
+        "confirm": "Revisa los detalles inciertos antes de que afecten a tus resultados.",
+        "see": "Sigue ventas, existencias y clientes cuando los registros lo permitan."
+      },
+      "sample": "Ejemplo local · no se guarda nada",
+      "try": "Prueba la próxima venta de café.",
+      "context": "Empieza con las 12 unidades que quedan al cierre del día de ejemplo. Esta venta posterior solo cambia las existencias mostradas aquí.",
+      "stock_one": "Café molido · queda {{count}} unidad",
+      "stock_other": "Café molido · quedan {{count}} unidades",
+      "select": "Registrar una venta de café",
+      "review": "Vende una unidad de café molido: quedan {{before}} → {{after}} unidades.",
+      "confirm": "Confirmar venta de ejemplo",
+      "cancel": "Cancelar",
+      "undo": "Deshacer venta de ejemplo",
+      "result": "La próxima venta reduce las existencias en una unidad.",
+      "formats": "CSV · Excel · Archivos del punto de venta · Fotos · Entrada diaria",
+      "explore": "Explorar ejemplos de fuentes"
+    },
+    "trust": {
+      "eyebrow": "Cada respuesta viene con sus pruebas",
+      "title": "Tú tienes la última palabra.",
+      "body": "El producto está diseñado para proponer un significado, explicar por qué y dejarte corregirlo. Prueba la revisión antes de traer tus propios registros.",
+      "question": "¿Qué significa «Cod.»?",
+      "evidence": "Estos valores originales del ejemplo en español parecen códigos de producto. El encabezado abreviado aún necesita tu contexto.",
+      "missing": "¿Falta un campo de coste confirmado? El margen queda como no disponible, en lugar de mostrarse como cero."
+    },
+    "demo": {
+      "workflow": "Explorar cada paso de la revisión"
+    }
   }
 }

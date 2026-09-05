@@ -2,7 +2,7 @@
 
 Date: 2026-09-05
 
-Status: PR 1 implemented for review; PRs 2–4 remain planned. See [PR 1 validation](reviews/landing-conversion.md).
+Status: PRs 1 and 2 implemented for review; PRs 3–4 remain planned. See [PR 1 validation](reviews/landing-conversion.md) and [PR 2 validation](reviews/landing-merchant-stories.md).
 
 Baseline: `45b7326` — flat landing section surfaces.
 
@@ -150,7 +150,7 @@ Ready to implement without a new commercial decision: PR 1, followed by the samp
 
 Anonymous real-file trials remain outside this plan. A future proposal must resolve FR-A-1's verified-account upload rule, isolation, file-size/type limits, abuse and compute budgets, retention/deletion, personal-data handling, and the difference between inference preview and committed ingestion. The current sample demo is the delivery path while that decision remains open.
 
-Next action: review PR 1 on `fix/tensu/landing-conversion-journey`, then implement the outcome stories and live-entry sample in PR 2. Preserve unrelated diagrams and leave the v4 amendment PR in place.
+Next action: review PRs 1 and 2 in order, then implement PR 3’s planned pricing comparison, FAQ, and verified trust/footer information. Preserve unrelated diagrams and leave the v4 amendment PR in place.
 
 ## 9. Review amendments
 

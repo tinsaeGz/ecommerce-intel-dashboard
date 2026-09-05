@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -8,6 +10,7 @@ import {
 } from "../components/public-ui";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
 import { emitJourneyEvent, useDemoVisit } from "../lib/journey-events";
+import { HowItWorks, SourceExplorer } from "../marketing/product-understanding";
 import { HeroRecordReview } from "../marketing/hero-record-review";
 import { DashboardPreview } from "../marketing/dashboard-preview";
 import "./demo-page.css";
@@ -15,6 +18,16 @@ import "./demo-page.css";
 export function DemoPage() {
   const { t } = useTranslation();
   useDemoVisit();
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (hash !== "#demo-review" && hash !== "#demo-sources") return;
+    const target = document.querySelector<HTMLDetailsElement>(hash);
+    if (target) {
+      target.open = true;
+      target.querySelector("summary")?.focus({ preventScroll: true });
+      target.scrollIntoView?.();
+    }
+  }, [hash]);
 
   useDocumentMetadata(t("meta.demo.title"), t("meta.demo.description"));
 
@@ -51,6 +64,14 @@ export function DemoPage() {
         }}>
           <summary>{t("hero.reviewAction")}</summary>
           <HeroRecordReview />
+        </details>
+        <details className="demo-review" id="demo-sources">
+          <summary>{t("stories.entry.explore")}</summary>
+          <SourceExplorer />
+        </details>
+        <details className="demo-review" id="demo-workflow">
+          <summary>{t("stories.demo.workflow")}</summary>
+          <HowItWorks />
         </details>
       </main>
       <SiteFooter />

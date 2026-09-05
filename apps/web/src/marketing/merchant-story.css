@@ -74,50 +74,6 @@
     }
   }
 
-  .merchant-outcomes {
-    padding: var(--space-18) var(--canvas-inset) 0;
-    background: transparent;
-  }
-
-  .merchant-outcomes__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-top: var(--space-10);
-    padding: 0;
-    list-style: none;
-  }
-
-  .merchant-outcomes__item {
-    padding: var(--space-6) var(--space-5);
-    border-top: 0.0625rem solid var(--color-line);
-    border-inline-start: 0.0625rem solid var(--color-line);
-  }
-
-  .merchant-outcomes__item:nth-child(3n + 1) {
-    border-inline-start: 0;
-  }
-
-  .merchant-outcomes__number {
-    display: inline-block;
-    margin-bottom: var(--space-5);
-    padding: var(--space-1) var(--space-2);
-    font-family: ui-monospace, monospace;
-    font-size: var(--font-size-caption);
-    background: var(--color-mint);
-  }
-
-  .merchant-outcomes__item h3 {
-    font-size: var(--font-size-body-large);
-    letter-spacing: -0.025em;
-    line-height: var(--line-height-heading);
-  }
-
-  .merchant-outcomes__item p {
-    margin-top: var(--space-3);
-    color: var(--color-slate);
-    line-height: var(--line-height-body);
-  }
-
   .closing-invitation {
     padding: var(--space-14) var(--canvas-inset);
   }
@@ -176,15 +132,6 @@
   @media (width <= 48rem) {
     .daily-briefing {
       padding: var(--space-4);
-    }
-
-    .merchant-outcomes__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .merchant-outcomes__item {
-      padding-inline: 0;
-      border-inline-start: 0;
     }
 
     .closing-invitation {
