@@ -468,7 +468,7 @@
       "missing": "¿Falta un campo de coste confirmado? El margen queda como no disponible, en lugar de mostrarse como cero."
     },
     "demo": {
-      "workflow": "Explorar cada paso de la revisión"
+      "workflow": "Prueba otra venta"
     }
   },
   "buying": {
@@ -558,6 +558,36 @@
     "reset": "Restablecer ejemplo",
     "resetDone": "Ejemplo restablecido. Tus opciones y la próxima venta vuelven a sus valores iniciales.",
     "memory": "Tus opciones se conservan entre estas páginas. Recarga para empezar de nuevo.",
-    "reviewScope": "Esta revisión solo cambia este ejemplo de registros. No vuelve a procesar el panel histórico."
+    "reviewScope": "Esta revisión solo cambia este ejemplo de registros. No vuelve a procesar el panel histórico.",
+    "eyebrow": "Una tienda. Un día de ejemplo.",
+    "intro": "Sigue la pregunta, comprueba los datos y prueba una pequeña decisión.",
+    "controls": "Capítulos de la historia",
+    "chapter": "Capítulo {{number}}",
+    "questions": "Explora una pregunta del negocio",
+    "topics": {
+      "sales": "Ventas",
+      "stock": "Existencias",
+      "customers": "Clientes"
+    },
+    "day": {
+      "label": "Entiende el día",
+      "title": "Empieza por lo que cambió.",
+      "body": "Suben las ventas. Queda poco café. Algunos clientes vuelven. Explora cada pregunta en el mismo día de ejemplo.",
+      "bridge": "Cada respuesta se apoya en registros. Ahora mira cómo se confirma su significado."
+    },
+    "evidence": {
+      "label": "Examina los datos",
+      "title": "El original sigue a la vista.",
+      "body": "Un nombre de campo corto puede tener varios significados. Examina los valores originales, elige su función y confirma la interpretación de forma explícita.",
+      "bridge": "Este ejemplo solo cambia su propia interpretación. Adivinar no permite obtener respuestas fiables cuando faltan datos de clientes o costes."
+    },
+    "sale": {
+      "label": "Prueba otra venta",
+      "title": "Una venta. Un cambio visible.",
+      "body": "El día histórico termina con 12 unidades de café. Previsualiza una venta más, confírmala y deshazla para ver cómo se recuperan las existencias.",
+      "bridge": "Tus opciones te acompañan a la demo. Sigue explorando allí el mismo ejemplo."
+    },
+    "continue": "Continuar con este ejemplo",
+    "historicalScope": "Después del corte histórico: este ejemplo solo cambia las existencias de café mostradas de 12 a 11. Los ingresos, las observaciones del gráfico y las estimaciones históricas de riesgo de existencias no cambian."
   }
 }

@@ -222,6 +222,7 @@ describe("public landing routes", () => {
     const user = userEvent.setup();
     await i18n.changeLanguage(locale);
     await renderAt("/");
+    await user.click(screen.getByRole("button", { name: i18n.t("cinematic.topics.customers") }));
     await user.click(screen.getByRole("checkbox", { name: i18n.t("stories.customers.toggle") }));
     await user.click(screen.getByRole("button", { name: i18n.t("stories.entry.select") }));
     await user.click(screen.getByRole("button", { name: i18n.t("stories.entry.confirm") }));
@@ -243,15 +244,20 @@ describe("public landing routes", () => {
     expect(within(metrics).getByRole("button", { pressed: true })).toHaveTextContent(i18n.t("dashboard.metrics.revenue"));
   });
 
-  it.each(["en", "es", "fr"])("shows distinct merchant stories and one ambiguity example in %s", async (locale) => {
+  it.each(["en", "es", "fr"])("shows three connected chapters with one review and compact business questions in %s", async (locale) => {
+    const user = userEvent.setup();
     await i18n.changeLanguage(locale);
     await renderAt("/");
-    for (const key of ["stories.title", "stories.sales.title", "stories.stock.title", "stories.customers.title", "stories.entry.title", "stories.trust.title"]) {
-      expect(screen.getByRole("heading", { name: i18n.t(key) })).toBeInTheDocument();
+    for (const chapter of ["day", "evidence", "sale"]) {
+      expect(screen.getByRole("heading", { name: i18n.t(`cinematic.${chapter}.title`) })).toBeInTheDocument();
     }
-    expect(screen.getByRole("main").textContent?.match(/Cod\./g)).toHaveLength(1);
-    expect(screen.queryByRole("tablist")).not.toBeInTheDocument();
-    expect(screen.getByText(i18n.t("stories.trust.missing"))).toBeInTheDocument();
+    for (const kind of ["sales", "stock", "customers"]) {
+      await user.click(screen.getByRole("button", { name: i18n.t(`cinematic.topics.${kind}`) }));
+      expect(screen.getByRole("heading", { name: i18n.t(`stories.${kind}.title`) })).toBeVisible();
+    }
+    expect(screen.getAllByRole("region", { name: i18n.t("polish.review.title") })).toHaveLength(1);
+    expect(screen.getByText(i18n.t("cinematic.reviewScope"))).toBeVisible();
+    expect(screen.getByText(i18n.t("cinematic.historicalScope"))).toBeVisible();
   });
 
   it.each(["en", "es", "fr"])("previews, cancels, confirms and undoes a sale with keyboard focus in %s", async (locale) => {
@@ -284,8 +290,10 @@ describe("public landing routes", () => {
     await renderAt("/");
     await user.click(screen.getByText(i18n.t("stories.sales.evidence"), { selector: "summary" }));
     expect(screen.getByRole("table", { name: i18n.t("stories.sales.caption") })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: i18n.t("cinematic.topics.stock") }));
     await user.click(screen.getByText(i18n.t("stories.stock.evidence"), { selector: "summary" }));
     expect(screen.getByText(i18n.t("stories.stock.prerequisite"))).toBeVisible();
+    await user.click(screen.getByRole("button", { name: i18n.t("cinematic.topics.customers") }));
     const customers = screen.getByRole("article", { name: i18n.t("stories.customers.title") });
     const status = within(customers).getByRole("status");
     expect(status).toHaveTextContent("38");

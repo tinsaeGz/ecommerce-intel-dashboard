@@ -1721,3 +1721,11 @@ Desktop uses scrolling copy beside one sticky scene with explicit chapter contro
 Delivery: three successive, unmerged PRs against dev, in order: scenario continuity, cinematic presentation, final accessibility/performance evidence. Each includes its predecessor until earlier PRs merge. Public support/legal destinations, real analytics, authenticated onboarding, and application workflows remain separate pending work.
 
 Acceptance: SDLC §1.2, FR-U-4/5/12, FR-G-6, FR-E-1, FR-D-12 and NFR-5/6/9/10, as illustrative marketing behavior only. Validate continuity, invalidation, cancel/undo/reset, repeated actions, Back/direct links, all locales, scroll isolation, historical integrity, keyboard/forced colors/reduced motion, mobile and short viewports, 200% text, browser accessibility, and initial JavaScript below 200 KB gzip. Capture screenshots and an interaction recording; no conversion claim without merchant evidence.
+
+### Cinematic presentation checkpoint
+
+The landing narrative now uses three connected chapters. The first scene has compact Sales / Stock / Customers question controls, the second reuses the original-record review, and the third reuses the preview/confirm/undo sale. Plans, FAQ, closing action and the immediate hero briefing remain below/above the story as approved. The legacy separate trust and workflow sections are removed.
+
+With sufficient width and height, chapter copy scrolls beside one visible sticky product scene. Inactive scenes are inert and excluded from the accessibility tree during crossfades. Scroll observes chapter intersections and changes presentation only; it cannot hide a scene containing keyboard focus. Explicit chapter buttons remain available. Without IntersectionObserver, on mobile/short screens, or with enlarged text, copy and scenes remain sequential in the same DOM order with no duplicated controls.
+
+Validation at this checkpoint: 74 web tests, including scroll/state isolation, focus protection and locale continuity; Chromium EN/ES/FR chapter controls, scroll selection, mobile/short fallback and axe including contrast. The final delivery adds the full viewport matrix, recording and performance evidence.

@@ -78,6 +78,7 @@ export function DemoPage() {
         <details className="demo-review" id="demo-workflow">
           <summary>{t("stories.demo.workflow")}</summary>
           <SampleSale />
+          <p className="cinematic-pane__scope">{t("cinematic.historicalScope")}</p>
         </details>
       </main>
       <SiteFooter />

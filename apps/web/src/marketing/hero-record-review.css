@@ -3,11 +3,10 @@
     --source-highlight: color-mix(in srgb, var(--color-amber) 30%, var(--color-white));
 
     width: 100%;
-    max-width: 29rem;
+    max-width: 38rem;
     margin-inline: auto;
     background: var(--color-white);
     border-radius: var(--radius-panel);
-    box-shadow: 0 1.75rem 5rem color-mix(in srgb, var(--color-ink) 10%, transparent);
     overflow: hidden;
   }
 

@@ -1,31 +1,24 @@
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ButtonLink } from "../components/public-ui";
 import { getSupportedLanguage } from "../i18n";
-import { emitJourneyEvent } from "../lib/journey-events";
 import { landingDemo } from "../lib/demo-data";
-import { formatDemoDate, formatNumber, formatPercent } from "../lib/format";
+import { formatNumber, formatPercent } from "../lib/format";
 import { coffeeStock, customerHistory, returningCount, salesComparison, sampleStock } from "../lib/merchant-story-data";
 import { useSampleScenario, type ScenarioAction } from "../lib/sample-scenario";
 import "./merchant-decisions.css";
 
-export function MerchantDecisions() {
+export type DecisionKind = "sales" | "stock" | "customers";
+
+export function DecisionExample({ kind }: { kind: DecisionKind }) {
   const { t, i18n } = useTranslation();
   const locale = getSupportedLanguage(i18n.resolvedLanguage);
   const { state: { hasIdentity }, dispatch } = useSampleScenario();
   const money = (cents: number) => new Intl.NumberFormat(locale, { style: "currency", currency: landingDemo.currency }).format(cents / 100);
   const increase = salesComparison.reduce((sum, row) => sum + row.currentCents - row.previousCents, 0);
 
-  return (
-    <section className="merchant-decisions" id="daily-decisions" tabIndex={-1} aria-labelledby="decisions-title">
-      <header className="story-heading">
-        <p className="story-eyebrow">{t("stories.eyebrow")}</p>
-        <h2 id="decisions-title">{t("stories.title")}</h2>
-        <p>{t("stories.sample", { date: formatDemoDate(landingDemo.date, locale, landingDemo.timeZone) })}</p>
-      </header>
-
-      <article className="decision-row" aria-labelledby="sales-title">
+  return <>
+{kind === "sales" && (<article className="decision-row" aria-labelledby="sales-title">
         <div className="decision-row__copy">
           <p className="story-eyebrow">{t("stories.sales.question")}</p>
           <h3 id="sales-title">{t("stories.sales.title")}</h3>
@@ -48,9 +41,8 @@ export function MerchantDecisions() {
             <p>{t("stories.sales.source", { count: landingDemo.transactions })}</p>
           </details>
         </div>
-      </article>
-
-      <article className="decision-row" aria-labelledby="stock-title">
+      </article>)}
+{kind === "stock" && (<article className="decision-row" aria-labelledby="stock-title">
         <div className="decision-row__copy">
           <p className="story-eyebrow">{t("stories.stock.question")}</p>
           <h3 id="stock-title">{t("stories.stock.title")}</h3>
@@ -70,9 +62,8 @@ export function MerchantDecisions() {
             <p>{t("stories.stock.prerequisite")}</p>
           </details>
         </div>
-      </article>
-
-      <article className="decision-row" aria-labelledby="customers-title">
+      </article>)}
+{kind === "customers" && (<article className="decision-row" aria-labelledby="customers-title">
         <div className="decision-row__copy">
           <p className="story-eyebrow">{t("stories.customers.question")}</p>
           <h3 id="customers-title">{t("stories.customers.title")}</h3>
@@ -94,50 +85,9 @@ export function MerchantDecisions() {
             <p>{hasIdentity ? t("stories.customers.source", { total: customerHistory.today.length, returning: returningCount }) : t("stories.customers.missing")}</p>
           </details>
         </div>
-      </article>
-    </section>
-  );
+      </article>)}
+  </>;
 }
-
-export function RecordToDecision() {
-  const { t } = useTranslation();
-  return (
-    <section className="record-journey" id="how-it-works" tabIndex={-1} aria-labelledby="record-journey-title">
-      <header className="story-heading">
-        <p className="story-eyebrow">{t("understanding.how.eyebrow")}</p>
-        <h2 id="record-journey-title">{t("stories.entry.title")}</h2>
-        <p>{t("stories.entry.body")}</p>
-      </header>
-      <ol className="record-journey__steps">
-        {(["add", "confirm", "see"] as const).map(step => <li key={step}><h3>{t(`understanding.how.steps.${step}.title`)}</h3><p>{t(`stories.entry.steps.${step}`)}</p></li>)}
-      </ol>
-      <SampleSale />
-      <p className="record-journey__formats">{t("stories.entry.formats")}</p>
-      <ButtonLink to="/demo#demo-sources" variant="quiet" onClick={() => emitJourneyEvent("landing_cta_selected", { location: "sources" })}>{t("stories.entry.explore")}</ButtonLink>
-    </section>
-  );
-}
-
-export function TrustStory() {
-  const { t } = useTranslation();
-  return (
-    <section className="trust-story" id="trust" aria-labelledby="trust-story-title">
-      <div className="story-heading">
-        <p className="story-eyebrow">{t("stories.trust.eyebrow")}</p>
-        <h2 id="trust-story-title">{t("stories.trust.title")}</h2>
-        <p>{t("stories.trust.body")}</p>
-        <ButtonLink to="/demo#demo-review" onClick={() => emitJourneyEvent("landing_cta_selected", { location: "trust" })}>{t("hero.reviewAction")}</ButtonLink>
-      </div>
-      <div className="trust-story__example">
-        <h3>{t("stories.trust.question")}</h3>
-        <p className="trust-story__values">CT-204 · GC-118</p>
-        <p>{t("stories.trust.evidence")}</p>
-        <p>{t("stories.trust.missing")}</p>
-      </div>
-    </section>
-  );
-}
-
 export function SampleSale() {
   const { t } = useTranslation();
   const { state: { sale: entry }, dispatch } = useSampleScenario();
