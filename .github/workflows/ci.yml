@@ -3,127 +3,289 @@ name: CI
 on:
   workflow_dispatch:
   push:
-    branches:
-      - dev
-      - main
+    branches: [dev, main]
   pull_request:
-    branches:
-      - dev
-      - main
+    branches: [dev, main]
 
 permissions:
   contents: read
-  deployments: write
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  branch-policy:
-    name: branch-policy
-    if: github.event_name == 'pull_request'
+  changes:
+    name: affected-subsystems
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      web: ${{ steps.select.outputs.web }}
+      mobile: ${{ steps.select.outputs.mobile }}
+      packages: ${{ steps.select.outputs.packages }}
+      api: ${{ steps.select.outputs.api }}
+      contract: ${{ steps.select.outputs.contract }}
+      docs: ${{ steps.select.outputs.docs }}
+      security: ${{ steps.select.outputs.security }}
+      containers: ${{ steps.select.outputs.containers }}
+      migrations: ${{ steps.select.outputs.migrations }}
+      deploy_web: ${{ steps.select.outputs.deploy_web }}
     steps:
-      - name: Require dev as the source of production pull requests
-        if: github.base_ref == 'main' && github.head_ref != 'dev'
-        run: |
-          echo "Pull requests into main must come from dev."
-          exit 1
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Select affected subsystem suites
+        id: select
+        run: python3 .github/scripts/affected.py
 
-  quality:
-    name: quality
+  workflow:
+    name: workflow-policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require dev as source of production PRs
+        if: github.event_name == 'pull_request' && github.base_ref == 'main' && github.head_ref != 'dev'
+        run: exit 1
+      - name: Test change selection and aggregate gate
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py' -v
+      - name: Lint workflow syntax
+        run: docker run --rm -v "$PWD:/repo:ro" -w /repo rhysd/actionlint:1.7.12 .github/workflows/ci.yml
+
+  frontend:
+    name: frontend-lint-types-tests-build
+    needs: changes
+    if: needs.changes.outputs.web == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+      - run: npm ci
+      - name: Frontend suite including locales and accessibility
+        run: |
+          npm run lint --workspace @suq-insights/web
+          npm run typecheck --workspace @suq-insights/web
+          npm run test --workspace @suq-insights/web
+          npm run build:web
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run repository checks
-        run: npm run check
-
-      - name: Upload web build
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: web-dist-${{ github.sha }}
-          path: apps/web/dist
-          if-no-files-found: error
-          retention-days: 7
-
-  api-quality:
-    name: api-quality
+  mobile:
+    name: mobile-lint-types-tests-build
+    needs: changes
+    if: needs.changes.outputs.mobile == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up uv and Python
-        uses: astral-sh/setup-uv@v10
+      - uses: actions/checkout@v4
         with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Mobile suite and Android export
+        run: |
+          npm run lint --workspace @suq-insights/mobile
+          npm run typecheck --workspace @suq-insights/mobile
+          npm run test --workspace @suq-insights/mobile
+          npm run build:mobile
+
+  packages:
+    name: shared-package-checks
+    needs: changes
+    if: needs.changes.outputs.packages == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Shared package suites and generated tokens
+        run: |
+          npm run check:generated --workspace @suq-insights/design-tokens
+          npm run build:packages
+          npm run test --workspace @suq-insights/api-client
+          npm run test --workspace @suq-insights/shared-types
+
+  backend:
+    name: backend-lint-types-tests-coverage-audit
+    needs: changes
+    if: needs.changes.outputs.api == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v10
+        with:
+          python-version: "3.12"
           enable-cache: true
           cache-dependency-glob: apps/api/uv.lock
-          python-version: "3.12"
-
-      - name: Install API dependencies
-        working-directory: apps/api
-        run: uv sync --locked --all-groups
-
-      - name: Run API checks
-        run: npm run check:api
-
-      - name: Check container smoke script
+      - run: uv sync --project apps/api --locked --all-groups
+      - name: Backend quality and coverage
         run: |
-          uv run --project apps/api ruff format --check deploy/smoke.py
-          uv run --project apps/api ruff check --select E,F,I,UP deploy/smoke.py
+          npm run check:api
+          python3 .github/scripts/domain_coverage.py /tmp/suq-coverage.json
+      - name: CI script lint
+        run: |
+          uv run --project apps/api ruff format --check .github/scripts deploy/smoke.py
+          uv run --project apps/api ruff check --select E,F,I,UP .github/scripts deploy/smoke.py
 
-      - name: Verify the checked-in OpenAPI contract
+  contract:
+    name: openapi-and-generated-client
+    needs: changes
+    if: needs.changes.outputs.contract == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: astral-sh/setup-uv@v10
+        with:
+          python-version: "3.12"
+          enable-cache: true
+          cache-dependency-glob: apps/api/uv.lock
+      - run: uv sync --project apps/api --locked --all-groups
+      - name: Verify API and generated client together
         run: |
           npm run generate:openapi
-          git diff --exit-code -- packages/api-client/openapi.json
+          npm run generate:api-client
+          git diff --exit-code -- packages/api-client/openapi.json packages/api-client/src/schema.d.ts
+          npm run typecheck --workspace @suq-insights/api-client
+          npm run test --workspace @suq-insights/api-client
 
-  container-smoke:
-    name: container-smoke
+  docs:
+    name: documentation-lint
+    needs: changes
+    if: needs.changes.outputs.docs == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Lint documentation
+        run: |
+          npm run lint:docs
 
-      - name: Validate development topology
-        run: docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci config --quiet
+  migrations:
+    name: migration-readiness
+    needs: changes
+    if: needs.changes.outputs.migrations == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate migration harness or report absent schema
+        run: |
+          python3 .github/scripts/migrations.py
 
-      - name: Build and start development stack
-        run: docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci up --build --detach --wait --wait-timeout 180
+  security:
+    name: dependency-and-secret-scans
+    needs: changes
+    if: needs.changes.outputs.security == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@81e514348e19b6112ce2a7e3ecbafe19c1e1f567
+        with:
+          version: v0.74.0
+      - name: Scan dependencies and redact secret findings
+        run: |
+          python3 .github/scripts/security.py
 
-      - name: Exercise services and worker isolation
+  integration:
+    name: container-integration-and-image-scan
+    needs: changes
+    if: needs.changes.outputs.containers == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@81e514348e19b6112ce2a7e3ecbafe19c1e1f567
+        with:
+          version: v0.74.0
+      - name: Validate and start real-service stack
+        run: |
+          docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci config --quiet
+          docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci up --build --detach --wait --wait-timeout 180
+      - name: Real-service and routing smoke checks
         run: python3 deploy/smoke.py --env-file deploy/.env.example --project-name suq-ci
-
-      - name: Collect container diagnostics on failure
+      - name: Scan built application and service images
+        run: |
+          docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci images --quiet | sort -u > /tmp/suq-images
+          test -s /tmp/suq-images
+          scan_status=0
+          while IFS= read -r image_id; do
+            trivy image --scanners vuln --severity CRITICAL --exit-code 1 "$image_id" || scan_status=1
+          done < /tmp/suq-images
+          exit "$scan_status"
+      - name: Failure diagnostics
         if: failure()
         run: docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci logs --no-color --tail 100
-
-      - name: Stop ephemeral CI stack
+      - name: Remove ephemeral stack
         if: always()
         run: docker compose --env-file deploy/.env.example -f deploy/compose.yml -p suq-ci down --volumes
 
+  ci-gate:
+    name: ci-gate
+    if: always()
+    needs: [changes, workflow, frontend, mobile, packages, backend, contract, docs, security, integration, migrations]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require every selected check to pass
+        env:
+          CI_NEEDS: ${{ toJSON(needs) }}
+        run: python3 .github/scripts/gate.py
+
   deploy:
     name: deploy-${{ github.ref_name }}
-    if: github.event_name == 'push'
+    if: ${{ !cancelled() && github.event_name == 'push' && needs.ci-gate.result == 'success' && needs.changes.outputs.deploy_web == 'true' }}
     needs:
-      - api-quality
-      - quality
-      - container-smoke
+      - changes
+      - ci-gate
+    permissions:
+      contents: read
+      deployments: write
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:
@@ -181,3 +343,9 @@ jobs:
           fi
 
           echo "url=$deployment_url" >> "$GITHUB_OUTPUT"
+
+      - name: Verify deployed web route
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: python3 .github/scripts/deployment_smoke.py

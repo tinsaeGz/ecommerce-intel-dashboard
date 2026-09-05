@@ -5,7 +5,7 @@ Authority: SDLC v3.0 §11. Phase 0 remains in progress; Phase 1 has not started.
 | Scope | State | Evidence or next work |
 |---|---|---|
 | Monorepo and client boundaries (§7.1) | Implemented | `apps/web`, `apps/mobile`, `apps/api`, and shared packages |
-| CI before features (§9.2) | Partial | Web/API quality gates and container smoke; image scanning, migration and authenticated journey gates still needed |
+| CI before features (§9.2) | Partial | Affected subsystem gates, security/image scans and container smoke are wired; GitHub startup, real migrations and authenticated journey gates remain open |
 | Development containers (§9.1) | Implemented | `deploy/compose.yml`, container builds, `deploy/smoke.py`, ADR 0001 |
 | Isolated worker queues (§5.2) | Infrastructure implemented | Ingest, fast, and reports pools; real task routing follows task implementation |
 | Core middleware (§5.3) | Not implemented | Request tracing, body guard, authentication, tenant/RLS binding, entitlements, limits, idempotency, conditional reads |
@@ -40,7 +40,7 @@ staging release candidate. Native product delivery remains demand-triggered.
   PostgreSQL, Redis, MinIO, mail preview, worker queue isolation, and non-root,
   read-only, memory-bounded application containers verified.
 - Smoke-script Ruff formatting/lint and documentation lint: passed.
-- Image vulnerability gate: unverified. The local Docker Scout command refused
-  to scan without a Docker login; CI image scanning still needs implementation.
+- Image vulnerability gate: Trivy scanning is now wired into CI without a Docker
+  Scout login. See `.github/CI.md`; a configured gate is not proof of a green run.
 - Authenticated staging, migration/RLS, and storage-adapter integration gates
   are not implemented and have not been run.

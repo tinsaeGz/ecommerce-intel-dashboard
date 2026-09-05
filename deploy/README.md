@@ -59,5 +59,5 @@ through adapters. API readiness currently reports process readiness only.
 Vercel still hosts only `apps/web`. This Compose file is development-only and
 must not be deployed to staging or production. Phase 0 still needs schema and
 RLS, the shared middleware chain, signup/login and tenant-scoped web journeys,
-provider fakes, dependency-aware readiness, image vulnerability scanning, and
+provider fakes, dependency-aware readiness, passing security scans, and
 automatic full-stack staging deployment. No Phase 1 exit criteria are claimed.
