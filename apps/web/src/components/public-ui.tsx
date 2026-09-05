@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { getSupportedLanguage, supportedLanguages } from "../i18n";
+import { emitJourneyEvent } from "../lib/journey-events";
 import { DropdownSelect } from "./dropdown-select";
 import "./public-ui.css";
 
@@ -16,16 +17,6 @@ const languageNames = {
   es: "Español",
   fr: "Français",
 } as const;
-
-const announcementStorageKey = "suq.landing-announcement-dismissed";
-
-function readAnnouncementVisibility() {
-  try {
-    return window.sessionStorage.getItem(announcementStorageKey) !== "true";
-  } catch {
-    return true;
-  }
-}
 
 export function SkipLink() {
   const { t } = useTranslation();
@@ -91,38 +82,6 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
   );
 }
 
-export function Announcement() {
-  const { t } = useTranslation();
-  const [visible, setVisible] = useState(readAnnouncementVisibility);
-
-  const dismiss = () => {
-    setVisible(false);
-    try {
-      window.sessionStorage.setItem(announcementStorageKey, "true");
-    } catch {
-      // Dismissal still works for the current render when storage is unavailable.
-    }
-  };
-
-  if (!visible) {
-    return null;
-  }
-
-  return (
-    <aside className="announcement" aria-label={t("announcement.label")}>
-      <p>{t("announcement.message")}</p>
-      <button
-        className="announcement__dismiss"
-        onClick={dismiss}
-        type="button"
-        aria-label={t("announcement.dismiss")}
-      >
-        <span aria-hidden="true">×</span>
-      </button>
-    </aside>
-  );
-}
-
 export function SiteHeader() {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -159,14 +118,8 @@ export function SiteHeader() {
         <Brand />
 
         <nav className="site-header__desktop" aria-label={t("navigation.primary")}>
-          <Link className="site-header__nav-link" to="/demo">
-            {t("actions.exploreDemo")}
-          </Link>
           <LanguageSwitcher compact />
-          <ButtonLink to="/login" variant="quiet">
-            {t("actions.logIn")}
-          </ButtonLink>
-          <ButtonLink to="/signup">{t("actions.startFree")}</ButtonLink>
+          <DemoLink location="header" />
         </nav>
 
         <button
@@ -189,16 +142,13 @@ export function SiteHeader() {
           id="site-mobile-menu"
           aria-label={t("navigation.mobile")}
         >
-          <Link ref={firstMenuLinkRef} className="mobile-menu__link" to="/demo">
+          <Link ref={firstMenuLinkRef} className="mobile-menu__link" to="/demo"
+            onClick={() => { emitJourneyEvent("landing_cta_selected", { location: "mobile-menu" }); setMenuOpen(false); }}>
             {t("actions.exploreDemo")}
-          </Link>
-          <Link className="mobile-menu__link" to="/login">
-            {t("actions.logIn")}
           </Link>
           <div className="mobile-menu__language">
             <LanguageSwitcher />
           </div>
-          <ButtonLink to="/signup">{t("actions.startFree")}</ButtonLink>
         </nav>
       ) : null}
     </header>
@@ -216,4 +166,7 @@ export function SiteFooter() {
   );
 }
 
-export { announcementStorageKey };
+export function DemoLink({ location }: { location: "header" | "hero" | "briefing" | "closing" | "how-it-works" }) {
+  const { t } = useTranslation();
+  return <ButtonLink to="/demo" onClick={() => emitJourneyEvent("landing_cta_selected", { location })}>{t("actions.exploreDemo")}</ButtonLink>;
+}

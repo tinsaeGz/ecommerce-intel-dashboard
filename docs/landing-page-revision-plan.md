@@ -2,7 +2,7 @@
 
 Date: 2026-09-05
 
-Status: Proposed delivery plan; no landing-page implementation in this checkpoint.
+Status: PR 1 implemented for review; PRs 2–4 remain planned. See [PR 1 validation](reviews/landing-conversion.md).
 
 Baseline: `45b7326` — flat landing section surfaces.
 
@@ -150,7 +150,7 @@ Ready to implement without a new commercial decision: PR 1, followed by the samp
 
 Anonymous real-file trials remain outside this plan. A future proposal must resolve FR-A-1's verified-account upload rule, isolation, file-size/type limits, abuse and compute budgets, retention/deletion, personal-data handling, and the difference between inference preview and committed ingestion. The current sample demo is the delivery path while that decision remains open.
 
-Next action: implement PR 1 on a new `fix/tensu/landing-conversion-journey` branch from the current integration baseline, using the criteria above. Preserve unrelated diagrams and leave the v4 amendment PR in place.
+Next action: review PR 1 on `fix/tensu/landing-conversion-journey`, then implement the outcome stories and live-entry sample in PR 2. Preserve unrelated diagrams and leave the v4 amendment PR in place.
 
 ## 9. Review amendments
 
@@ -162,7 +162,7 @@ Source: independent rendering review at 1440×900 and 390×844 (ghost, 2026-09-0
 | A2. Compact briefing means three elements | PR 1 | The hero visual is the question, one answer sentence, and at most three stat tiles with one next action. No chart and no field-review control above the first narrative section. Chart and review live in the demo and the trust section. | Prevents the hero from re-growing into the current stacked dashboard-plus-review composition. |
 | A3. Ambiguity budget | PR 2 | The `Cod.` example appears once, in the trust section. Each outcome example uses a distinct fixture concept: sales uses a period comparison, stock uses an observation plus movements, customers uses a confirmed identifier or the unavailable state. | Section 3 already forbids repeating the same ambiguity; a count of one makes the rule testable. |
 | A4. Qualification budget | PR 1–2 | One bounded sample disclosure per section, placed once beside the hero CTA as “Fictional sample data · No account needed.” Per-element repetitions are removed, except beside stock estimates and unavailable answers as section 4 requires. | The current page carries roughly eight disclaimers; the tone had moved from honest to defensive. |
-| A5. Instrument first, collect later | PR 1 (emit), PR 4 (collect) | PR 1 emits `landing_cta_selected`, `demo_started`, and `model_review_opened` through a provider interface whose only implementation is an in-repo, no-network sink with a tested property schema. PR 4 adds the reviewed collector. | Sequencing measurement last leaves PRs 2 and 3 unmeasured. Emitting to a local sink establishes the schema and a comparison baseline without the privacy review a collector needs. |
+| A5. Instrument first, collect later | PR 1 (emit), PR 4 (collect) | PR 1 emits `landing_cta_selected`, `demo_started`, and `model_review_opened` through a provider interface whose only implementation is an in-repo, no-network sink with a tested property schema. PR 4 adds the reviewed collector. | Sequencing measurement last leaves PRs 2 and 3 unmeasured. Emitting to a local sink establishes a tested schema without the privacy review a collector needs; a real visitor baseline still requires the collector. |
 | A6. Live entry is shown, not named | PR 2 | The how-it-works step includes a visible two-tap sample of recording a sale, with the running stock figure updating in the sample. | “Record the day as it happens” is a product pillar and currently exists only as a phrase and a tab label. |
 | A7. Headline change touches the concept document | PR 1 | Adopting “See who comes back” changes the primary recommendation in `UI-UX-CONCEPT.md` §4.3 and the hero blueprint in §5.2. The PR that implements it must update both and regenerate the PDF in the same checkpoint, per the repository instructions. | Section 6 states the proposal leaves the canonical documents unchanged; implementation of this line cannot. |
 | A8. Anonymous file trial has its own proposal | Outside PR 1–4 | See ADR 0005. It is scoped as an ephemeral inference preview that loads nothing, so it does not alter the FR-A-1 upload rule, and it is sequenced after the inference worker exists. | Section 8 names this as the open discovery item. The proposal records the boundary questions and a recommended answer for decision. |

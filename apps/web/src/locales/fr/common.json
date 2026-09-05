@@ -50,11 +50,11 @@
     "dismiss": "Fermer l’annonce"
   },
   "hero": {
-    "eyebrow": "Une vision commerciale claire à partir de vos données",
-    "titleBefore": "Sachez ce qui se vend.",
+    "eyebrow": "À partir de vos données actuelles",
+    "titleBefore": "Voyez ce qui se vend.",
     "titleEmphasis": "Anticipez les ruptures.",
-    "titleAfter": "Faites revenir vos clients.",
-    "body": "Importez les données que vous conservez déjà ou enregistrez la journée à mesure qu’elle avance. Suq confirme leur signification, puis les transforme en une vue claire des ventes, des stocks et des clients fidèles.",
+    "titleAfter": "Voyez qui revient.",
+    "body": "Explorez une vue quotidienne des ventes, des stocks et des clients fidèles à partir de tableurs, d’exports de caisse ou d’une photo de votre registre.",
     "languages": "English · Español · Français",
     "sourcesLabel": "Exemples de sources prises en charge",
     "sources": {
@@ -62,7 +62,13 @@
       "excel": "Excel",
       "pdf": "PDF",
       "photo": "Photo"
-    }
+    },
+    "sampleNote": "Données fictives · Sans compte",
+    "briefingAnswer": "Les ventes progressent et trois produits nécessitent une vérification du stock.",
+    "comparison": "{{comparison}} par rapport à la veille à la même heure",
+    "stockContext": "Estimation sur sept jours au rythme des ventes de l’exemple.",
+    "customerContext": "Sur {{customers}} clients dans la journée d’exemple",
+    "reviewAction": "Examiner les données de l’exemple"
   },
   "polish": {
     "review": {

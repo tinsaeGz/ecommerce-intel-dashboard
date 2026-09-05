@@ -50,11 +50,11 @@
     "dismiss": "Dismiss announcement"
   },
   "hero": {
-    "eyebrow": "Commerce clarity from the data you already have",
+    "eyebrow": "For the records you already keep",
     "titleBefore": "Know what’s selling.",
     "titleEmphasis": "See what runs out next.",
-    "titleAfter": "Bring customers back.",
-    "body": "Upload the records you already keep or record the day as it happens. Suq confirms what your data means, then turns it into a clear daily view of sales, stock, and returning customers.",
+    "titleAfter": "See who comes back.",
+    "body": "Preview a daily view of sales, stock, and returning customers from spreadsheets, POS exports, or a photo of your ledger.",
     "languages": "English · Español · Français",
     "sourcesLabel": "Example supported sources",
     "sources": {
@@ -62,7 +62,13 @@
       "excel": "Excel",
       "pdf": "PDF",
       "photo": "Photo"
-    }
+    },
+    "sampleNote": "Fictional sample data · No account needed",
+    "briefingAnswer": "Sales are rising, and three products need a stock check.",
+    "comparison": "{{comparison}} vs the previous day at the same time",
+    "stockContext": "Estimated within seven days at the sample sales pace.",
+    "customerContext": "Of {{customers}} customers in the sample day",
+    "reviewAction": "Review the sample records"
   },
   "polish": {
     "review": {

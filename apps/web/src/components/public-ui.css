@@ -98,40 +98,6 @@
   }
 
 
-  .announcement {
-    position: relative;
-    display: flex;
-    min-height: 2.75rem;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-2) 3.5rem var(--space-2) var(--space-4);
-    color: var(--color-ink);
-    font-size: var(--font-size-ui);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--line-height-ui);
-    text-align: center;
-    background: var(--color-lime);
-    border-bottom: 0.0625rem solid var(--color-ink);
-  }
-
-  .announcement__dismiss {
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-end: var(--space-2);
-    display: grid;
-    width: 2.75rem;
-    height: 2.75rem;
-    place-items: center;
-    padding: 0;
-    font-size: 1.5rem;
-    line-height: 1;
-    background: transparent;
-    border: 0;
-    border-radius: 999px;
-    cursor: pointer;
-    transform: translateY(-50%);
-  }
-
   .site-header {
     position: relative;
     z-index: 20;
@@ -167,6 +133,7 @@
 
   .menu-toggle {
     display: none;
+    flex-shrink: 0;
     width: 2.75rem;
     height: 2.75rem;
     padding: 0.75rem;
@@ -258,6 +225,10 @@
       overflow: hidden;
     }
 
+    .site-header__inner {
+      gap: var(--space-2);
+    }
+
     .site-header__desktop {
       display: none;
     }
@@ -293,9 +264,12 @@
   }
 
   @media (forced-colors: active) {
+    .menu-toggle span {
+      border-top: 0.125rem solid ButtonText;
+    }
+
     .brand__mark,
-    .button-link,
-    .announcement {
+    .button-link {
       border: 0.125rem solid currentcolor;
     }
   }

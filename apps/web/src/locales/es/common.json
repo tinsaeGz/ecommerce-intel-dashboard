@@ -50,11 +50,11 @@
     "dismiss": "Cerrar anuncio"
   },
   "hero": {
-    "eyebrow": "Claridad comercial a partir de los datos que ya tienes",
+    "eyebrow": "Para los registros que ya tienes",
     "titleBefore": "Descubre qué se vende.",
     "titleEmphasis": "Anticipa qué se agotará.",
-    "titleAfter": "Haz que tus clientes vuelvan.",
-    "body": "Sube los registros que ya guardas o registra el día a medida que sucede. Suq confirma qué significan tus datos y los convierte en una vista diaria clara de ventas, existencias y clientes recurrentes.",
+    "titleAfter": "Ve quién vuelve.",
+    "body": "Explora una vista diaria de ventas, existencias y clientes recurrentes a partir de hojas de cálculo, archivos del punto de venta o fotos de tu registro.",
     "languages": "English · Español · Français",
     "sourcesLabel": "Ejemplos de fuentes compatibles",
     "sources": {
@@ -62,7 +62,13 @@
       "excel": "Excel",
       "pdf": "PDF",
       "photo": "Foto"
-    }
+    },
+    "sampleNote": "Datos ficticios · Sin cuenta",
+    "briefingAnswer": "Las ventas suben y tres productos necesitan una revisión de existencias.",
+    "comparison": "{{comparison}} frente al día anterior a la misma hora",
+    "stockContext": "Estimación para los próximos siete días al ritmo de ventas de ejemplo.",
+    "customerContext": "De {{customers}} clientes en el día de ejemplo",
+    "reviewAction": "Revisa los registros de ejemplo"
   },
   "polish": {
     "review": {
