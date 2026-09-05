@@ -1,8 +1,11 @@
 # Landing page revision plan
 
-Date: 2026-09-05  
-Status: Proposed delivery plan; no landing-page implementation in this checkpoint.  
-Baseline: `45b7326` — flat landing section surfaces.  
+Date: 2026-09-05
+
+Status: Proposed delivery plan; no landing-page implementation in this checkpoint.
+
+Baseline: `45b7326` — flat landing section surfaces.
+
 Authority: [SDLC v3](../SDLC.md) remains canonical; the broader product direction is retained. This proposal supplements [UI-UX-CONCEPT.md](../UI-UX-CONCEPT.md), especially §§1, 4–7, 13–17. It does not adopt the v4 amendment, change entitlements, or authorize merging implementation PRs.
 
 ## 1. Objective and assessment
