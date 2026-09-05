@@ -68,10 +68,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+      - name: Verify self-hosted Node.js
+        run: |
+          node --version
+          npm --version
       - run: npm ci
       - name: Frontend suite including locales and accessibility
         run: |
@@ -90,10 +90,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+      - name: Verify self-hosted Node.js
+        run: |
+          node --version
+          npm --version
       - run: npm ci
       - name: Mobile suite and Android export
         run: |
@@ -112,10 +112,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+      - name: Verify self-hosted Node.js
+        run: |
+          node --version
+          npm --version
       - run: npm ci
       - name: Shared package suites and generated tokens
         run: |
@@ -159,10 +159,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+      - name: Verify self-hosted Node.js
+        run: |
+          node --version
+          npm --version
       - run: npm ci
       - uses: astral-sh/setup-uv@v10
         with:
@@ -188,10 +188,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+      - name: Verify self-hosted Node.js
+        run: |
+          node --version
+          npm --version
       - run: npm ci
       - name: Lint documentation
         run: |
@@ -302,10 +302,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      - name: Verify self-hosted Node.js
+        run: |
+          node --version
+          npm --version
 
       - name: Build and deploy to Vercel
         id: deploy
