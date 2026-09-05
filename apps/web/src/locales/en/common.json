@@ -390,5 +390,85 @@
   "footer": {
     "previewNote": "Product preview · No private data required",
     "languages": "English · Español · Français"
+  },
+  "stories": {
+    "eyebrow": "A decision before the day gets away",
+    "title": "Three questions. Clear next steps.",
+    "sample": "Mercado Norte · {{date}} · fictional sample day",
+    "product": "Product",
+    "products": {
+      "tote": "Canvas Tote",
+      "coffee": "Ground Coffee",
+      "other": "Other products"
+    },
+    "sales": {
+      "question": "What is selling?",
+      "title": "See what is driving the change.",
+      "body": "Canvas totes and coffee account for most of the increase. Check what is moving before choosing what to promote or reorder.",
+      "change": "More revenue than the previous day",
+      "evidence": "Which records explain the increase?",
+      "caption": "Revenue at 14:00 on each day, in EUR",
+      "before": "2 Sept",
+      "now": "3 Sept",
+      "total": "Total",
+      "source": "The sales export contains {{count}} confirmed transactions for the sample day; product totals reconcile to the revenue shown above."
+    },
+    "stock": {
+      "question": "What is about to run out?",
+      "title": "Check the shelf before it becomes a surprise.",
+      "body": "A count tells you where stock started. Deliveries add to it and sales reduce it, so you can check the number before reordering.",
+      "remaining_one": "{{count}} unit left",
+      "remaining_other": "{{count}} units left",
+      "estimate": "About {{days}} days at {{pace}} units sold per day. An estimate, not a guaranteed stockout date.",
+      "evidence": "How did stock reach this number?",
+      "observed": "Last physical count",
+      "delivered": "Deliveries since the count",
+      "sold": "Sales since the count",
+      "prerequisite": "This sample combines a stock count, a delivery record, and sales. A sales file alone cannot tell you what is on the shelf."
+    },
+    "customers": {
+      "question": "Which customers come back?",
+      "title": "See repeat business in the records.",
+      "body": "Recognize returning customers when your records include a stable identifier. Turn it off in this example to see what happens when that evidence is missing.",
+      "toggle": "Include customer identifiers",
+      "result": "Returning customers out of {{total}} today; {{first}} are first seen in the sample history.",
+      "unavailable": "Returning-customer analysis unavailable",
+      "missing": "Add a stable customer identifier to connect visits. Sales totals alone cannot reveal who returned.",
+      "evidence": "What counts as returning?",
+      "source": "Of {{total}} distinct identifiers in today’s records, {{returning}} also occur in the earlier sample history. This does not claim how long someone has been a customer."
+    },
+    "entry": {
+      "title": "Bring a file. Or record the next sale.",
+      "body": "Start with the records you have, then keep the picture current as work happens.",
+      "steps": {
+        "add": "Bring a spreadsheet, a POS export, a photo, or a daily entry.",
+        "confirm": "Check uncertain details before they affect your answers.",
+        "see": "Follow sales, stock, and customers wherever the records support them."
+      },
+      "sample": "Local example · nothing saved",
+      "try": "Try the next coffee sale.",
+      "context": "Start from the 12 units left at the sample day’s cutoff. This next-sale example changes only the stock shown here.",
+      "stock_one": "Ground Coffee · {{count}} unit left",
+      "stock_other": "Ground Coffee · {{count}} units left",
+      "select": "Record one coffee sale",
+      "review": "Sell one unit of Ground Coffee: {{before}} → {{after}} units left.",
+      "confirm": "Confirm sample sale",
+      "cancel": "Cancel",
+      "undo": "Undo sample sale",
+      "result": "The next sale reduces stock by one.",
+      "formats": "CSV · Excel · POS exports · Photos · Daily entry",
+      "explore": "Explore the source examples"
+    },
+    "trust": {
+      "eyebrow": "The answer comes with its evidence",
+      "title": "You have the final say.",
+      "body": "The product is designed to suggest a meaning, show why, and let you correct it. Try the review before bringing your own records.",
+      "question": "What does “Cod.” mean?",
+      "evidence": "These original Spanish sample values look like product codes. The abbreviated heading still needs your context.",
+      "missing": "No confirmed cost field? Margin stays unavailable, rather than appearing as zero."
+    },
+    "demo": {
+      "workflow": "Explore every step of the review"
+    }
   }
 }

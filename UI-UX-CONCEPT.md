@@ -495,105 +495,39 @@ The preview has no announcement strip. Source-format copy belongs in the hero an
 
 **Evidence:** sample revenue and customer totals come from the shared fictional fixture. The comparison names the previous day at the same time. Stock risk is explicitly an estimate at the sample sales pace. Display all amounts in the fixture's currency, formatted for the selected UI locale; changing language does not convert money.
 
-**Demo destination:** the existing interactive dashboard retains metric selection, deterministic cumulative observations, keyboard-operable range control, chart table alternative, and stock details. “Review the sample records” opens a focus-managed disclosure below the dashboard. It contains the original Spanish CSV values, editable field role, confirmation, and reset. This local interaction never saves or uploads data. The landing page's how-it-works section retains its interpretation example until the next narrative revision consolidates repetition.
+**Demo destination:** the existing interactive dashboard retains metric selection, deterministic cumulative observations, keyboard-operable range control, chart table alternative, and stock details. “Review the sample records” opens a focus-managed disclosure below the dashboard. It contains the original Spanish CSV values, editable field role, confirmation, and reset. This local interaction never saves or uploads data. The landing page keeps one concise ambiguity example in the trust section; detailed interpretation controls are available through demo disclosures.
 
 **Interaction:** a short briefing entrance is optional; reduced-motion users see the static final state. Keep keyboard focus visible, use shared dropdowns, and stay within the initial JavaScript budget.
 
 **Mobile acceptance:** at 390×844 and default text size, show the header, eyebrow, headline of at most four lines, one-sentence deck, primary CTA, and a complete revenue tile with comparison in the first screen. The secondary CTA is not required. Stack naturally at narrower widths or expanded text; never clip content or shrink touch targets to satisfy a fold measurement. Validate English, Spanish, and French independently. Main sections remain flat against the page background.
 
-### 2. Source ribbon: “Start where your records are”
+### 2. Three daily merchant decisions
 
-**Purpose:** resolve the first objection: “Will it accept my format?”
+Immediately after the compact hero, show three concise rows with a merchant question, decision-oriented copy, and an inspectable example. Use flat section surfaces and fine rules; reserve contained backgrounds for evidence. Numbered benefits are removed because they are not a sequence.
 
-**Content:** CSV, Excel, pasted table, JSON, POS export, marketplace export, image, PDF, manual entry, Sync API. Use neutral format icons, not unverified integration logos.
+One disclosure at the section heading identifies Mercado Norte, the sample date, and fictional data. Stock estimates and unavailable analyses retain their contextual qualifications. All explanatory copy and product labels render in English, Spanish, and French; original source records retain their values and currency.
 
-**Microcopy:** “No fixed column names. No required order. You confirm the meaning before totals change.”
+- **What is selling?** Show the revenue increase in EUR cents, with a disclosure of current and previous-day product totals at the same 14:00 cutoff. Canvas Tote, Ground Coffee, and Other products sum to the same revenue as the hero and demo. The evidence identifies confirmed sales transactions and the period being compared.
+- **What is about to run out?** Show Ground Coffee with 12 units left: a physical count of 50, plus 10 delivered, minus 48 sold. The six-units-per-day pace gives an illustrative two-day estimate, consistent with the demo risk list. Explain that a sales file alone cannot establish shelf stock.
+- **Which customers come back?** Show 38 returning customers out of 241 distinct current identifiers; 203 are first seen in the available fictional history. A labelled checkbox removes identifier availability and replaces the count with an explained unavailable state, never zero. Evidence explains the match against earlier history without claiming a customer's lifetime relationship with the business.
 
-**Interaction:** selecting a source changes a large adjacent stage from raw input to recognized table. Keyboard users receive the same change through tabs. Align the section with the other product chapters without outer rails or full-width border lines.
+### 3. Add → Confirm → See, including live entry
 
-### 3. Problem framing: “Your data should not need a new job before it can help you”
+Replace the long landing-page workflow panels with three short numbered steps and a compact next-sale example. A source ribbon names familiar inputs; the detailed ten-format explorer remains reachable through a demo disclosure.
 
-Use a dark Ink chapter with three bordered columns that stack on mobile. Precede each explanation with an illustrative merchant question, explicitly labelled as an example rather than a testimonial:
+**Narrative:** “Bring a file. Or record the next sale.” Uploaded and entered data serve the same merchant decisions in the product design. The current interaction is explicitly local and does not claim a live API or offline queue.
 
-1. **Every export looks different.** “Columns move, headings change, and dates mean different things.”
-2. **Manual cleanup steals the decision window.** “By the time the sheet is ready, the stock decision is already late.”
-3. **A confident wrong answer is worse than no answer.** “Suq shows uncertainty and asks before it commits.”
+**Two-tap example:** select one Ground Coffee sale, then confirm the displayed stock transition from 12 to 11. Selection alone does not change stock. Cancel returns to the initial state. After confirmation, Undo restores 12 and allows the example to be repeated. The next-sale example starts after the historical sample cutoff and changes only its own stock display, not the historical dashboard's revenue or customer totals.
 
-Example questions: “Why does every export need a different spreadsheet?”, “Can I get the numbers before it is too late to act?”, and “Did this column mean quantity or revenue?” Use Paper text, lime sequence markers, and serif emphasis for the questions. The whole chapter introduces the trust position; nothing auto-scrolls or requires motion to be read.
+Keyboard focus follows the current action through preview, confirmation, cancellation, and undo. A polite status announces the stock value. Values are derived from the explicit interaction state and shared fixture, so repeated confirmation cannot silently record extra sales. There is no network request or persistent record.
 
-### 4. How it works: “From messy records to a useful morning view”
+### 4. Trust: the answer comes with its evidence
 
-Use a three-act scrollytelling or tabbed sequence. Scrollytelling collapses to static cards on reduced motion and mobile.
+Present one compact interpretation example after the business outcomes: “What does ‘Cod.’ mean?” This abbreviation occurs once in rendered landing copy, in the trust heading. Original sample values remain visible, but the detailed field controls, source table, confirmation, and reset belong in the demo. The trust copy explains why repeated codes still need the merchant's context and why absent cost means unavailable margin rather than zero.
 
-**Act 1 — Add what you have.** File, photo, pasted table, or entry channel.
+The review link navigates to `/demo#demo-review`, opens the disclosure, moves focus to its summary, and scrolls to it. The source-explorer link does the equivalent for `/demo#demo-sources`. The full legacy step-by-step review remains available in a separate demo disclosure, preserving its field and evidence interactions without repeating them on the landing page.
 
-**Act 2 — Confirm what it means.** Show detected field, type, assigned use, confidence, sample values, and a visible edit. Copy: “Suq proves what it can and flags what it cannot.”
-
-**Act 3 — See what matters.** The confirmed fields animate into the starting dashboard. Copy: “Only supported analyses appear. Missing concepts are explained, never treated as zero.”
-
-Primary CTA after the sequence: **Try sample data**.
-
-In the current preview, follow the sequence with **Clarity you can check**, a six-cell grid of evidence, confirmation, preservation, missing-data, context, and localization principles. Its copy points to behavior visible in the sample. Finish with a dark invitation to explore Mercado Norte and an honest account-access preview link. As later phases arrive, these two closing sections move after the new product chapters.
-
-### 5. Three daily questions
-
-This is the product’s memorable center. Use three large feature panels, alternating image and copy.
-
-#### What is selling?
-
-**Headline:** “See momentum while it still matters.”
-
-**Copy:** “Track revenue, transactions, units, period patterns, top items, and slow movers from one confirmed source of truth.”
-
-**Mockup:** revenue-over-time with comparison, top-items ranked bar, and a narrative insight. Use a question label above the panel.
-
-#### What is about to run out?
-
-**Headline:** “Order before the shelf answers for you.”
-
-**Copy:** “See stock status, days remaining, depletion forecasts, and a reorder list—with provenance behind every derived quantity.”
-
-**Mockup:** stock-status table and days-of-stock gauge. Expand one item to show latest observation + deliveries − sales.
-
-#### Which customers come back?
-
-**Headline:** “Turn repeat business into something you can see.”
-
-**Copy:** “Understand repeat versus new customers, cohorts, purchase frequency, and top customers when your data includes a customer identifier.”
-
-**Honesty note:** show the unavailable state too: “Retention needs a customer identifier. Assign one in Data review.”
-
-### 6. Trust mechanism: “Nothing silently guessed”
-
-Use a black section with white copy, an acid-lime confidence indicator, and a high-resolution crop of the review screen.
-
-**Headline:** “The system proposes. You decide.”
-
-**Body:** “Suq detects structure, types, and likely meanings from headers and values. Before data is committed, you see the evidence, correct any uncertainty, and preview what the dataset can support.”
-
-Four proof points:
-
-- Actual sample values beside every interpretation.
-- Low-confidence cells beside the source image region.
-- Reusable confirmed models for returning formats.
-- Editable history without re-uploading raw records.
-
-CTA: **See the review experience**.
-
-### 7. Channels and live entry: “Keep the picture current”
-
-**Narrative:** “Upload weekly, record each sale, paste the closing table, or sync from another system. A channel remembers what that stream means, so every path feeds the same answers.”
-
-Use a horizontal flow:
-
-```text
-Daily sales channel        Supplier deliveries channel       Monday count channel
-file · photo · entry       file · paste · API                entry · photo
-          \                     |                            /
-                 confirmed records → derived stock → widgets
-```
-
-Show quick entry on a phone and the live freshness indicator on desktop. Mention offline queuing visibly: “3 entries waiting to sync.”
+**Remaining blueprint:** the following dashboard, proof, comparison, plans, FAQ, and footer sections describe the broader intended experience. They are not all implemented by this narrative checkpoint; delivery follows `docs/landing-page-revision-plan.md`.
 
 ### 8. Composable dashboard: “Your morning check is not your weekly review”
 
@@ -683,6 +617,8 @@ Answers should be visible in an accessible accordion with correct heading and bu
 Footer groups: Product, Use cases, Resources, Company, Legal, Language. Include status, accessibility, privacy, terms, security, and support links. Advertiser access sits in the footer, not the primary merchant navigation.
 
 ## 5.3 Landing-page wireframe
+
+This is the broader launch blueprint, including future sections. The current preview order is hero → three merchant decisions → short workflow and next-sale example → trust → closing action.
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -1516,7 +1452,7 @@ Forbidden properties include raw values, source names, field names, customer inf
 
 ### Preview event boundary
 
-The first landing revision emits `landing_cta_selected`, `demo_started`, and `model_review_opened` through a `JourneySink` interface. Its only implementation is a bounded, in-memory sink holding at most 100 events, with no network, cookies, persistent storage, or console logging. Runtime validation rejects unknown events, extra properties, and values outside the location/locale enums. Demo route visits are deduplicated across effect replay. Review events represent deliberate opening of the demo disclosure or re-entry to the interpretation tab, not a claim that merely rendered content was read.
+The first landing revision emits `landing_cta_selected`, `demo_started`, and `model_review_opened` through a `JourneySink` interface. Its only implementation is a bounded, in-memory sink holding at most 100 events, with no network, cookies, persistent storage, or console logging. Runtime validation rejects unknown events, extra properties, and values outside the location/locale enums. Demo route visits are deduplicated across effect replay. Review events represent deliberate opening of the demo disclosure or re-entry to the detailed interpretation tab. The landing trust/source links emit CTA events with fixed `trust` and `sources` locations. Rendering content alone is not counted as reading it.
 
 This establishes a testable event contract, not a production conversion baseline. A reviewed collector is still required for visitor measurement; provider, consent, retention, and access decisions remain pending. No lead capture is added in this checkpoint.
 

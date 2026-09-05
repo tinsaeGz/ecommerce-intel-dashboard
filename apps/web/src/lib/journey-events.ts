@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { getSupportedLanguage, i18n } from "../i18n";
 
 const schemas = {
-  landing_cta_selected: { location: ["header", "mobile-menu", "hero", "briefing", "closing", "how-it-works"] },
+  landing_cta_selected: { location: ["header", "mobile-menu", "hero", "briefing", "closing", "how-it-works", "sources", "trust"] },
   demo_started: { location: ["demo"] },
   model_review_opened: { location: ["demo", "how-it-works"] },
 } as const;

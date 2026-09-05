@@ -7,12 +7,8 @@ import {
   SkipLink,
 } from "../components/public-ui";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
-import { DailyBriefing, MerchantOutcomes, ClosingInvitation } from "./merchant-story";
-import {
-  HowItWorks,
-  ProblemFraming,
-  SourceExplorer,
-} from "./product-understanding";
+import { DailyBriefing, ClosingInvitation } from "./merchant-story";
+import { MerchantDecisions, RecordToDecision, TrustStory } from "./merchant-decisions";
 import "./landing-page.css";
 
 export function LandingPage() {
@@ -46,10 +42,9 @@ export function LandingPage() {
           </div>
         </section>
 
-        <SourceExplorer />
-        <ProblemFraming />
-        <HowItWorks />
-        <MerchantOutcomes />
+        <MerchantDecisions />
+        <RecordToDecision />
+        <TrustStory />
         <ClosingInvitation />
       </main>
 

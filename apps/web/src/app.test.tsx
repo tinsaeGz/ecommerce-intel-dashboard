@@ -87,7 +87,8 @@ describe("public landing routes", () => {
 
   it("lets keyboard users compare supported sources", async () => {
     const user = userEvent.setup();
-    await renderAt("/");
+    await renderAt("/demo");
+    await user.click(screen.getByText(i18n.t("stories.entry.explore"), { selector: "summary" }));
     const sourceTabs = screen.getByRole("tablist", {
       name: "Supported source examples",
     });
@@ -108,7 +109,8 @@ describe("public landing routes", () => {
 
   it("shows evidence and updates an interpretation before commitment", async () => {
     const user = userEvent.setup();
-    await renderAt("/");
+    await renderAt("/demo");
+    await user.click(screen.getByText(i18n.t("stories.demo.workflow"), { selector: "summary" }));
     const workflowTabs = screen.getByRole("tablist", {
       name: "How Suq turns records into answers",
     });
@@ -205,7 +207,8 @@ describe("public landing routes", () => {
 
   it("explains unsupported analysis instead of presenting a false zero", async () => {
     const user = userEvent.setup();
-    await renderAt("/");
+    await renderAt("/demo");
+    await user.click(screen.getByText(i18n.t("stories.demo.workflow"), { selector: "summary" }));
     const workflowTabs = screen.getByRole("tablist", {
       name: "How Suq turns records into answers",
     });
@@ -229,19 +232,72 @@ describe("public landing routes", () => {
     expect(answersPanel).not.toHaveTextContent(/Margin[^.]*0/);
   });
 
-  it.each([
-    ["en", "Start where your records are.", "From messy records to a useful morning view."],
-    ["es", "Empieza donde están tus registros.", "De registros desordenados a una vista útil cada mañana."],
-    ["fr", "Commencez là où se trouvent vos données.", "Des données imparfaites à une vue matinale utile."],
-  ])("renders the product-understanding sequence in %s", async (locale, sourcesTitle, howTitle) => {
+  it.each(["en", "es", "fr"])("shows distinct merchant stories and one ambiguity example in %s", async (locale) => {
     await i18n.changeLanguage(locale);
     await renderAt("/");
+    for (const key of ["stories.title", "stories.sales.title", "stories.stock.title", "stories.customers.title", "stories.entry.title", "stories.trust.title"]) {
+      expect(screen.getByRole("heading", { name: i18n.t(key) })).toBeInTheDocument();
+    }
+    expect(screen.getByRole("main").textContent?.match(/Cod\./g)).toHaveLength(1);
+    expect(screen.queryByRole("tablist")).not.toBeInTheDocument();
+    expect(screen.getByText(i18n.t("stories.trust.missing"))).toBeInTheDocument();
+  });
 
-    expect(screen.getByRole("heading", { name: sourcesTitle })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: howTitle })).toBeInTheDocument();
-    expect(
-      within(screen.getByRole("tablist", { name: /source|fuentes/i })).getAllByRole("tab"),
-    ).toHaveLength(10);
+  it.each(["en", "es", "fr"])("previews, cancels, confirms and undoes a sale with keyboard focus in %s", async (locale) => {
+    const user = userEvent.setup();
+    await i18n.changeLanguage(locale);
+    await renderAt("/");
+    const entry = screen.getByRole("group", { name: i18n.t("stories.entry.try") });
+    const stock = within(entry).getByRole("status");
+    expect(stock).toHaveTextContent(i18n.t("stories.entry.stock", { count: 12 }));
+    await user.click(within(entry).getByRole("button", { name: i18n.t("stories.entry.select") }));
+    expect(within(entry).getByRole("button", { name: i18n.t("stories.entry.confirm") })).toHaveFocus();
+    expect(stock).toHaveTextContent(i18n.t("stories.entry.stock", { count: 12 }));
+    await user.click(within(entry).getByRole("button", { name: i18n.t("stories.entry.cancel") }));
+    const select = within(entry).getByRole("button", { name: i18n.t("stories.entry.select") });
+    expect(select).toHaveFocus();
+    await user.keyboard("{Enter}");
+    await user.keyboard("{Enter}");
+    expect(stock).toHaveTextContent(i18n.t("stories.entry.stock", { count: 11 }));
+    const undo = within(entry).getByRole("button", { name: i18n.t("stories.entry.undo") });
+    expect(undo).toHaveFocus();
+    expect(within(entry).queryByRole("button", { name: i18n.t("stories.entry.confirm") })).not.toBeInTheDocument();
+    await user.keyboard("{Enter}");
+    expect(stock).toHaveTextContent(i18n.t("stories.entry.stock", { count: 12 }));
+    expect(within(entry).getByRole("button", { name: i18n.t("stories.entry.select") })).toHaveFocus();
+  });
+
+  it.each(["en", "es", "fr"])("explains the source math and missing customer identity in %s", async (locale) => {
+    const user = userEvent.setup();
+    await i18n.changeLanguage(locale);
+    await renderAt("/");
+    await user.click(screen.getByText(i18n.t("stories.sales.evidence"), { selector: "summary" }));
+    expect(screen.getByRole("table", { name: i18n.t("stories.sales.caption") })).toBeInTheDocument();
+    await user.click(screen.getByText(i18n.t("stories.stock.evidence"), { selector: "summary" }));
+    expect(screen.getByText(i18n.t("stories.stock.prerequisite"))).toBeVisible();
+    const customers = screen.getByRole("article", { name: i18n.t("stories.customers.title") });
+    const status = within(customers).getByRole("status");
+    expect(status).toHaveTextContent("38");
+    const toggle = within(customers).getByRole("checkbox", { name: i18n.t("stories.customers.toggle") });
+    await user.click(toggle);
+    expect(status).toHaveTextContent(i18n.t("stories.customers.unavailable"));
+    expect(status).not.toHaveTextContent("38");
+    expect(status).not.toHaveTextContent(/\b0\b/);
+    await user.keyboard(" ");
+    expect(status).toHaveTextContent("38");
+  });
+
+  it.each(["#demo-review", "#demo-sources"])("opens and focuses a linked demo destination at %s", async (hash) => {
+    const user = userEvent.setup();
+    await renderAt("/");
+    const action = hash === "#demo-review" ? "hero.reviewAction" : "stories.entry.explore";
+    await user.click(screen.getByRole("link", { name: i18n.t(action) }));
+    await screen.findByRole("heading", { level: 1, name: i18n.t("demo.title") });
+    const summary = screen.getByText(i18n.t(action), { selector: "summary" });
+    await waitFor(() => expect(summary.closest("details")).toHaveAttribute("open"));
+    expect(summary).toHaveFocus();
+    await user.click(screen.getByRole("link", { name: i18n.t("actions.backHome") }));
+    await screen.findByRole("heading", { name: i18n.t("stories.title") });
   });
 
   it.each([
