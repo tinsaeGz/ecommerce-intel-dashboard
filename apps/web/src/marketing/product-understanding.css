@@ -43,7 +43,7 @@
   }
 
   .source-explorer {
-    background: var(--color-white);
+    background: transparent;
   }
 
   .source-explorer__surface {

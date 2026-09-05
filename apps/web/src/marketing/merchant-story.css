@@ -135,7 +135,7 @@
 
   .merchant-outcomes {
     padding: var(--space-18) var(--canvas-inset) 0;
-    background: var(--color-white);
+    background: transparent;
   }
 
   .merchant-outcomes__grid {
