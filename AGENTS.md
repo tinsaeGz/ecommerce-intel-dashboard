@@ -2,46 +2,46 @@
 
 ## Mission and authority
 
-- Complete Suq Insights as a production SaaS governed by `SDLC.md` version 3.0.
-- Treat `SDLC.md` as the canonical product, architecture, delivery, and operations specification. It overrides conflicting material in `docs/`, especially the older fixed-schema ingestion and fixed-dashboard designs.
-- Use the requirement IDs and phase gates in `SDLC.md` to define acceptance criteria and trace implementation work.
-- Do not silently weaken, replace, or invent product requirements. Record material decisions that cross module boundaries, add tables, or affect money or entitlements in an accepted design note or ADR before implementation.
+- Complete Suq Insights as the paid MVP governed by `SDLC.md` version 4.0; production SaaS expansion happens only through the evidence-gated roadmap in that document.
+- Treat `SDLC.md` as the canonical product, architecture, delivery, and operations specification. It overrides conflicting material in `docs/`, especially the older broad international SaaS, fixed-schema ingestion, fixed-dashboard, document-extraction, offline mobile, advertising, and marketplace designs.
+- Use the SI requirement IDs and phase gates in `SDLC.md` to define acceptance criteria and trace implementation work.
+- Do not silently weaken, replace, or invent product requirements. Record material decisions that cross module boundaries, add tables, or affect money, quotas, entitlements, privacy, or roadmap scope in an accepted design note or ADR before implementation.
 
 ## Architecture
 
 - Maintain one monorepo with deployable applications in `apps/web`, `apps/mobile`, and `apps/api`; reusable TypeScript boundaries in `packages/api-client`, `packages/design-tokens`, and `packages/shared-types`; and operational material in `deploy/` and `docs/`.
 - Build `apps/web` with React, React Router, TypeScript, Vite, standards-based vanilla CSS, TanStack Query, react-i18next, and ECharts. Serve marketing pages and the application from the same origin, with the authenticated product under `/app` and the versioned API under `/v1`.
-- Build `apps/mobile` with Expo and React Native. Native delivery remains demand-triggered as specified by the SDLC, but mobile architecture must stay compatible with token authentication, offline entry, camera ingestion, push notifications, and the shared versioned API.
-- Build `apps/api` with Python 3.12, FastAPI, Pydantic v2, SQLAlchemy 2 async, Alembic, PostgreSQL 16, Redis 7, Celery 5, MinIO, Polars, DuckDB, and the SDLC document-extraction stack.
-- Keep the domain package pure: metrics, forecasting, fingerprints, billing math, entitlement rules, and auction scoring must not depend on HTTP, persistence, workers, or provider adapters.
+- Build `apps/mobile` with Expo and React Native for compatibility with shared authentication and API contracts. Native delivery, offline mutation, camera workflows, and push notifications remain demand-triggered roadmap work under SDLC v4.
+- Build `apps/api` with Python 3.12, FastAPI, Pydantic v2, SQLAlchemy 2 async, Alembic, PostgreSQL 16, durable workers/jobs, private object storage, and hosted email/payment adapters. Use Redis, Celery, MinIO/S3-compatible storage, Polars, or other parsing components only where they serve the bounded v4 launch requirements.
+- Keep the domain package pure: event identity, inventory math, replenishment rules, billing and quota math, entitlement rules, and privacy-retention rules must not depend on HTTP, persistence, workers, or provider adapters.
 - Generate `packages/api-client` from the FastAPI OpenAPI contract. Both client applications consume that package; commit a contract change and its regenerated client in the same checkpoint.
 - Keep cross-client sharing deliberate: `packages/design-tokens` owns platform-neutral values, while web CSS and React Native styles remain platform-specific. `packages/shared-types` may contain client-safe primitives only; backend domain models and secrets never move into TypeScript merely for reuse.
-- Keep API and worker processes stateless. Heavy work belongs in isolated Celery queues, never in the request path.
+- Keep API and worker processes stateless. Heavy work belongs in isolated durable jobs, never in the request path.
 - Read all configuration from the environment, validate it at startup, and refuse to start when required configuration is invalid.
 
 ## UI/UX and vanilla CSS
 
-- Treat `UI-UX-CONCEPT.md` as the implementation reference for the landing-page narrative, product information architecture, visual tokens, responsive behavior, component states, accessibility, localization, and interaction details. `SDLC.md` remains authoritative when the documents conflict. `SUQ-INSIGHTS-UI-UX-CONCEPT.pdf` is a reading artifact; update it whenever its Markdown source materially changes.
+- Treat `UI-UX-CONCEPT.md` as the implementation reference for the landing-page narrative, visual tokens, responsive behavior, component states, accessibility, localization, and interaction details where it is consistent with `SDLC.md`. `SDLC.md` remains authoritative when the documents conflict.
 - Author web styling as plain `.css` files imported explicitly by the owning entry point or component. Do not add Tailwind, Sass/Less, CSS-in-JS, CSS Modules, a runtime styling library, or a second design system without an approved architecture decision. React Native uses its native `StyleSheet` API rather than CSS.
 - Keep global web CSS deliberate: generate shared token custom properties from `packages/design-tokens/tokens.json`, define normalization in `apps/web/src/styles/reset.css`, element defaults in `apps/web/src/styles/base.css`, and ordered cascade layers `reset`, `base`, `components`, `utilities`, and `overrides`. Co-locate feature and component CSS with the code it styles once those directories exist.
 - Use CSS custom properties for color, typography, spacing, radius, elevation, motion, breakpoints where usable, and component-level theming. Reuse a semantic token when one exists; do not scatter raw brand values through feature styles.
 - Keep selectors low-specificity and locally namespaced with a consistent component/feature convention. Prefer classes and `data-*` state attributes; avoid IDs, deep descendant chains, `!important`, and markup-dependent selectors.
 - Reserve inline styles for genuinely runtime-calculated geometry or values that cannot be expressed through a class or custom property. State, variants, responsive behavior, focus, reduced motion, and print styling belong in CSS.
-- Implement mobile-first, content-driven layouts from the breakpoints and behavior in `UI-UX-CONCEPT.md`. Every changed component must cover loading, empty, error, disabled/permission, localization expansion, keyboard focus, reduced motion, and touch targets as applicable.
+- Implement mobile-first, content-driven layouts from the breakpoints and behavior in `UI-UX-CONCEPT.md`. Changed merchant-facing flows must cover loading, empty, error, disabled/permission, Spanish text expansion, keyboard focus, reduced motion, and touch targets as applicable.
 - Follow `UI-UX-CONCEPT.md` §12.13 for dropdowns across marketing and product screens. Reuse `apps/web/src/components/dropdown-select.tsx` for finite single-value pickers; keep the shared white floating surface, mint selection, rounded rows, and keyboard behavior. Action/profile menus use the same visual tokens but appropriate menu or navigation semantics, never a selection listbox. Do not create page-specific dropdown copies; native mobile uses platform-appropriate controls.
 
 ## Product invariants
 
-- Enforce tenant isolation twice: scope every tenant-owned query by `merchant_id` and apply PostgreSQL row-level security. Return not-found for cross-tenant resource identifiers.
-- Resolve authentication, tenant scope, entitlements, rate limits, idempotency, and conditional requests in the shared middleware and service layers rather than ad hoc endpoint checks.
-- Channel intent is declared by the merchant and is never inferred from values. Reconciliation is always a proposal requiring merchant confirmation unless a previously confirmed structural signature applies.
-- Preserve raw uploads and typed unmapped attributes. Model revisions are versioned, auditable, previewable, reversible, and capable of re-deriving existing history without re-upload.
-- Treat a load as the unit of undo. Derived state must recompute correctly for late events, amendments, and reversals.
-- Use decimal values plus explicit currency for merchant money and integer micro-units with an append-only ledger for advertising balances. Never use binary floating point for money.
-- Enforce plan entitlements centrally in both upgrade and downgrade directions. Webhooks, retries, sync operations, and billable events must be idempotent.
-- Localize all user-facing content in English, Spanish, and French. Do not hardcode user-facing strings. Meet WCAG 2.1 AA, keyboard navigation, and reduced-motion requirements.
-- Emit structured logs, metrics, traces, and actionable errors for new behavior without exposing credentials, customer data, or raw uploaded values.
-- Preserve the SDLC service objectives: dashboard reads below 300 ms p95, 10 MB ingestion below 60 seconds, verification delivery below 15 seconds, and no dashboard degradation during ingestion load.
+- Enforce tenant isolation twice: scope every tenant-owned query by server-derived workspace or merchant identity and apply PostgreSQL row-level security. Return not-found for cross-tenant resource identifiers.
+- Resolve authentication, tenant scope, memberships, roles, entitlements, quotas, rate limits, idempotency, and conditional requests in shared middleware and service layers rather than ad hoc endpoint checks.
+- Source intent is declared by the merchant and is never inferred from values. Consequential ambiguity in source type, item identity, quantity, unit, currency, date, refund/return, or count semantics requires merchant review before publication.
+- Preserve source blobs, allowed raw values, typed unmapped attributes, event revisions, model revisions, and audit records according to the SDLC v4 retention rules. Model revisions are versioned, auditable, previewable, reversible, and capable of re-deriving retained history without re-upload while source material is retained.
+- Treat a load revision as the unit of commit and undo. Derived state must recompute correctly for late events, amendments, and reversals.
+- Use decimal quantities, decimal money, and explicit currencies. Never use binary floating point for money and never sum incompatible units or currencies.
+- Enforce plan entitlements and pilot quotas centrally in both upgrade and downgrade directions. Webhooks, retries, sync operations, reminders, exports, and billable events must be idempotent.
+- Launch merchant-facing flows must work in Spanish first. Do not hardcode user-facing strings; keep existing English and French behavior healthy when those paths are touched.
+- Emit structured logs, metrics, traces, and actionable errors for new behavior without exposing credentials, customer data, raw uploaded values, or private source blobs.
+- Preserve the SDLC v4 pilot service objectives: 99.5% availability for authenticated reads and accepted writes, authenticated read p95 below 500 ms, supported CSV processing below two minutes excluding human review, supported XLSX processing below five minutes excluding human review, RPO at most 15 minutes, RTO at most two hours, and WCAG 2.2 AA.
 
 ## Exclusive LLM session
 
@@ -85,13 +85,14 @@ Checkpoint: <completed and usable behavior>
 ## Quality gates and definition of done
 
 - Run the narrowest relevant checks during development, then all affected subsystem gates before committing. Use the commands defined by the repository's manifests and CI configuration once those files exist.
-- Backend work requires formatting/lint, strict type checks where configured, unit tests, and relevant integration tests against real PostgreSQL, Redis, and MinIO. Domain logic must remain property-testable.
-- Web and mobile work requires formatting/lint, TypeScript checks, component tests in all three locales, and accessibility checks for changed flows. Web changes additionally require a production build within its performance budget; native release work requires the relevant Expo platform build and device-level offline, camera, notification, and accessibility checks.
+- Backend work requires formatting/lint, strict type checks where configured, unit tests, and relevant integration tests against real PostgreSQL and private object storage. Domain logic must remain property-testable.
+- Web work requires formatting/lint, TypeScript checks, component tests for changed flows, Spanish launch copy review when user-facing text changes, accessibility checks, and production build validation within the active performance budget.
+- Mobile work requires formatting/lint, TypeScript checks, export/build validation, and compatibility with shared authentication and API contracts. Native offline, camera, notification, and device-level gates apply only when the corresponding roadmap scope is active.
 - Schema work requires hand-reviewed Alembic migrations, upgrade validation against a realistic snapshot, tenant/RLS tests, and zero-downtime expand-migrate-contract discipline.
-- Contract, security, billing, ingestion, or critical-journey changes require the corresponding contract, negative, fixture-corpus, idempotency, and end-to-end coverage from SDLC chapter 8.
-- Maintain at least 95% coverage for the pure domain package and 85% overall. Do not hide coverage regressions by excluding meaningful code.
+- Contract, security, billing, ingestion, inventory, or critical-journey changes require the corresponding contract, negative, fixture-corpus, idempotency, recovery, and end-to-end coverage from SDLC v4.
+- Maintain meaningful coverage for pure domain logic and affected application code. Do not hide coverage regressions by excluding meaningful code.
 - If a required tool or environment is unavailable, report the exact unrun gate. Never claim a check passed when it was skipped or unavailable.
-- A feature is done only when code, tests, documentation, all three locales, security and tenancy review, observability, and requirement traceability are complete. Do not declare the SaaS complete until every SDLC phase and release gate has passed.
+- A feature is done only when code, tests, documentation, Spanish launch copy where applicable, security and tenancy review, observability, and SI requirement traceability are complete. Do not declare the SaaS complete until every SDLC phase and release gate has passed.
 
 ## Sequential handoff
 

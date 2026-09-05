@@ -1,47 +1,46 @@
 # E-Commerce Intelligence Dashboard — "Suq Insights"
 
-**Status:** Design complete, foundations in development (rev. 3 — multi-application monorepo)
-**API:** FastAPI (Python 3.12) · **Web:** React + TypeScript + vanilla CSS · **Mobile:** Expo/React Native (demand-triggered phase 2) · **DB:** PostgreSQL 16 · **Cache/Queue:** Redis 7 + Celery
-**Target deployment:** Ubuntu Linux server, EU region (Docker Compose), designed to scale out later
-**Languages:** English · Español · Français
+**Status:** Scope reset to SDLC v4 paid MVP; foundations in development
+**API:** FastAPI (Python 3.12) · **Web:** React + TypeScript + vanilla CSS · **Mobile:** Expo/React Native compatibility only until demand-triggered
+**DB:** PostgreSQL 16 · **Async work:** durable jobs/workers · **Storage:** private object storage
+**Launch language:** Spanish merchant workflow first; English engineering language
 
-A commercial SaaS analytics platform for small and mid-size merchants internationally — Latin America, francophone Europe/Africa, and English-speaking markets. Merchants upload messy sales exports (CSV/Excel from POS systems, marketplace back-offices, WhatsApp/Telegram order logs, hand-kept spreadsheets); the platform normalizes them and turns them into daily actionable intelligence: sales velocity, stockout prediction, and customer retention. Monetized through a free ad-supported tier (contextual B2B ads) and a premium subscription (unlimited history, SMS/email alerts, sync API).
+Suq Insights is a paid, narrow inventory-decision MVP for a small retailer in one country and one niche. The launch product supports one workspace stock location, one currency, CSV/XLSX ingestion, reviewed SKU mapping, stock counts and movements, deterministic stock/sales summaries, one action screen, email reminders, capped billing, owner/staff access, and export.
 
-> **Standalone edition (v3 — channels, live entry, derived state):** [SDLC.md](SDLC.md) is a single self-contained document covering everything — requirements, use cases and scenarios, 19 diagrams (use case, ER, class, sequence, state, activity, deployment, component, UX), design, implementation, testing, deployment, and maintenance — with no cross-references. Share that file when one document must stand alone.
->
-> **Note:** the standalone document supersedes the `docs/` set on data ingestion and on the dashboard. It specifies an **inferred domain model** — no predefined schema, structure and meaning derived from metadata and extracted values, merchant review and editing before commit, post-commit remodeling without re-upload, and image/PDF sources via document extraction. It also specifies **channels** (named, merchant-labelled streams whose label declares intent), a **day-to-day entry space** with offline sync and live canvas updates, **derived state** (count 50 today, sell 2 tomorrow, stock reads 48 — computed, never stored), a **drift guard** that is permissive about what it accepts and conservative about what it changes, and a **composable widget dashboard** — widgets as independently implemented backend modules over shared query primitives, a question-with-swappable-renders model, drag-and-drop canvases, multiple named dashboards, and a fourteen-widget launch catalog (Appendix A). The `docs/` set below still describes the earlier fixed-schema mapping design and fixed dashboard screens, and is being brought in line.
+[SDLC.md](SDLC.md) is the canonical product, architecture, delivery, and operations specification. It now reflects proposed version 4.0 and supersedes the broader v3 launch assumptions in `docs/`, including image/PDF ingestion, offline mobile entry, customer retention analytics, widget marketplaces, advertising, mixed currencies, multi-location inventory, and broad international expansion. Those capabilities are roadmap items only after the evidence triggers in SDLC v4 are met.
 
 ## Documentation index
 
-| Doc | Contents |
-|---|---|
-| [UI/UX Concept](UI-UX-CONCEPT.md) | Landing-page narrative, dashboard architecture, visual system, vanilla CSS conventions, component states, responsive behavior, accessibility, localization, and marketing initiatives |
-| [01 — Product Definition](docs/01-product.md) | Vision, personas, feature tiers, monetization, mobile strategy |
-| [02 — System Architecture](docs/02-architecture.md) | Components, diagrams, tech-stack decisions and rationale |
-| [03 — Data Model](docs/03-data-model.md) | Full PostgreSQL schema, multi-tenancy, partitioning, retention |
-| [04 — API Design](docs/04-api.md) | Conventions, endpoint catalog, versioning, errors, pagination, idempotency, webhooks, public sync API |
-| [05 — Security](docs/05-security.md) | AuthN/AuthZ, API keys, upload security, OWASP checklist, secrets, compliance |
-| [06 — Ingestion Pipeline](docs/06-ingestion.md) | Upload → parse → map → validate → load; schema mapping UX; dedup; error reporting |
-| [07 — Analytics Engine](docs/07-analytics.md) | Metric definitions, computation strategy, alert engine |
-| [08 — Ad Engine](docs/08-ads.md) | Contextual B2B ads: targeting, serving, pacing, advertiser portal, ad billing |
-| [09 — Performance: Caching & Rate Limiting](docs/09-performance.md) | Every cache layer, every rate limit, with exact policies |
-| [10 — Notifications & i18n](docs/10-notifications-i18n.md) | SMS/email/push, localization (en/es/fr), regional number/date formats |
-| [11 — Billing & Subscriptions](docs/11-billing.md) | Plans, entitlements, Stripe (+ regional providers), taxes, dunning, proration |
-| [12 — Operations](docs/12-operations.md) | Environments, CI/CD, deployment, backups, DR, observability, SLOs, runbooks |
-| [13 — Testing & QA](docs/13-testing.md) | Test pyramid, fixtures for messy CSVs, load testing, security testing |
-| [14 — Roadmap](docs/14-roadmap.md) | 14-week phased implementation plan, team shape, risk register |
-| [15 — SDLC](docs/15-sdlc.md) | Methodology, roles, phase gates, premium feature register (FR-P-1…10) with launch gates, release/change management, maintenance |
+| Doc | Contents | Authority |
+|---|---|---|
+| [SDLC](SDLC.md) | Canonical v4 product scope, requirements SI-01…SI-15, architecture, release gates, privacy, and build-to-revenue plan | Authoritative |
+| [UI/UX Concept](UI-UX-CONCEPT.md) | Landing-page narrative, visual system, vanilla CSS conventions, component states, responsive behavior, accessibility, localization, and marketing initiatives | Implementation reference where consistent with SDLC v4 |
+| [01 — Product Definition](docs/01-product.md) | Earlier v3 product, personas, feature tiers, monetization, and mobile strategy | Legacy reference |
+| [02 — System Architecture](docs/02-architecture.md) | Earlier v3 architecture and scale-out assumptions | Legacy reference |
+| [03 — Data Model](docs/03-data-model.md) | Earlier v3 PostgreSQL schema and retention design | Legacy reference |
+| [04 — API Design](docs/04-api.md) | Earlier v3 endpoint catalog and public sync API assumptions | Legacy reference |
+| [05 — Security](docs/05-security.md) | Security controls that may still apply after v4 review | Supporting reference |
+| [06 — Ingestion Pipeline](docs/06-ingestion.md) | Earlier ingestion pipeline design | Legacy reference |
+| [07 — Analytics Engine](docs/07-analytics.md) | Earlier metric and alerting design | Legacy reference |
+| [08 — Ad Engine](docs/08-ads.md) | Advertising design | Roadmap only |
+| [09 — Performance](docs/09-performance.md) | Earlier caching, rate limiting, and load assumptions | Legacy reference |
+| [10 — Notifications & i18n](docs/10-notifications-i18n.md) | Earlier SMS/email/push and locale assumptions | Legacy reference |
+| [11 — Billing & Subscriptions](docs/11-billing.md) | Billing concepts requiring v4 quota/subscription alignment | Supporting reference |
+| [12 — Operations](docs/12-operations.md) | Earlier environments, deployment, backup, DR, and observability | Supporting reference |
+| [13 — Testing & QA](docs/13-testing.md) | Earlier test pyramid and beta plan | Legacy reference |
+| [14 — Roadmap](docs/14-roadmap.md) | Earlier 14-week roadmap | Legacy reference |
+| [15 — SDLC](docs/15-sdlc.md) | Earlier SDLC methodology and premium feature register | Legacy reference |
 
 ## Reading order
 
-- **Engineers starting implementation:** 15 → 02 → 03 → 04 → 06 → 09
-- **Product/business stakeholders:** 01 → 08 → 11 → 14 → 15 §5
-- **DevOps:** 02 → 12 → 09 → 05
+- **Engineers starting implementation:** SDLC → AGENTS → 02 → 03 → 04 → 06, applying SDLC v4 where documents conflict.
+- **Product/business stakeholders:** SDLC → 01 → 11 → 14, applying SDLC v4 where documents conflict.
+- **DevOps:** SDLC → 12 → 05 → 09, applying SDLC v4 where documents conflict.
 
 ## Non-negotiable engineering principles
 
-1. **Tenant isolation everywhere.** Every query is scoped by `merchant_id`; PostgreSQL Row-Level Security backs this as defense-in-depth. There is no code path that reads cross-tenant data except the admin surface and the ad-targeting service (which sees only aggregate signals, never raw rows).
-2. **The dashboard must feel instant on bad connections.** Aggregates are precomputed at ingestion time and cached; no dashboard request may fan out into raw-row scans. Target p95 < 300 ms for every dashboard read endpoint.
-3. **Ingestion never blocks the request path.** Uploads return immediately with a job handle; all parsing happens in workers.
-4. **Fail loudly to us, gracefully to merchants.** Every rejected row in an upload is reported back per-row in the merchant's language; every worker exception pages us via Sentry.
-5. **Everything metered.** Rate limits, quotas, and entitlements are enforced in one middleware layer driven by the plan table — never hard-coded in endpoints.
+1. **Tenant isolation everywhere.** Every tenant-owned query is scoped server-side by workspace/merchant identity and backed by PostgreSQL Row-Level Security. Cross-tenant identifiers return not found.
+2. **Trust beats automatic acceptance.** Ambiguous source type, item identity, quantity, unit, currency, date, refund/return, or count semantics require review before publication.
+3. **Loads publish atomically.** Uploads, parsing, staging, publication, reversal, reminders, exports, and billing side effects run through durable, idempotent jobs and auditable revisions.
+4. **Inventory and money are exact.** Use decimal quantities and money, never sum incompatible units or currencies, and trace retained results to source row, model revision, actor, and load.
+5. **Everything is bounded.** Quotas, subscription state, export/deletion rights, reminders, and roadmap expansion are enforced centrally from the v4 pilot contract.
