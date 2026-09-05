@@ -466,6 +466,7 @@
 
   .interpretation-review__topline {
     display: flex;
+    flex-wrap: wrap;
     min-height: 4.75rem;
     align-items: center;
     justify-content: space-between;
@@ -565,12 +566,13 @@
 
   .confidence-badge {
     display: inline-flex;
+    max-width: 100%;
     align-items: center;
     gap: 0.3rem;
     padding: 0.3rem var(--space-2);
     font-size: 0.68rem;
     font-weight: var(--font-weight-semibold);
-    white-space: nowrap;
+    white-space: normal;
     background: var(--color-mist);
     border-radius: 999px;
   }
@@ -612,6 +614,7 @@
 
   .evidence-drawer__heading {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--space-3);
@@ -758,6 +761,7 @@
 
   .how-it-works__static {
     display: none;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-5);
     margin: var(--space-10) 0 0;
     padding: 0;
@@ -765,6 +769,8 @@
   }
 
   .how-it-works__static > li {
+    min-width: 0;
+    overflow-wrap: anywhere;
     padding: var(--space-4);
     background: var(--color-ink);
     border-radius: var(--radius-panel);

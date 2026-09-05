@@ -1,0 +1,24 @@
+@layer components {
+  .demo-review {
+    margin-top: var(--space-10);
+    scroll-margin-top: var(--space-5);
+  }
+
+  .demo-review > summary {
+    padding: var(--space-4);
+    min-height: 2.75rem;
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    border: 0.0625rem solid var(--color-line);
+    border-radius: var(--radius-control);
+  }
+
+  .demo-review > summary:focus-visible {
+    outline: 0.2rem solid var(--color-ink);
+    outline-offset: 0.2rem;
+  }
+
+  .demo-review .hero-record {
+    margin-block: var(--space-6);
+  }
+}

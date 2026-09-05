@@ -1,10 +1,9 @@
 import { useTranslation } from "react-i18next";
 
-import { ButtonLink } from "../components/public-ui";
+import { DemoLink } from "../components/public-ui";
 import { getSupportedLanguage } from "../i18n";
 import { landingDemo } from "../lib/demo-data";
-import { formatNumber, formatPercent } from "../lib/format";
-import { DashboardPreview } from "./dashboard-preview";
+import { formatCurrency, formatDemoDate, formatNumber, formatPercent } from "../lib/format";
 import "./merchant-story.css";
 
 
@@ -13,57 +12,29 @@ export function DailyBriefing() {
   const locale = getSupportedLanguage(i18n.resolvedLanguage);
 
   return (
-    <div className="daily-briefing">
-      <div className="daily-briefing__intro">
-        <div className="daily-briefing__caption">
-          <span className="daily-briefing__mark" aria-hidden="true">S</span>
-          <p>{t("presentation.briefing.label")}</p>
-          <span className="daily-briefing__sample">{t("demo.sampleLabel")}</span>
+    <section className="daily-briefing" aria-labelledby="briefing-title">
+      <p className="daily-briefing__caption">{landingDemo.workspace} · {formatDemoDate(landingDemo.date, locale, landingDemo.timeZone)}</p>
+      <h2 id="briefing-title">{t("presentation.briefing.question")}</h2>
+      <p className="daily-briefing__answer">{t("hero.briefingAnswer")}</p>
+      <dl className="daily-briefing__metrics">
+        <div className="daily-briefing__revenue">
+          <dt>{t("dashboard.metrics.revenue")}</dt>
+          <dd>{formatCurrency(landingDemo.revenue, landingDemo.currency, locale)}</dd>
+          <dd className="daily-briefing__comparison">{t("hero.comparison", { comparison: formatPercent(landingDemo.comparisonPercent, locale) })}</dd>
         </div>
-        <h2>{t("presentation.briefing.question")}</h2>
-        <p className="daily-briefing__answer">
-          {t("presentation.briefing.answer", {
-            comparison: formatPercent(landingDemo.comparisonPercent, locale),
-            risks: formatNumber(landingDemo.stockRisks, locale),
-          })}
-        </p>
-        <div className="daily-briefing__controls">
-          <details className="briefing-detail">
-            <summary>{t("presentation.briefing.stockAction")}</summary>
-            <div className="briefing-detail__content">
-              <p>{t("dashboard.stock.body")}</p>
-              <ul>
-                {landingDemo.stockRiskItems.map((item) => (
-                  <li key={item.name}>
-                    <strong>{item.name}</strong>
-                    <span>{t("dashboard.briefing.daysRemaining", { count: item.daysRemaining })}</span>
-                  </li>
-                ))}
-              </ul>
-              <p>{t("presentation.briefing.stockNote")}</p>
-            </div>
-          </details>
-          <details className="briefing-detail">
-            <summary>{t("presentation.briefing.evidenceAction")}</summary>
-            <div className="briefing-detail__content">
-              <p>{t("dashboard.briefing.evidence", {
-                transactions: formatNumber(landingDemo.transactions, locale),
-              })}</p>
-              <p>{t("presentation.briefing.evidenceBody")}</p>
-            </div>
-          </details>
-          <a
-            className="daily-briefing__review-link"
-            href="#how-it-works"
-            onClick={() => document.getElementById("how-it-works")?.focus({ preventScroll: true })}
-          >
-            {t("presentation.briefing.reviewAction")} <span aria-hidden="true">↗</span>
-          </a>
+        <div>
+          <dt>{t("dashboard.stock.eyebrow")}</dt>
+          <dd>{t("dashboard.stock.title", { count: landingDemo.stockRisks })}</dd>
+          <dd className="daily-briefing__context">{t("hero.stockContext")}</dd>
         </div>
-      </div>
-      <DashboardPreview showSourceCard />
-      <p className="daily-briefing__footnote">{t("presentation.briefing.caption")}</p>
-    </div>
+        <div>
+          <dt>{t("dashboard.briefing.returning")}</dt>
+          <dd>{formatNumber(landingDemo.returningCustomers, locale)}</dd>
+          <dd className="daily-briefing__context">{t("hero.customerContext", { customers: formatNumber(landingDemo.customers, locale) })}</dd>
+        </div>
+      </dl>
+      <DemoLink location="briefing" />
+    </section>
   );
 }
 
@@ -99,8 +70,7 @@ export function ClosingInvitation() {
         <h2 id="closing-title">{t("presentation.closing.title")}</h2>
         <p className="closing-invitation__body">{t("presentation.closing.body")}</p>
         <div className="closing-invitation__actions">
-          <ButtonLink to="/demo">{t("presentation.closing.action")}</ButtonLink>
-          <ButtonLink to="/signup" variant="secondary">{t("actions.previewSignup")}</ButtonLink>
+          <DemoLink location="closing" />
         </div>
         <p className="closing-invitation__note">{t("footer.previewNote")}</p>
       </div>

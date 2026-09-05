@@ -1,23 +1,19 @@
 import { useTranslation } from "react-i18next";
 
 import {
-  Announcement,
-  ButtonLink,
+  DemoLink,
   SiteFooter,
   SiteHeader,
   SkipLink,
 } from "../components/public-ui";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
 import { DailyBriefing, MerchantOutcomes, ClosingInvitation } from "./merchant-story";
-import { HeroRecordReview } from "./hero-record-review";
 import {
   HowItWorks,
   ProblemFraming,
   SourceExplorer,
 } from "./product-understanding";
 import "./landing-page.css";
-
-const heroSources = ["csv", "excel", "pdf", "photo"] as const;
 
 export function LandingPage() {
   const { t } = useTranslation();
@@ -27,7 +23,6 @@ export function LandingPage() {
   return (
     <div className="landing-page">
       <SkipLink />
-      <Announcement />
       <SiteHeader />
 
       <main id="main-content" className="marketing-canvas">
@@ -42,27 +37,10 @@ export function LandingPage() {
             <p className="landing-hero__deck">{t("hero.body")}</p>
 
             <div className="landing-hero__actions">
-              <ButtonLink to="/signup">{t("actions.startFree")}</ButtonLink>
-              <ButtonLink to="/demo" variant="secondary">
-                {t("actions.exploreDemo")}
-              </ButtonLink>
+              <DemoLink location="hero" />
             </div>
-
-            <div className="landing-hero__reassurance">
-              <p>{t("hero.languages")}</p>
-              <span aria-hidden="true" />
-              <ul aria-label={t("hero.sourcesLabel")}>
-                {heroSources.map((source) => (
-                  <li key={source}>{t(`hero.sources.${source}`)}</li>
-                ))}
-              </ul>
-            </div>
+            <p className="landing-hero__reassurance">{t("hero.sampleNote")}</p>
           </div>
-
-          <div className="landing-hero__companion">
-            <HeroRecordReview />
-          </div>
-
           <div className="landing-hero__visual" id="product-preview">
             <DailyBriefing />
           </div>

@@ -77,7 +77,7 @@ It is a concept and delivery brief, not a replacement for the SDLC. Where the tw
 
 ## Working product promise
 
-> **Know what’s selling. See what runs out next. Bring customers back.**
+> **Know what’s selling. See what runs out next. See who comes back.**
 
 Supporting promise:
 
@@ -420,7 +420,7 @@ Prefer user language consistently:
 
 Primary recommendation:
 
-> **Know what’s selling. See what runs out next. Bring customers back.**
+> **Know what’s selling. See what runs out next. See who comes back.**
 
 Alternatives for testing:
 
@@ -439,7 +439,8 @@ Supporting lines:
 
 | Intent | Primary label | Secondary label | Avoid |
 |---|---|---|---|
-| First visit | Start free | Explore the demo | Get started, Learn more everywhere |
+| First visit during preview | Explore the demo | How it works | Start free or Log in leading to an unavailable action |
+| First visit after authentication ships | Start free | Explore the demo | Get started, Learn more everywhere |
 | Skeptical evaluator | Try sample data | See how review works | Upload your private data before trust is established |
 | Returning visitor | Log in | Compare plans | Sign in / Log in mixed inconsistently |
 | Empty dashboard | Add your first data | Try a sample | Configure dashboard first |
@@ -470,46 +471,35 @@ Proof              “This works for businesses like mine.”
 Low-risk action    “I can try it safely.”
 ```
 
-The global navigation remains short: **Product · How it works · Use cases · Pricing · Resources**, followed by language, **Log in**, and the lime **Start free** button. On mobile, product links live in a full-height menu; Log in and Start free remain visible at the bottom of that menu.
+The preview navigation contains language and **Explore the demo**; mobile uses the existing menu with focus restoration. Add **Product · How it works · Plans · FAQ** links as the corresponding sections ship. Production account links appear only after the account journey works; do not create placeholder navigation destinations.
 
 ## 5.2 Section blueprint
 
 ### 0. Announcement strip
 
-**Purpose:** create relevance without a fake promotion.
-
-**Recommended copy:** “Built for the records you already keep—spreadsheets, exports, PDFs, photos, and more.”
-
-**Component:** slim lime strip, centered text, optional arrow link to supported sources. It may be dismissed for the session. Never rotate multiple messages or introduce a carousel.
+The preview has no announcement strip. Source-format copy belongs in the hero and source section. Add an announcement only for a real, timely update; availability and privacy qualifications must remain visible at every viewport.
 
 ### 1. Hero: the daily promise
 
-**Eyebrow:** “Commerce clarity from the data you already have”
+**Eyebrow:** “For the records you already keep.”
 
-**Headline:** “Know what’s selling. *See what runs out next.* Bring customers back.”
+**Headline:** “Know what’s selling. See what runs out next. See who comes back.” The last line describes observable retention, without promising that analytics alone causes repeat purchases.
 
-**Deck:** “Upload the records you already keep or record the day as it happens. Suq confirms what your data means, then turns it into a clear daily view of sales, stock, and returning customers.”
+**Deck:** “Preview a daily view of sales, stock, and returning customers from spreadsheets, POS exports, or a photo of your ledger.”
 
-**Actions:** lime **Start free**; text/outlined **Explore the demo**.
+**Action during preview:** lime **Explore the demo**, consistently used in the header, hero, briefing, and closing invitation. No public navigation promotes unavailable signup or login actions. Direct account-preview routes remain truthful. Once authentication and first use are verified on staging, the production CTA hierarchy applies.
 
-**Reassurance line:** “English · Español · Français” and supported-source icons. Do not claim a trial length or no-card signup until billing policy confirms it.
+**Reassurance:** “Fictional sample data · No account needed.” Place it once beside the hero CTA. Preserve contextual qualifications for estimates and unavailable analyses.
 
-**Composition:** a borderless two-column hero pairs the headline and CTAs on the left with a compact interactive CSV review on the right. The review displays original Spanish sample rows, an editable role for `Cod.`, evidence, explicit confirmation, and reset. Changing a confirmed role returns it to the pending state. This local preview never uploads or saves a file and does not mutate the separate dashboard example. At tablet and mobile widths, stack the copy, review, and full-width dashboard. Paper, Ink, Lime, Mint, and the existing serif emphasis retain the Suq theme. Do not use outer frame lines, dotted backgrounds, or the decorative ledger receipt.
+**Composition:** a flat two-column layout with top-aligned copy and compact briefing. Paper, Ink, Lime, Mint, and the serif emphasis retain the Suq identity. The briefing contains the merchant and date, “What needs my attention today?”, one answer sentence, three stat tiles, and one demo action. Revenue and the previous-day comparison lead; stock attention and returning customers follow. No chart, field-review controls, or second full-width dashboard extends the hero.
 
-**Question → answer → action:** “What needs my attention today?” leads into “Revenue is up 18%. Three products may run out soon. One field still needs your confirmation.” The product stage is visibly labelled fictional sample data. Native disclosures show the stock estimates and source evidence; “Review ‘Cod.’” links to the interpretation chapter and moves keyboard focus there. The pending field is separate from the confirmed revenue fields and must never imply that an unconfirmed import changed the totals.
+**Evidence:** sample revenue and customer totals come from the shared fictional fixture. The comparison names the previous day at the same time. Stock risk is explicitly an estimate at the sample sales pace. Display all amounts in the fixture's currency, formatted for the selected UI locale; changing language does not convert money.
 
-**Visual:** a straight-on merchant morning briefing uses real Suq components without browser chrome, device tilt, or decorative haze. Its asymmetrical hierarchy makes the input-to-insight relationship concrete instead of resembling a generic admin template. The visual should show:
+**Demo destination:** the existing interactive dashboard retains metric selection, deterministic cumulative observations, keyboard-operable range control, chart table alternative, and stock details. “Review the sample records” opens a focus-managed disclosure below the dashboard. It contains the original Spanish CSV values, editable field role, confirmation, and reset. This local interaction never saves or uploads data. The landing page's how-it-works section retains its interpretation example until the next narrative revision consolidates repetition.
 
-- One dominant chart with selectable revenue, transactions, units, and customer totals. Each metric uses deterministic cumulative observations whose final value matches the shared daily total.
-- A visible inspected value and localized sample time, controlled by a native range slider. The same observations are available in a disclosure table; the SVG itself is decorative to assistive technology.
-- A prioritized stock list with selectable products and a corresponding explanatory detail, available on mobile too.
-- A plain-language evidence disclosure and a focus-managed link to the full interpretation review.
-- A separate hero field-review example that visibly requires confirmation, supports changing the analytical role, and can be reset without reloading.
-- “Updated moments ago” freshness and source count.
+**Interaction:** a short briefing entrance is optional; reduced-motion users see the static final state. Keep keyboard focus visible, use shared dropdowns, and stay within the initial JavaScript budget.
 
-**Interaction:** use one short entrance after the copy; do not add parallax or decorative pointer movement. Reduced-motion users see the final static composition immediately. The hero content renders before the mockup and remains within the initial weight budget.
-
-**Mobile:** stack copy, CTAs, reassurance, the field review, and the dashboard. Metric controls use two columns; chart and stock detail stack. Keep the sample date, interactive chart controls, data table, and stock list available rather than hiding them. No product surface may cause horizontal overflow.
+**Mobile acceptance:** at 390×844 and default text size, show the header, eyebrow, headline of at most four lines, one-sentence deck, primary CTA, and a complete revenue tile with comparison in the first screen. The secondary CTA is not required. Stack naturally at narrower widths or expanded text; never clip content or shrink touch targets to satisfy a fold measurement. Validate English, Spanish, and French independently. Main sections remain flat against the page background.
 
 ### 2. Source ribbon: “Start where your records are”
 
@@ -688,7 +678,7 @@ Answers should be visible in an accessible accordion with correct heading and bu
 
 **Headline:** “Your next clear decision is already in your records.”
 
-**Actions:** **Start free** and **Try sample data**.
+**Preview action:** **Explore the demo**. Restore **Start free** with **Explore the demo** as secondary only after the production account journey is verified.
 
 Footer groups: Product, Use cases, Resources, Company, Legal, Language. Include status, accessibility, privacy, terms, security, and support links. Advertiser access sits in the footer, not the primary merchant navigation.
 
@@ -703,7 +693,7 @@ Footer groups: Product, Use cases, Resources, Company, Legal, Language. Include 
 │                                                                              │
 │ COMMERCE CLARITY FROM YOUR DATA          Interactive CSV field review       │
 │ Know what’s selling. See what runs out next.                                 │
-│ Bring customers back.                                                        │
+│ See who comes back.                                                        │
 │ [Start free]  [Explore the demo]                                             │
 │                                                                              │
 │ What needs my attention today?                 FICTIONAL SAMPLE DATA       │
@@ -737,22 +727,11 @@ Footer groups: Product, Use cases, Resources, Company, Legal, Language. Include 
 
 The page should not rely on one repeated screenshot. Build a small mockup set from production components so changes stay synchronized with the product.
 
-## 6.1 Hero dashboard mockup
+## 6.1 Hero briefing and demo dashboard
 
-Desktop sample content (the wireframe boxes above indicate grouping, not visible page borders):
+The landing hero uses the compact question, answer, and three-stat composition in §5.2. Revenue and its dated comparison form the first product cue on mobile. The full chart and review controls are reached through the demo.
 
-- Workspace: “Mercado Norte” (fictional).
-- Above the briefing: one daily question, a visible sample-data label, an answer, stock/evidence disclosures, and a working link to interpretation review. Essential meaning must remain accessible outside any decorative `aria-hidden` mockup crop.
-- Date: “Today · 3 Sep” using the selected locale and timezone.
-- Selectable daily metrics: €12,480 revenue, 312 transactions, 468 units, and 241 customers. Only revenue has a supported comparison delta of +18%; other metrics display cumulative total rather than inventing comparison data.
-- Eight sample observations run from 07:00 to 14:00 in the merchant timezone. The selected metric and time determine the plotted marker, inspected value, accessible slider value, and table content.
-- Evidence disclosure: “POS export · 312 confirmed transactions.”
-- Selectable stock queue: Ground Coffee, Canvas Tote, and Ceramic Cup with readable days-remaining labels and a matching detail. Estimates remain explicitly illustrative.
-- A separate hero review panel with source rows, `Cod.` role selection, explicit local confirmation, invalidation on edit, and reset. No preview control simulates a saved backend action.
-- A clear plot with zero baseline, restrained fill, time labels, native slider, and equivalent data table.
-- Freshness: “Updated 2 minutes ago · 4 sources.”
-
-Use varied product names that translate cleanly and avoid sensitive customer detail. Sample numbers must be internally consistent across charts, tooltips, and tables. The composition must retain clear primary, secondary, and evidence layers; do not turn each value into an interchangeable dashboard card.
+The demo retains selectable revenue, transactions, units, and customer totals, deterministic chart series, keyboard-operated time inspection, a table alternative, and stock-risk detail. Its review disclosure contains the original sample rows, field-role selection, confirmation, invalidation on edit, and reset. All data remains fictional and local. Preview interactions never imitate a saved backend action.
 
 ## 6.2 Interpretation-review mockup
 
@@ -1367,7 +1346,7 @@ Authorization is server-enforced. The UI improves comprehension but is never the
 
 ## 12.13 Dropdowns and selection surfaces
 
-**One visual family, appropriate semantics.** All web dropdowns inherit this contract, including language, field meaning, dashboard, workspace, filters, profile, and overflow controls as those features ship. Current coverage includes the shared public-header language picker (landing, demo, signup, login and mobile navigation), the hero field-role picker, and the interpretation-review field-role pickers. Future authenticated menus remain planned, not simulated.
+**One visual family, appropriate semantics.** All web dropdowns inherit this contract, including language, field meaning, dashboard, workspace, filters, profile, and overflow controls as those features ship. Current coverage includes the shared public-header language picker (landing, demo, signup, login and mobile navigation), the demo field-role picker, and the interpretation-review field-role pickers. Future authenticated menus remain planned, not simulated.
 
 **Surface and rows:** White floating panel, 16 px card radius, the shared overlay shadow, 8 px internal padding, and 8 px rounded rows. Avoid heavy panel outlines and repeated separators; use spacing and optional contextual headings to group content. Use Ink text and Slate supporting text. Selection combines a pale Mint surface with a Forest checkmark, never color alone. Keyboard-active rows have a visible Forest outline distinct from the saved selection. Options are at least 44 px high, wrap translated labels, and may carry a meaningful monochrome mark. Language options show names in their native language, not flags.
 
@@ -1397,8 +1376,8 @@ Breakpoints respond to available space, not device labels. Test at zoomed widths
 
 ## 13.2 Landing-page adaptation
 
-- Hero headline is never smaller than 40–44 px on compact mobile and uses balanced wrapping only when supported.
-- Two CTAs stack full width below 360 px.
+- The preview hero uses a responsive 27–45 px headline on compact widths, with a four-line maximum target at 390×844 in all three locales at default text size. Larger text must reflow naturally rather than being clipped.
+- The preview hero has one primary demo CTA; a secondary action is not required in the first screen.
 - Product visuals crop to the decision being explained rather than shrinking an entire desktop dashboard into illegibility.
 - Horizontal card rows use snap scrolling only when all cards remain reachable by keyboard and a non-gesture control exists.
 - Decorative haze and marks disappear before content or contrast is compromised.
@@ -1534,6 +1513,12 @@ Common safe properties:
 - experiment and variant IDs.
 
 Forbidden properties include raw values, source names, field names, customer information, entity names, user-entered dashboard names, and free-text support/search content.
+
+### Preview event boundary
+
+The first landing revision emits `landing_cta_selected`, `demo_started`, and `model_review_opened` through a `JourneySink` interface. Its only implementation is a bounded, in-memory sink holding at most 100 events, with no network, cookies, persistent storage, or console logging. Runtime validation rejects unknown events, extra properties, and values outside the location/locale enums. Demo route visits are deduplicated across effect replay. Review events represent deliberate opening of the demo disclosure or re-entry to the interpretation tab, not a claim that merely rendered content was read.
+
+This establishes a testable event contract, not a production conversion baseline. A reviewed collector is still required for visitor measurement; provider, consent, retention, and access decisions remain pending. No lead capture is added in this checkpoint.
 
 ## 17.2 Experience KPIs
 

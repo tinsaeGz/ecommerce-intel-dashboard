@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 
 import { App } from "./app";
-import { announcementStorageKey } from "./components/public-ui";
+import { localJourneySink } from "./lib/journey-events";
 import { i18n, LANGUAGE_STORAGE_KEY } from "./i18n";
 
 async function renderAt(pathname: string) {
@@ -14,7 +14,7 @@ async function renderAt(pathname: string) {
       <App />
     </MemoryRouter>,
   );
-  await screen.findByRole("main");
+  await screen.findByRole("heading", { level: 1 });
   return result;
 }
 
@@ -22,6 +22,7 @@ beforeEach(async () => {
   await i18n.changeLanguage("en");
   window.localStorage.clear();
   window.sessionStorage.clear();
+  localJourneySink.clear();
 });
 
 describe("public landing routes", () => {
@@ -32,33 +33,19 @@ describe("public landing routes", () => {
     expect(within(main).getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(
       within(main).getByRole("heading", {
-        name: /Know what’s selling.*See what runs out next.*Bring customers back/i,
+        name: /Know what’s selling.*See what runs out next.*See who comes back/i,
       }),
     ).toBeInTheDocument();
-    expect(within(main).getByRole("link", { name: "Start free" })).toHaveAttribute(
-      "href",
-      "/signup",
-    );
-    expect(within(main).getByRole("link", { name: "Explore the demo" })).toHaveAttribute(
-      "href",
-      "/demo",
-    );
-    expect(screen.getByRole("figure")).toHaveAccessibleDescription(
-      /Fictional Mercado Norte dashboard.*€12,480.*18%.*3.*4/i,
-    );
-  });
-
-  it("dismisses the announcement for the browser session", async () => {
-    const user = userEvent.setup();
-    const firstRender = await renderAt("/");
-
-    await user.click(screen.getByRole("button", { name: "Dismiss announcement" }));
-    expect(screen.queryByText(/Built for the records you already keep/i)).not.toBeInTheDocument();
-    expect(window.sessionStorage.getItem(announcementStorageKey)).toBe("true");
-
-    firstRender.unmount();
-    await renderAt("/");
-    expect(screen.queryByText(/Built for the records you already keep/i)).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Start free" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Log in" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
+    for (const link of within(main).getAllByRole("link", { name: "Explore the demo" })) {
+      expect(link).toHaveAttribute("href", "/demo");
+    }
+    const hero = screen.getByRole("region", { name: /Know what’s selling/ });
+    expect(within(hero).getByText("€12,480")).toBeInTheDocument();
+    expect(within(hero).queryByRole("combobox")).not.toBeInTheDocument();
+    expect(within(hero).queryByRole("slider")).not.toBeInTheDocument();
   });
 
   it("opens the mobile menu, moves focus, and restores focus on Escape", async () => {
@@ -146,10 +133,11 @@ describe("public landing routes", () => {
     );
   });
 
-  it.each(["en", "es", "fr"])("confirms, invalidates and resets the hero review in %s", async (locale) => {
+  it.each(["en", "es", "fr"])("confirms, invalidates and resets the demo review in %s", async (locale) => {
     const user = userEvent.setup();
     await i18n.changeLanguage(locale);
-    await renderAt("/");
+    await renderAt("/demo");
+    await user.click(screen.getByText(i18n.t("hero.reviewAction"), { selector: "summary" }));
     const review = screen.getByRole("region", { name: i18n.t("polish.review.title") });
     const select = within(review).getByRole("combobox");
     await user.click(select);
@@ -172,7 +160,7 @@ describe("public landing routes", () => {
   it.each(["en", "es", "fr"])("keeps metric, chart, table and stock selections consistent in %s", async (locale) => {
     const user = userEvent.setup();
     await i18n.changeLanguage(locale);
-    await renderAt("/");
+    await renderAt("/demo");
     const metrics = screen.getByRole("group", { name: i18n.t("polish.dashboard.metricLabel") });
     const units = within(metrics).getByRole("button", { name: new RegExp(`^${i18n.t("dashboard.metrics.units")} `) });
     await user.click(units);
@@ -195,29 +183,24 @@ describe("public landing routes", () => {
     expect(within(stock).getByRole("status")).toHaveTextContent(i18n.t("polish.dashboard.stockDetail", { count: 4 }));
   });
 
-  it.each(["en", "es", "fr"])("opens briefing evidence and focuses the review destination in %s", async (locale) => {
+  it.each(["en", "es", "fr"])("takes a merchant from the hero to the demo and source review in %s", async (locale) => {
     const user = userEvent.setup();
     await i18n.changeLanguage(locale);
     await renderAt("/");
-
-    const stockSummary = screen.getByText(i18n.t("presentation.briefing.stockAction"));
-    await user.click(stockSummary);
-    const stockDetail = stockSummary.closest("details");
-    expect(stockDetail).toHaveAttribute("open");
-    expect(within(stockDetail!).getAllByRole("listitem")).toHaveLength(3);
-    expect(stockDetail).toHaveTextContent(i18n.t("presentation.briefing.stockNote"));
-
-    const evidenceSummary = screen.getByText(i18n.t("presentation.briefing.evidenceAction"));
-    await user.click(evidenceSummary);
-    expect(evidenceSummary.closest("details")).toHaveAttribute("open");
-    expect(evidenceSummary.closest("details")).toHaveTextContent(i18n.t("presentation.briefing.evidenceBody"));
-
-    const reviewLink = screen.getByRole("link", { name: i18n.t("presentation.briefing.reviewAction") });
-    expect(reviewLink).toHaveAttribute("href", "#how-it-works");
-    reviewLink.focus();
-    await user.keyboard("{Enter}");
-    expect(screen.getByRole("region", { name: i18n.t("understanding.how.title") })).toHaveFocus();
-    expect(screen.getByRole("link", { name: i18n.t("presentation.closing.action") })).toHaveAttribute("href", "/demo");
+    const hero = screen.getByRole("region", { name: new RegExp(i18n.t("hero.titleBefore")) });
+    const action = within(hero).getAllByRole("link", { name: i18n.t("actions.exploreDemo") })[0];
+    await user.click(action);
+    await screen.findByRole("heading", { level: 1, name: i18n.t("demo.title") });
+    expect(screen.getByRole("figure")).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: i18n.t("actions.previewSignup") })).not.toBeInTheDocument();
+    await user.click(screen.getByRole("link", { name: i18n.t("hero.reviewAction") }));
+    const summary = screen.getByText(i18n.t("hero.reviewAction"), { selector: "summary" });
+    expect(summary).toHaveFocus();
+    expect(summary.closest("details")).toHaveAttribute("open");
+    await waitFor(() => expect(localJourneySink.snapshot().map(event => event.name)).toEqual([
+      "landing_cta_selected", "demo_started", "model_review_opened",
+    ]));
+    expect(localJourneySink.snapshot().every(event => event.properties.locale === locale)).toBe(true);
   });
 
   it("explains unsupported analysis instead of presenting a false zero", async () => {
@@ -274,9 +257,10 @@ describe("public landing routes", () => {
     expect(screen.queryByRole("form")).not.toBeInTheDocument();
   });
 
-  it.each(["/", "/demo", "/signup", "/login"])(
-    "has no automated accessibility violations at %s",
-    async (path) => {
+  it.each(["en", "es", "fr"].flatMap(locale => ["/", "/demo", "/signup", "/login"].map(path => [locale, path])))(
+    "has no automated accessibility violations in %s at %s",
+    async (locale, path) => {
+      await i18n.changeLanguage(locale);
       const { container } = await renderAt(path);
       await screen.findByRole("heading", { level: 1 });
 

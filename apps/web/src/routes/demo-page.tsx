@@ -7,10 +7,14 @@ import {
   SkipLink,
 } from "../components/public-ui";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
+import { emitJourneyEvent, useDemoVisit } from "../lib/journey-events";
+import { HeroRecordReview } from "../marketing/hero-record-review";
 import { DashboardPreview } from "../marketing/dashboard-preview";
+import "./demo-page.css";
 
 export function DemoPage() {
   const { t } = useTranslation();
+  useDemoVisit();
 
   useDocumentMetadata(t("meta.demo.title"), t("meta.demo.description"));
 
@@ -24,7 +28,10 @@ export function DemoPage() {
           <h1>{t("demo.title")}</h1>
           <p className="public-route__body">{t("demo.body")}</p>
           <div className="public-route__actions">
-            <ButtonLink to="/signup">{t("actions.previewSignup")}</ButtonLink>
+            <a className="button-link" data-variant="primary" href="#demo-review" onClick={() => {
+              const review = document.querySelector<HTMLDetailsElement>("#demo-review");
+              if (review) { review.open = true; review.querySelector("summary")?.focus({ preventScroll: true }); }
+            }}>{t("hero.reviewAction")}</a>
             <ButtonLink to="/" variant="secondary">
               {t("actions.backHome")}
             </ButtonLink>
@@ -39,6 +46,12 @@ export function DemoPage() {
           </div>
           <DashboardPreview variant="full" />
         </section>
+        <details className="demo-review" id="demo-review" onToggle={(event) => {
+          if (event.currentTarget.open) emitJourneyEvent("model_review_opened", { location: "demo" });
+        }}>
+          <summary>{t("hero.reviewAction")}</summary>
+          <HeroRecordReview />
+        </details>
       </main>
       <SiteFooter />
     </div>

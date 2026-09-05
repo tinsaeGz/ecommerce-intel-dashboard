@@ -6,8 +6,9 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 
+import { emitJourneyEvent } from "../lib/journey-events";
 import { DropdownSelect } from "../components/dropdown-select";
-import { ButtonLink } from "../components/public-ui";
+import { DemoLink } from "../components/public-ui";
 import "./product-understanding.css";
 
 const sourceKeys = [
@@ -401,6 +402,10 @@ function StepStage({ step, compact = false }: { step: (typeof stepKeys)[number];
 export function HowItWorks() {
   const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState<(typeof stepKeys)[number]>("confirm");
+  const selectStep = (step: (typeof stepKeys)[number]) => {
+    if (step === "confirm" && activeStep !== "confirm") emitJourneyEvent("model_review_opened", { location: "how-it-works" });
+    setActiveStep(step);
+  };
   const tabsId = useId();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -413,7 +418,7 @@ export function HowItWorks() {
       return;
     }
     event.preventDefault();
-    setActiveStep(stepKeys[targetIndex]);
+    selectStep(stepKeys[targetIndex]);
     tabRefs.current[targetIndex]?.focus();
   };
 
@@ -439,7 +444,7 @@ export function HowItWorks() {
               aria-controls={`${tabsId}-${step}-panel`}
               aria-selected={activeStep === step}
               tabIndex={activeStep === step ? 0 : -1}
-              onClick={() => setActiveStep(step)}
+              onClick={() => selectStep(step)}
               onKeyDown={(event) => activateWithKeyboard(event, index)}
             >
               <span className="how-it-works__step-number">0{index + 1}</span>
@@ -478,7 +483,7 @@ export function HowItWorks() {
       </ol>
 
       <div className="how-it-works__action">
-        <ButtonLink to="/demo">{t("understanding.how.action")}</ButtonLink>
+        <DemoLink location="how-it-works" />
       </div>
     </section>
   );
