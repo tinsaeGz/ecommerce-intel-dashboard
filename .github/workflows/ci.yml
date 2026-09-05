@@ -74,7 +74,7 @@ jobs:
         run: |
           node --version
           npm --version
-      - run: npm ci
+      - run: npm ci --prefer-offline
       - name: Frontend suite including locales and accessibility
         run: |
           npm run lint --workspace @suq-insights/web
@@ -96,7 +96,7 @@ jobs:
         run: |
           node --version
           npm --version
-      - run: npm ci
+      - run: npm ci --prefer-offline
       - name: Mobile suite and Android export
         run: |
           npm run lint --workspace @suq-insights/mobile
@@ -118,7 +118,7 @@ jobs:
         run: |
           node --version
           npm --version
-      - run: npm ci
+      - run: npm ci --prefer-offline
       - name: Shared package suites and generated tokens
         run: |
           npm run check:generated --workspace @suq-insights/design-tokens
@@ -162,7 +162,7 @@ jobs:
         run: |
           node --version
           npm --version
-      - run: npm ci
+      - run: npm ci --prefer-offline
       - name: Verify self-hosted uv
         run: uv --version
       - run: uv sync --project apps/api --locked --all-groups
@@ -188,7 +188,7 @@ jobs:
         run: |
           node --version
           npm --version
-      - run: npm ci
+      - run: npm ci --prefer-offline --workspaces=false
       - name: Lint documentation
         run: |
           npm run lint:docs

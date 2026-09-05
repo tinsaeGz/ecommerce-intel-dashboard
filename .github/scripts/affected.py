@@ -22,7 +22,11 @@ LANES = (
 def select(paths: list[str], full: bool = False) -> dict[str, bool]:
     selected = set(LANES) if full else set()
     for path in paths:
-        if path.endswith((".md", ".pdf")):
+        if path.endswith((".md", ".pdf")) or (
+            path.startswith("docs/")
+            and Path(path).suffix.lower()
+            in {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".drawio"}
+        ):
             selected.update(("docs", "security"))
         elif path.startswith(".github/") or path in {
             "package.json",
