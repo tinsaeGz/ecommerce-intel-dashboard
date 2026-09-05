@@ -67,19 +67,31 @@ GitHub is creating `startup_failure` runs before any jobs or logs exist. The
 manual CI dispatch [33953345103](https://github.com/backostech/ecommerce-intel-dashboard/actions/runs/33953345103)
 also failed. The workflow passes local actionlint, Actions is enabled, all
 actions are allowed, and the repository is neither disabled nor archived.
-Existing Dependabot events show the same failure. The API has not exposed the
-root cause; an account/service restriction is a hypothesis, not a diagnosis.
+Existing Dependabot events show the same failure. During joint diagnosis, the
+user supplied the error from the [latest run's workflow page](https://github.com/backostech/ecommerce-intel-dashboard/actions/runs/33954356990/workflow):
+GitHub refused to start jobs because recent account payments failed or the
+spending limit needs to be increased. This confirms a **billing/usage block**;
+the message does not distinguish a failed payment from an exhausted allowance
+or budget. The API exposed no equivalent explanatory detail.
+
+The configured `tinsaeGz` account is an organization member, not an owner.
+An organization owner or billing manager must inspect the organization's
+Billing & Licensing/Billing & plans page, payment status, Actions usage, and
+applicable budgets. Do not assume a paid plan upgrade is required merely from
+this error. See [GitHub Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
 
 Separately, the branch-protection API returns HTTP 403 requiring a private-repo
 plan upgrade. The [checked-in policy](branch-protection.json) is not installed.
 “No conflicts” and an enabled merge button therefore say nothing about test
 success. Do not merge until the required result exists and succeeds.
 
-The repository owner should inspect the failed run in the Actions UI, check
-organization Actions/billing restrictions, and provide the run ID to GitHub
-Support if the UI exposes no actionable cause. Do not change repository
-visibility, increase spending, disable checks, or delete workflow history as
-a workaround. Once startup works, dispatch CI on the PR head, require a green
+Resolve the billing condition through the account's authorized billing owner.
+No payment or budget change is authorized by the CI task; any additional spend
+requires an explicit account-owner decision. Do not change repository visibility,
+disable checks, or delete workflow history as a workaround. Once billing permits
+execution, dispatch CI on the PR head and verify that jobs actually start.
+The 44 image findings below are a separate, subsequent gate: the scanner never
+ran in the failed GitHub startup attempts. Require a green
 `ci-gate`, merge to `dev`, and verify the deployment job and its smoke result.
 
 ## Local checkpoint evidence
