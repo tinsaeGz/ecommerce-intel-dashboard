@@ -1730,8 +1730,26 @@ With sufficient width and height, chapter copy scrolls beside one visible sticky
 
 Validation at this checkpoint: 74 web tests, including scroll/state isolation, focus protection and locale continuity; Chromium EN/ES/FR chapter controls, scroll selection, mobile/short fallback and axe including contrast. The final delivery adds the full viewport matrix, recording and performance evidence.
 
-### Final cinematic acceptance evidence
+### First cinematic functional evidence
 
-The fictional landing/demo experience now meets the accepted cinematic implementation scope. Review/stock confirmation is guarded against accidental double clicks and held-key repeats. The dashboard labels stock after the historical cutoff separately from immutable historical figures. Programmatic route focus and direct demo disclosures remain functional. The final browser review corrected system-color contrast in the closing invitation and selected metrics, and made header navigation wrap under French text expansion.
+The first fictional landing/demo delivery supplied the shared scenario and functional interaction scope; the subsequent owner review requested stronger art direction. Review/stock confirmation is guarded against accidental double clicks and held-key repeats. The dashboard labels stock after the historical cutoff separately from immutable historical figures. Programmatic route focus and direct demo disclosures remain functional. The final browser review corrected system-color contrast in the closing invitation and selected metrics, and made header navigation wrap under French text expansion.
 
 Validation: 78 web tests, 27 Chromium continuity/layout cases across EN/ES/FR, browser axe including contrast, and a 122.9 KB initial JavaScript gzip build below 200 KB. Screenshots, a short interaction recording, reproduction commands and limitations are in `docs/reviews/cinematic-experience.md`. Physical assistive-technology, native-speaker and merchant-outcome reviews remain human follow-up. This evidence supports the fictional demonstration only; it neither establishes conversion improvement nor completes the production SaaS phase gates.
+
+## Art-direction revision: the story leads (2026-09-06)
+
+Owner feedback: the first cinematic implementation felt shallow and its mockups did not look real. The owner selected a more theatrical brand story, with dramatic scene changes and visual storytelling supported by the product demonstration. Functional test results from the first delivery did not establish the quality of its art direction.
+
+The revised sequence uses three distinct compositions:
+
+1. **The shop is busy. What is moving it?** Large editorial typography and a 312-transaction motif establish the scale of the fictional trading day. A compact workspace shows the actual sample product comparisons, stock arithmetic, or customer-history visualization. The chart uses existing aggregates, not invented transaction rows.
+2. **A small detail. A different story.** The desktop environment cuts to ink and lime. Original CSV rows sit beside the role selector and confirmation, bringing the meaning of one column into focus. The source review remains illustrative; it does not reprocess history.
+3. **The next sale. Now you see it.** Mint marks the shift to action. An inventory balance and movement ledger sit beside quick entry. The twelfth unit is marked as a draft during preview, leaves only after confirmation, and returns on undo. The historical balance stays at 12.
+
+The scene surfaces use consistent workspace identity, date, readable data, and functioning controls. Large typography and changes in scene scale provide the theatrical material; fabricated browser chrome, unavailable application navigation, videos, and new animation dependencies are unnecessary. Background lighting cuts immediately to keep text contrast stable; CSS crossfades and restrained movement apply to presentation only. Reduced motion removes those transitions.
+
+The immediate hero briefing, plan comparison, FAQ and closing invitation retain their existing place. Mobile, short and enlarged-text layouts remain sequential. A scene that grows beyond the available desktop viewport also falls back to normal flow, so expanded evidence and translated controls remain reachable. Missing customer identifiers remove the customer visualization and show the existing explanation.
+
+Acceptance stays within the earlier fictional marketing scope and requirement IDs. Review the revised screenshots and recording for the strength of the art direction; automated accessibility and behavior checks cannot establish immersion or conversion. Existing cinematic PRs stay unmerged. This revision follows their shared-state and accessibility work.
+
+Revision validation: 79 web tests, 30 Chromium continuity/layout cases across EN/ES/FR with axe including contrast, and a 125.3 KB initial JavaScript gzip build. See `docs/reviews/cinematic-experience.md` for the revised scenes, interaction recording, reproduction instructions and remaining human review limits.

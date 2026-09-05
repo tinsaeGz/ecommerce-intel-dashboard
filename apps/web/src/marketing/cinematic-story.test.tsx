@@ -77,6 +77,17 @@ describe("chapter presentation", () => {
     expect(screen.getByRole("region", { name: i18n.t("polish.review.title") })).toHaveAttribute("data-confirmed", "true");
   });
 
+  it("falls back when a translated or expanded product scene cannot fit the viewport", () => {
+    vi.stubGlobal("ResizeObserver", class { observe() {} disconnect() {} });
+    const height = vi.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockReturnValue(1200);
+    try {
+      renderStory();
+      expect(document.querySelector(".cinematic-story")).toHaveAttribute("data-enhanced", "false");
+      expect(document.querySelectorAll('.cinematic-pane:not([aria-hidden])')).toHaveLength(3);
+      expect(screen.getAllByRole("combobox")).toHaveLength(1);
+    } finally { height.mockRestore(); }
+  });
+
   it("renders sequential scenes when observers are unavailable or the viewport is short", () => {
     vi.stubGlobal("IntersectionObserver", undefined);
     vi.stubGlobal("innerHeight", 600);

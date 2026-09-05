@@ -6,6 +6,7 @@ import { ButtonLink } from "../components/public-ui";
 import { ResetSample } from "../components/reset-sample";
 import { emitJourneyEvent } from "../lib/journey-events";
 import { landingDemo } from "../lib/demo-data";
+import { DayEvidence, StockMovement, WorkspaceHeading } from "./scene-material";
 import { DecisionExample, SampleSale, type DecisionKind } from "./merchant-decisions";
 import { HeroRecordReview } from "./hero-record-review";
 import "./cinematic-story.css";
@@ -21,7 +22,8 @@ function DayScene() {
     <div className="day-scene__questions" role="group" aria-label={t("cinematic.questions")}>
       {(["sales", "stock", "customers"] as const).map(kind => <button key={kind} type="button" aria-pressed={question === kind} onClick={() => setQuestion(kind)}>{t(`cinematic.topics.${kind}`)}</button>)}
     </div>
-    <DecisionExample kind={question} />
+    <DayEvidence kind={question} />
+    <DecisionExample kind={question} compact />
   </div>;
 }
 
@@ -34,9 +36,13 @@ export function CinematicStory() {
 
   useEffect(() => {
     const media = window.matchMedia?.("(min-width: 72rem) and (min-height: 56rem)");
+    let lastGeometry = "";
     const update = () => {
       // Enlarged text gets the sequential layout too, with no clipped sticky scene.
       const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+      const geometry = `${window.innerWidth}/${window.innerHeight}/${rootSize}`;
+      if (geometry === lastGeometry) return;
+      lastGeometry = geometry;
       setEnhanced(Boolean(media?.matches && window.innerHeight >= rootSize * 56 && typeof IntersectionObserver !== "undefined"));
     };
     update();
@@ -64,6 +70,22 @@ export function CinematicStory() {
     return () => observer.disconnect();
   }, [enhanced]);
 
+  useEffect(() => {
+    if (!enhanced || typeof ResizeObserver === "undefined") return;
+    // A translated or expanded scene must not trap controls below the viewport.
+    // Retry enhancement only when viewport/font geometry changes, preventing a
+    // layout feedback loop when the sequential fallback itself gets taller.
+    const nodes = storyRef.current?.querySelectorAll<HTMLElement>(".cinematic-pane");
+    if (!nodes) return;
+    const fits = () => {
+      if (Array.from(nodes).some(node => node.offsetHeight > window.innerHeight - (parseFloat(getComputedStyle(node).top) || 0) - 16)) setEnhanced(false);
+    };
+    const resize = new ResizeObserver(fits);
+    nodes.forEach(node => resize.observe(node));
+    fits();
+    return () => resize.disconnect();
+  }, [enhanced]);
+
   const choose = (chapter: Chapter) => {
     setActive(chapter);
     const target = document.getElementById(chapterIds[chapter]);
@@ -74,8 +96,8 @@ export function CinematicStory() {
   return <section className="cinematic-story" ref={storyRef} data-enhanced={enhanced} data-chapter={active} aria-labelledby="cinematic-title">
     <header className="story-heading cinematic-story__heading">
       <p className="story-eyebrow">{t("cinematic.eyebrow")}</p>
-      <h2 id="cinematic-title">{t("stories.title")}</h2>
-      <p>{t("cinematic.intro")}</p>
+      <h2 id="cinematic-title">{t("theatre.title")} <em>{t("theatre.emphasis")}</em></h2>
+      <p>{t("theatre.intro")}</p>
     </header>
     <div className="cinematic-toolbar">
       <div className="cinematic-controls" role="group" aria-label={t("cinematic.controls")}>
@@ -89,21 +111,28 @@ export function CinematicStory() {
         return <div className="cinematic-chapter" key={chapter}>
           <article className="cinematic-copy" data-chapter={chapter} id={chapterIds[chapter]} tabIndex={-1} onFocus={() => setActive(chapter)} aria-labelledby={`chapter-${chapter}`}>
             <p className="story-eyebrow">{t("cinematic.chapter", { number: index + 1 })}</p>
-            <h3 id={`chapter-${chapter}`}>{t(`cinematic.${chapter}.title`)}</h3>
-            <p>{t(`cinematic.${chapter}.body`)}</p>
-            <p className="cinematic-copy__bridge">{t(`cinematic.${chapter}.bridge`)}</p>
+            <h3 id={`chapter-${chapter}`}><span>{t(`theatre.${chapter}.title`)}</span> <em>{t(`theatre.${chapter}.emphasis`)}</em></h3>
+            <p>{t(`theatre.${chapter}.body`)}</p>
+            <p className="cinematic-copy__bridge">{t(`theatre.${chapter}.bridge`)}</p>
             {chapter === "sale" && <ButtonLink to="/demo" variant="primary" onClick={() => emitJourneyEvent("landing_cta_selected", { location: "how-it-works" })}>{t("cinematic.continue")}</ButtonLink>}
           </article>
-          <div className="cinematic-pane" id={`scene-${chapter}`} data-active={!inactive} onFocusCapture={() => setActive(chapter)} aria-hidden={inactive || undefined} inert={inactive}>
-            <p className="cinematic-pane__caption"><span>{landingDemo.workspace}</span><span>{t("demo.sampleLabel")} · 0{index + 1} / 03</span></p>
+          <div className="cinematic-pane" data-scene={chapter} id={`scene-${chapter}`} data-active={!inactive} onFocusCapture={() => setActive(chapter)} aria-hidden={inactive || undefined} inert={inactive}>
+            <div className="scene-set">
+            <div className="scene-set__overture" aria-hidden="true"><span>0{index + 1} / 03</span><strong>{chapter === "day" ? "312" : chapter === "evidence" ? "Cod." : "−1"}</strong><span>{t(`theatre.${chapter}.motif`)}</span></div>
+            <div className="scene-workspace">
+            <WorkspaceHeading chapter={chapter} />
             {chapter === "day" ? <DayScene /> : chapter === "evidence" ? <>
-              <HeroRecordReview />
+              <HeroRecordReview compact />
               <ButtonLink to="/demo#demo-review" variant="quiet" onClick={() => emitJourneyEvent("landing_cta_selected", { location: "trust" })}>{t("hero.reviewAction")}</ButtonLink>
             </> : <>
+              <StockMovement />
               <SampleSale />
               <p className="cinematic-pane__scope">{t("cinematic.historicalScope")}</p>
               <ButtonLink to="/demo#demo-sources" variant="quiet" onClick={() => emitJourneyEvent("landing_cta_selected", { location: "sources" })}>{t("stories.entry.explore")}</ButtonLink>
             </>}
+            </div>
+            <p className="cinematic-pane__caption"><span>{landingDemo.workspace}</span><span>{t("demo.sampleLabel")}</span></p>
+            </div>
           </div>
         </div>;
       })}

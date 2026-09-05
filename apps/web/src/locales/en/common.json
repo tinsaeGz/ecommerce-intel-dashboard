@@ -594,5 +594,42 @@
     "saleApplied": "One sample sale confirmed. Historical figures above are unchanged.",
     "salePending": "The next sale is being previewed. Stock has not changed.",
     "saleNotApplied": "No next sale applied. Start with the stock at the historical cutoff."
+  },
+  "theatre": {
+    "title": "Every day has a story.",
+    "emphasis": "Find yours in the numbers.",
+    "intro": "Step inside Mercado Norte. Follow a busy day from the first question to the next decision.",
+    "day": {
+      "title": "The shop is busy.",
+      "emphasis": "What is moving it?",
+      "body": "312 transactions. More revenue. But the total is only the beginning. See which products explain the change, what is running low, and who comes back.",
+      "bridge": "Start with a question. Follow the answer into the records.",
+      "motif": "transactions in one sample day",
+      "workspace": "Daily overview · historical sample"
+    },
+    "evidence": {
+      "title": "A small detail.",
+      "emphasis": "A different story.",
+      "body": "One column says “Cod.” Is that a product or a customer? The original rows stay in view while you decide what the code means.",
+      "bridge": "Suq proposes a meaning. You make the call.",
+      "motif": "one column, more than one meaning",
+      "workspace": "Source review · illustrative example"
+    },
+    "sale": {
+      "title": "The next sale.",
+      "emphasis": "Now you see it.",
+      "body": "One coffee leaves the shelf. Preview the movement, confirm it, and watch twelve become eleven. Change your mind? Undo brings it back.",
+      "bridge": "The next action is yours. Nothing changes just because you scroll.",
+      "motif": "one decision, a visible consequence",
+      "workspace": "Quick entry · after the historical cutoff"
+    },
+    "customerHistory": "241 customers in the sample day",
+    "customerLegend": "Each dot is one customer. The 38 green dots also appear in earlier sample records.",
+    "balance": "Stock after the historical cutoff",
+    "units": "units",
+    "cutoff": "At the historical cutoff",
+    "noMovement": "No next sale recorded",
+    "draftMovement": "Next sale · awaiting confirmation",
+    "confirmedMovement": "Next sale · confirmed"
   }
 }

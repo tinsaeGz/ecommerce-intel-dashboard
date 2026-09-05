@@ -249,7 +249,7 @@ describe("public landing routes", () => {
     await i18n.changeLanguage(locale);
     await renderAt("/");
     for (const chapter of ["day", "evidence", "sale"]) {
-      expect(screen.getByRole("heading", { name: i18n.t(`cinematic.${chapter}.title`) })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: `${i18n.t(`theatre.${chapter}.title`)} ${i18n.t(`theatre.${chapter}.emphasis`)}` })).toBeInTheDocument();
     }
     for (const kind of ["sales", "stock", "customers"]) {
       await user.click(screen.getByRole("button", { name: i18n.t(`cinematic.topics.${kind}`) }));
@@ -266,16 +266,22 @@ describe("public landing routes", () => {
     await renderAt("/");
     const entry = screen.getByRole("group", { name: i18n.t("stories.entry.try") });
     const stock = within(entry).getByRole("status");
+    const movement = screen.getByRole("group", { name: i18n.t("theatre.balance") });
+    expect(within(movement).getByText(i18n.t("theatre.noMovement"))).toBeVisible();
     expect(stock).toHaveTextContent(i18n.t("stories.entry.stock", { count: 12 }));
     await user.click(within(entry).getByRole("button", { name: i18n.t("stories.entry.select") }));
     expect(within(entry).getByRole("button", { name: i18n.t("stories.entry.confirm") })).toHaveFocus();
     expect(stock).toHaveTextContent(i18n.t("stories.entry.stock", { count: 12 }));
+    expect(within(movement).getByText(i18n.t("theatre.draftMovement"))).toBeVisible();
+    expect(movement.querySelector(".scene-inventory__balance strong")).toHaveTextContent("12");
     await user.click(within(entry).getByRole("button", { name: i18n.t("stories.entry.cancel") }));
     const select = within(entry).getByRole("button", { name: i18n.t("stories.entry.select") });
     expect(select).toHaveFocus();
     await user.keyboard("{Enter}");
     await user.keyboard("{Enter}");
     expect(stock).toHaveTextContent(i18n.t("stories.entry.stock", { count: 11 }));
+    expect(within(movement).getByText(i18n.t("theatre.confirmedMovement"))).toBeVisible();
+    expect(movement.querySelector(".scene-inventory__balance strong")).toHaveTextContent("11");
     const undo = within(entry).getByRole("button", { name: i18n.t("stories.entry.undo") });
     expect(undo).toHaveFocus();
     expect(within(entry).queryByRole("button", { name: i18n.t("stories.entry.confirm") })).not.toBeInTheDocument();
@@ -328,7 +334,7 @@ describe("public landing routes", () => {
     await waitFor(() => expect(summary.closest("details")).toHaveAttribute("open"));
     expect(summary).toHaveFocus();
     await user.click(screen.getByRole("link", { name: i18n.t("actions.backHome") }));
-    await screen.findByRole("heading", { name: i18n.t("stories.title") });
+    await screen.findByRole("heading", { name: `${i18n.t("theatre.title")} ${i18n.t("theatre.emphasis")}` });
   });
 
   it.each(["#demo-review", "#demo-sources", "#demo-workflow"])("focuses a direct demo chapter at %s", async (hash) => {

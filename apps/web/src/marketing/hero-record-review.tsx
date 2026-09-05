@@ -8,14 +8,14 @@ import "./hero-record-review.css";
 const roles = ["itemIdentity", "customerIdentity", "notAnalyzed"] as const;
 
 
-export function HeroRecordReview() {
+export function HeroRecordReview({ compact = false }: { compact?: boolean }) {
   const { t } = useTranslation();
   const fieldId = useId();
   const titleId = useId();
   const { state: { role, confirmed }, dispatch } = useSampleScenario();
 
   return (
-    <section className="hero-record" aria-labelledby={titleId} data-confirmed={confirmed}>
+    <section className="hero-record" aria-labelledby={titleId} data-compact={compact} data-confirmed={confirmed}>
       <header className="hero-record__header">
         <span className="hero-record__file-icon" aria-hidden="true">CSV</span>
         <div>
@@ -30,6 +30,7 @@ export function HeroRecordReview() {
         <h2 id={titleId}>{t("polish.review.title")}</h2>
         <p className="hero-record__deck">{t("polish.review.body")}</p>
 
+        <div className="hero-record__review-layout">
         <div className="hero-record__source">
           <table>
             <caption className="visually-hidden">{t("polish.review.sourceCaption")}</caption>
@@ -42,6 +43,7 @@ export function HeroRecordReview() {
           <p>{t("polish.review.sourceNote")}</p>
         </div>
 
+        <div className="hero-record__selection">
         <label className="hero-record__label" htmlFor={fieldId}>{t("polish.review.roleLabel")}</label>
         <DropdownSelect
           id={fieldId} label={t("polish.review.roleLabel")} value={role}
@@ -71,6 +73,8 @@ export function HeroRecordReview() {
           {t(confirmed ? "polish.review.reset" : "polish.review.confirm")}
           <span aria-hidden="true">{confirmed ? "↺" : "→"}</span>
         </button>
+        </div>
+        </div>
       </div>
       <p className="hero-record__footnote">{t("cinematic.reviewScope")}</p>
     </section>

@@ -10,7 +10,7 @@ import "./merchant-decisions.css";
 
 export type DecisionKind = "sales" | "stock" | "customers";
 
-export function DecisionExample({ kind }: { kind: DecisionKind }) {
+export function DecisionExample({ kind, compact = false }: { kind: DecisionKind; compact?: boolean }) {
   const { t, i18n } = useTranslation();
   const locale = getSupportedLanguage(i18n.resolvedLanguage);
   const { state: { hasIdentity }, dispatch } = useSampleScenario();
@@ -18,8 +18,8 @@ export function DecisionExample({ kind }: { kind: DecisionKind }) {
   const increase = salesComparison.reduce((sum, row) => sum + row.currentCents - row.previousCents, 0);
 
   return <>
-{kind === "sales" && (<article className="decision-row" aria-labelledby="sales-title">
-        <div className="decision-row__copy">
+{kind === "sales" && (<article className="decision-row" data-compact={compact} aria-labelledby="sales-title">
+        <div className={compact ? "visually-hidden" : "decision-row__copy"}>
           <p className="story-eyebrow">{t("stories.sales.question")}</p>
           <h3 id="sales-title">{t("stories.sales.title")}</h3>
           <p>{t("stories.sales.body")}</p>
@@ -42,8 +42,8 @@ export function DecisionExample({ kind }: { kind: DecisionKind }) {
           </details>
         </div>
       </article>)}
-{kind === "stock" && (<article className="decision-row" aria-labelledby="stock-title">
-        <div className="decision-row__copy">
+{kind === "stock" && (<article className="decision-row" data-compact={compact} aria-labelledby="stock-title">
+        <div className={compact ? "visually-hidden" : "decision-row__copy"}>
           <p className="story-eyebrow">{t("stories.stock.question")}</p>
           <h3 id="stock-title">{t("stories.stock.title")}</h3>
           <p>{t("stories.stock.body")}</p>
@@ -63,8 +63,8 @@ export function DecisionExample({ kind }: { kind: DecisionKind }) {
           </details>
         </div>
       </article>)}
-{kind === "customers" && (<article className="decision-row" aria-labelledby="customers-title">
-        <div className="decision-row__copy">
+{kind === "customers" && (<article className="decision-row" data-compact={compact} aria-labelledby="customers-title">
+        <div className={compact ? "visually-hidden" : "decision-row__copy"}>
           <p className="story-eyebrow">{t("stories.customers.question")}</p>
           <h3 id="customers-title">{t("stories.customers.title")}</h3>
           <p>{t("stories.customers.body")}</p>

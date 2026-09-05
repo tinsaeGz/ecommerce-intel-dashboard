@@ -594,5 +594,42 @@
     "saleApplied": "Una venta de ejemplo confirmada. Las cifras históricas anteriores no cambian.",
     "salePending": "La próxima venta está en previsualización. Las existencias no han cambiado.",
     "saleNotApplied": "No se ha aplicado otra venta. Se parte de las existencias al corte histórico."
+  },
+  "theatre": {
+    "title": "Cada día tiene una historia.",
+    "emphasis": "Encuentra la tuya en los números.",
+    "intro": "Entra en Mercado Norte. Sigue un día de actividad, desde la primera pregunta hasta la siguiente decisión.",
+    "day": {
+      "title": "La tienda está llena.",
+      "emphasis": "¿Qué la mueve?",
+      "body": "312 transacciones. Más ingresos. Pero el total es solo el principio. Descubre qué productos explican el cambio, qué se está agotando y quién vuelve.",
+      "bridge": "Empieza con una pregunta. Sigue la respuesta hasta los registros.",
+      "motif": "transacciones en un día de ejemplo",
+      "workspace": "Resumen diario · muestra histórica"
+    },
+    "evidence": {
+      "title": "Un pequeño detalle.",
+      "emphasis": "Otra historia.",
+      "body": "Una columna dice «Cod.». ¿Es un producto o un cliente? Las filas originales siguen a la vista mientras decides qué significa el código.",
+      "bridge": "Suq propone un significado. Tú decides.",
+      "motif": "una columna, más de un significado",
+      "workspace": "Revisión de fuente · ejemplo ilustrativo"
+    },
+    "sale": {
+      "title": "La siguiente venta.",
+      "emphasis": "Ahora la ves.",
+      "body": "Un café sale del estante. Revisa el movimiento, confírmalo y mira cómo doce pasan a ser once. ¿Cambias de idea? Deshacer lo devuelve.",
+      "bridge": "La siguiente acción es tuya. Nada cambia solo por desplazarte.",
+      "motif": "una decisión, una consecuencia visible",
+      "workspace": "Entrada rápida · después del corte histórico"
+    },
+    "customerHistory": "241 clientes en el día de ejemplo",
+    "customerLegend": "Cada punto es un cliente. Los 38 puntos verdes también aparecen en registros anteriores de la muestra.",
+    "balance": "Stock después del corte histórico",
+    "units": "unidades",
+    "cutoff": "En el corte histórico",
+    "noMovement": "Sin nueva venta registrada",
+    "draftMovement": "Siguiente venta · pendiente de confirmar",
+    "confirmedMovement": "Siguiente venta · confirmada"
   }
 }

@@ -594,5 +594,42 @@
     "saleApplied": "Une vente exemple confirmée. Les chiffres historiques ci-dessus restent inchangés.",
     "salePending": "La vente suivante est en prévisualisation. Le stock n’a pas changé.",
     "saleNotApplied": "Aucune vente suivante appliquée. Le stock de départ est celui de la clôture historique."
+  },
+  "theatre": {
+    "title": "Chaque jour a son histoire.",
+    "emphasis": "Trouvez la vôtre dans les chiffres.",
+    "intro": "Entrez chez Mercado Norte. Suivez une journée animée, de la première question à la prochaine décision.",
+    "day": {
+      "title": "La boutique s’anime.",
+      "emphasis": "Qu’est-ce qui la fait avancer ?",
+      "body": "312 transactions. Plus de recettes. Mais le total n’est qu’un début. Voyez quels produits expliquent la hausse, ce qui vient à manquer et qui revient.",
+      "bridge": "Partez d’une question. Suivez la réponse jusqu’aux données.",
+      "motif": "transactions dans une journée fictive",
+      "workspace": "Vue du jour · historique fictif"
+    },
+    "evidence": {
+      "title": "Un petit détail.",
+      "emphasis": "Une autre histoire.",
+      "body": "Une colonne indique « Cod. ». Est-ce un produit ou un client ? Les lignes originales restent visibles pendant que vous décidez du sens de ce code.",
+      "bridge": "Suq propose un sens. Vous décidez.",
+      "motif": "une colonne, plusieurs sens possibles",
+      "workspace": "Revue de la source · exemple illustratif"
+    },
+    "sale": {
+      "title": "La prochaine vente.",
+      "emphasis": "Vous la voyez agir.",
+      "body": "Un café quitte le rayon. Vérifiez le mouvement, confirmez-le et voyez douze devenir onze. Vous changez d’avis ? Annuler le remet en stock.",
+      "bridge": "La prochaine action vous appartient. Faire défiler la page ne change aucune donnée.",
+      "motif": "une décision, une conséquence visible",
+      "workspace": "Saisie rapide · après l’arrêté historique"
+    },
+    "customerHistory": "241 clients dans la journée fictive",
+    "customerLegend": "Chaque point représente un client. Les 38 points verts figurent aussi dans des données antérieures de l’exemple.",
+    "balance": "Stock après l’arrêté historique",
+    "units": "unités",
+    "cutoff": "À l’arrêté historique",
+    "noMovement": "Aucune nouvelle vente enregistrée",
+    "draftMovement": "Prochaine vente · à confirmer",
+    "confirmedMovement": "Prochaine vente · confirmée"
   }
 }

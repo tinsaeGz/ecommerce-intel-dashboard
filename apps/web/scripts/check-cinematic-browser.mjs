@@ -74,6 +74,7 @@ try {
     await chapter(page, c, "day");
     await page.getByRole("button", { name: c.cinematic.topics.customers, exact: true }).click();
     await page.getByRole("checkbox").uncheck();
+    assert.equal(await page.locator(".scene-customers__marks").count(), 0, "missing identifiers must not render a customer count visualization");
     await chapter(page, c, "evidence");
     const role = page.locator("#scene-evidence").getByRole("combobox");
     await role.click();
@@ -145,6 +146,7 @@ try {
       { name: "narrow", width: 320, height: 740 },
       { name: "tablet", width: 768, height: 1024 },
       { name: "short", width: 1440, height: 600 },
+      { name: "compact-desktop", width: 1440, height: 900 },
       { name: "text-200", width: 1440, height: 1000, text: true },
       { name: "forced-colors", width: 1440, height: 1000, forcedColors: "active" },
       { name: "reduced-motion", width: 1440, height: 1000, reducedMotion: "reduce" },
@@ -156,7 +158,10 @@ try {
       if (config.text) await page.addStyleTag({ content: "html { font-size: 200%; }" });
       await settle(page);
       const enhanced = await page.locator(".cinematic-story").getAttribute("data-enhanced");
-      assert.equal(enhanced === "true", config.width >= 1152 && config.height >= 896 && !config.text, `${locale}/${config.name} layout`);
+      // System-color borders can make a translated scene too tall; both the
+      // sticky layout and the measured sequential fallback are valid here.
+      if (!config.forcedColors) assert.equal(enhanced === "true", config.width >= 1152 && config.height >= 1000 && !config.text, `${locale}/${config.name} layout`);
+      assert.equal(await page.locator('.cinematic-pane:not([aria-hidden])').count(), enhanced === "true" ? 1 : 3, `${locale}/${config.name} accessible scenes`);
       await noOverflow(page, `${locale}/${config.name} landing overflow`);
       if (config.name === "mobile") {
         const briefing = await page.locator(".daily-briefing__revenue").boundingBox();

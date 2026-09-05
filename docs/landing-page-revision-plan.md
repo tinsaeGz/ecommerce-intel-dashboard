@@ -196,3 +196,21 @@ Validation at this checkpoint: 74 web tests, including scroll/state isolation, f
 Scenario continuity and presentation are delivered in PRs #9 and #10. The final polish branch adds route focus, direct sale links, a separate dashboard stock readout after the cutoff, double-click protection, and the forced-color/200% text corrections found during browser review. All 78 web tests and 27 browser cases passed; initial JavaScript is 122.9 KB gzip. See the final validation report for screenshots, the interaction recording, reproducible checks and remaining human review limits.
 
 The accepted cinematic amendment replaces the earlier separate demonstration layout, not the pending public support/legal and analytics tasks. Leave the three cinematic PRs unmerged for owner review.
+
+## Art-direction revision: the story leads (2026-09-06)
+
+Owner feedback: the first cinematic implementation felt shallow and its mockups did not look real. The owner selected a more theatrical brand story, with dramatic scene changes and visual storytelling supported by the product demonstration. Functional test results from the first delivery did not establish the quality of its art direction.
+
+The revised sequence uses three distinct compositions:
+
+1. **The shop is busy. What is moving it?** Large editorial typography and a 312-transaction motif establish the scale of the fictional trading day. A compact workspace shows the actual sample product comparisons, stock arithmetic, or customer-history visualization. The chart uses existing aggregates, not invented transaction rows.
+2. **A small detail. A different story.** The desktop environment cuts to ink and lime. Original CSV rows sit beside the role selector and confirmation, bringing the meaning of one column into focus. The source review remains illustrative; it does not reprocess history.
+3. **The next sale. Now you see it.** Mint marks the shift to action. An inventory balance and movement ledger sit beside quick entry. The twelfth unit is marked as a draft during preview, leaves only after confirmation, and returns on undo. The historical balance stays at 12.
+
+The scene surfaces use consistent workspace identity, date, readable data, and functioning controls. Large typography and changes in scene scale provide the theatrical material; fabricated browser chrome, unavailable application navigation, videos, and new animation dependencies are unnecessary. Background lighting cuts immediately to keep text contrast stable; CSS crossfades and restrained movement apply to presentation only. Reduced motion removes those transitions.
+
+The immediate hero briefing, plan comparison, FAQ and closing invitation retain their existing place. Mobile, short and enlarged-text layouts remain sequential. A scene that grows beyond the available desktop viewport also falls back to normal flow, so expanded evidence and translated controls remain reachable. Missing customer identifiers remove the customer visualization and show the existing explanation.
+
+Acceptance stays within the earlier fictional marketing scope and requirement IDs. Review the revised screenshots and recording for the strength of the art direction; automated accessibility and behavior checks cannot establish immersion or conversion. Existing cinematic PRs stay unmerged. This revision follows their shared-state and accessibility work.
+
+Revision validation: 79 web tests, 30 Chromium continuity/layout cases across EN/ES/FR with axe including contrast, and a 125.3 KB initial JavaScript gzip build. The exact next action is owner review of the revised art direction in the unmerged PR and browser, following PR #11.
