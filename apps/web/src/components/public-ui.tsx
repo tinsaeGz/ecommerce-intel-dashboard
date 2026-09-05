@@ -18,6 +18,10 @@ const languageNames = {
   fr: "Français",
 } as const;
 
+const landingSections = [
+  ["product", "daily-decisions"], ["how", "how-it-works"], ["plans", "plans"], ["faq", "faq"],
+] as const;
+
 export function SkipLink() {
   const { t } = useTranslation();
   return (
@@ -118,6 +122,7 @@ export function SiteHeader() {
         <Brand />
 
         <nav className="site-header__desktop" aria-label={t("navigation.primary")}>
+          {landingSections.map(([label, id]) => <Link className="site-section-link" key={id} to={`/#${id}`}>{t(`buying.nav.${label}`)}</Link>)}
           <LanguageSwitcher compact />
           <DemoLink location="header" />
         </nav>
@@ -146,6 +151,7 @@ export function SiteHeader() {
             onClick={() => { emitJourneyEvent("landing_cta_selected", { location: "mobile-menu" }); setMenuOpen(false); }}>
             {t("actions.exploreDemo")}
           </Link>
+          {landingSections.map(([label, id]) => <Link className="mobile-menu__link" key={id} to={`/#${id}`} onClick={() => setMenuOpen(false)}>{t(`buying.nav.${label}`)}</Link>)}
           <div className="mobile-menu__language">
             <LanguageSwitcher />
           </div>
@@ -162,6 +168,11 @@ export function SiteFooter() {
       <Brand />
       <p>{t("footer.previewNote")}</p>
       <p>{t("footer.languages")}</p>
+      <nav className="site-footer__links" aria-label={t("buying.nav.footer")}>
+        <Link to="/demo">{t("actions.exploreDemo")}</Link>
+        <Link to="/#plans">{t("buying.nav.plans")}</Link>
+        <Link to="/#faq">{t("buying.nav.faq")}</Link>
+      </nav>
     </footer>
   );
 }

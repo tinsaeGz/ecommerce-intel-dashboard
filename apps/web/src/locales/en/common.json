@@ -470,5 +470,88 @@
     "demo": {
       "workflow": "Explore every step of the review"
     }
+  },
+  "buying": {
+    "nav": {
+      "product": "Product",
+      "how": "How it works",
+      "plans": "Plans",
+      "faq": "FAQ",
+      "footer": "Explore Suq Insights"
+    },
+    "eyebrow": "A fit for your daily routine",
+    "title": "Keep your records. Spend less time joining the dots.",
+    "intro": "Your files stay the starting point. The planned workspace brings reviewed records into one daily view.",
+    "availability": "Planned Free and Premium plans. Accounts and subscriptions are not available in this preview. Premium pricing will be announced when finalized.",
+    "workflow": {
+      "today": {
+        "title": "Working across separate records",
+        "body": "Compare exports, look up earlier entries, and connect sales with stock counts by hand."
+      },
+      "planned": {
+        "title": "The planned Suq workflow",
+        "body": "Review what each field means, then use a shared view of sales, stock, and customers. Keep the evidence behind each answer."
+      }
+    },
+    "rows": {
+      "dashboards": "Dashboards",
+      "history": "Visible history",
+      "uploads": "File uploads",
+      "alerts": "Alerts",
+      "team": "People",
+      "connections": "Sync and exports",
+      "sponsorship": "Sponsorship"
+    },
+    "free": {
+      "title": "Free · planned",
+      "purpose": "A daily view for the owner.",
+      "dashboards": "1 dashboard",
+      "history": "90 days",
+      "uploads": "5 per day, up to 10 MB each",
+      "alerts": "Dashboard alerts",
+      "team": "Owner only",
+      "connections": "Sync API and full exports are Premium features",
+      "sponsorship": "Contextual sponsorship in the workspace"
+    },
+    "premium": {
+      "title": "Premium · planned",
+      "purpose": "More history and ways to work together.",
+      "dashboards": "Multiple named dashboards",
+      "history": "Beyond 90 days, subject to retention rules below",
+      "uploads": "50 per day, up to 50 MB each",
+      "alerts": "Dashboard, opt-in email, and SMS to a verified phone (up to 10 SMS per day)",
+      "team": "Owner plus up to 4 staff",
+      "connections": "Sync API; CSV/XLSX exports, up to 5 export jobs per day",
+      "sponsorship": "Ad-free workspace"
+    },
+    "forecast": "Planned Premium forecasting needs at least 6 weeks of history. With less history, alerts use a moving average. Priority support is also planned; it is not an active support service in this preview.",
+    "faq": {
+      "eyebrow": "Before you bring your records",
+      "title": "A few practical answers.",
+      "availability": {
+        "question": "Can I use this with my business today?",
+        "answer": "You can explore the fictional demo and try its local review and sale examples today. Real accounts, uploads, saved entries, subscriptions, and notifications are not available in this preview."
+      },
+      "sources": {
+        "question": "Will I have to rename my columns or change my files?",
+        "answer": "The planned product accepts spreadsheets, CSV and POS exports, PDFs, and photos of records, alongside live entry. You review proposed field meanings instead of having to fit a fixed column template. The demo shows examples; it does not accept your files."
+      },
+      "review": {
+        "question": "What if a field is unclear or a load is wrong?",
+        "answer": "The planned workflow asks you to confirm uncertain field meanings before committing a dataset. Later corrections preview their effect on history, and an entire load can be undone. The demo lets you try field review and undo a sample sale without saving anything."
+      },
+      "missing": {
+        "question": "Can sales alone tell me stock, returning customers, or profit?",
+        "answer": "No. Stock needs a starting observation and the relevant movements. Returning-customer analysis needs a confirmed customer identifier, and margin needs cost data. Missing evidence means an explained unavailable answer, not zero or a guessed result."
+      },
+      "history": {
+        "question": "What happens to older records and downgrades?",
+        "answer": "Planned Free history covers 90 days; older Free raw records are pruned nightly. After a Premium downgrade, older Premium-era data is hidden and retained for 13 months so re-upgrading can restore it during that period. Original upload files expire after 30 days on Free or 180 days on Premium. These retention rules are planned, not a claim that this preview stores uploads."
+      },
+      "privacy": {
+        "question": "What does this demo save or send?",
+        "answer": "The examples use fictional data; you cannot upload business records here. Your language choice is saved in this browser. Demo interaction events stay in temporary tab memory and are not sent to an analytics collector. The site host receives ordinary page requests. Production privacy terms and a public support channel are not yet published here."
+      }
+    }
   }
 }

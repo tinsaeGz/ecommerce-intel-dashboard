@@ -171,6 +171,8 @@
     flex-direction: column;
     gap: var(--space-4);
     min-height: calc(100dvh - 5rem);
+    max-height: calc(100dvh - 5rem);
+    overflow-y: auto;
     padding: var(--space-8) var(--space-4);
     background: var(--color-paper);
     border-top: 0.0625rem solid var(--color-line);
@@ -220,7 +222,25 @@
     grid-column: 1 / -1;
   }
 
-  @media (width <= 52rem) {
+  .site-section-link,
+  .site-footer__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: inherit;
+    font-size: var(--font-size-ui);
+    font-weight: var(--font-weight-semibold);
+    text-underline-offset: 0.2em;
+  }
+
+  .site-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-5);
+    grid-column: 1 / -1;
+  }
+
+  @media (width <= 68rem) {
     body[data-menu-open="true"] {
       overflow: hidden;
     }
