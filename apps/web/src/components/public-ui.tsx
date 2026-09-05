@@ -1,7 +1,6 @@
 import {
   type ReactNode,
   useEffect,
-  useId,
   useRef,
   useState,
 } from "react";
@@ -9,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { getSupportedLanguage, supportedLanguages } from "../i18n";
+import { DropdownSelect } from "./dropdown-select";
 import "./public-ui.css";
 
 const languageNames = {
@@ -75,26 +75,18 @@ export function ButtonLink({
 
 export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
   const { i18n, t } = useTranslation();
-  const labelId = useId();
   const currentLanguage = getSupportedLanguage(i18n.resolvedLanguage);
 
   return (
     <div className="language-select" data-compact={compact}>
-      <label className="visually-hidden" htmlFor={labelId}>
-        {t("language.label")}
-      </label>
-      <select
-        id={labelId}
-        aria-label={t("language.label")}
-        onChange={(event) => void i18n.changeLanguage(event.target.value)}
+      <DropdownSelect
+        label={t("language.label")} compact={compact}
         value={currentLanguage}
-      >
-        {supportedLanguages.map((language) => (
-          <option key={language} value={language}>
-            {languageNames[language]}
-          </option>
-        ))}
-      </select>
+        onChange={(language) => void i18n.changeLanguage(language)}
+        options={supportedLanguages.map((language) => ({
+          value: language, label: languageNames[language], mark: language.toUpperCase(), lang: language,
+        }))}
+      />
     </div>
   );
 }

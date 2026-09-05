@@ -28,6 +28,7 @@
 - Keep selectors low-specificity and locally namespaced with a consistent component/feature convention. Prefer classes and `data-*` state attributes; avoid IDs, deep descendant chains, `!important`, and markup-dependent selectors.
 - Reserve inline styles for genuinely runtime-calculated geometry or values that cannot be expressed through a class or custom property. State, variants, responsive behavior, focus, reduced motion, and print styling belong in CSS.
 - Implement mobile-first, content-driven layouts from the breakpoints and behavior in `UI-UX-CONCEPT.md`. Every changed component must cover loading, empty, error, disabled/permission, localization expansion, keyboard focus, reduced motion, and touch targets as applicable.
+- Follow `UI-UX-CONCEPT.md` §12.13 for dropdowns across marketing and product screens. Reuse `apps/web/src/components/dropdown-select.tsx` for finite single-value pickers; keep the shared white floating surface, mint selection, rounded rows, and keyboard behavior. Action/profile menus use the same visual tokens but appropriate menu or navigation semantics, never a selection listbox. Do not create page-specific dropdown copies; native mobile uses platform-appropriate controls.
 
 ## Product invariants
 

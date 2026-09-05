@@ -49,7 +49,7 @@ hr { margin: 2em 0; border: 0; border-top: 1px solid #d8dbd1; }
 
 <div class="cover">
   <div>
-    <span class="cover-kicker">Product experience concept · v1.3</span>
+    <span class="cover-kicker">Product experience concept · v1.4</span>
     <h1>Suq Insights<br><em>Clarity for every market day.</em></h1>
     <p class="cover-deck">A comprehensive landing-page, dashboard, visual-system, content, conversion, and implementation blueprint for the production SaaS.</p>
   </div>
@@ -273,6 +273,12 @@ Reference: [Lightdash landing-page capture on Saaspo](https://saaspo.com/pages/l
 The presentation revision covers the existing foundations and understanding sequence, its outcome summary, and closing invitation. Dedicated daily-question panels, the full trust demonstration, channels, offline entry, and composable dashboards remain subsequent delivery work. This revision does not mark Phase 3 or the SaaS complete.
 
 ---
+
+## 2.6 Dropdown direction
+
+User-supplied reference: [Profile Dropdown Menu – Clean UI Component by Mahamud Hassan Jibon](https://dribbble.com/shots/26805540-Profile-Dropdown-Menu-Clean-UI-Component).
+
+The requested direction is a polished, coherent dropdown family across the application, starting on the landing page. The reference artwork could not be retrieved during implementation, so this is a Suq interpretation, not a verified reproduction: floating white panels, generous rounded rows, compact contextual headings, muted supporting text, and an unmistakable selected check. Keep Suq's Paper, Ink, Mint, and Forest tokens; do not adopt an unrelated palette or invent a signed-in profile for public pages. The reusable behavior and acceptance contract is §12.13.
 
 # 3. Brand theme: Market Day Intelligence
 
@@ -1358,6 +1364,22 @@ Authorization is server-enforced. The UI improves comprehension but is never the
 | Leave unsaved review | Confirm only if draft cannot safely persist | Saved draft preferred |
 
 ---
+
+## 12.13 Dropdowns and selection surfaces
+
+**One visual family, appropriate semantics.** All web dropdowns inherit this contract, including language, field meaning, dashboard, workspace, filters, profile, and overflow controls as those features ship. Current coverage includes the shared public-header language picker (landing, demo, signup, login and mobile navigation), the hero field-role picker, and the interpretation-review field-role pickers. Future authenticated menus remain planned, not simulated.
+
+**Surface and rows:** White floating panel, 16 px card radius, the shared overlay shadow, 8 px internal padding, and 8 px rounded rows. Avoid heavy panel outlines and repeated separators; use spacing and optional contextual headings to group content. Use Ink text and Slate supporting text. Selection combines a pale Mint surface with a Forest checkmark, never color alone. Keyboard-active rows have a visible Forest outline distinct from the saved selection. Options are at least 44 px high, wrap translated labels, and may carry a meaningful monochrome mark. Language options show names in their native language, not flags.
+
+**Shared implementation:** `apps/web/src/components/dropdown-select.tsx` and its co-located vanilla CSS own finite, single-value selection. Callers supply localized labels, options, optional marks/hints, disabled state, value and change handler. Do not fork copies for landing or dashboard pages. Empty option sets disable the trigger; data-loading, error and retry messages belong to the owning form and must be visible before a remote picker is enabled. Searchable or multi-select controls require their own accessible interaction contract rather than adding untested behavior to this primitive.
+
+**Selection behavior:** Use a named select-only combobox controlling a listbox with explicit selected and disabled option states. DOM focus stays on the trigger while `aria-activedescendant` identifies the navigated option. Enter/Space opens or commits; Arrow keys browse enabled options; Home/End jump to the first/last enabled option; printable characters support prefix search and repeated-character cycling. Tab commits the active option and moves onward. Escape closes without changing the value and does not close the parent mobile navigation. Clicking an enabled option commits it; outside interaction dismisses without committing. A reopened list starts at the saved selection. Browsing must not invalidate a review; an actual change still invalidates any prior local confirmation.
+
+**Position and motion:** Render popups outside clipping containers, align with the trigger, flip above when necessary, constrain them to the viewport, and scroll long lists internally. Recalculate geometry on scrolling, resizing, and visual viewport changes. Use 120 ms opacity/4 px motion with no bounce; reduced motion removes animation. Forced-colors mode adds a visible panel/control outline and retains non-color selection checks. At narrow or zoomed widths, every option remains reachable without horizontal page scrolling.
+
+**Menus are not selects:** Future profile/action menus may reuse the surface, contextual identity header, row spacing and icons, but use menu-button/menuitem semantics for commands or ordinary links for navigation. Do not implement logout, deletion or route links as listbox options. Group destructive actions separately with a text label and the relevant confirmation rule in §12.12. Long filters and complex date selection use the documented sheet/dialog patterns. React Native uses platform-appropriate accessible pickers or sheets and shared visual tokens, not the web popup or CSS.
+
+**Validation:** Cover click/touch, typeahead, disabled options, outside dismissal, Tab/Shift+Tab, Enter/Space, Escape within mobile navigation, focus retention and selected-state announcements. Audit open and closed states in all three locales, 30–40% expansion, 320–1440 px layouts, 200%/400% reflow, reduced motion, forced colors, viewport edges and long-list scrolling. Browser automation supplements but does not replace NVDA/VoiceOver and real mobile screen-reader checks before release. The keyboard contract is informed by the [WAI-ARIA select-only combobox guidance](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/); the reference example is not copied as a production component.
 
 # 13. Responsive behavior
 

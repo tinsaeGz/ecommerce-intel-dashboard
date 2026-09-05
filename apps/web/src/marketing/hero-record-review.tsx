@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { DropdownSelect } from "../components/dropdown-select";
 import "./hero-record-review.css";
 
 const roles = ["itemIdentity", "customerIdentity", "notAnalyzed"] as const;
@@ -42,17 +43,12 @@ export function HeroRecordReview() {
         </div>
 
         <label className="hero-record__label" htmlFor={fieldId}>{t("polish.review.roleLabel")}</label>
-        <select
-          id={fieldId}
-          className="hero-record__select"
-          value={role}
-          onChange={(event) => {
-            setRole(event.target.value as ReviewRole);
-            setConfirmed(false);
-          }}
-        >
-          {roles.map((value) => <option key={value} value={value}>{t(`understanding.review.roles.${value}`)}</option>)}
-        </select>
+        <DropdownSelect
+          id={fieldId} label={t("polish.review.roleLabel")} value={role}
+          hint={t("polish.review.localOnly")}
+          onChange={(value) => { setRole(value); setConfirmed(false); }}
+          options={roles.map((value) => ({ value, label: t(`understanding.review.roles.${value}`) }))}
+        />
 
         <div className="hero-record__result" role="status">
           <span className="hero-record__result-icon" aria-hidden="true">{confirmed ? "✓" : "?"}</span>

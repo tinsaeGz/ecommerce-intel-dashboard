@@ -6,6 +6,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 
+import { DropdownSelect } from "../components/dropdown-select";
 import { ButtonLink } from "../components/public-ui";
 import "./product-understanding.css";
 
@@ -322,17 +323,13 @@ function InterpretationReview({ compact = false }: { compact?: boolean }) {
           </ul>
 
           <label htmlFor={selectId}>{t("understanding.review.editLabel")}</label>
-          <select
-            id={selectId}
-            value={selectedRole}
-            onChange={(event) => setSelectedRole(event.target.value as ReviewField["role"])}
-          >
-            <option value="transactionTime">{t("understanding.review.roles.transactionTime")}</option>
-            <option value="lineAmount">{t("understanding.review.roles.lineAmount")}</option>
-            <option value="itemIdentity">{t("understanding.review.roles.itemIdentity")}</option>
-            <option value="customerIdentity">{t("understanding.review.roles.customerIdentity")}</option>
-            <option value="notAnalyzed">{t("understanding.review.roles.notAnalyzed")}</option>
-          </select>
+          <DropdownSelect
+            id={selectId} label={t("understanding.review.editLabel")}
+            value={selectedRole} onChange={setSelectedRole}
+            options={(["transactionTime", "lineAmount", "itemIdentity", "customerIdentity", "notAnalyzed"] as const).map((value) => ({
+              value, label: t(`understanding.review.roles.${value}`),
+            }))}
+          />
           <p className="evidence-drawer__update" role="status">
             {t("understanding.review.update", {
               role: t(`understanding.review.roles.${selectedRole}`),

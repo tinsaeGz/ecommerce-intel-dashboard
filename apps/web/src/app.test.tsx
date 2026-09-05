@@ -86,7 +86,8 @@ describe("public landing routes", () => {
     const user = userEvent.setup();
     await renderAt("/");
 
-    await user.selectOptions(screen.getByRole("combobox", { name: "Choose language" }), "es");
+    await user.click(screen.getByRole("combobox", { name: "Choose language" }));
+    await user.click(screen.getByRole("option", { name: "Español" }));
 
     await waitFor(() => expect(document.documentElement).toHaveAttribute("lang", "es"));
     expect(window.localStorage.getItem(LANGUAGE_STORAGE_KEY)).toBe("es");
@@ -138,10 +139,8 @@ describe("public landing routes", () => {
       }),
     ).toHaveTextContent(/abbreviated header is ambiguous/i);
 
-    await user.selectOptions(
-      within(reviewPanel).getByRole("combobox", { name: "Use this field as" }),
-      "customerIdentity",
-    );
+    await user.click(within(reviewPanel).getByRole("combobox", { name: "Use this field as" }));
+    await user.click(screen.getByRole("option", { name: "Customer identity" }));
     expect(within(reviewPanel).getByRole("status")).toHaveTextContent(
       /Customer identity.*Nothing is committed yet/i,
     );
@@ -153,14 +152,19 @@ describe("public landing routes", () => {
     await renderAt("/");
     const review = screen.getByRole("region", { name: i18n.t("polish.review.title") });
     const select = within(review).getByRole("combobox");
-    await user.selectOptions(select, "customerIdentity");
+    await user.click(select);
+    await user.click(screen.getByRole("option", { name: i18n.t("understanding.review.roles.customerIdentity") }));
     await user.click(within(review).getByRole("button", { name: i18n.t("polish.review.confirm") }));
     expect(within(review).getByRole("status")).toHaveTextContent(i18n.t("polish.review.result", { role: i18n.t("understanding.review.roles.customerIdentity") }));
-    await user.selectOptions(select, "notAnalyzed");
+    await user.click(select);
+    await user.keyboard("{Enter}");
+    expect(within(review).getByRole("status")).toHaveTextContent(i18n.t("polish.review.confirmed"));
+    await user.click(select);
+    await user.click(screen.getByRole("option", { name: i18n.t("understanding.review.roles.notAnalyzed") }));
     expect(within(review).getByRole("status")).toHaveTextContent(i18n.t("polish.review.pending"));
     await user.click(within(review).getByRole("button", { name: i18n.t("polish.review.confirm") }));
     await user.click(within(review).getByRole("button", { name: i18n.t("polish.review.reset") }));
-    expect(select).toHaveValue("itemIdentity");
+    expect(select).toHaveTextContent(i18n.t("understanding.review.roles.itemIdentity"));
     expect(within(review).getByRole("status")).toHaveTextContent(i18n.t("polish.review.pending"));
     expect(within(review).getByRole("table")).toHaveTextContent("48,00 €");
   });

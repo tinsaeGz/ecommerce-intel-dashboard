@@ -35,6 +35,7 @@ XLSX files skip the text pass and are converted to CSV first (Polars `read_excel
   - Column content probes: date-likeness, numeric-likeness, cardinality (per 1k-row sample) to score candidates.
   - Proposal includes detected delimiter (`,` vs `;` vs tab), decimal separator, and **day-first guess**: sample dates are parsed both ways; if any value exceeds 12 in the first position the format is proven, otherwise propose day-first from the merchant's locale (es/fr → DD/MM) and show the interpreted dates in the preview so the merchant confirms visually. Ambiguity is never silently resolved — it's the classic way analytics products corrupt a month of data.
 - The React mapping UI shows first 20 rows, proposal pre-filled, per-column dropdowns, live preview of parsed values (a `POST .../mapping?dry_run=true` parses the sample server-side and returns rendered results). Confirming saves the mapping for future auto-runs.
+- Visual implementation of field-role dropdowns follows the shared selection component and interaction contract in [UI/UX Concept §12.13](../UI-UX-CONCEPT.md#1213-dropdowns-and-selection-surfaces). This older ingestion design remains subordinate to `SDLC.md` v3; styling does not authorize its older fixed-schema API behavior.
 
 Target schemas per upload `kind`:
 - **sales:** `occurred_at`* , `product_name`*, `quantity`, `unit_price`, `line_total` (any 2 of the 3 amounts; third derived), `order_ref`, `customer_phone|customer_name`, `channel` (*required)
