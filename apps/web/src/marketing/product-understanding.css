@@ -44,7 +44,6 @@
 
   .source-explorer {
     background: var(--color-white);
-    border-top: 0.0625rem solid var(--color-line);
   }
 
   .source-explorer__surface {
@@ -265,7 +264,7 @@
   .problem-framing {
     color: var(--color-paper);
     background: var(--color-ink);
-    border-top: 0.0625rem solid var(--color-line);
+    border-radius: var(--radius-panel);
   }
 
   .problem-framing .section-heading__eyebrow {
@@ -343,10 +342,6 @@
 
   .problem-card[data-emphasis="true"] .problem-card__body {
     color: var(--color-mist);
-  }
-
-  .how-it-works {
-    border-top: 0.0625rem solid var(--color-line);
   }
 
   .how-it-works:focus-visible {
@@ -844,7 +839,7 @@
     }
 
     .section-heading h2 {
-      font-size: clamp(2.2rem, 11vw, 3.5rem);
+      font-size: clamp(2rem, 10vw, 3.5rem);
     }
 
     .section-heading__body {

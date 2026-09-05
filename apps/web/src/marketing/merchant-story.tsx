@@ -7,18 +7,6 @@ import { formatNumber, formatPercent } from "../lib/format";
 import { DashboardPreview } from "./dashboard-preview";
 import "./merchant-story.css";
 
-export function LedgerMotif() {
-  return (
-    <svg className="ledger-motif" viewBox="0 0 180 240" aria-hidden="true" focusable="false">
-      <path className="ledger-motif__paper" d="M20 1h159v220l-13-8-13 8-13-8-13 8-13-8-13 8-13-8-13 8-13-8-13 8-13-8-16 8Z" />
-      <path className="ledger-motif__grid" d="M20 41h159M20 81h159M20 121h159M20 161h159M60 1v200M100 1v200M140 1v200" />
-      <path className="ledger-motif__lime" d="M100 1h40v40h-40zM60 81h40v40H60z" />
-      <path className="ledger-motif__mint" d="M140 41h39v40h-39zM100 121h40v40h-40z" />
-      <path className="ledger-motif__ink" d="M20 161h40v40H20z" />
-      <path className="ledger-motif__tick" d="m30 181 7 7 13-15" />
-    </svg>
-  );
-}
 
 export function DailyBriefing() {
   const { i18n, t } = useTranslation();
@@ -107,7 +95,6 @@ export function ClosingInvitation() {
   return (
     <section className="closing-invitation" aria-labelledby="closing-title">
       <div className="closing-invitation__surface">
-        <LedgerMotif />
         <p className="closing-invitation__eyebrow">{t("presentation.closing.eyebrow")}</p>
         <h2 id="closing-title">{t("presentation.closing.title")}</h2>
         <p className="closing-invitation__body">{t("presentation.closing.body")}</p>

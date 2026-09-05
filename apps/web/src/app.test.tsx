@@ -1,5 +1,5 @@
 import axe from "axe-core";
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
 import { MemoryRouter } from "react-router-dom";
@@ -145,6 +145,50 @@ describe("public landing routes", () => {
     expect(within(reviewPanel).getByRole("status")).toHaveTextContent(
       /Customer identity.*Nothing is committed yet/i,
     );
+  });
+
+  it.each(["en", "es", "fr"])("confirms, invalidates and resets the hero review in %s", async (locale) => {
+    const user = userEvent.setup();
+    await i18n.changeLanguage(locale);
+    await renderAt("/");
+    const review = screen.getByRole("region", { name: i18n.t("polish.review.title") });
+    const select = within(review).getByRole("combobox");
+    await user.selectOptions(select, "customerIdentity");
+    await user.click(within(review).getByRole("button", { name: i18n.t("polish.review.confirm") }));
+    expect(within(review).getByRole("status")).toHaveTextContent(i18n.t("polish.review.result", { role: i18n.t("understanding.review.roles.customerIdentity") }));
+    await user.selectOptions(select, "notAnalyzed");
+    expect(within(review).getByRole("status")).toHaveTextContent(i18n.t("polish.review.pending"));
+    await user.click(within(review).getByRole("button", { name: i18n.t("polish.review.confirm") }));
+    await user.click(within(review).getByRole("button", { name: i18n.t("polish.review.reset") }));
+    expect(select).toHaveValue("itemIdentity");
+    expect(within(review).getByRole("status")).toHaveTextContent(i18n.t("polish.review.pending"));
+    expect(within(review).getByRole("table")).toHaveTextContent("48,00 €");
+  });
+
+  it.each(["en", "es", "fr"])("keeps metric, chart, table and stock selections consistent in %s", async (locale) => {
+    const user = userEvent.setup();
+    await i18n.changeLanguage(locale);
+    await renderAt("/");
+    const metrics = screen.getByRole("group", { name: i18n.t("polish.dashboard.metricLabel") });
+    const units = within(metrics).getByRole("button", { name: new RegExp(`^${i18n.t("dashboard.metrics.units")} `) });
+    await user.click(units);
+    expect(units).toHaveAttribute("aria-pressed", "true");
+    expect(within(metrics).getAllByRole("button", { pressed: true })).toHaveLength(1);
+    const chart = screen.getByRole("region", { name: i18n.t("dashboard.metrics.units") });
+    const slider = within(chart).getByRole("slider");
+    expect(within(chart).getByRole("status")).toHaveTextContent("468");
+    fireEvent.change(slider, { target: { value: "0" } });
+    expect(within(chart).getByRole("status")).toHaveTextContent(/^0/);
+    fireEvent.change(slider, { target: { value: "4" } });
+    expect(within(chart).getByRole("status")).toHaveTextContent(/^252/);
+    expect(slider).toHaveAttribute("aria-valuetext", expect.stringContaining("252"));
+    await user.click(within(chart).getByText(i18n.t("polish.dashboard.viewData")));
+    const table = within(chart).getByRole("table");
+    expect(within(table).getAllByRole("row")).toHaveLength(9);
+    expect(within(table).getAllByRole("row").at(-1)).toHaveTextContent("468");
+    const stock = screen.getByRole("region", { name: i18n.t("dashboard.stock.eyebrow") });
+    await user.click(within(stock).getByRole("button", { name: /Canvas Tote/ }));
+    expect(within(stock).getByRole("status")).toHaveTextContent(i18n.t("polish.dashboard.stockDetail", { count: 4 }));
   });
 
   it.each(["en", "es", "fr"])("opens briefing evidence and focuses the review destination in %s", async (locale) => {

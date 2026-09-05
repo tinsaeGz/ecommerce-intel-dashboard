@@ -1,55 +1,15 @@
 @layer components {
-  .ledger-motif {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    width: clamp(6rem, 13vw, 11rem);
-    pointer-events: none;
-  }
-
-  .ledger-motif__paper {
-    fill: var(--color-paper);
-    stroke: var(--color-line);
-  }
-
-  .ledger-motif__grid {
-    fill: none;
-    stroke: var(--color-line);
-  }
-
-  .ledger-motif__lime {
-    fill: var(--color-lime);
-  }
-
-  .ledger-motif__mint {
-    fill: var(--color-mint);
-  }
-
-  .ledger-motif__ink {
-    fill: var(--color-ink);
-  }
-
-  .ledger-motif__tick {
-    fill: none;
-    stroke: var(--color-lime);
-    stroke-width: 2;
-  }
-
   .daily-briefing {
     min-width: 0;
   }
 
   .daily-briefing__intro {
     padding: clamp(1rem, 3vw, 2.5rem);
-    background: var(--color-white);
-    border: 0.0625rem solid var(--color-line);
-    border-bottom: 0;
-    border-radius: var(--radius-card) var(--radius-card) 0 0;
+    background: transparent;
   }
 
   .daily-briefing .dashboard-preview__frame {
-    border-radius: 0 0 var(--radius-card) var(--radius-card);
-    box-shadow: none;
+    border-radius: var(--radius-panel);
   }
 
   .daily-briefing__caption {
@@ -176,7 +136,6 @@
   .merchant-outcomes {
     padding: var(--space-18) var(--canvas-inset) 0;
     background: var(--color-white);
-    border-block: 0.0625rem solid var(--color-line);
   }
 
   .merchant-outcomes__grid {
@@ -220,8 +179,6 @@
 
   .closing-invitation {
     padding: var(--space-14) var(--canvas-inset);
-    background-image: radial-gradient(var(--color-line) 0.75px, transparent 0.75px);
-    background-size: 0.75rem 0.75rem;
   }
 
   .closing-invitation__surface {
@@ -229,11 +186,11 @@
     padding: clamp(1.5rem, 5vw, 4rem);
     color: var(--color-paper);
     background: var(--color-ink);
-    border: 0.0625rem solid var(--color-ink);
+    border-radius: var(--radius-panel);
   }
 
   .closing-invitation__eyebrow {
-    max-width: calc(100% - 9rem);
+    max-width: 100%;
     margin-bottom: var(--space-6);
     color: var(--color-lime);
     font-size: var(--font-size-caption);
@@ -281,10 +238,6 @@
   }
 
   @media (width <= 48rem) {
-    .ledger-motif {
-      display: none;
-    }
-
     .daily-briefing__sample {
       margin-inline-start: 0;
     }
@@ -325,10 +278,6 @@
   }
 
   @media (forced-colors: active) {
-    .ledger-motif {
-      display: none;
-    }
-
     .daily-briefing__review-link,
     .briefing-detail,
     .closing-invitation__surface {

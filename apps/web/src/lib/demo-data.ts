@@ -24,3 +24,14 @@ export const landingDemo = {
 } as const;
 
 export type LandingDemo = typeof landingDemo;
+
+export const previewMetricKeys = ["revenue", "transactions", "units", "customers"] as const;
+export type PreviewMetric = (typeof previewMetricKeys)[number];
+
+// Cumulative fictional observations; final values match the shared daily totals.
+export const previewMetricSeries: Record<PreviewMetric, readonly number[]> = {
+  revenue: landingDemo.chart.current,
+  transactions: [0, 31, 72, 103, 168, 209, 256, landingDemo.transactions],
+  units: [0, 46, 108, 154, 252, 314, 384, landingDemo.units],
+  customers: [0, 26, 56, 89, 126, 158, 202, landingDemo.customers],
+};

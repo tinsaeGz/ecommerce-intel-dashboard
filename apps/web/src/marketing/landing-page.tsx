@@ -8,7 +8,8 @@ import {
   SkipLink,
 } from "../components/public-ui";
 import { useDocumentMetadata } from "../lib/use-document-metadata";
-import { DailyBriefing, LedgerMotif, MerchantOutcomes, ClosingInvitation } from "./merchant-story";
+import { DailyBriefing, MerchantOutcomes, ClosingInvitation } from "./merchant-story";
+import { HeroRecordReview } from "./hero-record-review";
 import {
   HowItWorks,
   ProblemFraming,
@@ -32,7 +33,6 @@ export function LandingPage() {
       <main id="main-content" className="marketing-canvas">
         <section className="landing-hero" aria-labelledby="landing-hero-title">
           <div className="landing-hero__copy">
-            <LedgerMotif />
             <p className="landing-hero__eyebrow">{t("hero.eyebrow")}</p>
             <h1 id="landing-hero-title">
               <span>{t("hero.titleBefore")}</span>{" "}
@@ -57,6 +57,10 @@ export function LandingPage() {
                 ))}
               </ul>
             </div>
+          </div>
+
+          <div className="landing-hero__companion">
+            <HeroRecordReview />
           </div>
 
           <div className="landing-hero__visual" id="product-preview">

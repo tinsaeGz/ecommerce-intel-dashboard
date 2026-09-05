@@ -64,6 +64,42 @@
       "photo": "Photo"
     }
   },
+  "polish": {
+    "review": {
+      "sample": "Fictional sample · ready to review",
+      "eyebrow": "Your records. Your meaning.",
+      "title": "What does “Cod.” mean here?",
+      "body": "Suq found a possible product code. You have the final say.",
+      "sourceCaption": "Original Spanish sample rows",
+      "sourceNote": "Original values, exactly as they arrived.",
+      "roleLabel": "Use “Cod.” as",
+      "pending": "A suggestion, not a decision",
+      "evidence": "These values repeat across orders. The abbreviated heading still needs your context.",
+      "confirmed": "Meaning confirmed in this preview",
+      "result": "“Cod.” is now previewed as: {{role}}.",
+      "confirm": "Confirm this meaning",
+      "reset": "Try the review again",
+      "localOnly": "Interactive example only. No file is uploaded or saved."
+    },
+    "dashboard": {
+      "workspaceNote": "Daily overview · fictional sample",
+      "metricLabel": "Choose a dashboard metric",
+      "selected": "Viewing this trend",
+      "viewTrend": "View trend ↗",
+      "dayView": "Across the sample day",
+      "cumulative": "Cumulative total",
+      "atTime": "at {{time}}",
+      "inspectTime": "Explore the day",
+      "viewData": "View the chart as a table",
+      "dataCaption": "{{metric}} across the sample day",
+      "time": "Time",
+      "stockHint": "Select a product to inspect the risk.",
+      "stockLabel": "Products with stock risk",
+      "stockDetail_one": "About {{count}} day of stock remains at the sample sales pace. Check the stock record before reordering.",
+      "stockDetail_other": "About {{count}} days of stock remain at the sample sales pace. Check the stock record before reordering.",
+      "reviewLink": "Inspect the source evidence"
+    }
+  },
   "presentation": {
     "briefing": {
       "label": "A morning with Mercado Norte",

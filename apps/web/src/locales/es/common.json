@@ -64,6 +64,42 @@
       "photo": "Foto"
     }
   },
+  "polish": {
+    "review": {
+      "sample": "Ejemplo ficticio · listo para revisar",
+      "eyebrow": "Tus registros. Tu significado.",
+      "title": "¿Qué significa «Cod.» aquí?",
+      "body": "Suq encontró un posible código de producto. Tú tienes la última palabra.",
+      "sourceCaption": "Filas originales del ejemplo en español",
+      "sourceNote": "Valores originales, tal como llegaron.",
+      "roleLabel": "Usar «Cod.» como",
+      "pending": "Una sugerencia, no una decisión",
+      "evidence": "Estos valores se repiten en varios pedidos. El encabezado abreviado aún necesita tu contexto.",
+      "confirmed": "Significado confirmado en esta vista previa",
+      "result": "«Cod.» se muestra ahora como: {{role}}.",
+      "confirm": "Confirmar este significado",
+      "reset": "Volver a probar la revisión",
+      "localOnly": "Solo es un ejemplo interactivo. No se sube ni guarda ningún archivo."
+    },
+    "dashboard": {
+      "workspaceNote": "Resumen diario · ejemplo ficticio",
+      "metricLabel": "Elegir una métrica del panel",
+      "selected": "Mostrando esta tendencia",
+      "viewTrend": "Ver tendencia ↗",
+      "dayView": "Durante el día de ejemplo",
+      "cumulative": "Total acumulado",
+      "atTime": "a las {{time}}",
+      "inspectTime": "Explorar el día",
+      "viewData": "Ver el gráfico como tabla",
+      "dataCaption": "{{metric}} durante el día de ejemplo",
+      "time": "Hora",
+      "stockHint": "Selecciona un producto para examinar el riesgo.",
+      "stockLabel": "Productos con riesgo de agotarse",
+      "stockDetail_one": "Queda aproximadamente {{count}} día de existencias al ritmo de ventas del ejemplo. Comprueba el registro antes de reponer.",
+      "stockDetail_other": "Quedan aproximadamente {{count}} días de existencias al ritmo de ventas del ejemplo. Comprueba el registro antes de reponer.",
+      "reviewLink": "Examinar la evidencia de origen"
+    }
+  },
   "presentation": {
     "briefing": {
       "label": "Una mañana con Mercado Norte",

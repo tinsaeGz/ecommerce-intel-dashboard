@@ -49,7 +49,7 @@ hr { margin: 2em 0; border: 0; border-top: 1px solid #d8dbd1; }
 
 <div class="cover">
   <div>
-    <span class="cover-kicker">Product experience concept · v1.2</span>
+    <span class="cover-kicker">Product experience concept · v1.3</span>
     <h1>Suq Insights<br><em>Clarity for every market day.</em></h1>
     <p class="cover-deck">A comprehensive landing-page, dashboard, visual-system, content, conversion, and implementation blueprint for the production SaaS.</p>
   </div>
@@ -201,7 +201,7 @@ Reference: [Milestone Webflow template](https://milestone-webflow-html-website-t
 
 Patterns worth carrying forward:
 
-- Oversized, high-contrast hero typography; the updated presentation uses left-aligned copy within a shared page frame.
+- Oversized, high-contrast hero typography; the updated presentation pairs left-aligned copy with a working record-review example in an open layout.
 - A bold sans-serif paired with a selective italic serif for warmth and emphasis.
 - Mostly white surfaces with acid-lime actions and soft mint, aqua, and lavender ambient gradients.
 - An oversized product mockup that makes the software tangible immediately. Suq uses the straight-on composition specified in §3.7.
@@ -261,14 +261,14 @@ Suq adaptation:
 
 Reference: [Lightdash landing-page capture on Saaspo](https://saaspo.com/pages/lightdash-landing-page). This is a presentation reference, not a source of Suq product capabilities. Some media panels in the capture are blank; no behavior is inferred from those panels.
 
-- **Continuous frame:** subtle vertical rails and shared section edges keep the page connected. Use the existing 1,280 px content maximum with responsive inner gutters. Sparse ledger dots belong behind product stages; they must not reduce text contrast.
-- **Large product demonstration:** begin with a merchant question, a concise answer, and useful actions before the detailed briefing. Keep one straight-on surface. Stock and evidence disclosures work by keyboard and touch; the review link moves focus to the corresponding section.
+- **Open composition:** use shared alignment and generous gutters within the 1,280 px content maximum. The merchant review on the hero's right balances the headline on its left. Do not use outer border rails, dotted page backgrounds, or a small receipt decoration in otherwise unused hero space. These treatments were rejected in the visual review. Surface contrast, soft elevation, and rounded product containers provide separation; borders remain available for form fields, data tables, and accessible states.
+- **Large product demonstration:** begin with a merchant question, a concise answer, and useful actions before the detailed dashboard. Metric buttons change the chart; a time slider changes the inspected observation; a table presents the same values; selecting a stock item changes its risk detail. The review link moves focus to the corresponding section. All controls work by keyboard and touch.
 - **Feature chapters:** give records, interpretation review, and daily decisions room for one dominant mockup each. A source selector or workflow tabs change only their own stage. Mobile and reduced-motion views show readable static workflow cards.
 - **Merchant situations:** use illustrative questions about incompatible exports, late numbers, and ambiguous columns in the problem section. Label them as illustrations; never give them fabricated customer identities, logos, or testimonial attribution.
 - **Outcome grid:** show six inspectable principles: evidence, confirmation, source preservation, honest missing data, period context, and localization. Prefer statements demonstrated by the preview. Future behavior remains part of the delivery plan until implemented.
 - **Transformation:** the existing Add → Confirm → See sequence is the first transformation timeline. Later iterations can extend it to repeated daily use; do not invent a five-day onboarding or productivity promise.
 - **Closing invitation:** a dark Ink panel with lime action invites the visitor into Mercado Norte's fictional demo. The account-access alternative remains explicitly a preview until authentication is connected.
-- **Brand detail:** original SVG ledger cells and receipt edges carry Suq's lime/mint palette at the hero and close. Hide decoration on narrow screens and in forced colors. Do not copy Lightdash's purple pixel artwork, copy, logos, security badges, or developer positioning.
+- **Brand detail:** product content carries the lime/mint palette: selected metrics, a confirmed field, and a restrained chart fill. A soft mint backdrop may sit behind the hero review panel. Do not reintroduce the decorative receipt, purple pixel artwork, copied copy, logos, security badges, or developer positioning.
 
 The presentation revision covers the existing foundations and understanding sequence, its outcome summary, and closing invitation. Dedicated daily-question panels, the full trust demonstration, channels, offline entry, and composable dashboards remain subsequent delivery work. This revision does not mark Phase 3 or the SaaS complete.
 
@@ -359,8 +359,8 @@ Use tabular numerals for metrics. Never tighten tracking on translated uppercase
 Mockups are the connective tissue between landing page and product:
 
 - Use real Suq components and plausible, localized sample data.
-- Display the hero as a straight-on Suq product surface with a decision-led hierarchy. Avoid decorative browser chrome, device tilt, floating cards, and equal-weight KPI grids that make the product resemble a generic analytics template.
-- Build the hero around one editorial answer, adjacent actions, supporting evidence, freshness, and a visible interpretation-review item. Later mockups crop to the specific decision or review state being explained.
+- Display product previews straight-on, with usable controls and readable labels. Avoid decorative browser chrome, device tilt, fake navigation buttons, or static cards styled as interactive controls. Use typography, whitespace and subtle surface elevation rather than framing every section with borders.
+- Pair the hero copy with an editable record-review surface. Beneath it, show one large chart with a row of selectable metrics and an adjacent stock-risk list. Metric tiles are controls: the selected tile has a distinct state, and changing it updates the chart, units, current observation, accessible value, and data table together.
 - Highlight one interaction per mockup: upload review, live dashboard update, stock warning, or mobile quick entry.
 - Keep sample merchant names fictional and clearly generic. Do not use real customer data.
 - A mockup caption states the user benefit, not the component name: “Confirm what every column means before it affects your totals.”
@@ -488,22 +488,22 @@ The global navigation remains short: **Product · How it works · Use cases · P
 
 **Reassurance line:** “English · Español · Français” and supported-source icons. Do not claim a trial length or no-card signup until billing policy confirms it.
 
-**Composition:** left-aligned headline and copy inside the continuous page rails, with a restrained ledger motif at the upper corner. The product stage occupies the full inner width below the copy on a quiet dotted surface. Paper, Ink, Lime, Mint, and the existing serif emphasis retain the Suq theme.
+**Composition:** a borderless two-column hero pairs the headline and CTAs on the left with a compact interactive CSV review on the right. The review displays original Spanish sample rows, an editable role for `Cod.`, evidence, explicit confirmation, and reset. Changing a confirmed role returns it to the pending state. This local preview never uploads or saves a file and does not mutate the separate dashboard example. At tablet and mobile widths, stack the copy, review, and full-width dashboard. Paper, Ink, Lime, Mint, and the existing serif emphasis retain the Suq theme. Do not use outer frame lines, dotted backgrounds, or the decorative ledger receipt.
 
 **Question → answer → action:** “What needs my attention today?” leads into “Revenue is up 18%. Three products may run out soon. One field still needs your confirmation.” The product stage is visibly labelled fictional sample data. Native disclosures show the stock estimates and source evidence; “Review ‘Cod.’” links to the interpretation chapter and moves keyboard focus there. The pending field is separate from the confirmed revenue fields and must never imply that an unconfirmed import changed the totals.
 
 **Visual:** a straight-on merchant morning briefing uses real Suq components without browser chrome, device tilt, or decorative haze. Its asymmetrical hierarchy makes the input-to-insight relationship concrete instead of resembling a generic admin template. The visual should show:
 
-- One dominant revenue answer with localized currency and a restrained supporting trend.
-- A plain-language explanation with a nearby evidence line and confirmed transaction count.
-- A prioritized stock action queue rather than another equal-weight metric card.
-- A compact daily glance for transactions, units, and returning customers.
-- One ambiguous source field that visibly requires confirmation before commitment.
+- One dominant chart with selectable revenue, transactions, units, and customer totals. Each metric uses deterministic cumulative observations whose final value matches the shared daily total.
+- A visible inspected value and localized sample time, controlled by a native range slider. The same observations are available in a disclosure table; the SVG itself is decorative to assistive technology.
+- A prioritized stock list with selectable products and a corresponding explanatory detail, available on mobile too.
+- A plain-language evidence disclosure and a focus-managed link to the full interpretation review.
+- A separate hero field-review example that visibly requires confirmation, supports changing the analytical role, and can be reset without reloading.
 - “Updated moments ago” freshness and source count.
 
 **Interaction:** use one short entrance after the copy; do not add parallax or decorative pointer movement. Reduced-motion users see the final static composition immediately. The hero content renders before the mockup and remains within the initial weight budget.
 
-**Mobile:** stack copy, CTAs, reassurance, then crop the briefing to its answer, daily glance, and review item. The wider stock queue may be omitted from the crop when retaining it would make the decision text illegible. No product surface may cause horizontal overflow.
+**Mobile:** stack copy, CTAs, reassurance, the field review, and the dashboard. Metric controls use two columns; chart and stock detail stack. Keep the sample date, interactive chart controls, data table, and stock list available rather than hiding them. No product surface may cause horizontal overflow.
 
 ### 2. Source ribbon: “Start where your records are”
 
@@ -513,7 +513,7 @@ The global navigation remains short: **Product · How it works · Use cases · P
 
 **Microcopy:** “No fixed column names. No required order. You confirm the meaning before totals change.”
 
-**Interaction:** selecting a source changes a large adjacent stage from raw input to recognized table. Keyboard users receive the same change through tabs. The section shares the page rails and uses thin separators rather than a collection of disconnected floating cards.
+**Interaction:** selecting a source changes a large adjacent stage from raw input to recognized table. Keyboard users receive the same change through tabs. Align the section with the other product chapters without outer rails or full-width border lines.
 
 ### 3. Problem framing: “Your data should not need a new job before it can help you”
 
@@ -695,7 +695,7 @@ Footer groups: Product, Use cases, Resources, Company, Legal, Language. Include 
 │ Suq   Product  How it works  Use cases  Pricing  Resources   EN  Log in [CTA]│
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│ COMMERCE CLARITY FROM YOUR DATA                          ledger cells       │
+│ COMMERCE CLARITY FROM YOUR DATA          Interactive CSV field review       │
 │ Know what’s selling. See what runs out next.                                 │
 │ Bring customers back.                                                        │
 │ [Start free]  [Explore the demo]                                             │
@@ -703,7 +703,7 @@ Footer groups: Product, Use cases, Resources, Company, Legal, Language. Include 
 │ What needs my attention today?                 FICTIONAL SAMPLE DATA       │
 │ Answer → [Stock risks] [Evidence] [Review Cod.]                              │
 │ ┌────────────────────────────────────────────────────────────────────────┐ │
-│ │ Straight-on briefing: answer, evidence, action queue, daily glance      │ │
+│ │ Select metric → inspect time/chart/table · select stock → risk detail   │ │
 │ └────────────────────────────────────────────────────────────────────────┘ │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │ CSV · Excel · Paste · JSON · POS · Marketplace · Image · PDF · Entry · API  │
@@ -733,17 +733,17 @@ The page should not rely on one repeated screenshot. Build a small mockup set fr
 
 ## 6.1 Hero dashboard mockup
 
-Desktop sample content:
+Desktop sample content (the wireframe boxes above indicate grouping, not visible page borders):
 
 - Workspace: “Mercado Norte” (fictional).
 - Above the briefing: one daily question, a visible sample-data label, an answer, stock/evidence disclosures, and a working link to interpretation review. Essential meaning must remain accessible outside any decorative `aria-hidden` mockup crop.
 - Date: “Today · 3 Sep” using the selected locale and timezone.
-- Editorial answer: “Revenue is 18% above the comparison period, led by Canvas Tote and Ground Coffee.”
-- Evidence line: “POS export · 312 confirmed transactions.”
-- Prioritized action queue: Ground Coffee, Canvas Tote, and Ceramic Cup with readable days-remaining labels.
-- Daily glance: 312 transactions, 468 units, and 38 returning customers.
-- Review item: “`Cod.` may be the item identifier,” with an explicit Review action and abbreviated-header evidence.
-- A restrained revenue sparkline that supports the answer instead of dominating it.
+- Selectable daily metrics: €12,480 revenue, 312 transactions, 468 units, and 241 customers. Only revenue has a supported comparison delta of +18%; other metrics display cumulative total rather than inventing comparison data.
+- Eight sample observations run from 07:00 to 14:00 in the merchant timezone. The selected metric and time determine the plotted marker, inspected value, accessible slider value, and table content.
+- Evidence disclosure: “POS export · 312 confirmed transactions.”
+- Selectable stock queue: Ground Coffee, Canvas Tote, and Ceramic Cup with readable days-remaining labels and a matching detail. Estimates remain explicitly illustrative.
+- A separate hero review panel with source rows, `Cod.` role selection, explicit local confirmation, invalidation on edit, and reset. No preview control simulates a saved backend action.
+- A clear plot with zero baseline, restrained fill, time labels, native slider, and equivalent data table.
 - Freshness: “Updated 2 minutes ago · 4 sources.”
 
 Use varied product names that translate cleanly and avoid sensitive customer detail. Sample numbers must be internally consistent across charts, tooltips, and tables. The composition must retain clear primary, secondary, and evidence layers; do not turn each value into an interchangeable dashboard card.

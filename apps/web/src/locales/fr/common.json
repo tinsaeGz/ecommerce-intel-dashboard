@@ -64,6 +64,42 @@
       "photo": "Photo"
     }
   },
+  "polish": {
+    "review": {
+      "sample": "Exemple fictif · prêt à vérifier",
+      "eyebrow": "Vos données. Votre interprétation.",
+      "title": "Que signifie « Cod. » ici ?",
+      "body": "Suq a repéré un possible code produit. Vous avez le dernier mot.",
+      "sourceCaption": "Lignes originales de l’exemple en espagnol",
+      "sourceNote": "Les valeurs d’origine, telles qu’elles sont arrivées.",
+      "roleLabel": "Utiliser « Cod. » comme",
+      "pending": "Une suggestion, pas une décision",
+      "evidence": "Ces valeurs se répètent dans plusieurs commandes. L’en-tête abrégé a encore besoin de votre contexte.",
+      "confirmed": "Sens confirmé dans cet aperçu",
+      "result": "« Cod. » est maintenant présenté comme : {{role}}.",
+      "confirm": "Confirmer ce sens",
+      "reset": "Réessayer la vérification",
+      "localOnly": "Exemple interactif uniquement. Aucun fichier n’est envoyé ni enregistré."
+    },
+    "dashboard": {
+      "workspaceNote": "Vue quotidienne · exemple fictif",
+      "metricLabel": "Choisir un indicateur du tableau de bord",
+      "selected": "Tendance affichée",
+      "viewTrend": "Voir la tendance ↗",
+      "dayView": "Au fil de la journée d’exemple",
+      "cumulative": "Total cumulé",
+      "atTime": "à {{time}}",
+      "inspectTime": "Explorer la journée",
+      "viewData": "Afficher le graphique en tableau",
+      "dataCaption": "{{metric}} au fil de la journée d’exemple",
+      "time": "Heure",
+      "stockHint": "Sélectionnez un produit pour examiner le risque.",
+      "stockLabel": "Produits à risque de rupture",
+      "stockDetail_one": "Il reste environ {{count}} jour de stock au rythme de vente de l’exemple. Vérifiez le relevé avant de réapprovisionner.",
+      "stockDetail_other": "Il reste environ {{count}} jours de stock au rythme de vente de l’exemple. Vérifiez le relevé avant de réapprovisionner.",
+      "reviewLink": "Examiner les preuves de la source"
+    }
+  },
   "presentation": {
     "briefing": {
       "label": "Une matinée avec Mercado Norte",

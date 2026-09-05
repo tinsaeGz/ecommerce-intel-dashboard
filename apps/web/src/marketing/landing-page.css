@@ -9,41 +9,43 @@
 
     width: min(100% - 3rem, 80rem);
     margin-inline: auto;
-    border-inline: 0.0625rem solid var(--color-line);
   }
 
   .landing-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(22rem, 1fr);
+    align-items: center;
+    gap: var(--space-10);
     position: relative;
     width: 100%;
     margin-inline: auto;
-    padding-block: 0;
+    padding-block: var(--space-14) var(--space-6);
   }
 
   .landing-hero__copy {
     position: relative;
     z-index: 2;
-    padding: clamp(3rem, 6vw, 5rem) var(--canvas-inset);
+    padding-block: var(--space-4);
     text-align: start;
   }
 
   .landing-hero__eyebrow {
     width: fit-content;
-    max-width: calc(100% - 10rem);
+    max-width: 100%;
     padding: var(--space-2) var(--space-3);
     font-size: var(--font-size-caption);
     font-weight: var(--font-weight-bold);
     letter-spacing: 0.08em;
     line-height: var(--line-height-ui);
     text-transform: uppercase;
-    background: color-mix(in srgb, var(--color-lime) 88%, var(--color-white));
-    border: 0.0625rem solid color-mix(in srgb, var(--color-ink) 20%, transparent);
-    border-radius: 999px;
+    color: var(--color-forest);
+    padding-inline: 0;
   }
 
   .landing-hero h1 {
     max-width: 22ch;
     margin: var(--space-6) 0 0;
-    font-size: clamp(2.75rem, 6.4vw, var(--font-size-display));
+    font-size: clamp(2.75rem, 4.6vw, 4rem);
     font-weight: var(--font-weight-semibold);
     letter-spacing: -0.055em;
     line-height: var(--line-height-display);
@@ -118,13 +120,36 @@
   }
 
   .landing-hero__visual {
+    grid-column: 1 / -1;
     position: relative;
     padding: var(--space-10) var(--canvas-inset) var(--space-6);
-    background-color: var(--color-mist);
-    background-image: radial-gradient(var(--color-line) 0.75px, transparent 0.75px);
-    background-size: 0.75rem 0.75rem;
-    border-top: 0.0625rem solid var(--color-line);
     animation: landing-mockup-reveal var(--motion-reveal) ease-out both;
+  }
+
+  .landing-hero__companion {
+    min-width: 0;
+    padding-block: var(--space-5);
+    background: radial-gradient(ellipse at center, color-mix(in srgb, var(--color-mint) 30%, transparent), transparent 72%);
+  }
+
+  .landing-page .site-header {
+    border-bottom: 0;
+  }
+
+  @media (width <= 64rem) {
+    .landing-hero {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .landing-hero__copy {
+      max-width: 46rem;
+      margin-inline: auto;
+    }
+
+    .landing-hero__companion {
+      padding-block: var(--space-6);
+    }
   }
 
   @keyframes landing-mockup-reveal {
@@ -141,7 +166,7 @@
 
   @media (width <= 48rem) {
     .marketing-canvas {
-      width: calc(100% - 1rem);
+      width: calc(100% - 2rem);
     }
 
     .landing-hero__copy {
