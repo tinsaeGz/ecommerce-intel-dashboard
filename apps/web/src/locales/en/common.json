@@ -632,9 +632,6 @@
     "draftMovement": "Next sale · awaiting confirmation",
     "confirmedMovement": "Next sale · confirmed",
     "windowTitle": "Sample workspace",
-    "focusTitle": "Interactive merchant story",
-    "enter": "Enter the experience",
-    "exit": "Exit experience",
     "followEvidence": "Follow the evidence",
     "trySale": "Continue to the next sale"
   }

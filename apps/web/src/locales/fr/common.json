@@ -632,9 +632,6 @@
     "draftMovement": "Prochaine vente · à confirmer",
     "confirmedMovement": "Prochaine vente · confirmée",
     "windowTitle": "Espace de démonstration",
-    "focusTitle": "Parcours marchand interactif",
-    "enter": "Entrer dans l’expérience",
-    "exit": "Quitter l’expérience",
     "followEvidence": "Suivre les données sources",
     "trySale": "Passer à la prochaine vente"
   }

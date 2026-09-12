@@ -7,10 +7,10 @@ import { fileURLToPath } from "node:url";
 // Use an externally installed Playwright to keep the production dependency graph unchanged.
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE ?? "playwright");
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
-const evidence = resolve(root, "docs/reviews/cinematic");
+const evidence = resolve(process.env.SUQ_REVIEW_EVIDENCE ?? resolve(root, "docs/reviews/cinematic"));
 const baseURL = process.env.SUQ_REVIEW_URL ?? "http://127.0.0.1:4178";
 const results = [];
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({ headless: true, executablePath: process.env.SUQ_CHROMIUM_PATH });
 await mkdir(evidence, { recursive: true });
 
 async function catalog(locale) {
@@ -61,6 +61,7 @@ try {
     page.on("pageerror", error => errors.push(error.message));
     await page.goto(baseURL);
     await settle(page);
+    assert.equal(await page.locator(".cinematic-story dialog, .cinematic-view-control, .cinematic-dialog").count(), 0, "story stays inline without an experience launcher");
     assert.equal(await page.getByRole("heading", { level: 1 }).evaluate(el => el === document.activeElement), true, "landing route focus");
     await page.locator('[data-enhanced="true"]').waitFor();
     // Pure scroll visits every chapter but cannot confirm or record anything.

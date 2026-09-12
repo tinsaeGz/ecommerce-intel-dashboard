@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { ButtonLink, LanguageSwitcher } from "../components/public-ui";
+import { ButtonLink } from "../components/public-ui";
 import { ResetSample } from "../components/reset-sample";
 import { emitJourneyEvent } from "../lib/journey-events";
 import { landingDemo } from "../lib/demo-data";
@@ -33,29 +33,6 @@ export function CinematicStory() {
   const [enhanced, setEnhanced] = useState(false);
   const storyRef = useRef<HTMLElement>(null);
   const [question, setQuestion] = useState<DecisionKind>("sales");
-  const [focused, setFocused] = useState(false);
-  const [focusAvailable] = useState(() => typeof HTMLDialogElement !== "undefined" && typeof HTMLDialogElement.prototype.showModal === "function");
-  const [inlineHeight, setInlineHeight] = useState(0);
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const launchRef = useRef<HTMLButtonElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const restoreFocus = useRef(false);
-
-  useEffect(() => {
-    if (focused) {
-      dialogRef.current?.showModal();
-      document.documentElement.classList.add("cinematic-focus-open");
-      closeRef.current?.focus();
-      restoreFocus.current = true;
-    } else {
-      dialogRef.current?.close?.();
-      if (restoreFocus.current) launchRef.current?.focus({ preventScroll: true });
-      restoreFocus.current = false;
-    }
-    return () => document.documentElement.classList.remove("cinematic-focus-open");
-  }, [focused]);
-
-
   useEffect(() => {
     const media = window.matchMedia?.("(min-width: 72rem) and (min-height: 56rem)");
     let lastGeometry = "";
@@ -77,7 +54,7 @@ export function CinematicStory() {
 
 
   useEffect(() => {
-    if (!enhanced || focused) return;
+    if (!enhanced) return;
     const nodes = storyRef.current?.querySelectorAll<HTMLElement>(".cinematic-copy");
     if (!nodes) return;
     const visible = new Map<Element, boolean>();
@@ -90,10 +67,10 @@ export function CinematicStory() {
     }, { rootMargin: "-15% 0px -45% 0px", threshold: [0, 0.2, 0.5, 1] });
     nodes.forEach(node => observer.observe(node));
     return () => observer.disconnect();
-  }, [enhanced, focused]);
+  }, [enhanced]);
 
   useEffect(() => {
-    if (!enhanced || focused || typeof ResizeObserver === "undefined") return;
+    if (!enhanced || typeof ResizeObserver === "undefined") return;
     // A translated or expanded scene must not trap controls below the viewport.
     // Retry enhancement only when viewport/font geometry changes, preventing a
     // layout feedback loop when the sequential fallback itself gets taller.
@@ -106,7 +83,7 @@ export function CinematicStory() {
     nodes.forEach(node => resize.observe(node));
     fits();
     return () => resize.disconnect();
-  }, [enhanced, focused]);
+  }, [enhanced]);
 
   const choose = (chapter: Chapter, moveFocus = false) => {
     setActive(chapter);
@@ -115,25 +92,18 @@ export function CinematicStory() {
       // to the always-present chapter control before hiding that pane.
       storyRef.current?.querySelector<HTMLButtonElement>(`[data-control="${chapter}"]`)?.focus({ preventScroll: true });
     }
-    if (focused) { dialogRef.current?.scrollTo?.({ top: 0, behavior: "instant" }); return; }
     const target = document.getElementById(chapterIds[chapter]);
     if (!enhanced) target?.focus({ preventScroll: true });
     target?.scrollIntoView?.({ block: "start" });
   };
 
-  const content = <section className="cinematic-story" ref={storyRef} data-focused={focused} data-enhanced={enhanced || focused} data-chapter={active} aria-labelledby="cinematic-title">
-    <header className="story-heading cinematic-story__heading" hidden={focused}>
+  return <section className="cinematic-story" ref={storyRef} data-enhanced={enhanced} data-chapter={active} aria-labelledby="cinematic-title">
+    <header className="story-heading cinematic-story__heading">
       <p className="story-eyebrow">{t("cinematic.eyebrow")}</p>
       <h2 id="cinematic-title">{t("theatre.title")} <em>{t("theatre.emphasis")}</em></h2>
       <p>{t("theatre.intro")}</p>
     </header>
     <div className="cinematic-toolbar">
-      <div className="cinematic-view-control">
-        {focused ? <><p>{t("theatre.focusTitle")}</p><LanguageSwitcher compact /><button ref={closeRef} type="button" className="button-link cinematic-exit" data-variant="quiet" onClick={() => setFocused(false)}>{t("theatre.exit")} <span aria-hidden="true">×</span></button></> : focusAvailable && <button ref={launchRef} type="button" className="button-link" data-variant="primary" onClick={() => {
-          setInlineHeight(storyRef.current?.getBoundingClientRect().height ?? 0);
-          setFocused(true);
-        }}>{t("theatre.enter")} <span aria-hidden="true">↗</span></button>}
-      </div>
       <div className="cinematic-controls" role="group" aria-label={t("cinematic.controls")}>
         {chapters.map((chapter, index) => <button type="button" key={chapter} data-control={chapter} aria-pressed={active === chapter} aria-controls={`scene-${chapter}`} onClick={() => choose(chapter)}><span aria-hidden="true">0{index + 1}</span>{t(`cinematic.${chapter}.label`)}</button>)}
       </div>
@@ -141,9 +111,9 @@ export function CinematicStory() {
     </div>
     <div className="cinematic-layout">
       {chapters.map((chapter, index) => {
-        const inactive = (enhanced || focused) && active !== chapter;
+        const inactive = enhanced && active !== chapter;
         return <div className="cinematic-chapter" key={chapter}>
-          <article className="cinematic-copy" hidden={focused && active !== chapter} data-chapter={chapter} id={chapterIds[chapter]} tabIndex={-1} onFocus={() => setActive(chapter)} aria-labelledby={`chapter-${chapter}`}>
+          <article className="cinematic-copy" data-chapter={chapter} id={chapterIds[chapter]} tabIndex={-1} onFocus={() => setActive(chapter)} aria-labelledby={`chapter-${chapter}`}>
             <p className="story-eyebrow">{t("cinematic.chapter", { number: index + 1 })}</p>
             <h3 id={`chapter-${chapter}`}><span>{t(`theatre.${chapter}.title`)}</span> <em>{t(`theatre.${chapter}.emphasis`)}</em></h3>
             <p>{t(`theatre.${chapter}.body`)}</p>
@@ -175,10 +145,4 @@ export function CinematicStory() {
     </div>
   </section>;
 
-  return <>
-    {focused ? <div aria-hidden="true" style={{ height: inlineHeight }} /> : content}
-    <dialog ref={dialogRef} className="cinematic-dialog" aria-label={t("theatre.focusTitle")} onCancel={event => { event.preventDefault(); setFocused(false); }} onClose={() => setFocused(false)}>
-      {focused && content}
-    </dialog>
-  </>;
 }

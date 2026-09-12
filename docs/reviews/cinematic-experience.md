@@ -2,6 +2,18 @@
 
 Date: 2026-09-06
 
+## Current revision — 2026-09-12
+
+The optional full-screen experience and its entry/exit controls have been removed at the owner's request. The merchant story and connected chapter actions remain inline on the landing page. Modal-only state, styles, locale strings and the focused browser script were removed; the three-locale component journey now exercises the inline flow. The focused-view evidence below is historical and describes the superseded revision.
+
+Requirements: SDLC §1.2, NFR-5, NFR-6, NFR-10. No API, tenancy, billing or telemetry behavior changes.
+
+Validation: web ESLint/Stylelint, TypeScript (production build), all 83 tests, and the production build passed; initial JavaScript is 125.7 KB gzip against the 200 KB budget. The updated inline browser script passed all 30 EN/ES/FR cases, including axe with contrast, keyboard/confirmation continuity, responsive layouts, enlarged text, forced colors and reduced motion. The desktop evidence screenshot was visually inspected. Markdown lint and diff whitespace passed. The concept PDF was regenerated with Markdown/WeasyPrint and its extracted amendment text verified.
+
+Browser reproduction used the command below with `PLAYWRIGHT_MODULE=/home/tensu/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.mjs`, `SUQ_CHROMIUM_PATH=/home/tensu/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell`, and `SUQ_REVIEW_EVIDENCE=/tmp/suq-inline-evidence`. Results are in `/tmp/suq-cinematic-results.json`. Physical-device, screen-reader and native-speaker checks remain unavailable; remote CI was not run for this local checkpoint.
+
+## Historical delivery — 2026-09-06
+
 The first delivery was functionally validated, but the owner found its cinematic treatment too shallow and its mockups unconvincing. The current revision follows the owner’s preference for a theatrical brand story, with the product supporting it. The latest revision removes the unnecessary monitor stand and adds an optional full-screen experience, with connected chapter actions and the live product inside a recognizable display frame.
 
 Scope: landing page and fictional demo, built on finalized PR #8. SDLC §1.2, FR-U-4/5/12, FR-G-6, FR-E-1, FR-D-12 and NFR-5/6/9/10 guide this demonstration. This does not complete the corresponding authenticated product requirements.
@@ -40,10 +52,9 @@ Reproduce with the web server running and an external Playwright installation:
 ```sh
 npm run dev --workspace @suq-insights/web -- --host 127.0.0.1 --port 4178
 PLAYWRIGHT_MODULE=/absolute/path/to/playwright/index.mjs node apps/web/scripts/check-cinematic-browser.mjs
-PLAYWRIGHT_MODULE=/absolute/path/to/playwright/index.mjs node apps/web/scripts/check-focused-browser.mjs
 ```
 
-`SUQ_REVIEW_URL` can select another local server. The scripts write screenshots here and detailed results to `/tmp/suq-cinematic-results.json` and `/tmp/suq-focused-results.json`; they introduce no production dependency or collector.
+`SUQ_REVIEW_URL` can select another local server. `SUQ_REVIEW_EVIDENCE` selects an alternate screenshot directory, and `SUQ_CHROMIUM_PATH` selects an installed Chromium executable. The scripts write screenshots here and detailed results to `/tmp/suq-cinematic-results.json` and `/tmp/suq-focused-results.json`; they introduce no production dependency or collector.
 
 ## Revised art direction
 

@@ -670,129 +670,13 @@
     outline-offset: 0.15rem;
   }
 
-  .cinematic-view-control { margin-bottom: var(--space-3); }
-
-  .cinematic-view-control .button-link {
-    gap: var(--space-3);
-    cursor: pointer;
-  }
-
-  .cinematic-view-control .dropdown-select__trigger { color: var(--story-ink); }
-
-  .cinematic-view-control .dropdown-select__trigger:hover,
-  .cinematic-view-control .dropdown-select__trigger[aria-expanded="true"] { color: var(--color-ink); }
-
   .cinematic-next {
     gap: var(--space-5);
     margin-top: var(--space-4);
     cursor: pointer;
   }
-  .cinematic-focus-open { overflow: hidden; }
-
-  .cinematic-dialog {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100dvh;
-    max-width: none;
-    max-height: none;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    background: var(--color-paper);
-    overscroll-behavior: contain;
-  }
-
-  .cinematic-dialog::backdrop { background: var(--color-ink); }
-
-  .cinematic-story[data-focused="true"] {
-    min-height: 100%;
-    padding: var(--space-5);
-    background: var(--story-ground);
-  }
-
-  .cinematic-story[data-focused="true"]::before { inset: 0; }
-
-  .cinematic-story[data-focused="true"][data-enhanced] .cinematic-toolbar {
-    position: relative;
-    padding-block: 0 var(--space-4);
-    z-index: 5;
-  }
-
-  .cinematic-story[data-focused="true"] .cinematic-view-control {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: var(--space-4);
-    min-height: 2.75rem;
-    padding-top: 3.25rem;
-  }
-
-  .cinematic-story[data-focused="true"] .cinematic-view-control p {
-    font-size: var(--font-size-ui);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .cinematic-story[data-focused="true"] .cinematic-exit {
-    position: fixed;
-    max-width: calc(100% - 2 * var(--space-4));
-    inset-block-start: var(--space-3);
-    inset-inline-end: var(--space-4);
-    color: var(--story-ink);
-    background: var(--story-ground);
-    border: 0.0625rem solid currentcolor;
-    z-index: 10;
-  }
-
-  .cinematic-story[data-focused="true"][data-enhanced] .cinematic-layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-5);
-  }
-
-  .cinematic-story[data-focused="true"][data-enhanced] .cinematic-copy {
-    grid-area: auto;
-    min-height: 0;
-    padding: 0;
-  }
-
-  .cinematic-story[data-focused="true"] .cinematic-copy h3 { font-size: clamp(1.8rem, 3.2vw, 3rem); }
-  .cinematic-story[data-focused="true"] .cinematic-copy__bridge { display: none; }
-
-  .cinematic-story[data-focused="true"][data-enhanced] .cinematic-pane {
-    grid-area: auto;
-    position: relative;
-    top: auto;
-    padding-bottom: 0;
-  }
-
-  .cinematic-story[data-focused="true"][data-enhanced] .cinematic-pane[data-active="false"] { display: none; }
-  .cinematic-story[data-focused="true"][data-enhanced] .desktop-monitor__screen { min-height: 0; }
-
-  @media (width >= 72rem) {
-    .cinematic-story[data-focused="true"] .cinematic-view-control {
-      padding-top: 0;
-      padding-inline-end: 12rem;
-    }
-
-    .cinematic-story[data-focused="false"] .cinematic-toolbar {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 0 var(--space-4);
-    }
-
-    .cinematic-story[data-focused="false"] .cinematic-view-control {
-      grid-area: 1 / 2;
-      margin: 0;
-    }
-    .cinematic-story[data-focused="false"] .cinematic-controls { grid-area: 1 / 1; }
-    .cinematic-story[data-focused="false"] .sample-reset { grid-column: 1 / -1; }
-    .cinematic-story[data-focused="true"] { padding: var(--space-5) var(--space-10); }
-    .cinematic-story[data-focused="true"] .cinematic-copy { align-self: center; }
-    .cinematic-story[data-focused="true"][data-enhanced] .cinematic-layout { grid-template-columns: minmax(0, 0.45fr) minmax(0, 1.55fr); }
-  }
 
   .cinematic-next:focus-visible,
-  .cinematic-view-control .dropdown-select__trigger:focus-visible,
   .cinematic-controls button:focus-visible,
   .cinematic-toolbar .button-link:focus-visible { outline-color: var(--story-ink); }
 
